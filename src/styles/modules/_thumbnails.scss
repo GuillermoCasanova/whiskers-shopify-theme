@@ -1,0 +1,170 @@
+
+
+/*------------------------------------*\
+    #Thumbnails
+\*------------------------------------*/
+
+
+
+.thumbnail1  {
+  
+  //background-color: #D1D3D4; 
+  //@extend %position-relative; 
+
+
+  &.is-active {
+
+    height: 920px;
+
+    .thumbnail-productInfo {
+
+      display: block; 
+
+    }
+
+  }
+
+  .thumbnail-productInfo {
+
+    background-color: #fbfbfb; 
+    padding: rem-calc($level3);
+    display: none; 
+    left: 0;
+    margin: auto;
+    right: 0;
+    margin-bottom: rem-calc($level4); 
+    width: 90vw;
+    @extend %position-absolute; 
+    
+    @media #{$medium-up} {
+  
+      min-height: 400px;
+
+    }
+
+    &:before {
+
+      content: " ";
+      top: -12px;
+      background-color: #fbfbfb;
+      width: 30px;
+      height: 30px;
+      z-index: 1;
+      left: 0;
+      margin: auto;
+      right: 0;
+      transform: rotate(45deg);
+      @extend %position-absolute; 
+
+    }
+
+    .thumbnail-productInfo-mainImage {
+
+        padding: rem-calc($level2);
+
+    }
+
+  }
+
+}
+
+
+.thumbnail--product {
+
+
+margin-bottom: rem-calc($level4); 
+margin-right: rem-calc($level1); 
+margin-left: rem-calc($level1); 
+
+
+}
+
+.thumbnail2 {
+    
+    height: auto;
+    background-color: white; 
+    border-top: 0; 
+    width: 100%; 
+    margin-bottom: rem-calc($level4); 
+
+
+    // @media #{$medium-up} {
+
+    //     height: 34rem; 
+        
+    // }
+
+    // @media #{$large-up} {
+
+    //     height: 36rem; 
+        
+    // }
+
+    // @media #{$xlarge-up} {
+
+    //     height: 38rem; 
+        
+    // }
+
+    &.is-hovered {
+
+      .thumbnail-overlay {
+
+        background-color: rgba(0,0,0, .5);
+
+      }
+
+    }
+
+    .thumbnail-description {
+      
+      color: #fff; 
+        @extend %position-absoluteCentered; 
+
+
+      .thumbnail-description-client {
+        
+        margin-bottom: 0; 
+        @include type-setting(-1);
+
+        @media #{$large-up} {
+
+          margin-bottom: rem-calc($level1); 
+          
+        }
+
+      }
+
+      .thumbnail-description-headline {
+        
+        @include type-setting(1);
+
+
+        @media #{$medium-up} {
+          
+          margin-bottom: rem-calc($level3); 
+          @include type-setting(5);
+
+        }
+
+      }
+
+    }
+
+
+    .thumbnail-bg {
+        background-repeat: no-repeat; 
+        background-size: cover; 
+        background-position: center; 
+        width: 100vw;
+
+    }
+
+    .thumbnail-overlay {
+        background-color: transparent; 
+        border: solid 0px white; 
+        @include transition(all .4s ease-in-out); 
+        @extend %position-absoluteCentered; 
+    }
+
+}   

@@ -1,0 +1,93 @@
+
+
+/*------------------------------------*\
+    #Accordion
+\*------------------------------------*/
+
+
+.accordion-element  > a {
+    
+    color: $body-color !important; 
+    font-family: $primary-font-family !important; 
+}
+
+
+
+.accordion {
+    
+
+    .accordion-element {
+
+        border-bottom: 1px $grey--med solid;
+        z-index: 2; 
+        @extend %position-relative; 
+
+        &:hover,
+        &:focus {
+
+            a {
+                
+                color: $primaryColor !important; 
+
+            }
+        }
+
+        &:after {
+
+            content: '\e813'; 
+            right: rem-calc($level3); 
+            top: rem-calc(14px); 
+            color: $accentColor; 
+            z-index: 1; 
+            @extend .icon--small; 
+            @extend %iconStyles; 
+            @extend %position-absolute;             
+        }
+    }
+
+    .accordion-element.active {
+    
+        &:after {
+            
+            content: '\e817'; 
+
+        }
+
+    }
+
+    .accordion-element > .content {
+
+        @extend %pt0; 
+    }
+
+}
+
+
+
+
+/*------------------------------------*\
+    #Accordion Sizes
+\*------------------------------------*/
+
+
+.accordion--large  {
+
+
+    .accordion-element > a {
+        
+        @extend %h3; 
+        @extend %ptb5; 
+
+    }
+
+
+    .accordion-element {
+
+        &:after {
+
+            @extend .icon--medium; 
+        }
+    }
+
+
+}

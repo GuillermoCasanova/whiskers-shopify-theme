@@ -1,0 +1,23 @@
+
+/*------------------------------------*\
+    #Icons 
+\*------------------------------------*/
+
+
+.icon--center {
+  
+  background-position: center;    /* 1 */
+  text-align: center;             /* 2 */
+
+  &:before {
+      content: '';                /* 3 */
+      display: inline-block;      /* 3 */
+      vertical-align: middle;     /* 3 */
+      height: 100%;               /* 4 */
+  }
+
+  > svg {
+      vertical-align: middle;     /* 5 */
+  }
+
+}

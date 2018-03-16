@@ -1,0 +1,79 @@
+
+/*------------------------------------*\
+    #Colors 
+\*------------------------------------*/
+
+//Light Whiskers Gray
+$primaryColor: #5F5E6C; 
+$primaryColor--dark: darken($primaryColor, 15%); 
+$primaryColor--translucent: rgba(85, 85, 85, .7); 
+
+//Dark Whiskers Gray
+$secondaryColor: #383642; 
+$secondaryColor--dark: darken($secondaryColor, 20%); 
+$secondaryColor--translucent: rgba(136, 136, 136, .7);
+
+//Whiskers White Body Copy
+$tertiaryColor: #F9F9F9; 
+$tertiaryColor--dark: darken($tertiaryColor, 25%); 
+$tertiaryColor--translucent: rgba(0,0,0, .7); 
+
+
+//Darker Gray
+$quaternaryColor: #BCBEC0; 
+$quaternaryColor--dark: darken($quaternaryColor, 25%); 
+$quaternaryColor--translucent: rgba(58,38,30, .7); 
+
+
+//Whiskers Teal 
+$accentColor: #3FD5AE; 
+$accentColor--dark: darken($accentColor, 45%); 
+$accentColor--translucent: rgba(68, 219, 228, 0.7);  
+   
+$translucentBlack:  rgba(14, 14, 14, 0.9);
+
+$body-color: $tertiaryColor; 
+
+
+$white--translucent: rgba(255,255,255, .7); 
+
+//Darker Gray
+$quintenaryColor: #BCBEC0; 
+$quintenaryColor--dark: darken($quintenaryColor, 25%); 
+$quintenaryColor--translucent: rgba(58,38,30, .7); 
+
+
+/*------------------------------------*\
+    #Blacks n greys
+\*------------------------------------*/
+
+
+$off-black: #191919;
+$grey--light: #f3f3f3;
+$grey--med: #808083; //dfdfdf
+$grey--dark: #7B7878;
+
+
+
+
+/*------------------------------------*\
+    #Social Media Colors
+\*------------------------------------*/
+
+
+$blue-twitter: #55ACEE;
+$blue-facebook: #3b5998;
+$blue-vimeo: #1ab7ea; 
+$blue-instagram: #517fa4; 
+$red-pinterest: #cb2027; 
+
+
+
+
+
+/*------------------------------------*\
+    #UI Colors 
+\*------------------------------------*/
+
+//Whiskers Red 
+$warningColor: #FF5959; 

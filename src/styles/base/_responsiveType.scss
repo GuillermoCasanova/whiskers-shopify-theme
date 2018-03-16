@@ -1,0 +1,58 @@
+
+
+
+/*------------------------------------*\
+    #Responsive Type with Media Queries 
+\*------------------------------------*/
+//This allows for type to resize as needed as oppose to needing media queries
+//that force changing type size 
+//http://robertmaple.co.uk/fluid-responsive-type-with-media-queries/
+
+//Set your font size min/max (px)
+$max-font-size : 18;
+$min-font-size : 16;
+ 
+//Set your viewport size min/max (px)
+$max-media : 1400;
+$min-media : 400;
+ 
+// Internal variables for the font/viewport ranges
+$viewport-range : $max-media - $min-media;
+$font-increments : ($max-font-size - $min-font-size) / $viewport-range;
+ 
+// Calculate min/max :root font sizes (%) - 6.25 relates to 1px being 6.25% of the default 16px html font-size. 
+$min-root-font : (6.25 * $min-font-size);
+$max-root-font : (6.25 * $max-font-size);
+ 
+// Counter variable for use in loop
+$i : 0;
+ 
+// Loop through the range between the min/max viewport sizes
+@while $i < $viewport-range {
+    
+    // Calculate the font size based on position in the loop.
+    $font-size : ((($font-increments * $i) *  6.25 ) + $min-root-font ) * 1%;
+ 
+    // Calculate the breakpoint size based on position in the loop
+    $break : $i + $min-media * 1px;
+ 
+    // Print out breakpoint with :root font-size
+    @media screen and (min-width: #{$break}) {
+        :root {   
+            font-size: $font-size; 
+        }
+    }
+    
+    // Advance the counter
+    $i : $i + 1;
+}
+ 
+// Set the min and max font/viewport sizes where text will stop scaling.
+:root {    
+    @media (max-width: #{$min-media}px){
+        font-size: $min-root-font * 1%; 
+    }
+    @media (min-width: #{$max-media}px){
+        font-size: $max-root-font * 1%; 
+    } 
+}

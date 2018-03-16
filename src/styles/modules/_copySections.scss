@@ -1,0 +1,285 @@
+
+
+/*------------------------------------*\
+    #Copy Sections 
+\*------------------------------------*/
+
+
+.copySection {
+
+  .copySection-inner {
+    background-color: transparent;
+    width: 100%;
+    @extend %position-relative; 
+
+    &:before {
+      content: " ";
+      background-color: rgb(56, 54, 65);
+      width: 100%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      height: 94%; 
+
+      @media #{$medium-up} {
+        height: 83%;
+      }
+
+    }
+
+    @media #{$medium-up} {
+      padding-top: rem-calc($level7 + $level2);
+      padding-bottom: rem-calc($level7 + $level2);
+    }
+  
+    @media #{$large-up} {
+      padding-top: rem-calc($level7 + $level3);
+      padding-bottom: rem-calc($level7 + $level3);
+    }
+  }
+
+  .copySection-accent {
+    @extend %position-absolute; 
+  }
+  
+  .copySection-copy {
+    margin-bottom: rem-calc($level3);
+    max-width: rem-calc(370px);
+    position: relative;
+
+    @media #{$medium-up} {
+      margin-bottom: 0; 
+      max-width: 16rem; 
+      margin-bottom: rem-calc($level4);
+    }
+
+    @media #{$large-up} {
+      max-width: 19rem; 
+      margin-bottom: rem-calc($level7);
+    }
+
+    .copySection-headline {
+      @include type-setting(4);
+
+      @media #{$large-up} {
+        @include type-setting(5); 
+      }
+    }
+
+    .copySection-headline--secondary {
+
+      @media #{$medium-up} {
+        @include type-setting(6);
+      }
+
+      @media #{$large-up} {
+        @include type-setting(7);
+      }
+
+    }
+  }
+}
+
+
+
+
+
+
+/*------------------------------------*\
+    #Copy Section Types
+\*------------------------------------*/
+
+
+.copySection--alt {
+
+  .copySection-inner {
+    &:before {
+      content: " ";
+      background-color: rgb(56, 54, 65);
+      height: 90%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+
+      @media #{$medium-up} {
+        height: 66%; 
+      }
+
+    }
+
+    .copySection-copy {
+      @media #{$medium-up} {
+        margin-bottom: rem-calc($level7); 
+      }
+    }
+  }
+}
+
+
+.copySection--right {
+  padding-left: rem-calc($level4); 
+
+  @media #{$medium-up} {
+    padding-left: 0; 
+  }
+
+  .copySection-accent {
+    left: -.9rem; 
+    width: rem-calc(30px);
+    bottom: 0;
+    top: 45%;
+  }
+
+  .copySection-imageContainer {
+    @media #{$medium-up} {
+      left: rem-calc(-12px);
+    }
+
+    @media #{$large-up} {
+      left: rem-calC(-24px);
+    }
+  }
+
+  .copySection-copy {
+     @media #{$large-up} {
+      right: rem-calC(-12px);
+    }
+  }
+
+}
+
+
+
+.copySection--left {
+  padding-right: rem-calc($level4); 
+
+  @media #{$medium-up} {
+    padding-right: 0; 
+  }
+
+  .copySection-accent {
+    right: -.9rem; 
+    width: rem-calc(30px);
+    bottom: 0;
+    top: 45%;
+  }
+
+  .copySection-imageContainer {
+
+    @media #{$medium-up} {
+      right: rem-calc(-12px);
+    }
+
+    @media #{$large-up} {
+      right: rem-calc(-24px);
+    }
+  }
+
+  .copySection-copy {
+    @media #{$large-up} {
+      left: rem-calC(-12px);
+    }
+  }
+
+}
+
+
+.copySection--center {
+  padding-right: rem-calc($level4);
+  padding-left: rem-calc($level4);
+}
+
+
+//Behaves like left on small, but like right on larger)
+.copySection--leftAlt {
+  margin-right: rem-calc($level4); 
+
+  @media #{$medium-up} {
+    margin-right: 0; 
+  }
+
+  .copySection-accent {
+    left: rem-calc(-18px);
+    width: rem-calc(30px);
+    bottom: 0;
+    top: 45%;
+  }
+
+  .copySection-copy {
+    
+    @media #{$medium-up} {
+      right: rem-calc(-1 * $level4); 
+    }
+
+
+    @media #{$large-up} {
+      padding: 0; 
+      padding-right: rem-calc($level4);
+    }
+
+  }
+
+}
+
+
+
+
+
+
+
+
+/*------------------------------------*\
+    #Copy Section Images
+\*------------------------------------*/
+
+.copySection-imageContainer {
+  z-index: 106; 
+  position: relative; 
+
+  @media #{$medium-up} {
+    height: rem-calc(260px); 
+  }
+
+  .copySection-imageContainer-inner {
+
+    @media #{$medium-up} {
+      position: absolute; 
+      width: 100%; 
+    }
+
+  }
+
+}
+
+
+.copySection-imageContainer--offset {
+  
+  @media #{$medium-up} {
+    top: rem-calc(-1 * ($level7)); 
+  }
+
+  @media #{$large-up} {
+    top: rem-calc(-80px);
+  }
+
+}
+
+
+.copySection-imageContainer--right {
+
+  .copySection-imageContainer-image {
+    
+    padding: rem-calc($level1); 
+
+    @media #{$large-up} {
+
+      padding-right: rem-calc($level3); 
+
+    }
+
+  }
+
+}

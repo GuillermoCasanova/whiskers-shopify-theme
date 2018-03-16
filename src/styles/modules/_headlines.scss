@@ -1,0 +1,53 @@
+
+/*------------------------------------*\
+    #Headline Styles 
+\*------------------------------------*/
+
+.headline {
+  font-family: $tertiary-font-family; 
+  @extend %fwb; 
+
+}
+
+
+
+
+
+
+/*------------------------------------*\
+    #Headline Variations
+\*------------------------------------*/
+
+.headline--primary {
+
+  @extend %secondary-font-family; 
+
+}
+
+.headline--secondary {
+
+  @extend %tertiary-font-family; 
+
+}
+
+.headline--standout {
+  color: $body-color;
+  letter-spacing: 0; 
+  text-transform: capitalize; 
+  font-family: $secondary-font-family;  
+  @extend %fwn; 
+  @extend %text-kilo; 
+
+}
+
+.headline--spaced {
+
+  margin-bottom: rem-calc($level1); 
+
+  @media #{$medium-up} {
+
+    margin-bottom: rem-calc($level2); 
+
+  }
+
+}

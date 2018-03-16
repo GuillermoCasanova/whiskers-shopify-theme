@@ -1,0 +1,556 @@
+
+
+/*------------------------------------*\
+    #Project Header
+\*------------------------------------*/
+
+.projectHeader {
+  
+  @extend %position-relative; 
+
+  img {
+
+    width: 100%; 
+  }
+
+  &:after {
+
+    content: " ";
+    bottom: 0;
+    background-color: white;
+    width: 30px;
+    height: 30px;
+    bottom: -21px;
+    z-index: 1;
+    left: 0;
+    margin: auto;
+    right: 0;
+    transform: rotate(45deg);
+    @extend %position-absolute; 
+
+    @media #{$medium-up} {
+      
+      width: 55px;
+      height: 55px;
+      bottom: -32px;
+
+    }
+
+  }
+
+}
+
+
+
+
+
+
+/*------------------------------------*\
+    #Project Summary
+\*------------------------------------*/
+
+
+.projectSummary {
+
+  .projectSummary-ask {
+
+    .projectSummary-headline {
+      
+      margin-bottom: rem-calc($level1); 
+      @include type-setting(-1); 
+
+    }
+  
+    margin-bottom: rem-calc($level5); 
+
+    @media #{$medium-up} {
+
+    margin-bottom: rem-calc($level7); 
+
+    }
+
+    @media #{$large-up} {
+
+      max-width: 90%; 
+
+    }
+    
+  }
+
+  .projectSummary-result {
+
+    .projectSummary-headline {
+      margin-bottom: rem-calc($level1); 
+      @include type-setting(-1); 
+      
+    }
+
+    @media #{$large-up} {
+
+      max-width: 90%; 
+
+    }
+    
+  }
+  
+  .projectSummary-headlineGroup {
+    
+    height: rem-calc($level6); 
+    top: 12px; 
+    margin-bottom: rem-calc($level2); 
+    @extend %position-relative; 
+
+    .projectSummary-headline {
+      
+      left: 0; 
+      top: -12px;
+      width: rem-calc(179px); 
+      background-color: #fff; 
+      padding-top: rem-calc($level1); 
+      padding-bottom: rem-calc($level1); 
+      padding-right: rem-calc($level1); 
+      @extend %position-absolute; 
+
+    }
+
+  }
+
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Project Brag
+\*------------------------------------*/
+
+
+.projectBrag {
+  
+  .projectBrag-container {
+    width: 100%; 
+    margin-bottom: rem-calc($level4); 
+    @extend %text-center; 
+    @extend %position-relative; 
+
+    @media #{$large-up} {
+
+      margin-bottom: rem-calc($level6); 
+
+    }
+
+    &:after {
+      
+      content: " ";
+      width: 70px;
+      background-color: $accentColor;
+      height: 2px;
+      left: 0;
+      right: 0;
+      top: 0; 
+      margin: auto;
+      top: auto; 
+      bottom: 0; 
+      @extend %position-absolute; 
+
+    }
+
+  }
+
+  .projectBrag-headline {
+      
+      padding-top: rem-calc($level4); 
+      padding-bottom: rem-calc($level4); 
+      font-family: $secondary-font-family; 
+      @include type-setting(3);
+
+      @media #{$medium-up} {
+
+        @include type-setting(4); 
+
+      }
+
+      @media #{$large-up} {
+
+        @include type-setting(5); 
+
+      } 
+
+  }
+
+}
+
+
+.twitter-tweet  {
+
+  margin: auto !important; 
+}
+
+
+
+
+/*------------------------------------*\
+    #Project Copy Section
+\*------------------------------------*/
+
+
+.projectCopy {
+
+    .projectCopy-image {
+
+      margin-bottom: rem-calc($level5); 
+
+      @media #{$medium-up} {
+
+        margin-bottom: 0; 
+
+      }
+    }
+
+}
+
+
+
+
+
+
+/*------------------------------------*\
+    #Project Pagination Links
+\*------------------------------------*/
+
+.projectPagination {
+  
+  overflow: hidden; 
+  margin-bottom: -3px !important; 
+  @extend %position-relative; 
+
+  .projectPagination-link {
+
+    height: auto; 
+    overflow: hidden; 
+    @extend %position-relative; 
+
+    &:hover, 
+    &:focus {
+
+      .projectPagination-link-overlay {
+
+        background-color: rgba(0,0,0, 0);
+        
+        &:after {
+
+        width: 100%;
+        }
+
+      }
+
+    }
+
+    .projectPagination-link-overlay {
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0,0,0, .5);
+    z-index: 1; 
+    opacity: 1; 
+    @include transition(all .2s ceaser($easeInOutSine)); 
+    @extend %position-absolute; 
+    @extend %text-center; 
+
+    }
+
+    .projectPagination-link-bg {
+      
+        height: rem-calc(200px); 
+        width: 100%; 
+        background-position: center; 
+        background-size: cover; 
+        @extend %position-relative; 
+
+        @media #{$medium-up} {
+          
+          height: rem-calc(260px); 
+
+        }
+        
+        @media #{$large-up} {
+          
+          height: rem-calc(360px); 
+
+        }
+
+    }
+
+  }
+
+}
+
+
+
+
+
+
+/*------------------------------------*\
+    #Project Pagination Link Types
+\*------------------------------------*/
+
+
+.projectPagination-link--previous {
+  
+  &:hover, 
+  &:focus {
+
+   .projectPagination-link-arrow {
+
+      opacity: 0; 
+      @include transform(translateX(-10px));
+
+    }
+
+    .projectPagination-link-headline {
+
+      opacity: 1; 
+      @include transform(translateX(-10px)); 
+
+    }
+
+  }
+
+  .projectPagination-link-overlay {
+
+    &:after {
+
+      content: " ";
+      bottom: 0; 
+      right: 0; 
+      width: 0%; 
+      height: 5px;
+      background-color: $accentColor;  
+      @include transition(all .2s ceaser($easeInOutSine)); 
+      @extend %position-absolute; 
+      
+    }
+ 
+  }
+
+  .projectPagination-link-arrow {
+    
+    width: rem-calc(95px); 
+
+    @media #{$medium-up} {
+
+      width: rem-calc(260px); 
+
+    }
+
+    .projectPagination-link-arrow-icon {
+
+      @include transform(scale(-1)); 
+
+    } 
+
+  }
+
+}
+
+.projectPagination-link--next {
+
+  
+  &:hover, 
+  &:focus {
+
+   .projectPagination-link-arrow {
+
+      opacity: 0; 
+      @include transform(translateX(6px)); 
+
+    }
+
+    .projectPagination-link-headline {
+
+      opacity: 1; 
+      @include transform(translateX(6px)); 
+
+    }
+
+  }
+
+  .projectPagination-link-overlay {
+
+    &:after {
+
+    content: " ";
+    bottom: 0; 
+    left: 0; 
+    width: 0%; 
+    height: 5px;
+    background-color: $accentColor;  
+    @include transition(all .2s ceaser($easeInOutSine)); 
+    @extend %position-absolute; 
+
+    }
+
+    .projectPagination-link-arrow {
+      
+      width: rem-calc(60px); 
+
+      @media #{$medium-up} {
+
+        width: rem-calc(160px); 
+
+      }
+    }
+  }
+
+}
+
+
+//
+//Styles for pagePagination-link  for devices that support svg clip path 
+//
+.svgclippaths {
+
+  .projectPagination-link--previous {
+    -webkit-clip-path: polygon(100% 0, 0 0, 0 600%);
+    clip-path: polygon(100% 0, 0 0, 0 600%);
+    left: 0;
+    width: 115%;
+
+  }
+
+  .projectPagination-link--next {
+    -webkit-clip-path: polygon(100% -600%, 0% 100%, 100% 100%);
+    clip-path: polygon(100% -600%, 0% 100%, 100% 100%);
+    right: 5%;
+    width: 110%;
+
+    @media #{$medium-up} {
+
+      right: 5%;
+
+    }
+
+  }
+
+}
+
+
+.projectPagination-link-headline {
+
+    width: rem-calc(120px);   
+    opacity: 0; 
+    @include type-setting(0); 
+    @include transition(all .2s ceaser($easeInOutSine) .1s); 
+
+    @media #{$medium-up} {
+
+      width: rem-calc(200px);
+
+    }
+
+    @media #{$large-up} {
+
+      width: rem-calc(280px);
+
+    }
+
+    color: #fff; 
+    margin-bottom: 0; 
+    margin-right: rem-calc(2px); 
+    @extend %uc; 
+    @extend %fwb; 
+
+}
+
+
+
+
+
+//
+// projectPagination-link-arrow Styles for no-touch devices
+//
+.projectPagination-link-arrow {
+
+  opacity: 1; 
+  color: #fff; 
+  top: 0; 
+  bottom: 0; 
+  left: 0; 
+  right: 0; 
+  margin: auto; 
+  @extend %text-center; 
+  @extend %position-absolute; 
+  @include transition(all .2s ceaser($easeInOutSine)); 
+
+  .projectPagination-link-arrow-label {
+    
+    @include type-setting(-1); 
+    @extend %fwb; 
+    @extend %uc; 
+
+    @media #{$medium-up} {
+
+      @include type-setting(0); 
+
+    }
+
+  }
+
+  .projectPagination-link-arrow-icon {
+
+    width: rem-calc(24px);
+    height: rem-calc(24px); 
+    fill: white; 
+
+    @media #{$medium-up} {
+
+      width: rem-calc(30px);
+      height: rem-calc(30px);
+
+    }
+
+  }
+
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Project Press List
+\*------------------------------------*/
+
+
+.projectPress {
+
+  .projectPress-publication {
+      
+    width: rem-calc(100px);
+    margin-bottom: rem-calc($level3); 
+    opacity: 1; 
+    @include transition(all .2s ceaser($easeInOutSine)); 
+
+    @media #{$medium-up} {
+
+      margin-bottom: 0; 
+      width: rem-calc(90px);
+
+    }
+
+    img {
+
+      width: 100%; 
+
+    }
+
+    &:hover, 
+    &:focus {
+
+      opacity: .5; 
+
+    }
+
+  }
+
+}

@@ -1,0 +1,27 @@
+
+
+/*------------------------------------*\
+    #Marquee 
+\*------------------------------------*/
+
+.marquee {
+
+  overflow: hidden; 
+  width: 100%; 
+  height: rem-calc(100px);
+  white-space: nowrap; 
+
+  .marquee-lines {
+
+    color: $secondaryColor;
+    display: inline-block;  
+    margin-top: rem-calc($level4);
+    margin-bottom: rem-calc($level4);
+    will-change: transform; 
+    position: absolute; 
+    white-space: nowrap; 
+    @include type-setting(4); 
+
+  }
+
+}

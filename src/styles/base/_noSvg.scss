@@ -1,0 +1,41 @@
+
+
+/*------------------------------------*\
+    #CSS behavior for when a device doesn't support svgs 
+\*------------------------------------*/
+
+
+
+// hides elements when the device doesn't support svgs
+.no-svg  {
+
+    .hide-no-svg {
+
+        display: none; 
+
+    }
+
+}
+
+
+
+//Shows element as a fallback when svg is not supported
+.no-svg  {
+
+    .show-no-svg {
+
+        display: block; 
+
+    }
+
+}
+
+.svg {
+
+    .show-no-svg {
+
+        display: none; 
+        
+    }
+}
+

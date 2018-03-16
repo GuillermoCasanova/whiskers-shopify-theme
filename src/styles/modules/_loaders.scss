@@ -1,0 +1,220 @@
+
+
+/*------------------------------------*\
+    #Loaders
+\*------------------------------------*/
+
+.loadingbar {
+
+  width: 0%; 
+  bottom: 0;
+  left: 0; 
+  height: rem-calc(5px); 
+  background-color: $accentColor; 
+  box-shadow: -1px -1px 8px rgba(0, 0, 0, .6);
+  @extend %position-fixed; 
+  
+  @media #{$medium-up} {
+    bottom: rem-calc(0);
+  }
+
+  &.is-loading {
+    width: 100%; 
+    @include animation(loading 1s ease-in-out); 
+  }
+
+}
+
+
+
+@include keyframes(loading) {
+  
+
+  0% {
+
+    width: 0%; 
+  }
+
+  20% {
+    width: 30%;
+  }
+
+  30% {
+
+    width: 40%;
+  }
+
+  60% {
+
+    width: 65%;
+  }
+
+  80% {
+
+    width: 75%;
+  }
+
+
+  100% {
+
+    width: 100%; 
+  }
+
+}
+
+
+.loadingtext {
+  
+  bottom: rem-calc($level2); 
+  left: 0;
+  right: 0;
+  text-align: center; 
+  opacity: 0; 
+  @extend %position-fixed; 
+
+  &.is-showing {
+    opacity: 1; 
+  }
+  
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Loading Screen
+\*------------------------------------*/
+
+.loadingScreen {
+
+   background-color: #fff; 
+   top: 0; 
+   bottom: 0; 
+   right: 0;
+   left: 0; 
+   z-index: 300; 
+   opacity: 1; 
+   will-change: opacity; 
+   @extend %position-fixed; 
+
+   // &.is-hidden {
+
+   //    @include animation(loading-screen-out .6s ease-in-out forwards); 
+
+   // }
+
+}
+
+
+
+.loadingScreen {
+    
+    &.ng-enter {
+      @include animation(loading-screen-in .6s ease-in-out forwards); 
+    }
+
+    &.ng-leave {
+      @include animation(loading-screen-out .6s ease-in-out forwards); 
+        
+    }
+
+}
+
+
+
+.loader,
+.loader:after {
+  border-radius: 50%;
+  width: 5rem;
+  height: 5rem;
+}
+
+
+.loader {
+  margin: 60px auto;
+  font-size: 10px;
+  position: relative;
+  text-indent: -9999em;
+  border-top: .8em solid $quaternaryColor;
+  border-right: .8em solid $quaternaryColor;
+  border-bottom: .8em solid $quaternaryColor;
+  border-left: .8em solid $accentColor;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation: load8 .8s infinite linear;
+  animation: load8 .8s infinite linear;
+}
+@-webkit-keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load8 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+
+
+
+@include keyframes(loading-screen-in) {
+
+   0% {
+    
+
+     opacity: 0; 
+    @include transform(translateX(100%)); 
+
+    }
+    1% {
+      opacity: 0; 
+      @include transform(translateX(0)); 
+
+    }
+
+    100% {
+      opacity: 1; 
+
+    }
+    
+}
+
+
+@include keyframes(loading-screen-out) {
+    
+    0% {
+    
+
+     opacity: 1; 
+
+    }
+
+    99% {
+
+      opacity: 0; 
+      @include transform(translateX(0)); 
+
+
+    }
+    
+  
+    100% {
+      opacity: 0; 
+      @include transform(translateX(100%)); 
+
+    }
+
+}

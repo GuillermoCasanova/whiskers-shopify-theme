@@ -1,0 +1,45 @@
+
+
+/*------------------------------------*\
+    #Link Groups 
+\*------------------------------------*/
+
+
+.linkGroup {
+  
+  a {
+
+    color: #fff; 
+    font-family: $secondary-font-family; 
+
+  }
+
+  &:hover, 
+  &:focus {
+  
+    .linkGroup-icon {
+      
+      color: $accentColor; 
+      fill: $accentColor; 
+
+    }
+
+    .linkGroup-icon {
+
+      @include transform(translateX(5px));
+    }
+
+  }
+  
+  .linkGroup-icon {
+
+    fill: $tertiaryColor; 
+    width: 45px;
+    height: 22px; 
+    padding-left: rem-calc($level1); 
+    @include transition(all .4s ease-in-out); 
+    @include transform(translateX(0));
+
+  }
+
+}

@@ -1,0 +1,52 @@
+
+/*------------------------------------*\
+    #Icons  
+\*------------------------------------*/
+
+$font-family: "siteIcons";
+
+@mixin icon($icon: false, $position: before) {
+  @if $position == both {
+    $position: 'before, &:after';
+  }
+
+  &:#{$position} {
+    @if $icon {
+      content: $icon;
+      font-family: $font-family;
+      font-style: normal; 
+      vertical-align: middle; 
+      margin-right: rem-calc(4); 
+    }
+
+    @content;
+    
+  }
+}
+
+
+%iconStyles {
+
+    font-family: "siteicons";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    vertical-align: middle;
+    display: inline-block;
+    text-decoration: none;
+    width: 1em;
+    text-align: center;
+
+    /* For safety - reset parent styles, that can break glyph codes*/
+    font-variant: normal;
+    text-transform: none;
+
+    /* fix buttons height, for twitter bootstrap */
+    line-height: 1em;
+    // Increase size of all icons 
+    font-size: 110%;
+
+    /* Font smoothing. That was taken from TWBS */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}

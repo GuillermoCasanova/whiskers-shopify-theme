@@ -1,0 +1,85 @@
+
+
+/*------------------------------------*\
+    #Footer Styles
+\*------------------------------------*/
+
+.footer-inner {
+
+  background-color: $secondaryColor;
+  padding-top: rem-calc($level4); 
+  padding-bottom: rem-calc($level4);  
+    
+  @media #{$large-up} {
+
+      padding-top: rem-calc($level5); 
+      padding-bottom: rem-calc($level3);  
+
+  }
+}
+
+
+.footer-menu {
+  
+  margin-bottom: rem-calc($level5); 
+  color: $tertiaryColor; 
+  @include type-setting(1); 
+
+  @media #{$large-up} {
+
+    margin-bottom: 0; 
+    @include type-setting(-1); 
+
+  }
+
+  .footer-menu-title {
+    font-family: $secondary-font-family; 
+    margin-bottom: rem-calc($level2); 
+    @include type-setting(2); 
+    @extend %uc; 
+    @extend %fwb; 
+
+    @media #{$large-up} {
+      margin-bottom: 0; 
+      @include type-setting(0); 
+
+    }
+
+  }
+
+  .footer-menu-item {
+
+    margin-bottom: rem-calc($level2); 
+    
+    @media #{$medium-up} {
+
+      margin-bottom: rem-calc($level1); 
+
+    }
+
+  }
+  
+  .footer-menu-link {
+
+    color: $tertiaryColor; 
+    
+    &:hover, 
+    &:focus {
+
+      border-bottom: 2px solid $accentColor; 
+      
+    }
+  }
+
+}
+
+
+.footer-siteCredit {
+
+
+}
+
+.footer-logo {
+
+  margin-top: rem-calc($level3); 
+}

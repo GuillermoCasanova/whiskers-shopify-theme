@@ -1,0 +1,939 @@
+
+
+/*------------------------------------*\
+    #Flex-Box
+\*------------------------------------*/
+
+
+/*------------------------------------*\
+    #Grid Alignments and Properties  
+\*------------------------------------*/
+
+//TODO: convert this into a placeholder module
+//so they can be extended inside components 
+
+// GUIDE TO USING FLEX
+//https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+//http://the-echoplex.net/flexyboxes/
+//
+
+  // @include flex-wrap(wrap; 
+  // -ms-flex-wrap: wrap; 
+
+
+.grid {
+  // margin: 0;
+  // padding: 0;
+  list-style: none;
+  display: -ms-flexbox; 
+  display: flex; 
+}
+
+
+//Container Becomes the size of content 
+.grid--inline {
+    display: -ms-inline-flex;
+    display: inline-flex; 
+}
+
+.grid-cell {
+    -ms-flex: 1 1 auto; 
+    flex: 1 1 auto;
+}
+
+.grid-cell--2 {
+    -ms-flex: 2 1 auto; 
+    flex: 2;
+}
+
+.grid-cell--3 {
+    -ms-flex: 3 1 auto; 
+    flex: 3;
+}
+
+
+.grid--flexCells > .grid-cell {
+    display: -ms-flexbox; 
+    display: flex; 
+}
+
+// Grid becomes 100% width of container 
+.grid--expand {
+    width: 100%; 
+}
+
+
+
+
+
+
+/*------------------------------------*\
+    #Grid Alignment (cross axis space distribution)
+\*------------------------------------*/
+
+
+.grid--top {
+    -ms-flex-align: start; 
+   align-items: flex-start;
+}
+
+.grid--bottom {
+    -ms-flex-align: end; 
+   align-items: flex-end;
+}
+
+.grid--center {
+    -ms-flex-align: center; 
+   align-items: center;
+}
+
+.grid--stretch {
+    -ms-flex-align: stretch; 
+   align-items: stretch;
+}
+
+.grid--top {
+      -ms-flex-align: flex-start; 
+   align-items: flex-start;
+}
+
+.grid--bottom {
+      -ms-flex-align: flex-end; 
+   align-items: flex-end;
+}
+
+
+
+@include media-query($small-up)  {
+
+    .small-grid--baseline {
+        -ms-flex-align: baseline; 
+       align-items: baseline;
+    }
+
+    .small-grid--top {
+        -ms-flex-align: start; 
+       align-items: flex-start;
+    }
+
+    .small-grid--bottom {
+        -ms-flex-align: end; 
+       align-items: flex-end;
+    }
+
+    .small-grid--center {
+        -ms-flex-align: center; 
+       align-items: center;
+    }
+
+    .small-grid--stretch {
+        -ms-flex-align: stretch; 
+       align-items: stretch;
+    }
+
+}
+
+@include media-query($medium-up)  {
+    
+    .med-grid--baseline {
+        -ms-flex-align: baseline; 
+       align-items: baseline;
+    }
+
+    .med-grid--top {
+        -ms-flex-align: start; 
+       align-items: flex-start;
+    }
+
+    .med-grid--bottom {
+        -ms-flex-align: end; 
+       align-items: flex-end;
+    }
+
+    .med-grid--center {
+        -ms-flex-align: center; 
+       align-items: center;
+    }
+
+    .med-grid--stretch {
+        -ms-flex-align: stretch; 
+       align-items: stretch;
+    }
+
+}
+
+
+@include media-query($large-up)  {
+
+    .large-grid--baseline {
+        -ms-flex-align: baseline; 
+       align-items: baseline;
+    }
+
+    .large-grid--top {
+        -ms-flex-align: start; 
+       align-items: flex-start;
+    }
+
+    .large-grid--bottom {
+        -ms-flex-align: end; 
+       align-items: flex-end;
+    }
+
+    .large-grid--center {
+        -ms-flex-align: center; 
+       align-items: center;
+    }
+
+    .large-grid--stretch {
+        -ms-flex-align: stretch; 
+       align-items: stretch;
+    }
+    
+}
+
+
+
+
+
+
+/*------------------------------------*\
+    #Grid Directions
+\*------------------------------------*/
+
+
+// Column adjusts to the height of the content 
+.grid--flexDirectionColumn {
+    -ms-flex-direction: column; 
+   flex-direction: column;
+}
+
+.grid--flexDirectionColumnReverse {
+    -ms-flex-direction: column-reverse; 
+    flex-direction: column-reverse; 
+}
+
+.grid--flexDirectionRow {
+    -ms-flex-direction: row; 
+   flex-direction: row;
+}
+
+.grid--flexDirectionRowReverse{
+    -ms-flex-direction: row-reverse; 
+   flex-direction: row-reverse; 
+}
+
+
+@include media-query($small-up)  {
+
+    .small-grid--flexDirectionColumn {
+        -ms-flex-direction: column; 
+       flex-direction: column;
+    }
+
+    .small-grid--flexDirectionColumnReverse {
+        -ms-flex-direction: column-reverse; 
+      flex-direction: column-reverse; 
+    }
+
+    .small-grid--flexDirectionRow {
+        -ms-flex-direction: row; 
+       flex-direction: row;
+    }
+
+    .small-grid--flexDirectionRowReverse{
+        -ms-flex-direction: row-reverse; 
+       flex-direction: row-reverse; 
+    }
+
+
+}
+
+
+@include media-query($medium-up) {
+
+    .med-grid--flexDirectionColumn {
+        -ms-flex-direction: column; 
+       flex-direction: column;
+    }
+
+    .med-grid--flexDirectionColumnReverse {
+        -ms-flex-direction: column-reverse; 
+      flex-direction: column-reverse; 
+    }
+
+    .med-grid--flexDirectionRow {
+        -ms-flex-direction: row; 
+       flex-direction: row;
+    }
+
+    .med-grid--flexDirectionRowReverse{
+        -ms-flex-direction: row-reverse; 
+       flex-direction: row-reverse; 
+    }
+
+}
+
+
+@include media-query($large-up)  {
+
+    .large-grid--flexDirectionColumn {
+        -ms-flex-direction: column; 
+       flex-direction: column;
+    }
+
+    .large-grid--flexDirectionColumnReverse {
+        -ms-flex-direction: column-reverse; 
+      flex-direction: column-reverse; 
+    }
+
+    .large-grid--flexDirectionRow {
+        -ms-flex-direction: row; 
+       flex-direction: row;
+    }
+
+    .large-grid--flexDirectionRowReverse{
+        -ms-flex-direction: row-reverse; 
+       flex-direction: row-reverse; 
+    }
+
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Grid Justifications
+\*------------------------------------*/
+
+
+.grid--justifyCenter {
+    -ms-flex-pack: center; 
+    justify-content: center; 
+}
+
+.grid--justifyRight {
+    -ms-flex-pack: end; 
+    justify-content: flex-end; 
+}
+
+.grid--justifyLeft {
+    -ms-flex-pack: start; 
+    justify-content: flex-start; 
+}
+
+.grid--justifySpaceBetween {
+    -ms-flex-pack: justify; 
+  justify-content: space-between;
+}
+
+.grid--justifySpaceAround {
+    -ms-flex-pack: distribute; 
+  justify-content: space-around;
+}
+
+
+@include media-query($small-up) {
+
+    .small-grid--justifyCenter {
+        -ms-flex-pack: center; 
+        justify-content: center; 
+    }
+
+    .small-grid--justifyEnd {
+        -ms-flex-pack: end; 
+        justify-content: flex-end; 
+    }
+
+    .small-grid--justifyStart {
+        -ms-flex-pack: start; 
+        justify-content: flex-start; 
+    }
+
+    .small-grid--justifySpaceBetween {
+        -ms-flex-pack: justify; 
+      justify-content: space-between;
+    }
+
+    .small-grid--justifySpaceAround {
+        -ms-flex-pack: distribute; 
+      justify-content: space-around;
+    }
+
+}
+
+
+@include media-query($medium-up) {
+
+
+    .med-grid--justifyCenter {
+        -ms-flex-pack: center; 
+        justify-content: center; 
+    }
+
+    .med-grid--justifyEnd {
+        -ms-flex-pack: end; 
+        justify-content: flex-end; 
+    }
+
+    .med-grid--justifyStart {
+        -ms-flex-pack: start; 
+        justify-content: flex-start; 
+    }
+
+    .med-grid--justifySpaceBetween {
+        -ms-flex-pack: justify; 
+      justify-content: space-between;
+    }
+
+    .med-grid--justifySpaceAround {
+        -ms-flex-pack: distribute; 
+      justify-content: space-around;
+    }
+
+}
+
+@include media-query($large-up)  {
+
+
+    .large-grid--justifyCenter {
+        -ms-flex-pack: center; 
+        justify-content: center; 
+    }
+
+    .large-grid--justifyEnd {
+        -ms-flex-pack: end; 
+        justify-content: flex-end; 
+    }
+
+    .large-grid--justifyStart {
+        -ms-flex-pack: start; 
+        justify-content: flex-start; 
+    }
+
+    .large-grid--justifySpaceBetween {
+        -ms-flex-pack: justify; 
+      justify-content: space-between;
+    }
+
+    .large-grid--justifySpaceAround {
+        -ms-flex-pack: distribute; 
+      justify-content: space-around;
+    }
+
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Grid Wrap
+\*------------------------------------*/
+
+
+.grid--flexWrap {
+    -ms-flex-wrap: wrap; 
+   flex-wrap: wrap;
+}
+
+.grid--flexWrapReverse {
+    -ms-flex-wrap: wrap-reverse; 
+  flex-wrap: wrap-reverse; 
+}
+
+
+.grid--flexNoWrap {
+    -ms-flex-wrap: nowrap; 
+  flex-wrap: nowrap; 
+}
+
+
+@include media-query($small-up) {
+
+    .small-grid--flexWrap {
+        -ms-flex-wrap: wrap; 
+        flex-wrap: wrap;
+    }
+
+    .small-grid--flexWrapReverse {
+        -ms-flex-wrap: wrap-reverse; 
+      flex-wrap: wrap-reverse; 
+    }
+
+
+    .small-grid--flexNoWrap {
+        -ms-flex-wrap: nowrap; 
+      flex-wrap: nowrap; 
+    }
+
+}
+
+@include media-query($medium-up) {
+
+    .med-grid--flexWrap {
+        -ms-flex-wrap: wrap; 
+        flex-wrap: wrap;
+    }
+
+    .med-grid--flexWrapReverse {
+        -ms-flex-wrap: wrap-reverse; 
+      flex-wrap: wrap-reverse; 
+    }
+
+
+    .med-grid--flexNoWrap {
+        -ms-flex-wrap: nowrap; 
+      flex-wrap: nowrap; 
+    }
+
+}
+
+@include media-query($large-up) {
+
+    .large-grid--flexWrap {
+        -ms-flex-wrap: wrap; 
+        flex-wrap: wrap;
+    }
+
+    .large-grid--flexWrapReverse {
+        -ms-flex-wrap: wrap-reverse; 
+      flex-wrap: wrap-reverse; 
+    }
+
+
+    .large-grid--flexNoWrap {
+        -ms-flex-wrap: nowrap; 
+      flex-wrap: nowrap; 
+    }
+
+
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Grid Child Source Order
+\*------------------------------------*/
+
+
+//TODO: Make order classes for -1 0 and 1 
+
+
+
+
+
+
+
+/*------------------------------------*\
+    #Grid Child Flex Auto Size (shrink)
+\*------------------------------------*/
+
+//Makes items stay the same size and not grow or shrink 
+.grid-cell--autoSize {
+   -ms-flex: 0 0 auto; 
+    flex: none; 
+}
+
+
+
+
+
+
+/*------------------------------------*\
+    #Grid Child Flex Grow
+\*------------------------------------*/
+
+
+.grid-cell--flexGrow1 {
+    -ms-flex-grow: 1; 
+    flex-grow: 1; 
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Grid Child Sef Alignment 
+\*------------------------------------*/
+
+
+.grid-cell--top {
+  -ms-flex-item-align: start; 
+  align-self: flex-start;
+}
+
+.grid-cell--bottom {
+  -ms-flex-item-align: end; 
+  align-self: flex-end;
+}
+
+.grid-cell--center {
+  -ms-flex-item-align: center; 
+  align-self: center;
+}
+
+.grid-cell--center {
+  -ms-flex-item-align: stretch; 
+  align-self: stretch;
+}
+
+.grid-cell--autoSize {
+   -ms-flex: 0 0 auto; 
+    flex: none; 
+}
+
+
+/*------------------------------------*\
+    #Grid Child Elem Media Queries  (grow/autosize + align-self)
+\*------------------------------------*/
+
+@include media-query($small-up) {
+
+    .small-grid-cell--flexGrow1 {
+        -ms-flex-grow: 1; 
+        flex-grow: 1; 
+    }
+
+    .small-grid-cell--autoSize {
+       -ms-flex: 0 0 auto; 
+        flex: none; 
+    }
+
+    .small-grid-cell--top {
+      -ms-flex-item-align: start; 
+      align-self: flex-start;
+    }
+
+    .small-grid-cell--bottom {
+      -ms-flex-item-align: end; 
+      align-self: flex-end;
+    }
+
+    .small-grid-cell--center {
+      -ms-flex-item-align: center; 
+      align-self: center;
+    }
+
+    .small-grid-cell--center {
+      -ms-flex-item-align: stretch; 
+      align-self: stretch;
+    }
+
+}
+
+
+
+
+
+@include media-query($medium-up) {
+
+    .med-grid-cell--flexGrow1 {
+        -ms-flex-grow: 1; 
+        flex-grow: 1; 
+    }
+
+    .med-grid-cell--autoSize {
+       -ms-flex: 0 0 auto; 
+        flex: none; 
+    }
+
+    .med-grid-cell--top {
+      -ms-flex-item-align: start; 
+      align-self: flex-start;
+    }
+
+    .med-grid-cell--bottom {
+      -ms-flex-item-align: end; 
+      align-self: flex-end;
+    }
+
+    .med-grid-cell--center {
+      -ms-flex-item-align: center; 
+      align-self: center;
+    }
+
+    .med-grid-cell--center {
+      -ms-flex-item-align: stretch; 
+      align-self: stretch;
+    }
+
+}
+
+
+
+@include media-query($large-up)  {
+
+    .large-grid-cell--flexGrow1 {
+        -ms-flex-grow: 1; 
+        flex-grow: 1; 
+    }
+
+    .large-grid-cell--autoSize {
+       -ms-flex: 0 0 auto; 
+        flex: none; 
+    }
+
+    .large-grid-cell--top {
+      -ms-flex-item-align: start; 
+      align-self: flex-start;
+    }
+
+    .large-grid-cell--bottom {
+      -ms-flex-item-align: end; 
+      align-self: flex-end;
+    }
+
+    .large-grid-cell--center {
+      -ms-flex-item-align: center; 
+      align-self: center;
+    }
+
+    .large-grid-cell--center {
+      -ms-flex-item-align: stretch; 
+      align-self: stretch;
+    }
+
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Sizing properties for Child Elements 
+\*------------------------------------*/
+
+
+.grid--fit > .grid-cell {
+    -ms-flex: 1 1 auto; 
+    flex: 1; 
+}
+
+.grid--full > .grid-cell {
+    -ms-flex: 0 0 100%; 
+    flex: 0 0 100%; 
+}
+
+.grid--1of2 > .grid-cell {
+    -ms-flex: 0 0 50%; 
+    flex: 0 0 50%; 
+}
+
+.grid--1of3 > .grid-cell {
+    -ms-flex: 0 0 33.3333%; 
+    flex: 0 0 33.3333%; 
+}
+
+.grid--1of4 > .grid-cell {
+    -ms-flex: 0 0 25%; 
+    flex: 0 0 25%; 
+
+}
+
+.grid--1of4 > .grid-cell {
+    -ms-flex: 0 0 20%; 
+    flex: 0 0 20%; 
+}
+
+
+@include media-query($small-up) {
+
+  .small-grid--fit > .grid-cell {
+    -ms-flex: 1 1 auto; 
+    flex: 1;
+  }
+  .small-grid--full > .grid-cell {
+    -ms-flex: 0 0 100%; 
+    flex: 0 0 100%;
+  }
+  .small-grid--1of2 > .grid-cell {
+    -ms-flex: 0 0 50%; 
+    flex: 0 0 50%;
+  }
+  .small-grid--1of3 > .grid-cell {
+    -ms-flex: 0 0 33.3333%; 
+    flex: 0 0 33.3333%;
+  }
+  .small-grid--1of4 > .grid-cell {
+    -ms-flex: 0 0 25%; 
+    flex: 0 0 25%;
+  }
+  .small-grid--1of5 > .grid-cell {
+    -ms-flex: 0 0 20%; 
+    flex: 0 0 20%;
+  }
+}
+
+@include media-query($medium-up) {
+
+  .med-grid--fit > .grid-cell {
+    -ms-flex: 1 1 auto; 
+    flex: 1;
+  }
+  .med-grid--full > .grid-cell {
+    -ms-flex: 0 0 100%; 
+    flex: 0 0 100%;
+  }
+  .med-grid--1of2 > .grid-cell {
+    -ms-flex: 0 0 50%; 
+    flex: 0 0 50%;
+  }
+  .med-grid--1of3 > .grid-cell {
+    -ms-flex: 0 0 33.3333%; 
+    flex: 0 0 33.3333%;
+  }
+  .med-grid--1of4 > .grid-cell {
+    -ms-flex: 0 0 25%; 
+    flex: 0 0 25%;
+  }
+  .med-grid--1of5 > .grid-cell {
+    -ms-flex: 0 0 20%; 
+    flex: 0 0 20%;
+  }
+}
+
+@include media-query($large-up)  {
+
+  .large-grid--fit > .grid-cell {
+    -ms-flex: 1 1 auto; 
+    flex: 1;
+  }
+  .large-grid--full > .grid-cell {
+    -ms-flex: 0 0 100%; 
+    flex: 0 0 100%;
+  }
+  .large-grid--1of2 > .grid-cell {
+    -ms-flex: 0 0 50%; 
+    flex: 0 0 50%;
+  }
+  .large-grid--1of3 > .grid-cell {
+    -ms-flex: 0 0 33.3333%; 
+    flex: 0 0 33.3333%;
+  }
+  .large-grid--1of4 > .grid-cell {
+    -ms-flex: 0 0 25%; 
+    flex: 0 0 25%;
+  }
+  .large-grid--1of5 > .grid-cell {
+    -ms-flex: 0 0 20%; 
+    flex: 0 0 20%;
+  }
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Flex Gutters  (these using 1rem for gutter base)
+\*------------------------------------*/
+
+
+$column-gutter-flex: $column-gutter/2; 
+
+
+.grid--collapse {
+  margin: 0 -$column-gutter-flex 0 -$column-gutter-flex;
+}
+
+.grid--gutters > .grid-cell {
+  padding: 0 $column-gutter-flex 0 $column-gutter-flex;
+}
+
+// .grid--guttersLg {
+//   margin: -1.5rem 0 1.5rem -1.5rem;
+// }
+// .grid--guttersLg > .grid-cell {
+//   padding: 1.5rem 0 0 1.5rem;
+// }
+
+// .grid--guttersXl {
+//   margin: -2rem 0 2rem -2rem;
+// }
+// .grid--guttersXl > .grid-cell {
+//   padding: 2rem 0 0 2rem;
+// }
+
+// // @include media-query($small-up)  {
+// //   .small-grid--gutters {
+// //     margin: -1rem 0 1rem -1rem;
+// //   }
+// //   .small-grid--gutters > .grid-cell {
+// //     padding: 1rem 0 0 1rem;
+// //   }
+// //   .small-grid--guttersLg {
+// //     margin: -1.5rem 0 1.5rem -1.5rem;
+// //   }
+// //   .small-grid--guttersLg > .grid-cell {
+// //     padding: 1.5rem 0 0 1.5rem;
+// //   }
+// //   .small-grid--guttersXl {
+// //     margin: -2rem 0 2rem -2rem;
+// //   }
+// //   .small-grid--guttersXl > .grid-cell {
+// //     padding: 2rem 0 0 2rem;
+// //   }
+// // }
+
+// // @include media-query($medium-u) } {
+// //   .med-grid--gutters {
+// //     margin: -1rem 0 1rem -1rem;
+// //   }
+// //   .med-grid--gutters > .grid-cell {
+// //     padding: 1rem 0 0 1rem;
+// //   }
+// //   .med-grid--guttersLg {
+// //     margin: -1.5rem 0 1.5rem -1.5rem;
+// //   }
+// //   .med-grid--guttersLg > .grid-cell {
+// //     padding: 1.5rem 0 0 1.5rem;
+// //   }
+// //   .med-grid--guttersXl {
+// //     margin: -2rem 0 2rem -2rem;
+// //   }
+// //   .med-grid--guttersXl > .grid-cell {
+// //     padding: 2rem 0 0 2rem;
+// //   }
+// // }
+
+// // @include media-query($large-u) } {
+// //   .large-grid--gutters {
+// //     margin: -1rem 0 1rem -1rem;
+// //   }
+// //   .large-grid--gutters > .grid-cell {
+// //     padding: 1rem 0 0 1rem;
+// //   }
+// //   .large-grid--guttersLg {
+// //     margin: -1.5rem 0 1.5rem -1.5rem;
+// //   }
+// //   .large-grid--guttersLg > .grid-cell {
+// //     padding: 1.5rem 0 0 1.5rem;
+// //   }
+// //   .large-grid--guttersXl {
+// //     margin: -2rem 0 2rem -2rem;
+// //   }
+// //   .large-grid--guttersXl > .grid-cell {
+// //     padding: 2rem 0 0 2rem;
+// //   }
+// // }
+
+
+
+/*------------------------------------*\
+    #Flex Debug
+\*------------------------------------*/
+
+
+//Debug For finding FlexBoxes with Grow 
+// [class*="flex"] {
+//   // background-color: red; 
+//   // margin-right: 2em;
+//   // margin-left: 2em; 
+// }
+
+

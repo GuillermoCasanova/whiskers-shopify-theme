@@ -1,0 +1,30 @@
+
+
+/*------------------------------------*\
+    #Shout Out Component  
+\*------------------------------------*/
+
+
+.shoutout {
+  
+  margin-bottom: rem-calc($level3); 
+
+  .shoutout-icon {
+    margin-bottom: rem-calc($level3); 
+    @extend %text-center; 
+  }
+  .shoutout-text {
+    font-family: $secondary-font-family; 
+    @extend %text-center; 
+    @extend %text-mega; 
+
+  }
+
+  @media #{$medium-up} {
+
+    margin-bottom: rem-calc($level7); 
+
+  }
+
+}
+

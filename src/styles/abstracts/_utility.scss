@@ -1,0 +1,826 @@
+
+/*------------------------------------*\
+    #Utility  
+\*------------------------------------*/
+
+
+/*------------------------------------*\
+    #Padding + Margin Levels  
+\*------------------------------------*/
+
+$level1: 6;
+$level2: 12; 
+$level3: 18;
+$level4: 24; 
+$level5: 30;  
+$level6: 36; 
+$level7: 48; 
+
+
+
+
+
+/*------------------------------------*\
+    #Centering without flexbox
+\*------------------------------------*/
+
+
+%horizontal-align {
+  display: block; 
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+%vertical-align {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
+%centerContentsVertically {
+  display: inline-block; 
+
+  & > * {
+    display: inline-block; 
+    vertical-align: middle; 
+  }
+}
+
+
+/*------------------------------------*\
+    #Display Types 
+\*------------------------------------*/
+
+
+%display-inlineBlock {
+  display: inline-block; 
+}
+
+%display-block {
+  display: block; 
+}
+
+%display-inline {
+    display: inline; 
+}
+
+
+/*------------------------------------*\
+    #Flag Object  (like Media Object but with centered body vertically)
+\*------------------------------------*/
+
+
+%flag {
+    display: table;
+    width: 100%;
+}
+
+%flag-components {
+
+  display: table-cell;
+  vertical-align: middle;
+
+  .flag--top & {
+    vertical-align: top;
+  }
+
+  .flag--bottom & {
+    vertical-align: bottom;
+  }
+
+}
+
+%flag-image {
+    
+  > img {
+    display: block;
+    max-width: none;
+  }
+
+  .flag--rev & {
+    padding-left: 10px;
+    padding-right: 0;
+    
+  }
+}
+
+%flag-body {
+  width: 100%;
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Flexbox 
+\*------------------------------------*/
+
+
+%flexb { 
+  display: -webkit-flex;
+  display: flex;
+}
+
+%flexb-center-vert {
+  margin-bottom: auto; 
+  margin-top: auto;
+}
+
+
+
+
+
+
+/*------------------------------------*\
+    #Floats & Clearfix  
+\*------------------------------------*/
+
+
+%left {
+  float: left;
+}
+
+%right {
+  float: right; 
+}
+
+%clearfix {
+  overflow: auto;
+  zoom: 1;
+}
+
+
+
+
+
+
+
+/*------------------------------------*\
+    #Height Classes
+\*------------------------------------*/
+
+
+%vh100 {
+
+    height: 100vh;
+
+}
+
+
+
+
+
+
+/*------------------------------------*\
+    #Media Object  
+\*------------------------------------*/
+
+
+@mixin media($float: left) {
+  overflow: hidden;
+  zoom: 1; 
+  & > :first-child {
+    float: $float;
+  }
+  
+  & > :last-child {
+    overflow: hidden;
+  }
+}
+
+
+%media--fr { 
+  @include media(right);
+}
+
+%media--fl {
+  @include media(left); 
+}
+
+
+
+
+
+
+/*------------------------------------*\
+    #Position Types 
+\*------------------------------------*/
+
+
+%position-relative {
+  position: relative; 
+}
+
+%position-absolute {
+  position: absolute; 
+}
+
+%position-fixed {
+  position: fixed; 
+}
+
+%position-fixedCentered {
+    right: 0;
+    left: 0; 
+    top: 0; 
+    bottom: 0; 
+    margin: auto; 
+    @extend %position-fixed; 
+}
+
+%position-absoluteCentered {
+
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: auto; 
+    @extend %position-absolute;
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Text Alignment  
+\*------------------------------------*/
+
+%text-center { text-align: center; }
+%text-left {text-align: left;}
+%text-right {text-align: right;}
+
+
+
+
+
+/*------------------------------------*\
+    #Paddings 
+\*------------------------------------*/
+
+
+//padding All Sides
+%ptrbl0 {
+  padding: 0 !important; 
+}
+
+%ptrbl1 { 
+  padding: rem-calc($level1) !important;
+}
+
+%ptrbl2 { 
+  padding: rem-calc($level2) !important;
+}
+
+%ptrbl3 { 
+  padding: rem-calc($level3) !important;
+}
+
+%ptrbl4 { 
+  padding: rem-calc($level4) !important;
+}
+
+%ptrbl5 { 
+  padding: rem-calc($level5) !important;
+}
+
+%ptrbl6 {
+  padding: rem-calc($level6) !important; 
+}
+
+%ptrbl7 {
+  padding: rem-calc($level7) !important; 
+}
+
+
+//
+//padding Top 
+//
+
+%pt0 {
+  padding-top: 0 !important; 
+}
+
+%pt1 { 
+  padding-top: rem-calc($level1) !important;
+}
+
+%pt2 { 
+  padding-top: rem-calc($level2) !important;
+}
+
+%pt3 { 
+  padding-top: rem-calc($level3) !important;
+}
+
+%pt4 { 
+  padding-top: rem-calc($level4) !important;
+}
+
+%pt5 { 
+  padding-top: rem-calc($level5) !important;
+}
+
+%pt6 { 
+  padding-top: rem-calc($level6) !important;
+}
+
+%pt7 { 
+  padding-top: rem-calc($level7) !important;
+}
+
+
+//
+//padding Bottom 
+//
+
+%pb0 {
+  padding-bottom: 0 !important; 
+}
+
+%pb1 { 
+  padding-bottom: rem-calc($level1) !important;
+}
+
+%pb2 { 
+  padding-bottom: rem-calc($level2) !important;
+}
+
+%pb3 { 
+  padding-bottom: rem-calc($level3) !important;
+}
+
+%pb4 { 
+  padding-bottom: rem-calc($level4) !important;
+}
+
+%pb5 { 
+  padding-bottom: rem-calc($level5) !important;
+}
+
+%pb6 { 
+  padding-bottom: rem-calc($level6) !important;
+}
+
+%pb7 { 
+  padding-bottom: rem-calc($level7) !important;
+}
+
+
+
+
+
+//
+//padding Top + Bottom 
+//
+
+%ptb0 {
+  padding-top: 0 !important; 
+  padding-bottom: 0 !important; 
+}
+
+%ptb1 { 
+  padding-top: rem-calc($level1) !important;
+  padding-bottom: rem-calc($level1) !important;
+}
+
+%ptb2 { 
+  padding-top: rem-calc($level2) !important;
+  padding-bottom: rem-calc($level2) !important;
+}
+
+%ptb3 { 
+  padding-top: rem-calc($level3) !important;
+  padding-bottom: rem-calc($level3) !important;
+}
+
+%ptb4 { 
+  padding-top: rem-calc($level4) !important;
+  padding-bottom: rem-calc($level4) !important;
+}
+
+%ptb5 { 
+  padding-top: rem-calc($level5) !important;
+  padding-bottom: rem-calc($level5) !important;
+}
+
+%ptb6 { 
+  padding-top: rem-calc($level6) !important;
+  padding-bottom: rem-calc($level6) !important;
+}
+
+%ptb7 { 
+  padding-top: rem-calc($level7) !important;
+  padding-bottom: rem-calc($level7) !important;
+}
+
+
+
+
+
+//
+//padding Right + Left 
+//
+
+%prl0 {
+  padding-right: 0 !important; 
+  padding-left: 0 !important; 
+}
+
+%prl1 { 
+  padding-right: rem-calc($level1) !important;
+  padding-bottom: rem-calc($level1) !important;
+}
+
+%prl2 { 
+  padding-right: rem-calc($level2) !important;
+  padding-left: rem-calc($level2) !important;
+}
+
+%prl3 { 
+  padding-right: rem-calc($level3) !important;
+  padding-left: rem-calc($level3) !important;
+}
+
+%prl4 { 
+  padding-right: rem-calc($level4) !important;
+  padding-left: rem-calc($level4) !important;
+}
+
+%prl5 { 
+  padding-right: rem-calc($level5) !important;
+  padding-left: rem-calc($level5) !important;
+}
+
+%prl6 { 
+  padding-right: rem-calc($level6) !important;
+  padding-left: rem-calc($level6) !important;
+}
+
+%prl7 { 
+  padding-right: rem-calc($level7) !important;
+  padding-left: rem-calc($level7) !important;
+}
+
+
+//
+//Padding Right 
+//
+
+%pr0 {
+  padding-right: 0 !important; 
+}
+
+%pr1 { 
+  padding-right: rem-calc($level1) !important;
+}
+
+%pr2 { 
+  padding-right: rem-calc($level2) !important;
+}
+
+%pr3 { 
+  padding-right: rem-calc($level3) !important;
+}
+
+%pr4 { 
+  padding-right: rem-calc($level4) !important;
+}
+
+%pr5 { 
+  padding-right: rem-calc($level5) !important;
+}
+
+%pr6 { 
+  padding-right: rem-calc($level6) !important;
+}
+
+%pr7 { 
+  padding-right: rem-calc($level7) !important;
+}
+
+
+//
+//Padding Left 
+//
+
+%pl0 {
+  padding-left: 0 !important; 
+}
+
+%pl1 { 
+  padding-left: rem-calc($level1) !important;
+}
+
+%pl2 { 
+  padding-left: rem-calc($level2) !important;
+}
+
+%pl3 { 
+  padding-left: rem-calc($level3) !important;
+}
+
+%pl4 { 
+  padding-left: rem-calc($level4) !important;
+}
+
+%pl5 { 
+  padding-left: rem-calc($level5) !important;
+}
+
+%pl6 { 
+  padding-left: rem-calc($level6) !important;
+}
+
+%pl7 { 
+  padding-left: rem-calc($level7) !important;
+}
+
+
+
+
+
+
+
+//
+//Margins
+//
+
+
+//Margin All Sides
+%mtrbl0 {
+  margin: 0 !important; 
+}
+
+%mtrbl1 { 
+  margin: rem-calc($level1) !important;
+}
+
+%mtrbl2 { 
+  margin: rem-calc($level2) !important;
+}
+
+%mtrbl3 { 
+  margin: rem-calc($level3) !important;
+}
+
+%mtrbl4 { 
+  margin: rem-calc($level4) !important;
+}
+
+%mtrbl5 { 
+  margin: rem-calc($level5) !important;
+}
+
+%mtrbl6 { 
+  margin: rem-calc($level6) !important;
+}
+
+%mtrbl7 { 
+  margin: rem-calc($level7) !important;
+}
+
+
+//
+//Margin Top 
+//
+
+%mt0 {
+  margin-top: 0 !important; 
+}
+
+%mt1 { 
+  margin-top: rem-calc($level1) !important;
+}
+
+%mt2 { 
+  margin-top: rem-calc($level2) !important;
+}
+
+%mt3 { 
+  margin-top: rem-calc($level3) !important;
+}
+
+%mt4 { 
+  margin-top: rem-calc($level4) !important;
+}
+
+%mt5 { 
+  margin-top: rem-calc($level5) !important;
+}
+
+%mt6 { 
+  margin-top: rem-calc($level6) !important;
+}
+
+%mt7 { 
+  margin-top: rem-calc($level7) !important;
+}
+
+
+//
+//Margin Bottom 
+//
+
+%mb0 {
+  margin-bottom: 0 !important; 
+}
+
+%mb1 { 
+  margin-bottom: rem-calc($level1) !important;
+}
+
+%mb2 { 
+  margin-bottom: rem-calc($level2) !important;
+}
+
+%mb3 { 
+  margin-bottom: rem-calc($level3) !important;
+}
+
+%mb4 { 
+  margin-bottom: rem-calc($level4) !important;
+}
+
+%mb5 { 
+  margin-bottom: rem-calc($level5) !important;
+}
+
+%mb6 { 
+  margin-bottom: rem-calc($level6) !important;
+}
+
+%mb7 { 
+  margin-bottom: rem-calc($level7) !important;
+}
+
+
+
+//
+//Margin Top + Bottom 
+//
+
+%mtb0 {
+  margin-top: 0 !important; 
+  margin-bottom: 0 !important; 
+}
+
+%mtb1 { 
+  margin-top: rem-calc($level1) !important;
+  margin-bottom: rem-calc($level1) !important;
+}
+
+%mtb2 { 
+  margin-top: rem-calc($level2) !important;
+  margin-bottom: rem-calc($level2) !important;
+}
+
+%mtb3 { 
+  margin-top: rem-calc($level3) !important;
+  margin-bottom: rem-calc($level3) !important;
+}
+
+%mtb4 { 
+  margin-top: rem-calc($level4) !important;
+  margin-bottom: rem-calc($level4) !important;
+}
+
+%mtb5 { 
+  margin-top: rem-calc($level5) !important;
+  margin-bottom: rem-calc($level5) !important;
+}
+
+%mtb6 { 
+  margin-top: rem-calc($level6) !important;
+  margin-bottom: rem-calc($level6) !important;
+}
+
+%mtb7 { 
+  margin-top: rem-calc($level7) !important;
+  margin-bottom: rem-calc($level7) !important;
+}
+
+
+
+//
+//Margin Right + Left 
+//
+
+%mrl0 {
+  margin-right: 0 !important; 
+  margin-left: 0 !important; 
+}
+
+%mrl1 { 
+  margin-right: rem-calc($level1) !important;
+  margin-left: rem-calc($level1) !important;
+}
+
+%mrl2 { 
+  margin-right: rem-calc($level2) !important;
+  margin-left: rem-calc($level2) !important;
+}
+
+%mrl3 { 
+  margin-right: rem-calc($level3) !important;
+  margin-left: rem-calc($level3) !important;
+}
+
+%mrl4 { 
+  margin-right: rem-calc($level4) !important;
+  margin-left: rem-calc($level4) !important;
+}
+
+%mrl5 { 
+  margin-right: rem-calc($level5) !important;
+  margin-left: rem-calc($level5) !important;
+}
+
+%mrl6 { 
+  margin-right: rem-calc($level6) !important;
+  margin-left: rem-calc($level6) !important;
+}
+
+%mrl7 { 
+  margin-right: rem-calc($level7) !important;
+  margin-left: rem-calc($level7) !important;
+}
+
+
+
+//
+//Margin right 
+//
+
+%mr0 {
+  margin-right: 0 !important; 
+}
+
+%mr1 { 
+  margin-right: rem-calc($level1) !important;
+}
+
+%mr2 { 
+  margin-right: rem-calc($level2) !important;
+}
+
+%mr3 { 
+  margin-right: rem-calc($level3) !important;
+}
+
+%mr4 { 
+  margin-right: rem-calc($level4) !important;
+}
+
+%mr5 { 
+  margin-right: rem-calc($level5) !important;
+}
+
+%mr6 { 
+  margin-right: rem-calc($level6) !important;
+}
+
+%mr7 { 
+  margin-right: rem-calc($level7) !important;
+}
+
+
+//
+//Margin Left 
+//
+
+%ml0 {
+  margin-left: 0 !important; 
+}
+
+%ml1 { 
+  margin-left: rem-calc($level1) !important;
+}
+
+%ml2 { 
+  margin-left: rem-calc($level2) !important;
+}
+
+%ml3 { 
+  margin-left: rem-calc($level3) !important;
+}
+
+%ml4 { 
+  margin-left: rem-calc($level4) !important;
+}
+
+%ml5 { 
+  margin-left: rem-calc($level5) !important;
+}
+
+
+%ml6 { 
+  margin-left: rem-calc($level6) !important;
+}
+
+%ml7 { 
+  margin-left: rem-calc($level7) !important;
+}

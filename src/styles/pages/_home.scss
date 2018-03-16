@@ -1,0 +1,250 @@
+
+/*------------------------------------*\
+    #Homepage Styles
+\*------------------------------------*/
+
+
+/*------------------------------------*\
+    #Shoe Showcase
+\*------------------------------------*/
+
+.homeSection {
+  
+  @media #{$medium-up} {
+    padding-top: 0; 
+    padding-bottom: 0; 
+  }
+
+}
+
+
+/*------------------------------------*\
+    #Shoe Showcase
+\*------------------------------------*/
+
+
+.copySection--shoeShowcase {
+  width: 100%; 
+
+  .shoeShowcase-slideshow {
+
+    @media #{$medium-up} {
+      position: relative;
+      right: 3%;
+      width:18rem;
+      max-width: none; 
+      height: rem-calc(220px);
+      @include transform(translateY(12px)); 
+    } 
+
+    @media #{$large-up} {
+      height: 15rem;
+      width: 28rem; 
+    }
+  
+    .shoeShowcase-slides {
+      max-width: rem-calc(320px);
+       position: relative;
+
+       &:before {
+        @media #{$medium-up} {
+          content: " ";
+          height: 26rem;
+          width: 15.5rem;
+          border: 6px solid $quaternaryColor;
+          position: absolute;
+        }
+       }
+
+      .shoeShowcase-slide { 
+        width: 100%; 
+        @include transform(rotate(-8deg));
+
+        @media #{$medium-up} {
+          @include transform(rotate(-8deg) scale(1.2));
+        }
+
+        img {
+          width: 100%;
+        }
+
+      }
+    }
+
+  }
+
+}
+
+
+
+
+
+/*------------------------------------*\
+    #About Laces
+\*------------------------------------*/
+
+.copySection--aboutLaces {
+
+  .aboutLaces-slideshow {
+    right: 0; 
+    width: 100%;
+    height: 100%; 
+    @extend %position-relative; 
+
+    @media #{$medium-up} {
+      top: -30%;
+    }
+
+    @media #{$large-up} {
+      top: -46%; 
+    }
+
+    @media #{$large-up} {
+      padding-right: rem-calc($level3); 
+      padding-left: rem-calc($level3); 
+    }
+
+    .aboutLaces-slideshow-slide {
+      height: 100%; 
+      width: 100%; 
+
+      .aboutLaces-slideshow-slide-img {
+        width: 100%; 
+      }
+
+    }
+
+    .aboutLaces-slideshow-slide.ng-animate {
+      @include single-transition(all 0.6s ceaser($easeInOutCubic));
+    }
+
+    .aboutLaces-slideshow-slide.ng-enter {
+      z-index: 29; 
+    }
+    .aboutLaces-slideshow-slide.ng-enter.ng-enter-active {
+      position: absolute; 
+      z-index: 29; 
+
+    }
+
+    .aboutLaces-slideshow-slide.ng-leave {
+      z-index: 30; 
+      position: absolute; 
+      @include transform(translateY(0));
+    }
+    .aboutLaces-slideshow-slide.ng-leave.ng-leave-active {
+      @include transform(translateY(-100%));
+    }
+  }
+
+}
+
+
+
+
+
+
+/*------------------------------------*\
+    #Featured Styles
+\*------------------------------------*/
+
+
+.copySection--featuredLaces {
+
+  @media #{$medium-up} {
+    padding-top: rem-calc($level6);
+    padding-bottom: rem-calc($level6);
+  }
+
+
+  .copySection-copy {
+
+    @media #{$medium-up} {
+      margin-bottom: rem-calc($level7 + $level2);
+    }
+
+    @media #{$large-up} {
+      margin-bottom: rem-calc($level7 + $level5); 
+    }
+  }
+
+  .copySection-accent {
+    left: rem-calc(-18px);
+    width: rem-calc(30px);
+    top: 0%;
+
+    @media #{$medium-up} {
+      right: 0;
+      left: 0;
+      width: rem-calc(30px);
+      margin: auto; 
+      top: auto; 
+      bottom: rem-calc(-18px); 
+    }
+
+  }
+
+  .featuredLaces {
+
+    .featuredLaces-container {
+      position: relative; 
+    }
+
+    .featuredLaces-laces {
+      margin-right: rem-calc(-12px);
+      margin-bottom: rem-calc($level2);
+
+      @media #{$medium-up} {
+        width: 100%;
+        margin-right: -1rem;
+        @include transform(scale(1.15)); 
+      }
+  
+      .featuredLaces-thumb {
+        padding-right: rem-calc(12px);
+      }
+  
+    }
+
+    .featuredLaces-headline {
+
+      @media #{$medium-up} {
+        margin-bottom: -60px;
+        position: absolute;
+        padding-left: rem-calc(12px); 
+        @include transform(translateY(-40px));
+      }
+      
+      @media #{$large-up} {
+        @include transform(translateY(-52px));
+      }
+    }
+
+    .featuredLaces-cta {
+      position: relative; 
+      width: 100%; 
+
+      @media #{$medium-up} {
+        height: rem-calc(18px);
+      }
+
+      @media #{$large-up} {
+        height: rem-calc($level6);
+      }
+
+      .featuredStyles-cta-link {
+        color: #fff; 
+
+        @media #{$medium-up} {
+          position: absolute; 
+          min-width: rem-calc(110px); 
+          right: rem-calc(-40px); 
+          @include type-setting(0); 
+        }
+
+      } 
+
+    }
+
+  }
+}

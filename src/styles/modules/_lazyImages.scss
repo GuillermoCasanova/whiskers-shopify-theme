@@ -1,0 +1,12 @@
+
+
+/*------------------------------------*\
+    #Hero Section Component
+\*------------------------------------*/
+
+
+.img-lazy {
+  opacity: 0; 
+ @include transition(all .4s ease-in-out); 
+
+}

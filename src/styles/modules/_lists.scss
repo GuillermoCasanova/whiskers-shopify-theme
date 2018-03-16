@@ -1,0 +1,108 @@
+
+
+/*------------------------------------*\
+    #list
+\*------------------------------------*/
+
+
+.list {
+
+  @include type-setting(0); 
+
+  @media #{$medium-up} {
+
+     @include type-setting(1); 
+
+  }
+
+  .list-item {
+  
+    margin-bottom: rem-calc($level2); 
+
+    @media #{$medium-up} {
+
+      margin-bottom: rem-calc($level4); 
+      
+    }
+  }
+
+}
+
+
+.list--secondary {
+
+  margin-bottom: rem-calc($level6); 
+
+  @include type-setting(1); 
+
+  @media #{$medium-up} {  
+
+    margin-bottom: rem-calc($level7 + $level2); 
+    @include type-setting(2); 
+    
+  }
+
+  .list-item {
+  
+    margin-bottom: rem-calc($level2); 
+
+    @media #{$medium-up} {
+
+      margin-bottom: rem-calc($level3); 
+      
+    }
+  }
+}
+
+.list--press {
+    
+  margin-top: rem-calc($level2); 
+
+  .list-item {
+
+    @extend %text-center; 
+
+  }
+
+  .list-logo {
+  
+    width: 100%;
+    padding: rem-calc($level1); 
+
+    @media #{$medium-up} {
+      width: rem-calc(160px); 
+      padding: rem-calc($level2); 
+
+    }
+
+  }
+
+}
+
+.list--highlight {
+
+  .list-item {
+
+    margin-bottom: rem-calc($level5); 
+
+  }
+
+  .list-item:nth-child(2) {
+    
+    
+    @media #{$medium-up} {
+      border: 1px solid $quaternaryColor;
+      border-top: 0; 
+      border-bottom: 0; 
+
+    }
+
+  }
+
+  .list-item:last-child {
+  
+    margin-bottom: 0; 
+
+  }
+
+}

@@ -1,0 +1,533 @@
+
+/*------------------------------------*\
+    #Typograp#hy  (Extends variables/placeholders from typography abstract)
+\*------------------------------------*/
+
+
+/*------------------------------------*\
+    #Reset
+\*------------------------------------*/
+
+
+body, div, dl, dt, dd, ul, ol, li,
+h1, h2, h3, h4, h5, h6,
+pre, form, fieldset, input, textarea,
+p, blockquote, th, td { 
+  margin: 0;
+  padding: 0;
+}
+
+li, 
+ul {
+  list-style: none; 
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+fieldset, img {
+  border: 0;
+}
+address, caption, cite, dfn, th, var {
+  font-style: normal;
+  font-weight: normal;
+}
+caption, th {
+  @extend %text-left; 
+}
+
+q:before, q:after {
+  content: '';
+}
+abbr, acronym {
+  border: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*------------------------------------*\
+    #Base   (Extends from typography.scss module)
+\*------------------------------------*/
+/*  Base font sizes, margin-bottoms, and properties */
+
+body, html {
+  font-family: $primary-font-family; 
+  font-weight: $base-font-weight;
+  line-height: $base-font-line-height; 
+  color: $body-color; 
+  background-color: $primaryColor;
+}
+
+
+// 24px magic number, all line heights and margin bottoms will be multiples of this
+// to maintain vertical and line  height rhythm 
+// Reference: http://jsfiddle.net/csswizardry/8nYqN/
+
+/* Common margin-bottom for vertical rhythm. */
+h1,h2,h3,h4,h5,h6,
+ul,ol,dl,
+fieldset,
+p,
+table,
+pre,
+hr{
+    margin-bottom: rem-calc($base-magic-number);
+}
+
+a {
+
+  text-decoration: none; 
+
+}
+
+
+p {
+
+  a {
+
+    color: $body-color;
+    text-decoration: none; 
+    border-bottom: $accentColor 2px solid; 
+    @include transition(all .3s ease-in-out); 
+
+    &:hover,
+    &:focus {
+
+        color: $accentColor;
+        border-bottom: transparent 2px solid; 
+
+    }
+
+  }
+
+}
+
+a.styled-link {
+
+    color: $body-color;
+    text-decoration: none; 
+    border-bottom: $accentColor 2px solid; 
+    @include transition(all .3s ease-in-out); 
+
+    &:hover,
+    &:focus {
+
+        color: $accentColor;
+        border-bottom: transparent 2px solid; 
+
+    }
+
+}
+
+a.styled-link2 {
+  color: $body-color;
+  font-family: $secondary-font-family; 
+  @extend %fwb; 
+  @extend %uc; 
+  @extend %position-relative; 
+
+  &:after {
+
+    content: " ";
+    left: 0;
+    bottom: -8px; 
+    width: rem-calc(36px); 
+    border-bottom: 4px solid $accentColor; 
+    @include transition(all .2s ease-in-out); 
+    @extend %position-absolute; 
+
+  }
+
+  &:hover, 
+  &:focus {
+
+    &:after {
+      
+      width: 100%; 
+
+    }
+
+  }
+
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Default Text Selection Color 
+\*------------------------------------*/
+
+
+::selection {
+  background-color: $translucentBlack; 
+  color: #fff; 
+}
+
+::-moz-selection {
+
+    background-color: $translucentBlack; 
+    color: #fff; 
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Font Color Classes 
+\*------------------------------------*/
+
+
+.txtc1 {
+  @extend %txtc1; 
+}
+
+.txtc2 {
+  @extend %txtc2; 
+}
+
+.txtc3 {
+  @extend %txtc3; 
+}
+
+.txtc4 {
+  @extend %txtc4; 
+}
+
+.txtc5 {
+  @extend %txtc5; 
+}
+
+
+.txtc--warning {
+  @extend %txtc--warning; 
+}
+
+
+
+
+/*------------------------------------*\
+    #Font Family Classes 
+\*------------------------------------*/
+
+
+.ff1 {
+  
+  @extend %primary-font-family; 
+    
+}
+
+.ff2 {
+
+  @extend %secondary-font-family; 
+    
+}
+
+
+.ff3 {
+  letter-spacing: 2px; 
+  @extend %tertiary-font-family;  
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Header Styles and Sizes 
+\*------------------------------------*/
+
+// For text that is massive, less occurring
+.text-giga { 
+    @extend %text-giga; 
+}
+
+
+.text-mega { 
+    @extend %text-mega; 
+}
+
+
+.text-kilo { 
+    @extend %text-kilo; 
+}
+
+
+// Default font family for all headers 
+h1,h2,h3,h4,h5,h6 {
+    font-family: $primary-font-family;
+    @extend %fwn; 
+}
+
+h1, 
+.h1 { 
+  @extend %h1; 
+}
+
+h2, 
+.h2 { 
+  @extend %h2; 
+}
+
+h3, 
+.h3 { 
+  @extend %h3; 
+}
+
+h4, 
+.h4 { 
+  @extend %h4; 
+}
+
+h5, 
+.h5 { 
+  @extend %h5; 
+}
+
+h6, 
+.h6 { 
+  @extend %h6; 
+}
+
+.text-micro { 
+  @extend %text-micro; 
+}
+
+.text-mini {
+   @extend %text-mini; 
+}
+
+
+
+
+
+
+/*------------------------------------*\
+    #HR Classes
+\*------------------------------------*/
+
+$hrHeight: rem-calc(1px); 
+$hrHeightBig: .3rem; 
+
+hr {
+    border-style: none; 
+    height: $hrHeight;
+    margin-top: 0; 
+}
+
+.hr--primary {
+
+   background-color: #2f2c2f;
+
+}
+
+.hr--secondary {
+
+   background-color: $secondaryColor; 
+    margin-left: 0; 
+}
+
+.hr--tertiary {
+   background-color: $tertiaryColor; 
+
+}
+
+
+.hr--quaternary {
+
+   background-color: $quaternaryColor; 
+
+}
+
+.hr--accent {
+
+  background-color: $accentColor; 
+}
+
+.hr--white {
+
+  background-color: white; 
+}
+
+.hr--thick {
+
+  height: $hrHeightBig; 
+
+}
+
+
+.hr--cut {
+    width: rem-calc($level5);
+    margin-left: 0;
+    height: $hrHeightBig;
+}
+
+.hr--center {
+    margin-right: auto; 
+    margin-left: auto; 
+}
+
+
+
+
+
+
+
+/*------------------------------------*\
+    #Letter Spacing (Extends typography module)
+\*------------------------------------*/
+
+
+.ltrs1 {
+    
+   @extend %ltrs1; 
+
+}
+
+
+
+
+/*------------------------------------*\
+    #Paragraph Sizes 
+\*------------------------------------*/
+
+
+.p1 {
+
+  @extend %p1;
+
+}
+
+.p2 {
+  
+  @extend %p2; 
+}
+
+.p3 {
+  
+  @extend %p3;
+
+}
+
+
+
+
+
+
+/*------------------------------------*\
+    #Text Weights + Syles (Extends _typography.scss module)
+\*------------------------------------*/
+
+
+.fwn         { @extend %fwn; }
+.fwb, strong { @extend %fwb; }
+.fwxb        { font-weight: 800;}
+.uc          { @extend %uc;  }
+.fsi         {font-style: italic;}
+
+
+
+
+
+
+/*------------------------------------*\
+    #Text Alignments  
+\*------------------------------------*/
+
+
+.text-center { @extend %text-center; }
+.text-left   { @extend %text-left;   }
+.text-right  { @extend %text-right;  }
+
+
+.large-text-right {
+
+    @media #{$large-up} {
+
+        text-align: right; 
+    }
+}
+
+.large-text-center {
+
+    @media #{$large-up} {
+
+        text-align: center; 
+    }
+}
+
+
+.large-text-left {
+    @media #{$large-up} {
+
+        text-align: left; 
+    }
+}
+
+
+
+.medium-text-center {
+    @media #{$medium-up} {
+        text-align: center; 
+    }
+}
+
+
+
+
+.medium-text-left {
+    @media #{$medium-up} {
+        text-align: left; 
+    }
+}
+
+
+
+.medium-text-right {
+
+    @media #{$medium-up} {
+
+        text-align: right; 
+    }
+}
+
+
+.small-text-left {
+    @media #{$medium-up} {
+        text-align: left; 
+    }
+}
+
+
+
+.small-text-right {
+
+    @media #{$medium-up} {
+
+        text-align: right; 
+    }
+}
+
+.small-text-right {
+
+    @media #{$medium-up} {
+
+        text-align: center; 
+    }
+}
+
+
+

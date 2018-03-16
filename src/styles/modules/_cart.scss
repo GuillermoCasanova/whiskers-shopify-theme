@@ -1,0 +1,114 @@
+
+
+/*------------------------------------*\
+    #Cart Styles
+\*------------------------------------*/
+
+
+
+/*------------------------------------*\
+    #Cart Toggle
+\*------------------------------------*/
+
+
+.cartToggle {
+  background-color: transparent;
+  margin-bottom: 0;  
+  display: inline-block; 
+  @include type-setting(0); 
+
+  .cartToggle-total  {
+    color: $accentColor; 
+    display: inline-block; 
+    padding-left: rem-calc(3px); 
+  }
+
+}
+
+
+.cart {
+    z-index: 200;
+    background-color: #fff;
+    top: 0;
+    right: 0;
+    overflow: hidden;
+    height: 100%; 
+    width: rem-calc(420px); 
+    color: $primaryColor; 
+    padding-right: rem-calc($level3); 
+    padding-left: rem-calc($level3); 
+    @include transition(all .8s ceaser($easeOutCirc)); 
+    @include transform(translateX(130%)); 
+
+    @media #{$large-up} {
+
+       @include transform(translateX(130%)); 
+        
+    }
+
+
+    &.is-open {
+      @include transform(translateX(0));
+
+      .cart-items {
+        
+          opacity: 1; 
+          @include transition(opacity .6s ceaser($easeOutCirc) .7s); 
+
+      } 
+
+    }
+
+
+}
+
+
+
+.cart-items {
+
+    opacity: 0; 
+    @include transition(opacity .6s ceaser($easeOutCirc)); 
+
+}
+
+
+.cart-total {
+  
+  border-bottom: 2px solid $primaryColor; 
+  padding-bottom: rem-calc($level1); 
+  margin-bottom: rem-calc($level2); 
+
+}
+
+
+.cart-inventory{
+
+  border-top: 2px solid $primaryColor;
+  border-bottom: 2px solid $primaryColor;  
+  padding-top: rem-calc($level4); 
+  margin-bottom: rem-calc($level1); 
+
+}
+
+.cart-overlay {
+
+  opacity: 0; 
+  top: 0; 
+  bottom: 0; 
+  left: 0; 
+  z-index: 145; 
+  height: 100%; 
+  width: 100%; 
+  background: rgba(0, 0, 0, .9); 
+  @extend %position-fixed; 
+  @include transform(translateX(100%)); 
+
+    &.is-visible {
+      
+      opacity: 1; 
+        @include transform(translateX(0));
+
+    }
+
+}
+

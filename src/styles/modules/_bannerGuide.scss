@@ -1,0 +1,94 @@
+
+
+/*------------------------------------*\
+    #Banner Guide
+\*------------------------------------*/
+
+.bannerGuide {
+
+  height: 120vh; 
+  width: 100%; 
+  min-width: rem-calc(200px); 
+  @extend %position-relative; 
+
+ &:after {
+
+    content: " ";
+    width: 8px; 
+    border-right: 2px solid $secondaryColor; 
+    position: absolute; 
+    z-index: 8; 
+    right: 0; 
+    left: 0; 
+    margin: auto;
+    height: 120vh; 
+
+  }
+
+  .bannerGuide-headline {
+    
+    position: absolute; 
+    z-index: 10; 
+    left: 0;
+    right: 0; 
+    margin: auto; 
+    top: 30%;
+    background-color: $primaryColor; 
+    color: $secondaryColor; 
+    @include transform(rotate(-90deg)); 
+ 
+  }
+
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Notice Banner
+\*------------------------------------*/
+
+
+.noticeBanner {
+
+  width: 100%; 
+  height: rem-calc(420px); 
+  position: relative; 
+  color: $secondaryColor;
+  overflow: hidden;  
+
+ &:after {
+
+    content: " ";
+    width: 8px; 
+    border-right: 2px solid $secondaryColor; 
+    position: absolute; 
+    z-index: 8; 
+    right: 0; 
+    left: -40px; 
+    bottom: 0; 
+    margin: auto;
+    height: 65%; 
+
+  }
+
+  .noticeBanner-headline {
+      
+    top: 30%;
+    bottom: -20px;
+    right: 0;
+    left: -45px;
+    margin: auto;
+    height: 30px;
+    width: 138px;
+    z-index: 9; 
+    padding-left: rem-calc($level1);
+    padding-right: rem-calc($level1);
+    background-color: $primaryColor; 
+    @include type-setting(-2); 
+    @include transform(rotate(90deg)); 
+    @extend %position-absolute; 
+
+  }
+}

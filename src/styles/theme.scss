@@ -4,10 +4,25 @@
     - You cannot use native CSS/Sass @imports in this file without a build script
 ==============================================================================*/
 
+
+/*================ SETTINGS ================*/
+@import url('settings/variables.scss.liquid');
+
 /*================ UTILS ================*/
 @import url('tools/mixins.scss');
+@import url('tools/compassFlexboxMixins.scss');
+@import url('vendor/sassListMaps.scss');
 
-/*================ MODULES ================*/
+
+
+/*================ ABSTRACTS ================*/
+@import url('abstracts/_colors.scss');
+@import url('abstracts/_icons.scss');
+@import url('abstracts/_lists.scss');
+@import url('abstracts/typography.scss');
+@import url('abstracts/_utility.scss');
+
+/*================ VENDOR ================*/
 @import url('vendor/foundationFunctions.scss');
 @import url('vendor/foundationGlobals.scss');
 @import url('vendor/foundationGrid.scss');
@@ -15,8 +30,7 @@
 @import url('vendor/foundationMixins.scss');
 
 
-/*================ SETTINGS ================*/
-@import url('settings/variables.scss.liquid');
+
 
 /*================ COMMON ================*/
 @import url('global/normalize.scss');
@@ -31,8 +45,22 @@
 @import url('global/forms.scss');
 @import url('global/blank-states.scss');
 
+
+/*================ BASE ================*/
+@import url('base/_flexbox.scss');
+@import url('base/_icons.scss');
+@import url('base/_responsiveType.scss');
+@import url('base/_theme.scss');
+@import url('base/_typography.scss');
+@import url('base/_utility.scss');
+
+
+
+
 /*================ MODULES ================*/
 @import url('modules/site-header.scss');
 @import url('modules/gift-card-template.scss');
 
 
+/*================ PAGES ================*/
+@import url('pages/_product.scss');

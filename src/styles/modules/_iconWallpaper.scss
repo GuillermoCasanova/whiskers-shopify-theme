@@ -1,0 +1,50 @@
+
+
+/*------------------------------------*\
+    #Icon Wallpaper  
+\*------------------------------------*/
+
+
+.iconWallpaper {
+
+  width: 100%; 
+  overflow: hidden; 
+  @extend %position-relative; 
+
+  .iconWallpaper-img {
+    
+    height: rem-calc(260px); 
+    object-fit: cover; 
+
+  }
+
+}
+
+
+.headerIconBackground {
+  
+  background-image: url('../assets/images/icon_wallpaper_alt_small.svg');
+  background-size: contain; 
+  background-repeat: no-repeat; 
+  width: 19rem; 
+  height: 13rem; 
+  margin-top: rem-calc(47px); 
+  @extend %position-absolute; 
+
+  @media #{$medium-up} {
+    
+    background-image: url('../assets/images/icon_wallpaper_alt.svg');
+    width: 39rem; 
+    height: 16rem; 
+
+  }
+
+  @media #{$large-up} {
+
+    margin-top: 0; 
+    width: 49rem;
+    height: 26rem;
+    
+  }
+
+}

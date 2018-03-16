@@ -1,0 +1,173 @@
+
+
+/*------------------------------------*\
+    #Hero Section Component
+\*------------------------------------*/
+
+@include keyframes(gradFade) {
+
+    0%, 100% {
+        background-position: 0 50%
+
+    }
+
+    50% {
+        background-position: 100% 50%
+
+    }
+
+}
+
+
+.heroHeader {
+  overflow: hidden; 
+  margin-top: rem-calc($level7 + $level1); 
+
+  @media #{$medium-up} {
+    margin-top: rem-calc($level7 + $level2); 
+    height: 29.5rem;
+
+  }
+
+  @media #{$large-up} {
+    margin-top: 0; 
+    height: 39.5rem; 
+
+  }
+
+  .heroHeader-bg {
+
+    @media #{$medium-up} {
+        height: 100%; 
+        max-height: none;
+        background-color: red; 
+        width: 65%; 
+        max-width: rem-calc(600px); 
+    }
+
+    @media #{$large-up} {
+      max-width: 44rem; 
+
+    }
+
+    .heroHeader-bg-inner {
+      width: 100%; 
+      height: 100%;
+
+    }
+
+    .heroHeader-bg-img {
+      height: 100%;
+      width: 100%;
+
+    }
+
+  }
+
+}
+
+.heroHeader-content {
+  padding-top: rem-calc($level6); 
+  padding-bottom: rem-calc($level5);
+  background-color: $secondaryColor;
+  z-index: 31;  
+
+  @media #{$medium-up} {
+    max-width: rem-calc(330px); 
+    width: 60%; 
+
+  }
+
+  @media #{$large-up} {
+    width: 50%; 
+    max-width: none; 
+
+  }
+
+  .heroHeader-content-inner {
+    max-width: rem-calc(360px);
+
+    @media #{$medium-up} {
+      max-width: none; 
+    } 
+
+  }
+
+  .heroHeader-headline {
+    font-family: $tertiary-font-family; 
+    margin-bottom: rem-calc($level4); 
+    @extend %fwb; 
+    @include type-setting(5); 
+
+    @media #{$medium-up} {
+      text-align: center; 
+
+    }
+    
+    @media #{$large-up} {
+      @include type-setting(7); 
+
+    }
+
+  }
+    
+
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Hero Slideshow Component
+\*------------------------------------*/
+
+
+.heroSlideshow {
+
+  right: 0; 
+  width: 100%;
+  height: 100%; 
+  @extend %position-relative; 
+
+  .heroSlideshow-slide {
+
+    height: 100%; 
+    width: 100%; 
+
+    .heroSlideshow-slide-img {
+
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position-y: 100%;
+      background-position-x: 100%;
+      height: 100%; 
+
+    }
+
+  }
+
+  .heroSlideshow-slide.ng-animate {
+    transition: 0.6s ceaser($easeInOutCubic) all;
+  }
+
+  .heroSlideshow-slide.ng-enter {
+    z-index: 29; 
+  }
+  .heroSlideshow-slide.ng-enter.ng-enter-active {
+    position: absolute; 
+    z-index: 29; 
+
+  }
+
+  .heroSlideshow-slide.ng-leave {
+    z-index: 30; 
+    position: absolute; 
+    @include transform(translateY(0));
+  }
+  .heroSlideshow-slide.ng-leave.ng-leave-active {
+    @include transform(translateY(-100%));
+  }
+
+
+}

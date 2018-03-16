@@ -1,0 +1,38 @@
+
+
+/*------------------------------------*\
+    #Lacing Thumbnails 
+\*------------------------------------*/
+
+.lacingThumbnail {
+  
+  margin-bottom: rem-calc($level3); 
+
+  @media #{$large-up} {
+
+    margin-bottom: rem-calc($level4); 
+    
+  }
+
+  .lacingThumbnail-bg {
+    
+    margin-bottom: rem-calc($level2); 
+      
+  }
+
+  .lacingThumbnail-title {
+    
+    color: $quaternaryColor; 
+    @extend %fwb; 
+    @extend %uc; 
+    @include type-setting(0); 
+
+    @media #{$medium-up} {
+
+      @include type-setting(-1); 
+
+    }
+
+  }
+
+}

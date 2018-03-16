@@ -1,0 +1,43 @@
+
+
+/*------------------------------------*\
+    #Reveal Modals (overrides for foundation styles)
+\*------------------------------------*/
+
+
+.reveal-modal {
+    
+    top: rem-calc(60px) !important; 
+    @extend %position-fixed; 
+    @extend %ptrbl0; 
+
+    a.close-reveal-modal {
+
+        color: $secondaryColor; 
+        top: rem-calc(-40px); 
+        right: rem-calc(-32px); 
+        text-decoration: none; 
+
+        &:hover, 
+        &:focus, 
+        &:active {
+
+            text-decoration: underline; 
+
+        }
+
+    }
+
+    @media #{$medium-up} {
+
+        max-width:  70%; 
+
+    }
+
+    @media #{$large-up} {
+
+        max-width: 60rem; 
+
+    }
+
+}

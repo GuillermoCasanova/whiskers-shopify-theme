@@ -1,0 +1,14 @@
+
+/*------------------------------------*\
+    #Panels
+\*------------------------------------*/
+
+%panel {
+  background-color: #fff;  
+
+  .panel-title {
+      @extend %fwb;
+      @extend %h4; 
+      @extend %mb0;  
+  }
+}

@@ -1,0 +1,431 @@
+
+/*------------------------------------*\
+    #Typography
+\*------------------------------------*/
+
+
+/*------------------------------------*\
+    #Type Related Variables 
+\*------------------------------------*/
+
+
+/* Base Typefaces */
+$primary-font-family: "sofia-pro", sans-serif; // Base Font Family
+
+$secondary-font-family: "sofia-pro-condensed", serif; // Secondary Font Family
+
+$tertiary-font-family: 'Acta-Black', serif; // Secondary Font Family
+
+
+// Weights 
+$light: 300;
+$normal: 400;
+$bold: 900;
+$extra-bold: 900;
+$base-font-weight: $normal;
+
+
+
+
+// Font families used throughout the project 
+%primary-font-family {
+    font-family:  $primary-font-family; 
+    font-weight: normal; 
+
+}
+
+%secondary-font-family {
+    font-family: $secondary-font-family; 
+}
+
+
+%tertiary-font-family {
+    font-family: $tertiary-font-family; 
+}
+
+
+
+
+
+
+
+
+/*------------------------------------*\
+    #Font Weights & Styles 
+\*------------------------------------*/
+
+
+%fwn {font-weight: $normal;}
+%fwb {font-weight: $extra-bold; }; 
+%uc {text-transform: uppercase;}
+
+
+
+
+
+
+/*------------------------------------*\
+    #Letter Spacing
+\*------------------------------------*/
+
+
+%ltrs1 {
+    letter-spacing: rem-calc(2px); 
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Text Alignments 
+\*------------------------------------*/
+
+
+%text-center { text-align: center; }
+%text-left { text-align: left; }
+%text-right { text-align: right; }
+
+
+
+
+
+
+/*------------------------------------*\
+    #Text Color Classes 
+\*------------------------------------*/
+
+
+%txtc1 {
+   color: $primaryColor; 
+}
+
+
+%txtc2 {
+    color: $secondaryColor; 
+}
+
+%txtc3 {
+    color: $tertiaryColor; 
+}
+
+%txtc4 {
+    color: $quaternaryColor; 
+}
+
+%txtc5 {
+
+  color: $accentColor; 
+
+}
+
+
+
+
+
+
+/*------------------------------------*\
+    #Font Color Classes 
+\*------------------------------------*/
+
+
+%txtc1 {
+    color: $primaryColor; 
+}
+
+%txtc2 {
+    color: $secondaryColor; 
+}
+
+%txtc3 {
+    color: $tertiaryColor; 
+}
+
+%txtc4 {
+
+    color: $quaternaryColor; 
+}
+
+%txtc5 {
+    color: $accentColor; 
+}
+
+%txtc6 {
+    color: white; 
+}
+
+%txtc--warning {
+
+    color: $warningColor; 
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Base Typographic Rhythm Mixins
+\*------------------------------------*/
+
+
+// Base font sizes and numbers for typographic rhytm
+
+$base-magic-number: 24; 
+$base-magic-number-px: 24px;  
+$base-font-size: rem-calc(16px); // 1rem
+$base-font-size: 16; 
+$base-font-line-height: $base-magic-number / $base-font-size; //24px
+
+
+
+@function type-scale($level) {
+
+  @return  map-get(map-get($type-settings, $level), 'font-size'); 
+}
+
+// Again, we can make a helper function:
+@function line-height($level) {
+
+  @return  map-get(map-get($type-settings, $level), 'line-height');
+
+}
+
+@mixin type-setting($level: 0) {
+  font-size: type-scale($level);
+  line-height: line-height($level);
+}
+
+@mixin line-height($level: 0) {
+  line-height: line-height($level);
+}
+
+$type-settings: (
+
+    0 (
+
+    font-size 1rem //16px
+    line-height  $base-magic-number / 16 //24px
+
+    ),
+    1 (
+    
+    font-size 1.125rem //18px
+    line-height  $base-magic-number / 18  //24px
+
+    ),
+    2 (
+
+    font-size 1.25rem //20px 
+    line-height  $base-magic-number / 20   
+
+    ),
+    3 (
+
+    font-size 1.5rem //24px
+    line-height  $base-magic-number / 24 //24px
+
+    ),
+    4 (
+
+    font-size 2rem //32px
+    line-height  $base-magic-number / 24  //48px
+
+    ),
+    5 (
+    
+    font-size 2.5rem //40px 
+    line-height $base-magic-number / 24
+
+    ),
+    6 (
+    
+    font-size 3rem //60px
+    line-height $base-magic-number / 24
+
+    ),
+    7 (
+    
+    font-size 3.5rem //64px
+    line-height $base-magic-number / 24 // 72px
+
+    )
+
+); 
+
+
+
+/*------------------------------------*\
+    #Text Sizes and Hn sizes 
+\*------------------------------------*/
+
+// Magic numberis 24 (1.5rem), line heights 
+// must be multiples of this for vertical rhythm
+// 24 ÷ (font size) = (line height)
+
+
+/* Sizes for text too small or too large for a header tag */
+
+
+%text-mini {
+    @include type-setting(-2); 
+}
+
+%text-micro {
+    @include type-setting(-1); 
+}
+
+
+%h6 {
+    @include type-setting(0); 
+}
+
+%h5 {
+    @include type-setting(0); 
+}
+
+%h4 {
+    @include type-setting(1); 
+}
+
+%h3 {
+    @include type-setting(2); 
+
+}
+
+%h2 {
+    @include type-setting(2); 
+
+    @media #{$medium-up} {
+    
+     @include type-setting(3); 
+
+    }
+
+}
+
+%h1 {
+    
+    @include type-setting(3); 
+
+    @media #{$medium-up} {
+    
+     @include type-setting(4); 
+
+    }
+
+}
+
+
+%text-kilo {
+    @include type-setting(4); 
+
+    @media #{$medium-up} {
+    
+     @include type-setting(5); 
+
+    } 
+}
+
+
+%text-mega {
+    @include type-setting(4); 
+
+    @media #{$medium-up} {
+    
+     @include type-setting(5); 
+
+    } 
+
+    @media #{$large-up} {
+    
+     @include type-setting(6); 
+
+    } 
+}
+
+%text-giga {
+  @include type-setting(6); 
+
+  @media #{$medium-up} {
+  
+   @include type-setting(7); 
+
+  } 
+}
+
+
+/*------------------------------------*\
+    #Line Heights  
+\*------------------------------------*/
+
+
+%lh0 {
+    line-height:  $base-magic-number / 16; 
+}
+
+%lh1 {
+    line-height:  $base-magic-number / 16; 
+}
+
+
+%lh2 {
+    
+    line-height:  $base-magic-number / 18; 
+}
+
+
+%lh3 {
+    line-height:  $base-magic-number / 20;
+} 
+
+%lh4 {
+    line-height:  $base-magic-number / 24;
+} 
+
+
+
+
+/*------------------------------------*\
+    #Paragraph Sizes 
+\*------------------------------------*/
+
+%p1 {
+
+  @include type-setting(0);
+
+  @media #{$medium-up} {
+      
+    @include type-setting(1);
+    @include line-height(0);  
+
+  }
+
+}
+
+
+%p2 {
+
+  @include type-setting(1);
+
+  @media #{$medium-up} {
+      
+    @include type-setting(2);
+    @include line-height(0);  
+
+  }
+
+}
+
+
+%p3 {
+
+  @include type-setting(2);
+
+  @media #{$medium-up} {
+      
+    @include type-setting(3);
+    @include line-height(0);  
+
+  }
+
+}

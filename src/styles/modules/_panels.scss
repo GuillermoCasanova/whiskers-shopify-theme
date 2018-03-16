@@ -1,0 +1,53 @@
+    
+/*------------------------------------*\
+    #Panels
+\*------------------------------------*/
+
+
+.panel {
+    @extend %panel; 
+    @extend %br2; 
+}
+
+
+.panel-body {
+    //@extend %text-center; 
+}
+
+
+
+
+
+
+/*------------------------------------*\
+    #Panel Types 
+\*------------------------------------*/
+
+
+.panel--success {
+    opacity: 0; 
+    display: none; 
+    color: #fff; 
+    background-color: $primaryColor; 
+    border: 0; 
+    @include single-transition(all, 0.4s, ease-in-out); 
+
+    .panel-body,
+    .panel-title {
+        color: #fff; 
+    }
+
+}
+
+
+.panel--information {
+    border-top: 4px solid $primaryColor;
+    background-color: #fff; 
+
+    &:hover {
+
+        .icon {
+            fill:  #ace63c; 
+        }
+    } 
+}
