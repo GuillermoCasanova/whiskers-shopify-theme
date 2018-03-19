@@ -1,0 +1,79 @@
+
+/*------------------------------------*\
+    #Sections (Extends from _generics.scss, _colors.scss)
+\*------------------------------------*/
+
+
+
+/*------------------------------------*\
+    #Normal Section
+\*------------------------------------*/
+
+.section,
+section {
+  padding-bottom: rem-calc($level7);
+  @extend %position-relative; 
+
+  @include media-query($medium-up) {
+    padding-bottom: rem-calc($level5);
+  }
+
+  @include media-query($large-up) {
+    padding-bottom: rem-calc($level6);
+  }
+    
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Lead Section
+\*------------------------------------*/
+
+
+.section--lead {
+  padding-top: rem-calc($level7);
+
+  @include media-query($medium-up) {
+    padding-top: rem-calc($level5);
+  }
+
+  @include media-query($large-up) {
+    padding-top: rem-calc($level6);
+  }
+}
+
+
+
+
+
+
+/*------------------------------------*\
+    #Main Section
+\*------------------------------------*/
+
+
+.section--main {
+  padding-top: rem-calc($level7 + $level2); 
+  @include media-query($large-up) {
+    padding-top: 0; 
+  }
+}
+
+.section--primary {
+  background-color: $primaryColor; 
+  .section-text {
+    color:  $tertiaryColor; 
+  }
+
+}
+
+.section--secondary {
+  background-color: $secondaryColor; 
+}
+
+
+
+

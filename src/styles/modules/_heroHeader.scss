@@ -4,18 +4,14 @@
     #Hero Section Component
 \*------------------------------------*/
 
-@include keyframes(gradFade) {
+@keyframes gradFade {
+  0%, 100% {
+      background-position: 0 50%
+  }
 
-    0%, 100% {
-        background-position: 0 50%
-
-    }
-
-    50% {
-        background-position: 100% 50%
-
-    }
-
+  50% {
+      background-position: 100% 50%
+  }
 }
 
 
@@ -23,47 +19,41 @@
   overflow: hidden; 
   margin-top: rem-calc($level7 + $level1); 
 
-  @media #{$medium-up} {
+  @include media-query($medium-up) {
     margin-top: rem-calc($level7 + $level2); 
     height: 29.5rem;
 
   }
 
-  @media #{$large-up} {
+  @include media-query($large-up) {
     margin-top: 0; 
     height: 39.5rem; 
-
   }
 
   .heroHeader-bg {
 
-    @media #{$medium-up} {
-        height: 100%; 
-        max-height: none;
-        background-color: red; 
-        width: 65%; 
-        max-width: rem-calc(600px); 
+    @include media-query($medium-up) {
+      height: 100%; 
+      max-height: none;
+      background-color: $quaternaryColor; 
+      width: 65%; 
+      max-width: rem-calc(600px); 
     }
 
-    @media #{$large-up} {
+    @include media-query($large-up) {
       max-width: 44rem; 
-
     }
 
     .heroHeader-bg-inner {
       width: 100%; 
       height: 100%;
-
     }
 
     .heroHeader-bg-img {
       height: 100%;
       width: 100%;
-
     }
-
   }
-
 }
 
 .heroHeader-content {
@@ -72,46 +62,38 @@
   background-color: $secondaryColor;
   z-index: 31;  
 
-  @media #{$medium-up} {
+  @include media-query($medium-up) {
     max-width: rem-calc(330px); 
     width: 60%; 
-
   }
 
-  @media #{$large-up} {
+  @include media-query($large-up) {
     width: 50%; 
     max-width: none; 
-
   }
 
   .heroHeader-content-inner {
     max-width: rem-calc(360px);
 
-    @media #{$medium-up} {
+    @include media-query($medium-up) {
       max-width: none; 
     } 
-
   }
 
   .heroHeader-headline {
     font-family: $tertiary-font-family; 
     margin-bottom: rem-calc($level4); 
     @extend %fwb; 
-    @include type-setting(5); 
+    @include text-kilo(); 
 
-    @media #{$medium-up} {
+    @include media-query($medium-up) {
       text-align: center; 
-
     }
     
-    @media #{$large-up} {
-      @include type-setting(7); 
-
+    @include media-query($large-up) {
+      @include text-giga(); 
     }
-
   }
-    
-
 }
 
 
@@ -142,13 +124,11 @@
       background-position-y: 100%;
       background-position-x: 100%;
       height: 100%; 
-
     }
-
   }
 
   .heroSlideshow-slide.ng-animate {
-    transition: 0.6s ceaser($easeInOutCubic) all;
+    transition: 0.6s ease-in-out all;
   }
 
   .heroSlideshow-slide.ng-enter {
@@ -157,17 +137,14 @@
   .heroSlideshow-slide.ng-enter.ng-enter-active {
     position: absolute; 
     z-index: 29; 
-
   }
 
   .heroSlideshow-slide.ng-leave {
     z-index: 30; 
     position: absolute; 
-    @include transform(translateY(0));
+    transform: translateY(0);
   }
   .heroSlideshow-slide.ng-leave.ng-leave-active {
-    @include transform(translateY(-100%));
+    transform: translateY(-100%);
   }
-
-
 }

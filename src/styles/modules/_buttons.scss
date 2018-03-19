@@ -11,6 +11,8 @@ button,
   letter-spacing: .5px; 
   font-weight: bold; 
   font-family: $secondary-font-family; 
+  display: block; 
+  text-align: center; 
   @extend %uc; 
 
   .button-inner {

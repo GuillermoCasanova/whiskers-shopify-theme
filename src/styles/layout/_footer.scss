@@ -41,10 +41,8 @@ footer {
   padding-bottom: rem-calc($level4);  
     
   @include media-query($large-up) {
-
-      padding-top: rem-calc($level5); 
-      padding-bottom: rem-calc($level3);  
-
+    padding-top: rem-calc($level5); 
+    padding-bottom: rem-calc($level3);  
   }
 }
 
