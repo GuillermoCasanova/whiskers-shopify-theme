@@ -67,7 +67,7 @@ $column-gutter: rem-calc(48px);
 .columns.end {
   float: left; }
 
-@include media-query(only screen) {
+@media only screen {
   .small-push-0 {
     position: relative;
     left: 0;

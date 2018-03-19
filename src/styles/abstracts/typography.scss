@@ -266,91 +266,117 @@ $type-settings: (
 /* Sizes for text too small or too large for a header tag */
 
 
+@mixin text-mini() {
+  font-size: 0.6rem;
+  line-height: $base-magic-number / 16;
+};
+
+@mixin text-micro() {
+  font-size: 0.8rem;
+  line-height: $base-magic-number / 16;
+}; 
+
+@mixin h6() {
+  font-size: 1rem; //16px
+  line-height:  $base-magic-number / 16; //24px
+}; 
+
+@mixin h5() {
+  font-size: 1rem; //16px
+  line-height:  $base-magic-number / 16; //24px
+}; 
+
+@mixin h4() {
+  font-size: 1.125rem; //18px
+  line-height:  $base-magic-number / 18;  //24px
+}; 
+
+
+@mixin h3() { // (2)
+  font-size: 1.25rem; //20px 
+  line-height:  $base-magic-number / 20; 
+}; 
+
+@mixin h2() { 
+  font-size: 1.5rem; //24px
+  line-height:  $base-magic-number / 24; //24px
+}; 
+
+
+@mixin h1() {
+  font-size: 2rem; //32px
+  line-height:  $base-magic-number / 24;  //48px
+}; 
+
+@mixin text-kilo() { // (5)
+  font-size: 2.5rem; //40px 
+  line-height: $base-magic-number / 24;
+}; 
+
+@mixin text-mega() {
+  font-size: 3rem; //60px
+  line-height: $base-magic-number / 24;
+}; 
+
+@mixin text-giga() {
+  font-size: 3.5rem; //64px
+  line-height: $base-magic-number / 24;  // 72px
+}; 
+
+
+// Magic numberis 24 (1.5rem), line heights 
+// must be multiples of this for vertical rhythm
+// 24 ÷ (font size) = (line height)
+
+
+/* Sizes for text too small or too large for a header tag */
+
+
 %text-mini {
-    @include type-setting(-2); 
+  @include text-micro(); 
 }
 
 %text-micro {
-    @include type-setting(-1); 
+  @include text-mini(); 
 }
 
 
 %h6 {
-    @include type-setting(0); 
+  @include h6(); 
 }
 
 %h5 {
-    @include type-setting(0); 
+  @include h5(); 
 }
 
 %h4 {
-    @include type-setting(1); 
+  @include h4(); 
 }
 
 %h3 {
-    @include type-setting(2); 
-
+  @include h3(); 
 }
 
 %h2 {
-    @include type-setting(2); 
-
-    @media #{$medium-up} {
-    
-     @include type-setting(3); 
-
-    }
-
+  @include h2(); 
 }
 
 %h1 {
-    
-    @include type-setting(3); 
-
-    @media #{$medium-up} {
-    
-     @include type-setting(4); 
-
-    }
-
+  @include h1(); 
 }
 
 
 %text-kilo {
-    @include type-setting(4); 
-
-    @media #{$medium-up} {
-    
-     @include type-setting(5); 
-
-    } 
+  @include text-kilo(); 
 }
 
 
 %text-mega {
-    @include type-setting(4); 
-
-    @media #{$medium-up} {
-    
-     @include type-setting(5); 
-
-    } 
-
-    @media #{$large-up} {
-    
-     @include type-setting(6); 
-
-    } 
+  @include text-mega(); 
 }
 
 %text-giga {
-  @include type-setting(6); 
-
-  @media #{$medium-up} {
-  
-   @include type-setting(7); 
-
-  } 
+  @include text-giga(); 
 }
 
 
@@ -390,42 +416,24 @@ $type-settings: (
 \*------------------------------------*/
 
 %p1 {
-
-  @include type-setting(0);
-
+  @include h6(); 
   @media #{$medium-up} {
-      
-    @include type-setting(1);
-    @include line-height(0);  
-
+    @include h5(); 
   }
-
 }
 
 
 %p2 {
-
-  @include type-setting(1);
-
+  @include h5(); 
   @media #{$medium-up} {
-      
-    @include type-setting(2);
-    @include line-height(0);  
-
+    @include h4(); 
   }
-
 }
 
 
 %p3 {
-
-  @include type-setting(2);
-
+  @include h4(); 
   @media #{$medium-up} {
-      
-    @include type-setting(3);
-    @include line-height(0);  
-
+    @include h3(); 
   }
-
 }

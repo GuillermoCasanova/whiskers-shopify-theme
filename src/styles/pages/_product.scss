@@ -201,11 +201,11 @@
     .product-name {
       font-family: $tertiary-font-family; 
       margin-bottom: rem-calc($level1);
-      @include type-setting(5);
+      @include text-kilo(); 
 
       @include media-query($large-up) {
         margin-bottom: 0;
-        @include type-setting(7);
+        @include text-giga(); 
       }
 
     }
@@ -215,7 +215,7 @@
 
       .product-price {
         margin-right: rem-calc($level2);
-        @include type-setting(2);
+        @include h3();
       }
 
     }
@@ -226,7 +226,7 @@
       
       p {
         @include media-query($large-up) {
-          @include type-setting(1); 
+          @include h4();
         }
       }
     }
@@ -279,7 +279,7 @@
   .productPhotoThumbnails-title {
     margin-bottom: rem-calc($level1); 
     color: $quaternaryColor; 
-    @include type-setting(-1); 
+    @include text-micro(); 
   }
 
   .productPhotoThumbnails-thumb {

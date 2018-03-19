@@ -81,11 +81,6 @@
                           <p class="product-description">
                             {{ product.description }}
                           </p>
-<!-- 
-                          {% if section.settings.show_share_buttons %}
-                            {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
-                          {% endif %}
- -->
                           {% unless product == empty %}
                             <script type="application/json" data-product-json>
                               {{ product | json }}
@@ -133,7 +128,8 @@
                               </select>
 
                              <div class="product-qty  grid  grid--center">
-                              <label for="Quantity">{{ 'products.product.quantity' | t }}</label>
+                              <label for="Quantity">QTY.</label>
+                              <!--<label for="Quantity">{{ 'products.product.quantity' | t }}</label> -->
                               <input type="number" id="Quantity" name="quantity" value="1" min="1" class="input--small" >
                             </div>
 
@@ -160,15 +156,6 @@
                               </button>
                             </form>
 
-                          </div>
-
-                          <div>
-                              
-                            <div class="product-qty  grid  grid--center">
-                              <label for="quantity">QTY.</label>
-                              <input type="number" id="quantity" name="quantity" class="input--small" value="1">
-                            </div>
-                         
                           </div>
                         </div>
                     </div>
