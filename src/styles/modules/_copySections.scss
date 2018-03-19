@@ -22,18 +22,18 @@
       margin: auto;
       height: 94%; 
 
-      @media #{$medium-up} {
+      @include media-query($medium-up) {
         height: 83%;
       }
 
     }
 
-    @media #{$medium-up} {
+    @include media-query($medium-up) {
       padding-top: rem-calc($level7 + $level2);
       padding-bottom: rem-calc($level7 + $level2);
     }
   
-    @media #{$large-up} {
+    @include media-query($large-up) {
       padding-top: rem-calc($level7 + $level3);
       padding-bottom: rem-calc($level7 + $level3);
     }
@@ -48,33 +48,33 @@
     max-width: rem-calc(370px);
     position: relative;
 
-    @media #{$medium-up} {
+    @include media-query($medium-up) {
       margin-bottom: 0; 
       max-width: 16rem; 
       margin-bottom: rem-calc($level4);
     }
 
-    @media #{$large-up} {
+    @include media-query($large-up) {
       max-width: 19rem; 
       margin-bottom: rem-calc($level7);
     }
 
     .copySection-headline {
-      @include type-setting(4);
+      @include h1(); 
 
-      @media #{$large-up} {
-        @include type-setting(5); 
+      @include media-query($large-up) {
+        @include text-kilo(); 
       }
     }
 
     .copySection-headline--secondary {
 
-      @media #{$medium-up} {
-        @include type-setting(6);
+      @include media-query($medium-up) {
+        @include text-mega(); 
       }
 
-      @media #{$large-up} {
-        @include type-setting(7);
+      @include media-query($large-up) {
+        @include text-giga(); 
       }
 
     }
@@ -104,14 +104,14 @@
       bottom: 0;
       margin: auto;
 
-      @media #{$medium-up} {
+      @include media-query($medium-up) {
         height: 66%; 
       }
 
     }
 
     .copySection-copy {
-      @media #{$medium-up} {
+      @include media-query($medium-up) {
         margin-bottom: rem-calc($level7); 
       }
     }
@@ -122,7 +122,7 @@
 .copySection--right {
   padding-left: rem-calc($level4); 
 
-  @media #{$medium-up} {
+  @include media-query($medium-up) {
     padding-left: 0; 
   }
 
@@ -134,17 +134,17 @@
   }
 
   .copySection-imageContainer {
-    @media #{$medium-up} {
+    @include media-query($medium-up) {
       left: rem-calc(-12px);
     }
 
-    @media #{$large-up} {
+    @include media-query($large-up) {
       left: rem-calC(-24px);
     }
   }
 
   .copySection-copy {
-     @media #{$large-up} {
+     @include media-query($large-up) {
       right: rem-calC(-12px);
     }
   }
@@ -156,7 +156,7 @@
 .copySection--left {
   padding-right: rem-calc($level4); 
 
-  @media #{$medium-up} {
+  @include media-query($medium-up) {
     padding-right: 0; 
   }
 
@@ -169,18 +169,18 @@
 
   .copySection-imageContainer {
 
-    @media #{$medium-up} {
+    @include media-query($medium-up) {
       right: rem-calc(-12px);
     }
 
-    @media #{$large-up} {
+    @include media-query($large-up) {
       right: rem-calc(-24px);
     }
   }
 
   .copySection-copy {
-    @media #{$large-up} {
-      left: rem-calC(-12px);
+    @include media-query($large-up) {
+      left: rem-calc(-12px);
     }
   }
 
@@ -197,7 +197,7 @@
 .copySection--leftAlt {
   margin-right: rem-calc($level4); 
 
-  @media #{$medium-up} {
+  @include media-query($medium-up) {
     margin-right: 0; 
   }
 
@@ -210,12 +210,12 @@
 
   .copySection-copy {
     
-    @media #{$medium-up} {
+    @include media-query($medium-up) {
       right: rem-calc(-1 * $level4); 
     }
 
 
-    @media #{$large-up} {
+    @include media-query($large-up) {
       padding: 0; 
       padding-right: rem-calc($level4);
     }
@@ -239,13 +239,13 @@
   z-index: 106; 
   position: relative; 
 
-  @media #{$medium-up} {
+  @include media-query($medium-up) {
     height: rem-calc(260px); 
   }
 
   .copySection-imageContainer-inner {
 
-    @media #{$medium-up} {
+    @include media-query($medium-up) {
       position: absolute; 
       width: 100%; 
     }
@@ -257,11 +257,11 @@
 
 .copySection-imageContainer--offset {
   
-  @media #{$medium-up} {
+  @include media-query($medium-up) {
     top: rem-calc(-1 * ($level7)); 
   }
 
-  @media #{$large-up} {
+  @include media-query($large-up) {
     top: rem-calc(-80px);
   }
 
@@ -274,7 +274,7 @@
     
     padding: rem-calc($level1); 
 
-    @media #{$large-up} {
+    @include media-query($large-up) {
 
       padding-right: rem-calc($level3); 
 

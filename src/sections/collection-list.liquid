@@ -22,9 +22,7 @@
                 
                 <div class="copySection-copy">
                   <h1 class="headline  copySection-headline  featuredLaces-headline">
-                    Shop
-                    <br>
-                    Styles
+                    {{ section.settings.title | escape }}
                   </h1>
                 </div>
 
@@ -71,7 +69,7 @@
                               {% if collection == empty %}
                                 {{ 'homepage.onboarding.collection_title' | t }}
                               {% else %}
-                                {{ collection.title  | t }}
+                                {{ collection.title }}
                               {% endif %}
                                </p>
                           </a>
@@ -125,10 +123,6 @@
   </div>
 
 </div>
-
-{% if section.settings.title != blank %}
-  <h2>{{ section.settings.title | escape }}</h2>
-{% endif %}
 
 
 {% if section.blocks.size == 0 %}

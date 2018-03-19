@@ -10,11 +10,10 @@
 
 .homeSection {
   
-  @media #{$medium-up} {
+  @include media-query($medium-up) {
     padding-top: 0; 
     padding-bottom: 0; 
   }
-
 }
 
 
@@ -28,7 +27,7 @@
 
   .shoeShowcase-slideshow {
 
-    @media #{$medium-up} {
+    @include media-query($medium-up) {
       position: relative;
       right: 3%;
       width:18rem;
@@ -37,7 +36,7 @@
       transform: translateY(12px); 
     } 
 
-    @media #{$large-up} {
+    @include media-query($large-up) {
       height: 15rem;
       width: 28rem; 
     }
@@ -47,7 +46,7 @@
        position: relative;
 
        &:before {
-        @media #{$medium-up} {
+        @include media-query($medium-up) {
           content: " ";
           height: 26rem;
           width: 15.5rem;
@@ -60,7 +59,7 @@
         width: 100%; 
         transform: rotate(-8deg);
 
-        @media #{$medium-up} {
+        @include media-query($medium-up) {
           transform: rotate(-8deg) scale(1.2);
         }
 
@@ -91,15 +90,15 @@
     height: 100%; 
     @extend %position-relative; 
 
-    @media #{$medium-up} {
+    @include media-query($medium-up) {
       top: -30%;
     }
 
-    @media #{$large-up} {
+    @include media-query($large-up) {
       top: -46%; 
     }
 
-    @media #{$large-up} {
+    @include media-query($large-up) {
       padding-right: rem-calc($level3); 
       padding-left: rem-calc($level3); 
     }
@@ -136,7 +135,6 @@
       transform: translateY(-100%);
     }
   }
-
 }
 
 
@@ -151,7 +149,7 @@
 
 .copySection--featuredLaces {
 
-  @media #{$medium-up} {
+  @include media-query($medium-up) {
     padding-top: rem-calc($level6);
     padding-bottom: rem-calc($level6);
   }
@@ -159,11 +157,11 @@
 
   .copySection-copy {
 
-    @media #{$medium-up} {
+    @include media-query($medium-up) {
       margin-bottom: rem-calc($level7 + $level2);
     }
 
-    @media #{$large-up} {
+    @include media-query($large-up) {
       margin-bottom: rem-calc($level7 + $level5); 
     }
   }
@@ -173,7 +171,7 @@
     width: rem-calc(30px);
     top: 0%;
 
-    @media #{$medium-up} {
+    @include media-query($medium-up) {
       right: 0;
       left: 0;
       width: rem-calc(30px);
@@ -194,7 +192,7 @@
       margin-right: rem-calc(-12px);
       margin-bottom: rem-calc($level2);
 
-      @media #{$medium-up} {
+      @include media-query($medium-up) {
         width: 100%;
         margin-right: -1rem;
         transform: scale(1.15); 
@@ -207,15 +205,16 @@
     }
 
     .featuredLaces-headline {
-
-      @media #{$medium-up} {
+      max-width: rem-calc(160px);
+       
+      @include media-query($medium-up) {
         margin-bottom: -60px;
         position: absolute;
         padding-left: rem-calc(12px); 
         transform: translateY(-40px);
       }
       
-      @media #{$large-up} {
+      @include media-query($large-up) {
         transform: translateY(-52px);
       }
     }
@@ -224,27 +223,24 @@
       position: relative; 
       width: 100%; 
 
-      @media #{$medium-up} {
+      @include media-query($medium-up) {
         height: rem-calc(18px);
       }
 
-      @media #{$large-up} {
+      @include media-query($large-up) {
         height: rem-calc($level6);
       }
 
       .featuredStyles-cta-link {
         color: #fff; 
 
-        @media #{$medium-up} {
+        @include media-query($medium-up) {
           position: absolute; 
           min-width: rem-calc(110px); 
           right: rem-calc(-40px); 
           @include h6(); 
         }
-
       } 
-
     }
-
   }
 }
