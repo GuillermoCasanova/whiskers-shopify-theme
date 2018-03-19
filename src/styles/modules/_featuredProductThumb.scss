@@ -16,8 +16,8 @@
     bottom:0; 
     left: rem-calc($level1); 
     bottom: rem-calc(3px);
-    @include transition(all .2s ceaser($easeInOutCubic));
-    @include type-setting(-1); 
+    @include text-micro; 
+    @include transition(all .2s ease-in-out);
   }
 
   &:after {
@@ -28,7 +28,7 @@
     bottom: rem-calc(-5px); 
     right: 0; 
     left: 0; 
-    @include transition(all .2s ceaser($easeInOutCubic));
+    @include transition(all .2s ease-in-out);
   }
 
   &:hover, 
@@ -36,7 +36,8 @@
   
     .featuredProductThumb-title {
       color: $primaryColor;
-      @include transform(translateY(-4px));      
+      transform: translateY(-4px);   
+      margin-bottom: 0;   
     }
 
     &:after {
@@ -46,29 +47,28 @@
 }
 
 
-.featuredProductThumb--solids {
+.featuredProductThumb--Solids {
   &:after {
     background-color: #66eac9; 
   }
 }
 
 
-.featuredProductThumb--striped {
+.featuredProductThumb--Striped {
   &:after {
     background-color: #d7b8e0; 
   }
 }
 
 
-
-.featuredProductThumb--braided {
+.featuredProductThumb--Braided {
   &:after {
     background-color: #9082d8; 
   }
 }
 
 
-.featuredProductThumb--ticked {
+.featuredProductThumb--Ticked {
   &:after {
     background-color: #4967bf; 
   }

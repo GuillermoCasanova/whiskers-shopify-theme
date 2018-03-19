@@ -1,31 +1,135 @@
+
+<div class="copySection  copySection--center  copySection--featuredLaces">
+
+  <div class="row small-collapse">
+  
+    <div class="small-12 medium-11 large-9  medium-centered columns [ grid  grid--justifyCenter ]">
+
+      <div class="copySection-inner">
+
+        <div class="row">
+            
+          <div class="small-12 columns">
+               
+          <div class="featuredLaces">
+
+            <div class="row small-collapse">
+                
+              <div class="small-12 columns medium-8   text-left"
+                       data-stellar-vertical-offset="100"
+                       data-stellar-offset-parent="true"
+                       data-stellar-ratio="1.4" >
+                
+                <div class="copySection-copy">
+                  <h1 class="headline  copySection-headline  featuredLaces-headline">
+                    Shop
+                    <br>
+                    Styles
+                  </h1>
+                </div>
+
+              </div>
+                  
+              <div class="small-12 columns">
+                  
+                <div class="featuredLaces-container  grid  grid--justifyCenter"
+                       data-stellar-vertical-offset="100"
+                       data-stellar-offset-parent="true"
+                       data-stellar-ratio="1.2">
+
+                  <ul class="featuredLaces-laces
+                             [ grid
+                             grid--flexDirectionRow
+                             grid--1of2
+                             med-grid--1of4
+                             grid--flexWrap
+                             med-grid--flexDirectionRow
+                             large-grid--1of4
+                             large-grid--flexNoWrap ]">
+
+                      {% for block in section.blocks limit: section.blocks.size %}
+                        <li {{ block.shopify_attributes }} class="featuredLaces-thumb grid-cell">
+                          {%- assign collection = collections[block.settings.collection] -%}
+
+                          <a href="{% if collection == empty %}#{% else %}{{ collection.url }}{% endif %}" 
+                               rel="internal" class="featuredProductThumb  featuredProductThumb--{{collection.title}}">
+
+                            {% if collection.image != blank %}
+                              <div class="featuredProductThumb-bg">
+                                {{ collection | img_url: '480x480' | img_tag: collection.title }}
+                               </div>
+                            {% elsif collection.products.first != blank %}
+                              <div class="featuredProductThumb-bg">
+                                {{ collection.products.first | img_url: '480x480' | img_tag: collection.title }}
+                               </div>
+
+                            {% elsif collection == empty %}
+                              {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                              {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
+                            {% endif %}
+                                <p class="featuredProductThumb-title">
+                              {% if collection == empty %}
+                                {{ 'homepage.onboarding.collection_title' | t }}
+                              {% else %}
+                                {{ collection.title  | t }}
+                              {% endif %}
+                               </p>
+                          </a>
+                        </li>
+                      {% endfor %}
+                  </ul>
+
+                </div>
+
+              </div>
+            
+            </div>
+
+            <div class="featuredLaces-cta [ grid  grid--center grid--justifyRight ]"
+                      data-stellar-vertical-offset="500"
+                   data-stellar-offset-parent="true"
+                   data-stellar-ratio="1.4" >
+
+              <div class="featuredStyles-cta-link">
+
+                <div class="linkGroup 
+                            grid 
+                            grid--center">
+                  <a href="/collections/all" class="uc fwb display-block">Shop All Styles</a>
+                  
+                  <div class="linkGroup-icon
+                              grid
+                             grid--center">
+                    <img src="{{'icon--arrow--accent.svg' | asset_url}}" 
+                         alt="Arrow Facing Right"
+                         role="presentation"
+                         >
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+            </div>
+                       
+          </div>
+        
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
 {% if section.settings.title != blank %}
   <h2>{{ section.settings.title | escape }}</h2>
 {% endif %}
 
-{% for block in section.blocks limit: section.blocks.size %}
-  <div {{ block.shopify_attributes }}>
-    {%- assign collection = collections[block.settings.collection] -%}
-
-    <a href="{% if collection == empty %}#{% else %}{{ collection.url }}{% endif %}">
-      {% if collection.image != blank %}
-        {{ collection | img_url: '480x480' | img_tag: collection.title }}
-      {% elsif collection.products.first != blank %}
-        {{ collection.products.first | img_url: '480x480' | img_tag: collection.title }}
-      {% elsif collection == empty %}
-        {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
-        {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
-      {% endif %}
-
-      <p>
-        {% if collection == empty %}
-          {{ 'homepage.onboarding.collection_title' | t }}
-        {% else %}
-          {{ collection.title }}
-        {% endif %}
-      </p>
-    </a>
-  </div>
-{% endfor %}
 
 {% if section.blocks.size == 0 %}
   {% include 'no-blocks' %}
@@ -34,7 +138,7 @@
 {% schema %}
   {
     "name": "Collection list",
-    "max_blocks": 12,
+    "max_blocks": 4,
     "settings": [
       {
         "type": "text",
