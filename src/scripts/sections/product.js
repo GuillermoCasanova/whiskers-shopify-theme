@@ -30,6 +30,38 @@ theme.Product = (function() {
   function Product(container) {
     this.$container = $(container);
 
+    var slideshow = $(container).find('[data-ui-component="product-photo-slideshow"]'); 
+
+    slideshow.slick({
+
+      'centerMode': true,
+      'centerPadding': '36px',
+      'slidesToShow:': 1,
+      'mobileFirst': true,
+      'responsive': [ {
+          'breakpoint': 720, 
+          'settings': {
+            slidesToShow: 1,
+            'centerPadding': '150px'
+          }
+        },
+        {
+          'breakpoint': 960, 
+          'settings': {
+            slidesToShow: 1,
+            'centerPadding': '0px'
+          }
+        }
+      ]
+
+    });
+
+    var nextBtn = $(container).find('.slick-next');
+    var prevBtn = $(container).find('.slick-prev');
+
+    nextBtn.text('');
+    prevBtn.text('');
+
     // Stop parsing if we don't have the product json script tag when loading
     // section in the Theme Editor
     if (!$(selectors.productJson, this.$container).html()) {
@@ -61,6 +93,8 @@ theme.Product = (function() {
 
       this.$container.on('variantImageChange' + this.namespace, this.updateProductImage.bind(this));
     }
+
+
   }
 
   Product.prototype = $.extend({}, Product.prototype, {

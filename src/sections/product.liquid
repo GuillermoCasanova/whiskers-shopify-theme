@@ -14,7 +14,7 @@
 
 
   <div class="product-header  grid  grid--center  grid--justifyCenter">
-    <a ui-sref="main.shop({productType: 'laces'})" class="product-header-backBtn">
+    <a href="/collections/all" rel="internal" class="product-header-backBtn">
       <span></span>
       <span></span>
       <span></span>
@@ -27,18 +27,20 @@
 
         <div class="product-inner">
           <div class="row small-collapse [ grid  grid--center  grid--flexDirectionColumn  large-grid--flexDirectionRow ]">
-            
+          
             <div class="small-12 large-7  columns large-push-5">
               <div class="row  small-collapse  large-uncollapse">
                 <div class="small-12 columns">
                   <div class="row  small-collapse  large-uncollapse">
                     <div class="small-12 columns">
-
-
-                        {% if featured_image != blank %}
-                          <img src="{{ featured_image | img_url: '480x480' }}" alt="{{ featured_image.alt | escape }}" data-product-featured-image>
-                        {% endif %}
-
+                     <!--    <img src="{{ image | img_url: '480x480' }}" alt="{{ image.alt | escape }}" data-product-featured-image> -->
+                      <div class="product-photoSlideshow"  data-ui-component="product-photo-slideshow">
+                        {% for image in product.images %}
+                        <div class="product-photoSlideshow-slide">
+                            <img src="{{ image | img_url: '480x480' }}" alt="{{ image.alt | escape }}">
+                        </div>
+                        {% endfor %}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -175,7 +177,7 @@
                           {% if product.images.size > 1 %}
                           <ul class="productPhotoThumbnails-thumbnails grid grid--flexWrap grid--flexDirectionRow grid--1of2 large-grid--flexDirectionRow large-grid--fit">
                             {% for image in product.images %}
-                            <li class="grid-cell">
+                            <li>
                               <a href="{{ image.src | img_url: '480x480' }}" data-product-single-thumbnail>
                               <div class="productPhotoThumbnails-thumb">
                                 <img src="{{ image.src | img_url: '160x160' }}" alt="{{ image.alt | escape }}">

@@ -1,0 +1,21 @@
+
+
+/*------------------------------------*\
+    #Webfont
+\*------------------------------------*/
+
+//
+//Acta Black Family 
+// 
+@font-face {
+  font-family: 'Acta-Black';
+  src: url('../assets/acta-black.eot');
+  src: url('../assets/acta-black.eot?#iefix') format('embedded-opentype'),
+             url('../assets/acta-black.woff2') format('woff2'),
+       url('../assets/acta-black.woff') format('woff'),
+       url('../assets/acta-black.ttf') format('truetype'),
+       url('../assets/acta-black.svg#youworkforthem') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+

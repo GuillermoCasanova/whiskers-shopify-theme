@@ -29,7 +29,7 @@ $column-gutter: rem-calc(48px);
     margin-left: 0;
     margin-right: 0; }
   .row .row {
-    margin: 0 rem-calc(($column-gutter / 2) * -1);
+    margin: 0 (($column-gutter / 2) * -1);
     max-width: none;
     width: auto; }
     .row .row:before, .row .row:after {
@@ -191,8 +191,8 @@ $column-gutter: rem-calc(48px);
   .column,
   .columns {
     position: relative;
-    padding-left: 0.9375rem;
-    padding-right: 0.9375rem;
+    padding-left: $column-gutter / 2;
+    padding-right: $column-gutter / 2;
     float: left; }
 
   .small-1 {
@@ -307,8 +307,8 @@ $column-gutter: rem-calc(48px);
     margin-right: 0; }
   .row.small-uncollapse > .column,
   .row.small-uncollapse > .columns {
-    padding-left: 0.9375rem;
-    padding-right: 0.9375rem;
+    padding-left: $column-gutter / 2;
+    padding-right: $column-gutter / 2;
     float: left; } }
 @include media-query($medium-up) {
   .medium-push-0 {
@@ -434,8 +434,8 @@ $column-gutter: rem-calc(48px);
   .column,
   .columns {
     position: relative;
-    padding-left: 0.9375rem;
-    padding-right: 0.9375rem;
+    padding-left: $column-gutter / 2;
+    padding-right: $column-gutter / 2;
     float: left; }
 
   .medium-1 {
@@ -550,8 +550,8 @@ $column-gutter: rem-calc(48px);
     margin-right: 0; }
   .row.medium-uncollapse > .column,
   .row.medium-uncollapse > .columns {
-    padding-left: 0.9375rem;
-    padding-right: 0.9375rem;
+    padding-left: $column-gutter / 2;
+    padding-right: $column-gutter / 2;
     float: left; }
 
   .push-0 {
@@ -798,8 +798,8 @@ $column-gutter: rem-calc(48px);
   .column,
   .columns {
     position: relative;
-    padding-left: 0.9375rem;
-    padding-right: 0.9375rem;
+    padding-left: $column-gutter / 2;
+    padding-right: $column-gutter / 2;
     float: left; }
 
   .large-1 {
@@ -914,8 +914,8 @@ $column-gutter: rem-calc(48px);
     margin-right: 0; }
   .row.large-uncollapse > .column,
   .row.large-uncollapse > .columns {
-    padding-left: 0.9375rem;
-    padding-right: 0.9375rem;
+    padding-left: $column-gutter / 2;
+    padding-right: $column-gutter / 2;
     float: left; }
 
   .push-0 {
