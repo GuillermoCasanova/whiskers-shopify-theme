@@ -204,17 +204,19 @@
         margin-bottom: 0;
         @include text-mega(); 
       }
-
     }
 
     .product-details {
       color: $quaternaryColor; 
 
+      @include media-query($medium-up) {
+        margin-bottom: rem-calc($level2);
+      }
+
       .product-price {
         margin-right: rem-calc($level2);
         @include h3();
       }
-
     }
 
 
@@ -240,7 +242,6 @@
         label,
         input {
           margin-bottom: 0; 
-
         }
         
         input {
@@ -248,9 +249,7 @@
           margin-right: 0; 
           text-align: center; 
         }
-
       }
-
     }
 
     .product-buyBtn {
