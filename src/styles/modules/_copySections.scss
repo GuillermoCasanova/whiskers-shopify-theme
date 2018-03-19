@@ -67,6 +67,14 @@
       }
     }
 
+    .copySection-body {
+      p {
+        @include media-query($medium-up) {
+          margin-bottom: 0; 
+        }
+      }
+    }
+
     .copySection-headline--secondary {
 
       @include media-query($medium-up) {
