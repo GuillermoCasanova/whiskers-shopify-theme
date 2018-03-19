@@ -23,7 +23,7 @@
 
 .headerIconBackground {
   
-  background-image: url('../assets/images/icon_wallpaper_alt_small.svg');
+  background-image: url('../assets/icon_wallpaper_alt_small.svg');
   background-size: contain; 
   background-repeat: no-repeat; 
   width: 19rem; 
@@ -33,7 +33,7 @@
 
   @media #{$medium-up} {
     
-    background-image: url('../assets/images/icon_wallpaper_alt.svg');
+    background-image: url('../assets/icon_wallpaper_alt.svg');
     width: 39rem; 
     height: 16rem; 
 

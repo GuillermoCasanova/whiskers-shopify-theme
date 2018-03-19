@@ -31,11 +31,12 @@ $base-font-weight: $normal;
 %primary-font-family {
     font-family:  $primary-font-family; 
     font-weight: normal; 
-
+    font-weight: bold;  
 }
 
 %secondary-font-family {
-    font-family: $secondary-font-family; 
+    font-family: $secondary-font-family;
+    font-weight: bold;  
 }
 
 

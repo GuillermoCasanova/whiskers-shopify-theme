@@ -1,55 +1,147 @@
+
+
 <footer>
+<div class="iconWallpaper">
+  <img  class="iconWallpaper-img" src="{{'icon_wallpaper.svg' | asset_url}}" alt="" role="presentation">
+</div>
 
-  {%- assign social_accounts = 'Facebook, Twitter, Pinterest, Instagram, Snapchat, Tumblr, YouTube, Vimeo,' | split: ', ' -%}
-  <ul>
-    {% for social in social_accounts %}
-      {%- assign social_handle = social | handleize -%}
-      {% capture social_link %}social_{{ social_handle }}_link{% endcapture %}
-      {% capture social_icon %}icon-{{ social_handle }}{% endcapture %}
+  <div class="footer-inner">
+    
+    <div class="row">
+      
+      <div class="small-12 medium-11 large-9 large-push-3  large-uncentered   medium-centered  columns">
 
-      {% if settings[social_link] != blank %}
-        <li>
-          <a href="{{ settings[social_link] }}" title="{{ 'layout.footer.social_platform' | t: name: shop.name, platform: social }}">
-            {% include social_icon %}
-            <span class="icon-fallback-text">{{ social }}</span>
-          </a>
-        </li>
-      {% endif %}
+        <div class="row">
 
-    {% endfor %}
-  </ul>
+          <div class="small-12 columns medium-9 large-8">
 
-  {% if section.settings.show_payment_icons %}
-    {% unless shop.enabled_payment_types == empty %}
-      {%- assign payment_icons_available = 'amazon_payments,american_express,apple_pay,bitcoin,cirrus,dankort,diners_club,discover,dogecoin,dwolla,forbrugsforeningen,interac,jcb,litecoin,maestro,master,paypal,visa' | split: ',' -%}
+            <div class="row">
+              <div class="small-12  medium-4 columns">
+                  
+                <ul class="footer-menu">
+              
+                  <li class="footer-menu-title">
+                    Shop
+                  </li>
+                  
+                  <li class="footer-menu-item">
+                    <a ui-sref="main.shopLaces({productType: 'laces'})" class="footer-menu-link">Laces</a>
+                  </li>
+              
+                  <li class="footer-menu-item">
+                    <a ui-sref="main.shopBoxes" class="footer-menu-link">Lace Box Sets</a>
+                  </li>
+              
+                </ul>
+              
+              </div>
+              
+              <div class="small-12  medium-4  columns">
+                  
+                <ul class="footer-menu">
+              
+                  <li class="footer-menu-title">
+                    Info
+                  </li>
+                  
+                  <li class="footer-menu-item">
+                    <a ui-sref="main.lacingStyles"  class="footer-menu-link">Lacing Styles</a>
+                  </li>
+              
+                  <li class="footer-menu-item">
+                    <a ui-sref="main.ethos" class="footer-menu-link">Ethos</a>
+                  </li>
+                  
+                </ul>
+              
+              </div>
+              
+              
+              <div class="small-12  medium-4 columns">
+                  
+                <ul class="footer-menu">
+              
+                  <li class="footer-menu-title">
+                    Support
+                  </li>
+                  
+                  <li class="footer-menu-item">
+                    <a ui-sref="main.sales" class="footer-menu-link">Sales</a>
+                  </li>
+              
+                  <li class="footer-menu-item">
+                    <a ui-sref="main.faq" class="footer-menu-link">Faq</a>
+                  </li>
+                  
+                </ul>
+              
+              </div>
+            </div>
 
-      <span class="visually-hidden">{{ 'layout.footer.payment_methods' | t }}</span>
-      <ul class="payment-icons">
-        {% for type in shop.enabled_payment_types %}
-          {% if payment_icons_available contains type %}
-            <li>
-              {%- assign icon_name = type | prepend: 'icon-' -%}
-              {% include icon_name %}
-              <span class="visually-hidden">{{ type | capitalize | replace: '_', ' ' }}</span>
-            </li>
-          {% endif %}
-        {% endfor %}
-      </ul>
-    {% endunless %}
-  {% endif %}
+          </div>
+          
+          
+          <div class="small-12  medium-3 large-4 columns">
+                    
+         <!--    <div class="footer-menu">
+              <label class="footer-menu-title">
+                  
+                  Newsletter
+                  
+              </label>
+              
+              <input type="text" 
+                     placeholder="Your Email"
+                     class="input--small"> 
 
-  {%- assign footer_linklist = section.settings.footer_linklist -%}
-  {% if linklists[footer_linklist].links.size > 0 %}
-    <ul>
-      {% for link in linklists[footer_linklist].links %}
-        <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-      {% endfor %}
-    </ul>
-  {% endif %}
+              <button class="button--micro  button--tertiary">
+                Sign Up
+              </button>
+            </div>
+           -->
+          </div>
 
-  <div>
-    <small>{{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: '/' }}. {{ powered_by_link }}</small>
+        </div>
+
+      </div>
+
+      <div class="small-12 large-3  large-pull-9   columns">
+                  
+        <div class="row">
+
+          <div class="small-11  medium-4  large-11  columns small-centered">
+
+            <div class="footer-logo">
+              <img src="{{'logo--whiskers--slogan.svg'  | asset_url}}" 
+                   alt="Whiskers Logo">
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="row">
+      
+      <div class="small-12  columns text-center  large-text-left">
+
+        <div class="footer-siteCredit">
+
+          <span class="txtc1  ff2 text-mini">
+            Tastefully Wrong | {{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: '/' }}
+          </span>
+          
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
+
 </footer>
 
 {% schema %}
