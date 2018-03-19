@@ -1,0 +1,288 @@
+
+/*------------------------------------*\
+    #Buttons  (Default button sizes being used from Foundation 5, disable at settings--overwrite.scss)
+\*------------------------------------*/
+
+button,
+.button {
+  white-space: nowrap; 
+  margin-bottom: rem-calc($base-magic-number);
+  background-color: transparent; 
+  letter-spacing: .5px; 
+
+  .button-inner {
+    position: relative; 
+    z-index: 1; 
+    font-weight: bold;
+    text-transform: uppercase;
+    @include type-setting(-1); 
+
+  }
+
+  &.is-inactive {
+    opacity: .2; 
+    pointer-events: none; 
+    
+  }
+
+}
+
+
+.button--primary {
+  background-color: $primaryColor;
+  position: relative; 
+  color: #fff; 
+  fill: #fff; 
+  border: 1px solid transparent; 
+  @include transition(all .1s ease .1s); 
+
+  &:hover,
+  &:focus {
+
+    color: $primaryColor; 
+    background-color: transparent;
+    border: 1px solid $primaryColor; 
+
+  }
+
+}
+
+.button--secondary {
+  background-color: $secondaryColor;
+  position: relative; 
+  color: #fff; 
+  fill: #fff; 
+  border: 1px solid $secondaryColor; 
+  @include transition(all .2s ease); 
+  
+  &:hover,
+  &:focus {
+    color: $secondaryColor;
+    background-color: transparent; 
+    border: 1px solid $secondaryColor; 
+    fill: $secondaryColor;
+  }
+}
+
+
+.button--tertiary {
+  background-color: transparent;
+  position: relative; 
+  color: $secondaryColor; 
+  fill: $secondaryColor; 
+  border: 1px solid $secondaryColor; 
+  @include transition(all .1s ease .1s); 
+
+  &:hover,
+  &:focus {
+    color: #fff;
+    fill: #fff; 
+    border: 1px solid $secondaryColor;
+    background-color: $secondaryColor;  
+  }
+}
+
+
+.button--quaternary {
+  background-color: transparent;
+  position: relative; 
+  color: $primaryColor; 
+  fill: $primaryColor; 
+  border: 1px solid $primaryColor; 
+  @include transition(all .1s ease .1s); 
+
+  &:hover,
+  &:focus {
+    color: #fff;
+    fill: #fff; 
+    border: 1px solid $primaryColor;
+    background-color: $primaryColor;  
+  }
+}
+
+.button--quintenary {
+  background-color: $accentColor;
+  position: relative; 
+  color: #fff; 
+  fill: #fff; 
+  border: 1px solid $accentColor; 
+  @include transition(all .1s ease .1s); 
+
+  &:hover,
+  &:focus {
+    color: #fff;
+    fill: #fff; 
+    border: 1px solid $accentColor;
+    background-color: transparent;  
+  }
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Button With Icon Sizing 
+\*------------------------------------*/
+
+
+.button--withIcon {
+
+  .button-icon, 
+  .button-label {
+    display: inline-block; 
+  }
+
+  .button-icon {
+    width: rem-calc(18px); 
+    height: rem-calc(18px); 
+    margin-right: rem-calc($level1); 
+    vertical-align: middle; 
+  }
+
+  .button-label {
+    position: relative; 
+    vertical-align: middle; 
+  }
+
+  &.button--micro {
+    .button-icon {
+      width: rem-calc(14px);
+      height: rem-calc(14px);
+      margin-right: rem-calc(2px); 
+    }
+  }
+
+  &.button--small {
+    .button-icon {
+      width: rem-calc(18px);
+      height: rem-calc(18px);
+    }
+  }
+
+  &.button--medium {
+    .button-icon {
+      width: rem-calc(18px);
+      height: rem-calc(18px);
+    }
+  }
+
+}
+
+
+.button--link {
+    color: $tertiaryColor;
+    position: relative; 
+    text-transform: capitalize; 
+    @extend %fwn; 
+    @include transition(all .2s ease-in-out); 
+
+    &:before {
+      content: " "; 
+      left: 0; 
+      bottom: -2px; 
+      width: 100%; 
+      height: 2px; 
+      background-color: $primaryColor; 
+      position: absolute; 
+      opacity: 0; 
+      transform: translateY(3px); 
+      @include transition(all .2s ease-in-out); 
+
+    }
+
+    &:hover,
+    &:focus {
+      color: $primaryColor;
+      
+      &:after {
+        opacity: 0; 
+        transform: translateY(-4px); 
+
+      }
+
+      &:before {
+        opacity: 1; 
+        transform: translateY(0); 
+
+      }
+
+    }
+
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Button Sizes
+\*------------------------------------*/
+
+
+.button--micro {
+    padding: rem-calc(3px);
+    padding-right: rem-calc($level1);
+    padding-left: rem-calc($level1);
+    @include type-setting(-1);
+}
+
+.button--small {
+    padding: rem-calc($level1);
+    padding-right: rem-calc($level2);
+    padding-left: rem-calc($level2);
+    @include type-setting(-1);
+
+}
+
+
+.button--medium {
+    padding: rem-calc($level2);
+    padding-right: rem-calc($level2);
+    padding-left: rem-calc($level2);
+    @include type-setting(-1);
+
+}
+
+.button--large {
+    padding: rem-calc(15px);
+    padding-right: rem-calc($level3);
+    padding-left: rem-calc($level3);
+    @include type-setting(-1);
+}
+
+.button--kilo {
+    padding: rem-calc(16);
+    padding-right: rem-calc($level6);
+    padding-left: rem-calc($level6); 
+    @include type-setting(0);
+}
+
+.button--mega {
+    padding: rem-calc(18);
+    padding-right: rem-calc($level7);
+    padding-left: rem-calc($level7); 
+    @extend %h1; 
+}
+
+.button--giga {
+    padding: rem-calc(22);
+    padding-right: rem-calc($level7);
+    padding-left: rem-calc($level7); 
+    @extend %h1; 
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Button Properties
+\*------------------------------------*/
+
+
+.button--expanded {
+    width: 100%; 
+    padding-right: 0; 
+    padding-left: 0; 
+}
