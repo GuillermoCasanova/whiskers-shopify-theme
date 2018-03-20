@@ -121,7 +121,6 @@
     @include media-query($medium-up) {
       display: none; 
     }
-
   }
 
 
@@ -300,12 +299,13 @@
         margin-bottom: rem-calc($level2); 
         @extend %display-block; 
         @extend %tertiary-font-family; 
-        @include type-setting(4); 
+        @include h1(); 
+
         @include transition(all .200s ease-in-out); 
 
         @include media-query($medium-up) {
           margin-bottom: rem-calc($level1); 
-          @include type-setting(3); 
+          @include h2(); 
         }
 
         &:hover,

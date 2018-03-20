@@ -13,14 +13,12 @@
   .iconWallpaper-img {
     height: rem-calc(260px); 
     object-fit: cover; 
-
   }
 }
 
 footer {
 
   .footer-logo {
-
     margin-top: rem-calc($level6); 
     margin-bottom: rem-calc($level6 + $level3); 
 
@@ -28,14 +26,12 @@ footer {
 
       margin-top: rem-calc($level7); 
       margin-bottom: rem-calc($level7  + $level3); 
-
     }
-
   }
 }
 
-.footer-inner {
 
+.footer-inner {
   background-color: $secondaryColor;
   padding-top: rem-calc($level4); 
   padding-bottom: rem-calc($level4);  
@@ -48,7 +44,6 @@ footer {
 
 
 .footer-menu {
-  
   margin-bottom: rem-calc($level5); 
   color: $tertiaryColor; 
   @include h6();  
@@ -80,7 +75,6 @@ footer {
   }
   
   .footer-menu-link {
-
     color: $tertiaryColor; 
     
     &:hover, 
@@ -88,6 +82,11 @@ footer {
       border-bottom: 2px solid $accentColor; 
     }
   }
+}
+
+.footer-siteCredit {
+  width: 100%; 
+  text-align: left; 
 }
 
 .footer-logo {
