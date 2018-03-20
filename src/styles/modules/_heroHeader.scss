@@ -20,13 +20,11 @@
   margin-top: rem-calc($level7 + $level1); 
 
   @include media-query($medium-up) {
-    margin-top: rem-calc($level7 + $level2); 
+    margin-top: 0; 
     height: 29.5rem;
-
   }
 
   @include media-query($large-up) {
-    margin-top: 0; 
     height: 39.5rem; 
   }
 

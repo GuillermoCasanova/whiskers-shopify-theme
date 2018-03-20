@@ -1,0 +1,492 @@
+
+
+/*------------------------------------*\
+    #Navigation Styles  
+\*------------------------------------*/
+
+
+.nav-is-open {
+  // overflow: hidden; 
+  // overflow-x: hidden; 
+}
+
+
+/*------------------------------------*\
+    #Main Nav Basic Styles
+\*------------------------------------*/
+
+
+.mainNav {
+  background-color: transparent; 
+  width: 100%; 
+  position: fixed; 
+  top: 0; 
+
+  .mainNav-title {
+    z-index: 190; 
+    @include transition(all .8s ease-in-out); 
+  }
+}
+
+
+
+
+/*------------------------------------*\
+    #Header Logo
+\*------------------------------------*/
+
+
+.headerLogo {
+  position: fixed; 
+  z-index: 200; 
+  height: rem-calc(60px);
+  width: 25%;
+  top: 0; 
+
+  @include media-query($medium-up) {
+    height: rem-calc(75px)
+  } 
+
+  @include media-query($medium-up) {
+    width: 8.5rem;  
+    position: fixed;
+    margin-top: 0;
+    top: 0; 
+    height: rem-calc(80px);
+    margin-top: rem-calc($level1);
+  }
+
+  .headerLogo-inner {
+    width: rem-calc(60px); 
+  }
+
+}
+
+
+
+/*------------------------------------*\
+    #Main Nav Position Styles 
+\*------------------------------------*/
+
+
+.fixed-nav {
+  width: 100%; 
+  z-index: 100;
+  @extend %position-fixed; 
+}
+
+.absolute-nav {
+  width: 100%; 
+  z-index: 100; 
+  top: 0; 
+  @extend %position-absolute; 
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Main Navigation Small 
+\*------------------------------------*/
+
+
+.mainNav {
+  height: rem-calc(60px);
+  width: 100%; 
+  z-index: 199; 
+  @extend %position-relative;
+
+  @include media-query($medium-up) {
+    height: rem-calc(75px)
+  } 
+
+  @include media-query($medium-up) {
+    width: 12rem;
+    height: 5rem;
+    right: 0; 
+  }
+
+  .mainNav-cartToggle {
+    padding-right: rem-calc($level2); 
+    @extend %uc; 
+  }
+
+  .mainNav-title {
+    height: 100%; 
+    background-color: $primaryColor; 
+    width: 25%; 
+    @extend %position-relative; 
+
+    @include media-query($medium-up) {
+      display: none; 
+    }
+
+  }
+
+
+  /*------------------------------------*\
+      #Main Nav Small Menu Toggle
+  \*------------------------------------*/
+
+  $toggleStrokeWidth: 4px;
+  $toggleHeight: .9rem; 
+  $toggleWidth: 2.1rem;  
+
+  .mainNav-menuToggleWrapper {
+      background-color: $secondaryColor; 
+      color: #fff; 
+      right: 0; 
+      width: 75%; 
+      z-index: 201; 
+      height: 100%; 
+      @extend %text-center; 
+
+      @include media-query($medium-up) {
+        width: 100%; 
+      }
+  }
+
+  .mainNav-menuToggle {
+    background-color: transparent; 
+    margin-bottom: 0; 
+    @extend %uc; 
+
+    .menuToggle-label {
+      margin-right: rem-calc($level1); 
+      @include text-micro(); 
+    }
+  }
+
+
+  .menuToggle-icon {
+    height: $toggleHeight;
+    width: $toggleWidth; 
+    @extend %display-block;
+    @extend %position-relative; 
+    @extend %text-center; 
+    @include transition(all .4s ease-in-out); 
+
+    &:after,
+    &:before {
+      content: ""; 
+      height: $toggleStrokeWidth;
+      background-color: $accentColor; 
+      width: 100%;  
+      left: 0; 
+      right: 0; 
+      @extend %position-absolute; 
+      @include transition(all .2s ease-in-out); 
+    }
+
+    &:after {
+      top: 70%;
+    }
+
+    &:hover,
+    &:focus {
+      transform: scale(1.1); 
+    }
+  }
+}
+
+
+
+
+
+
+
+
+/*------------------------------------*\
+    #Main Nav Small Menu Toggle Open
+\*------------------------------------*/
+
+
+.mainNav-menuToggle.is-menu-open {
+  
+  .menuToggle-label {
+    opacity: 0; 
+  }
+
+  .menuToggle-icon {
+    border-bottom: solid 2px transparent; 
+
+    &:before {
+      top: 50%; 
+      background-color: $accentColor; 
+      transform: translateY(0) rotate(-45deg); 
+    }
+
+    &:after {
+      top: 50%; 
+      background-color: $accentColor; 
+      transform: translateY(0) rotate(45deg); 
+    }
+
+    &:hover,
+    &:focus {
+      transform: scale(1.1); 
+    }
+  }
+}
+
+
+
+
+
+
+/*------------------------------------*\
+    #Main Nav Off Canvas 
+\*------------------------------------*/
+
+.mainNav--offCanvas {
+    background-color: $secondaryColor;
+    height: 100vh;
+    width: 100vw; 
+    z-index: 180; 
+    top: 0; 
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
+    color: #fff; 
+    margin-top: rem-calc(60px); 
+    transform: translateY(-100%); 
+    @extend %position-fixed; 
+
+    @include media-query($medium-up) {
+      width: 12rem; 
+      left: auto; 
+    }
+
+    .mainNav-navToggle {
+      width: 100%; 
+      padding-left: rem-calc(3px); 
+      @extend %text-right; 
+      
+      .navToggle-icon {
+        color: $tertiaryColor; 
+        z-index: 201; 
+
+        &:active  {
+          color: $primaryColor; 
+        }
+
+      }
+
+    }
+
+    .mainNav-container {
+      height: 100vh; 
+      @extend %position-relative; 
+    }
+
+    .mainNav-menu {
+      padding-top: rem-calc($level7 + $level2); 
+      margin-left: 25%;
+      margin-bottom: rem-calc($level4); 
+      @extend %text-left;
+
+      @include media-query($medium-up) {
+        margin-left: rem-calc($level5); 
+      } 
+
+      .mainNav-menu-item {
+        margin-bottom: rem-calc($level4); 
+      }
+      
+      .mainNav-menu-link {
+        color: #fff;  
+        width: 100%; 
+        margin-bottom: rem-calc($level2); 
+        @extend %display-block; 
+        @extend %tertiary-font-family; 
+        @include type-setting(4); 
+        @include transition(all .200s ease-in-out); 
+
+        @include media-query($medium-up) {
+          margin-bottom: rem-calc($level1); 
+          @include type-setting(3); 
+        }
+
+        &:hover,
+        &:focus {
+          //color: $accentColor; 
+        }
+
+      }
+      
+      // @for $i from 1 through 5 {
+      //    li:nth-child(#{$i}) { 
+      //       .mainNav-animElem {
+            
+      //         @include transition-delay(.06s * $i); 
+
+      //       }
+      //     }
+      // }
+    
+    }
+
+
+    .mainNav-animElem {
+      opacity: 0; 
+      transform: translateY(-70px); 
+      @include transition(all .4s ease-in-out); 
+    }
+
+    .mainNav-social {
+      margin-bottom: rem-calc($level6); 
+      margin-left: 25%;
+      color: $accentColor; 
+      transition-delay: .06s * 5; 
+      @extend %text-left; 
+
+      @include media-query($medium-up) {
+        margin-left: rem-calc($level5); 
+      } 
+
+      .mainNav-social-link {
+        color: #fff; 
+        @extend %display-block; 
+
+        &:hover,
+        &:active,
+        &:focus {
+          color: $accentColor; 
+        }
+      }
+    }
+
+    .mainNav-tagline {
+      color: $primaryColor; 
+      margin-left: 25%; 
+      font-family: $secondary-font-family;
+      margin-bottom: 30%;  
+      @extend %position-relative; 
+      
+      @include media-query($medium-up) {
+        margin-bottom: 20%; 
+      }
+    
+      @include media-query($medium-up) {
+        margin-bottom: 40%; 
+      }
+
+      .mainNav-tagline-icon {
+        width: 1.4rem;
+        left: -13px;
+        top: -35px;
+        @extend %position-absolute;
+      }
+    }
+
+    .mainNav-contact {
+      margin-left: rem-calc($level3);
+      margin-bottom: rem-calc($level4); 
+      color: #fff;
+      transition-delay: .06s * 6; 
+    }
+
+    .mainNav-address {
+      @extend %text-left; 
+    }
+
+
+    &.is-closed {  // for when nav is closed
+        animation: main-nav-disappear .6s ease-in-out forwards; 
+    }
+
+    &.is-open { // for when nav is open
+        animation: main-nav-appear .8s ease-in-out forwards; 
+
+      .mainNav-animElem {
+          opacity: 1; 
+          transform: translateX(0); 
+      }
+    }
+
+    .mainNav-dropDown {
+      margin-bottom: 0; 
+
+      &.is-open {
+        margin-bottom: rem-calc($level5); 
+          
+        .mainNav-dropDown-item {
+          display: block; 
+          margin-bottom: rem-calc($level2); 
+
+          @include media-query($medium-up) {
+
+            margin-bottom: rem-calc($level1); 
+
+          }
+        }
+      }
+
+      .mainNav-dropDown-item {
+        display: none; 
+
+        @include media-query($medium-up) {
+          display: block !important; 
+        }
+      }
+
+      .mainNav-dropDown-link {
+        color: #ffffff; 
+        @include h4(); 
+
+        @include media-query($medium-up) {
+          @include h6(); 
+        }
+
+        &:hover, 
+        &:focus {
+          border-bottom: 2px solid $accentColor; 
+        }
+      }
+  }
+}
+
+
+
+
+@keyframes  main-nav-appear {
+
+  0% {
+    transform: translateY(-300%); 
+  }
+
+  1% {
+    transform: translateY(-300%); 
+  }
+
+ 100% {
+    transform: translateY(0); 
+  }
+}
+
+@keyframes main-nav-disappear {
+
+  0% {
+    transform: translateY(0); 
+  }
+
+  99% {
+    transform: translateY(-300%); 
+  }
+
+ 100% {
+    transform: translateY(-300%); 
+  }
+}
+
+
+
+/*------------------------------------*\
+    #Main Nav Message
+\*------------------------------------*/
+
+.mainNav-message {
+  z-index: 102; 
+  @extend %position-relative; 
+}

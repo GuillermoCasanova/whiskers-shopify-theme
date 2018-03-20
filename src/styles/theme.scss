@@ -61,6 +61,8 @@
 /*================ LAYOUT ================*/
 @import url('layout/_footer.scss');
 @import url('layout/_sections.scss');
+@import url('layout/_navigation.scss');
+
 
 
 
@@ -68,10 +70,12 @@
 @import url('modules/site-header.scss');
 @import url('modules/gift-card-template.scss');
 @import url('modules/_buttons.scss');
+@import url('modules/_cart.scss');
 @import url('modules/_copySections.scss');
 @import url('modules/_featuredProductThumb.scss');
 @import url('modules/_headlines.scss');
 @import url('modules/_heroHeader.scss');
+
 
 
 

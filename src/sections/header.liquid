@@ -1,109 +1,202 @@
-<style>
-  {% if section.settings.logo != blank %}
-    .site-header__logo-image {
-      max-width: {{ section.settings.logo_max_width }}px;
-    }
-  {% endif %}
-</style>
+
 <div data-section-id="{{ section.id }}" data-section-type="header-section">
-  <header role="banner">
-    {% if template.name == 'index' %}
-      <h1 itemscope itemtype="http://schema.org/Organization">
-    {% else %}
-      <div class="h1" itemscope itemtype="http://schema.org/Organization">
-    {% endif %}
-        <a href="/" itemprop="url" class="site-logo{% if section.settings.logo != blank %} site-header__logo-image{% endif %}">
-          {% if section.settings.logo != blank %}
-            {% capture image_size %}{{ section.settings.logo_max_width }}x{% endcapture %}
-            <img src="{{ section.settings.logo | img_url: image_size }}"
-                 srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
-                 alt="{{ section.settings.logo.alt | default: shop.name }}"
-                 itemprop="logo">
-          {% else %}
-            {{ shop.name }}
-          {% endif %}
-        </a>
-    {% if template.name == 'index' %}
-      </h1>
-    {% else %}
+
+  <!-- Navigation for small devices--> 
+  <header>
+
+    <h1 class="headerLogo grid grid--center grid--justifyCenter   large-grid--justifyLeft">
+
+      <a ui-sref="main.home">
+      
+        <img src="{{'logo--whiskers--badge.svg' | asset_url}}" 
+         alt="Whiskers Logo" 
+         class="headerLogo-inner">
+
+      </a>
+
+    </h1>
+
+    <nav class="mainNav  grid grid--center  grid--justifyRight">
+
+      <div class="mainNav-title">
+  
       </div>
-    {% endif %}
 
-    <a href="/cart">
-      {% include 'icon-cart' %}
-      {{ 'layout.cart.title' | t }}
-      ({{ cart.item_count }} {{ 'layout.cart.items_count' | t: count: cart.item_count }})
-    </a>
+      <div class="mainNav-menuToggleWrapper  grid  grid--center  grid--justifyCenter">
+        
+        <button class="cartToggle show-for-medium-up">
+              Cart <span class="cartToggle-total">{{cart.item_count}}</span>
+        </button>
 
-    {% if shop.customer_accounts_enabled %}
-      <ul>
-        {% if customer %}
-          <li>
-            {% if customer.first_name != blank %}
-              {% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
-              {{ 'layout.customer.logged_in_as_html' | t: first_name: first_name }}
-            {% else %}
-              <a href="/account">{{ 'layout.customer.account' | t }}</a>
-            {% endif %}
-          </li>
-          <li>
-            {{ 'layout.customer.log_out' | t | customer_logout_link }}
-          </li>
-        {% else %}
-          <li>
-            {{ 'layout.customer.log_in' | t | customer_login_link }}
-          </li>
-          <li>
-            {{ 'layout.customer.create_account' | t | customer_register_link }}
-          </li>
-        {% endif %}
-      </ul>
-    {% endif %}
+        <button class="mainNav-menuToggle  grid grid--center "
+             ng-class="{'is-menu-open' : mainNav.mainNavIsOpen, 'is-menu-closed' : !mainNav.mainNavIsOpen}"
+             ng-click="mainNav.toggleMainNav()">
+            
+            <span class="menuToggle-label  show-for-medium-up">
+               Menu
+            </span>
 
-    <form action="/search" method="get" role="search">
-      <label for="Search" class="label-hidden">
-        {{ 'general.search.placeholder' | t }}
-      </label>
-      <input type="search"
-             name="q"
-             id="Search"
-             value="{{ search.terms | escape }}"
-             placeholder="{{ 'general.search.placeholder' | t }}">
-      <button type="submit" class="btn">
-        {% include 'icon-search' %}
-        <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
-      </button>
-    </form>
+            <span class="menuToggle-icon">
+              
+            </span>
+        
+        </button>
 
-  </header>
+      </div>
 
-  <nav role="navigation">
-    <ul class="site-nav">
-      {% for link in linklists[section.settings.main_linklist].links %}
-        {%- assign child_list_handle = link.title | handleize -%}
-        {% if menus[child_list_handle].links != blank %}
-          <li class="site-nav--has-submenu{% if link.active %} site-nav--active{% endif %}">
-            <a href="{{ link.url }}" class="site-nav__link">
-              {{ link.title }}
-              {% include 'icon-arrow-down' %}
-            </a>
-            <ul class="site-nav__submenu">
-              {% for childlink in menus[child_list_handle].links %}
-                <li {% if childlink.active %}class="site-nav--active"{% endif %}>
-                  <a href="{{ childlink.url }}" class="site-nav__link">{{ childlink.title | escape }}</a>
+      <!-- Off canvas navigation for small devices--> 
+      <aside class="mainNav--offCanvas"
+           ng-class="{'is-open' : mainNav.mainNavIsOpen, 'is-closed' : !mainNav.mainNavIsOpen}">
+      
+              
+         <div class="mainNav-container  grid 
+                    grid--flexDirectionColumn 
+                    grid--justifySpaceBetween">
+
+            <div>
+
+              <ul class="mainNav-menu ">
+                
+                <li class="mainNav-menu-item  hide-for-medium-up">
+                
+                    <a ui-sref="main.cart"
+                       ng-click="mainNav.toggleMainNav()"
+                       class="mainNav-menu-link   mainNav-animElem">Cart (0)</a>
+              
                 </li>
-              {% endfor %}
-            </ul>
-          </li>
-        {% else %}
-          <li {% if link.active %}class="site-nav--active"{% endif %}>
-            <a href="{{ link.url }}" class="site-nav__link">{{ link.title }}</a>
-          </li>
-        {% endif %}
-      {% endfor %}
-    </ul>
-  </nav>
+                
+                <li class="mainNav-menu-item">
+                
+                  <a 
+                     ng-click="mainNav.openDrawer('shop')"
+                     class="mainNav-menu-link   mainNav-animElem">Shop</a>
+                  
+                  <ul class="mainNav-dropDown"
+                      ng-class="{'is-open' : mainNav.checkIfActive('shop')}">
+                    
+                    <li class="mainNav-dropDown-item">
+                      
+                      <a ui-sref="main.shop({productType: 'laces', productFilter: 'all'})"
+                         class="mainNav-dropDown-link">
+                        Laces
+                      </a>
+                      
+                    </li>
+
+                    <li class="mainNav-dropDown-item">
+                      <a ui-sref="main.shop({productType: 'boxes', productFilter: 'all'})"
+                         class="mainNav-dropDown-link">
+                         Box Sets
+                      </a>
+                    </li>
+
+                  </ul>
+
+                </li>
+                
+                <li class="mainNav-menu-item">
+                
+                  <a  ng-click="mainNav.openDrawer('lifestyle')"
+                     class="mainNav-menu-link   mainNav-animElem">Lifestyle</a>
+                  
+                  <ul class="mainNav-dropDown"
+                      ng-class="{'is-open' : mainNav.checkIfActive('lifestyle')}">
+                    
+                    <li class="mainNav-dropDown-item">
+                      
+                      <a ui-sref="main.lacingStyles"
+                         class="mainNav-dropDown-link">
+                        Lacing Guide
+                      </a>
+                    </li>
+
+                    <li class="mainNav-dropDown-item">
+                      <a 
+                         class="mainNav-dropDown-link">
+                        Ethos
+                      </a>
+                    </li>
+
+                  </ul>    
+
+                </li>
+              
+                <li class="mainNav-menu-item">
+                
+                  <a ui-sref="main.contact"
+                       ng-click="mainNav.openDrawer('support')"
+                       class="mainNav-menu-link   mainNav-animElem"
+                       >Support</a>
+
+                  <ul class="mainNav-dropDown"
+                      ng-class="{'is-open' : mainNav.checkIfActive('support')}">
+                    
+                    
+                    <li class="mainNav-dropDown-item">
+                      
+                      <a ui-sref="main.lacingGuide"
+                         class="mainNav-dropDown-link">
+                        FAQ
+                      </a>
+                    </li>
+
+                    <li class="mainNav-dropDown-item">
+                      <a ui-sref="main.shopLaces({productType: 'laces'})"
+                         class="mainNav-dropDown-link">
+                        Sales
+                      </a>
+                    </li>
+                  </ul>  
+
+                </li>
+            
+              </ul>
+              
+      
+              <ul class="[ grid  grid--center  grid--justifyStart ]  [ mainNav-social mainNav-animElem ]">
+                                              
+                 <li>
+              
+                   <a href="https://www.instagram.com/humanaut.is/" target="_blank" class="mainNav-social-link   icon-instagram icon--medium  mr1">
+              
+                   </a> 
+              
+                 </li>
+                            
+                 <li>
+              
+                   <a href="https://twitter.com/humanaut?lang=en" target="_blank" class="mainNav-social-link   icon-twitter icon--medium  ml1">
+              
+                   </a>
+                            
+                 </li>
+                
+               </ul>
+
+            </div>
+
+            <div class="mainNav-tagline">
+              
+              <div class="mainNav-tagline-icon">
+                <img src="{{'whiskIcon--iceCream_red.svg' | asset_url}}" alt="">
+              </div>
+
+              Tastefully Wrong.
+
+            </div>
+           
+         </div>
+
+      </aside>
+      <!--End off canvas navigation--> 
+  
+    </nav>
+  
+  </header>
+  <!--End small devices navigation--> 
+
 </div>
+
 
 {% schema %}
   {
