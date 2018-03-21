@@ -8,11 +8,11 @@
 /*================ SETTINGS ================*/
 @import url('settings/variables.scss.liquid');
 
+
 /*================ UTILS ================*/
 @import url('tools/mixins.scss');
 @import url('tools/compassFlexboxMixins.scss');
 @import url('vendor/sassListMaps.scss');
-
 
 
 /*================ ABSTRACTS ================*/
@@ -22,6 +22,7 @@
 @import url('abstracts/typography.scss');
 @import url('abstracts/_utility.scss');
 
+
 /*================ VENDOR ================*/
 @import url('vendor/foundationFunctions.scss');
 @import url('vendor/foundationGlobals.scss');
@@ -29,8 +30,6 @@
 @import url('vendor/foundationVisibility.scss');
 @import url('vendor/foundationMixins.scss');
 @import url('vendor/slick.scss');
-
-
 
 
 /*================ COMMON ================*/
@@ -57,32 +56,27 @@
 @import url('base/_webfonts.scss');
 
 
-
 /*================ LAYOUT ================*/
 @import url('layout/_footer.scss');
 @import url('layout/_sections.scss');
 @import url('layout/_navigation.scss');
 
 
-
-
 /*================ MODULES ================*/
-@import url('modules/site-header.scss');
-@import url('modules/gift-card-template.scss');
 @import url('modules/_buttons.scss');
 @import url('modules/_cart.scss');
 @import url('modules/_copySections.scss');
 @import url('modules/_featuredProductThumb.scss');
+@import url('modules/gift-card-template.scss');
 @import url('modules/_headlines.scss');
 @import url('modules/_heroHeader.scss');
-
-
-
-
-
+@import url('modules/_pageHeaders.scss');
+@import url('modules/_productThumbs.scss');
+@import url('modules/site-header.scss');
 
 
 /*================ PAGES ================*/
 @import url('pages/_product.scss');
 @import url('pages/_home.scss');
+@import url('pages/_collection.scss');
 

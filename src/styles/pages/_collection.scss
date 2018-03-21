@@ -1,10 +1,26 @@
 
 /*------------------------------------*\
-    #Product Category Header
+    #Collection 
+\*------------------------------------*/
+
+
+/*------------------------------------*\
+    #Collection Container
+\*------------------------------------*/
+
+.collectionContainer {
+  max-width: rem-calc(1000px); 
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Collection Category Header
 \*------------------------------------*/
 
 .categoryHeader {
-
   margin-bottom: rem-calc(-18px); 
   padding: rem-calc($level3); 
   padding-bottom: rem-calc($level5); 
@@ -13,41 +29,33 @@
   margin-left: rem-calc($level6);
   @extend %position-relative; 
 
-  @media #{$large-up} {
-
+  @include media-query($large-up) {
     margin-right: rem-calc($level7);
     margin-left: rem-calc($level7);
     padding-bottom: rem-calc($level6); 
-
   }
 
   .categoryHeader-title {
-
     padding-top: rem-calc($level1);
     padding-bottom: rem-calc($level1);
     padding-left: rem-calc($level1);  
     margin-bottom: 0; 
     font-family: $secondary-font-family; 
-    @include type-setting(1); 
+    @include h4(); 
     @extend %uc; 
 
-    @media #{$large-up} {
-
+    @include media-query($large-up) {
       padding-left: rem-calc($level4); 
-
     }
-
   }
 
   .categoryHeader-icon {
-    
     right: 0; 
     left: 0; 
     margin: auto; 
     top: -23px; 
     width: rem-calc(32px);
     @extend %position-absolute; 
-
   }
-
 }
+
