@@ -1,20 +1,25 @@
 
-<div data-section-id="{{ section.id }}" data-section-type="header-section">
+<div data-section-id="{{ section.id }}" data-section-type="header">
 
   <!-- Navigation for small devices--> 
-  <header>
+  <header role="banner">
 
-    <h1 class="headerLogo grid grid--center grid--justifyCenter   large-grid--justifyLeft">
-
-      <a ui-sref="main.home">
-      
-        <img src="{{'logo--whiskers--badge.svg' | asset_url}}" 
-         alt="Whiskers Logo" 
-         class="headerLogo-inner">
-
-      </a>
-
-    </h1>
+    {% if template.name == 'index' %}
+      <h1 itemscope itemtype="http://schema.org/Organization" class="headerLogo grid grid--center grid--justifyCenter   large-grid--justifyLeft">
+      {% else %}
+        <div class="h1 headerLogo grid grid--center grid--justifyCenter   large-grid--justifyLeft" itemscope itemtype="http://schema.org/Organization">
+        {% endif %}
+            <a href="/" itemprop="url" >
+              <img src="{{'logo--whiskers--badge.svg' | asset_url}}"
+                   alt="{{ section.settings.logo.alt | default: shop.name }}"
+                   itemprop="logo"
+                   class="headerLogo-inner">
+            </a>
+        {% if template.name == 'index' %}
+          </h1>
+      {% else %}
+        </div>
+    {% endif %}
 
     <nav class="mainNav  grid grid--center  grid--justifyRight">
 
@@ -23,14 +28,13 @@
       </div>
 
       <div class="mainNav-menuToggleWrapper  grid  grid--center  grid--justifyCenter">
-        
-        <button class="cartToggle show-for-medium-up">
+         
+         <a href="/cart" class="cartToggle show-for-medium-up">
               Cart <span class="cartToggle-total">{{cart.item_count}}</span>
-        </button>
+         </a>
 
         <button class="mainNav-menuToggle  grid grid--center "
-             ng-class="{'is-menu-open' : mainNav.mainNavIsOpen, 'is-menu-closed' : !mainNav.mainNavIsOpen}"
-             ng-click="mainNav.toggleMainNav()">
+                data-menu-toggle>
             
             <span class="menuToggle-label  show-for-medium-up">
                Menu
@@ -46,9 +50,8 @@
 
       <!-- Off canvas navigation for small devices--> 
       <aside class="mainNav--offCanvas"
-           ng-class="{'is-open' : mainNav.mainNavIsOpen, 'is-closed' : !mainNav.mainNavIsOpen}">
-      
-              
+             data-off-canvas-menu>
+
          <div class="mainNav-container  grid 
                     grid--flexDirectionColumn 
                     grid--justifySpaceBetween">
