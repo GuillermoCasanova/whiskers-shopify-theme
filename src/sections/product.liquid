@@ -36,9 +36,11 @@
                      <!--    <img src="{{ image | img_url: '480x480' }}" alt="{{ image.alt | escape }}" data-product-featured-image> -->
                       <div class="product-photoSlideshow"  data-ui-component="product-photo-slideshow">
                         {% for image in product.images %}
-                        <div class="product-photoSlideshow-slide">
-                            <img src="{{ image | img_url: '480x480' }}" alt="{{ image.alt | escape }}">
-                        </div>
+                          {% if forloop.first == false %}
+                          <div class="product-photoSlideshow-slide">
+                              <img src="{{ image | img_url: '480x480' }}" alt="{{ image.alt | escape }}">
+                          </div>
+                          {% endif %}
                         {% endfor %}
                       </div>
                     </div>
@@ -177,13 +179,15 @@
                           {% if product.images.size > 1 %}
                           <ul class="productPhotoThumbnails-thumbnails grid grid--flexWrap grid--flexDirectionRow grid--1of2 large-grid--flexDirectionRow large-grid--fit">
                             {% for image in product.images %}
-                            <li>
-                              <a href="{{ image.src | img_url: '480x480' }}" data-product-single-thumbnail>
-                              <div class="productPhotoThumbnails-thumb">
-                                <img src="{{ image.src | img_url: '160x160' }}" alt="{{ image.alt | escape }}">
-                              </div>
-                              </a>
-                            </li>
+                              {% if forloop.first == false %}
+                              <li>
+                                <a href="{{ image.src | img_url: '480x480' }}" data-product-single-thumbnail>
+                                <div class="productPhotoThumbnails-thumb">
+                                  <img src="{{ image.src | img_url: '160x160' }}" alt="{{ image.alt | escape }}">
+                                </div>
+                                </a>
+                              </li>
+                              {% endif %}
                             {% endfor %}
                           </ul>
                           {% endif %}
