@@ -21,7 +21,7 @@
         </div>
     {% endif %}
 
-    <nav class="mainNav  grid grid--center  grid--justifyRight">
+    <nav class="mainNav  grid grid--center  grid--justifyRight" role="navigation">
 
       <div class="mainNav-title">
   
@@ -29,7 +29,7 @@
 
       <div class="mainNav-menuToggleWrapper  grid  grid--center  grid--justifyCenter">
          
-         <a href="/cart" class="cartToggle show-for-medium-up">
+         <a href="/cart"  rel="interna" class="cartToggle show-for-medium-up">
               Cart <span class="cartToggle-total">{{cart.item_count}}</span>
          </a>
 
@@ -50,6 +50,7 @@
 
       <!-- Off canvas navigation for small devices--> 
       <aside class="mainNav--offCanvas"
+             role="navigation"
              data-off-canvas-menu>
 
          <div class="mainNav-container  grid 
@@ -59,99 +60,38 @@
             <div>
 
               <ul class="mainNav-menu ">
-                
-                <li class="mainNav-menu-item  hide-for-medium-up">
+
+                {% for link in linklists[section.settings.main_linklist].links %}
+                  {%- assign child_list_handle = link.title | handleize -%}
+                  {% if menus[child_list_handle].links != blank %}
+
+                    <li class="mainNav-menu-item  site-nav--has-submenu{% if link.active %} site-nav--active{% endif %}">
+                      <a href="{{ link.url }}" class="site-nav__link  mainNav-menu-link   mainNav-animElem">
+                        {{ link.title }}
+                      </a>
+                      <ul class="mainNav-dropDown">
+                        {% for childlink in menus[child_list_handle].links %}
+                          <li class="mainNav-dropDown-item {% if childlink.active %}site-nav--active{% endif %}" >
+                            <a href="{{ childlink.url }}" class="mainNav-dropDown-link">{{ childlink.title | escape }}</a>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    </li>
+                  {% else %}
+                    <li class="mainNav-menu-item  {% if link.active %}site-nav--active{% endif %}">
+                      <a href="{{ link.url }}" class="mainNav-menu-link">{{ link.title }}</a>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+
+                <li class="hide-for-medium-up">
                 
                     <a ui-sref="main.cart"
                        ng-click="mainNav.toggleMainNav()"
-                       class="mainNav-menu-link   mainNav-animElem">Cart (0)</a>
+                       class="">Cart (0)</a>
               
                 </li>
                 
-                <li class="mainNav-menu-item">
-                
-                  <a 
-                     ng-click="mainNav.openDrawer('shop')"
-                     class="mainNav-menu-link   mainNav-animElem">Shop</a>
-                  
-                  <ul class="mainNav-dropDown"
-                      ng-class="{'is-open' : mainNav.checkIfActive('shop')}">
-                    
-                    <li class="mainNav-dropDown-item">
-                      
-                      <a ui-sref="main.shop({productType: 'laces', productFilter: 'all'})"
-                         class="mainNav-dropDown-link">
-                        Laces
-                      </a>
-                      
-                    </li>
-
-                    <li class="mainNav-dropDown-item">
-                      <a ui-sref="main.shop({productType: 'boxes', productFilter: 'all'})"
-                         class="mainNav-dropDown-link">
-                         Box Sets
-                      </a>
-                    </li>
-
-                  </ul>
-
-                </li>
-                
-                <li class="mainNav-menu-item">
-                
-                  <a  ng-click="mainNav.openDrawer('lifestyle')"
-                     class="mainNav-menu-link   mainNav-animElem">Lifestyle</a>
-                  
-                  <ul class="mainNav-dropDown"
-                      ng-class="{'is-open' : mainNav.checkIfActive('lifestyle')}">
-                    
-                    <li class="mainNav-dropDown-item">
-                      
-                      <a ui-sref="main.lacingStyles"
-                         class="mainNav-dropDown-link">
-                        Lacing Guide
-                      </a>
-                    </li>
-
-                    <li class="mainNav-dropDown-item">
-                      <a 
-                         class="mainNav-dropDown-link">
-                        Ethos
-                      </a>
-                    </li>
-
-                  </ul>    
-
-                </li>
-              
-                <li class="mainNav-menu-item">
-                
-                  <a ui-sref="main.contact"
-                       ng-click="mainNav.openDrawer('support')"
-                       class="mainNav-menu-link   mainNav-animElem"
-                       >Support</a>
-
-                  <ul class="mainNav-dropDown"
-                      ng-class="{'is-open' : mainNav.checkIfActive('support')}">
-                    
-                    
-                    <li class="mainNav-dropDown-item">
-                      
-                      <a ui-sref="main.lacingGuide"
-                         class="mainNav-dropDown-link">
-                        FAQ
-                      </a>
-                    </li>
-
-                    <li class="mainNav-dropDown-item">
-                      <a ui-sref="main.shopLaces({productType: 'laces'})"
-                         class="mainNav-dropDown-link">
-                        Sales
-                      </a>
-                    </li>
-                  </ul>  
-
-                </li>
             
               </ul>
               

@@ -31,6 +31,12 @@
     } 
   }
 
+  .cart-actions {
+    button:nth-child(odd){
+      margin-right: rem-calc($level2);
+    }
+  }
+
   .cart-total {
     border-bottom: 1px solid $quaternaryColor;
     padding-bottom: rem-calc($level3);    

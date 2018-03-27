@@ -1,0 +1,115 @@
+
+<section class="copySection  copySection--left  copySection--alt  copySection--aboutLaces">
+  <div class="row small-collapse">
+    <div class="small-12 medium-11 large-9  medium-centered columns [ grid  grid--justifyCenter ]">
+      <div class="copySection-inner">
+
+        <div class="copySection-accent"
+                   data-stellar-offset-parent="true"
+                   data-stellar-vertical-offset="200"
+                   data-stellar-ratio="1.5">
+         
+            <img src="{{'whiskIcon--dolphin.svg' | asset_url}}" 
+                 alt=""
+                 width="350">    
+
+        </div>  
+
+        <div class="row  grid  grid--flexDirectionColumn  med-grid--flexDirectionRowReverse  grid--center">
+        
+          <div class="small-12 columns medium-6 large-6">
+            
+              <div class="row  small-collapse">
+                  
+                <div class="small-12 columns medium-12  large-10 large-push-1  [ grid  grid--justifyCenter ]">
+                  
+                  <div class="copySection-copy"
+                       data-stellar-offset-parent="true"
+                       data-stellar-vertical-offset="200"
+                       data-stellar-ratio="1.3">
+        
+                   <h1 class="headline  [ copySection-headline  copySection-headline--secondary ]">
+                     Our 
+                     <br>
+                     Laces
+                   </h1>
+                
+                    <p class="copySection-body">
+                    Whiskers are colored shoelaces with metal aglets. And they could beat your basic laces up anyday. They come wrapped around a wooden spool because they'll try to take over your dresser otherwise.
+                    </p>
+                            
+                    <div class="row small-collapse">
+                
+                      <div class="small-12 columns">
+                
+                        <a href="collections/all" rel="internal" class="button--expanded  button button--primary button--small">
+                        Shop Laces
+                        </a>
+                      </div>
+                
+                    </div>
+        
+                  </div>
+            
+                </div>
+            
+                <div class="small-12 columns medium-6  hide-for-medium-up">
+                  <div class="copySection-imageContainer">
+                    <div class="aboutLaces-slideshow ">
+                    
+                      <div class="aboutLaces-slideshow-slide" >
+                        <img src="{{'aboutLaces-1_small.jpg' | asset_url}}" alt="Whiskers Laces" width="350" class="aboutLaces-slideshow-slide-img">
+                      </div>
+                
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+          
+          <div class="medium-6  large-6  columns  show-for-medium-up" 
+               data-stellar-vertical-offset="100"
+               data-stellar-offset-parent="true"
+               data-stellar-ratio="1.5">
+        
+            <div class="copySection-imageContainer  [ grid  grid--justifyCenter grid--center ]">
+              <div class="aboutLaces-slideshow ">
+                <div class="aboutLaces-slideshow-slide">
+                      <img src="{{'aboutLaces-1_large.jpg' | asset_url}}" alt="Whiskers Laces" width="350" class="aboutLaces-slideshow-slide-img">     
+                </div>
+              </div>
+            </div>
+         </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+{% schema %}
+  {
+    "name": "Alt Copy section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Title for section"
+      },
+      {
+        "type": "richtext",
+        "id": "column_richtext",
+        "label": "Description",
+        "default": "<p>About this section</p>"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Alt Copy Section",
+        "category": "Copy Section"
+      }
+    ]
+  }
+{% endschema %}

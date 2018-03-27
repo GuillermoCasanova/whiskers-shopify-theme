@@ -16,7 +16,7 @@ button,
   color: #fff; 
   outline: none; 
   border: none; 
-  @include h6();
+  @include h4();
   @extend %uc; 
 
   &.is-inactive {
@@ -29,19 +29,50 @@ button,
 .button--primary {
   background-color: $accentColor;
   position: relative; 
-  color: #fff; 
+  color: $secondaryColor; 
   fill: #fff; 
-  border: 1px solid transparent; 
-  @include transition(all .2s ease-in-out); 
+  border: 3px solid transparent; 
+  transition: all .2s ease-in-out; 
 
   &:hover,
   &:focus {
-    color: $accentColor; 
+    color: #fff; 
     background-color: transparent;
-    border: 1px solid $accentColor; 
+    border: 3px solid $accentColor; 
   }
 }
 
+
+.button--secondary {
+  background-color: transparent;
+  position: relative; 
+  color: #fff; 
+  border: 3px solid $accentColor; 
+  transition: all .2s ease-in-out; 
+
+  &:hover,
+  &:focus {
+    color: $secondaryColor;
+    background-color: $accentColor; 
+    border: 3px solid $accentColor; 
+  }
+}
+
+
+.button--tertiary {
+  background-color: $quaternaryColor;
+  position: relative; 
+  color: $secondaryColor; 
+  border: 3px solid $quaternaryColor; 
+  transition: all .2s ease-in-out; 
+
+  &:hover,
+  &:focus {
+    color: #fff;
+    background-color: transparent; 
+    border: 3px solid $quaternaryColor; 
+  }
+}
 
 
 .button--link {
@@ -49,7 +80,7 @@ button,
   position: relative; 
   text-transform: capitalize; 
   @extend %fwn; 
-  @include transition(all .2s ease-in-out); 
+  transition: all .2s ease-in-out; 
 
   &:before {
     content: " "; 
@@ -61,7 +92,7 @@ button,
     position: absolute; 
     opacity: 0; 
     transform: translateY(3px); 
-    @include transition(all .2s ease-in-out); 
+    transition: all .2s ease-in-out; 
   }
 
   &:hover,
@@ -93,36 +124,32 @@ button,
   padding: rem-calc(3px);
   padding-right: rem-calc($level1);
   padding-left: rem-calc($level1);
-  @include text-mini();
+  @include text-micro();
 }
 
 .button--small {
   padding: rem-calc($level1);
-  padding-right: rem-calc($level2);
-  padding-left: rem-calc($level2);
-  @include text-micro();
+  padding-right: rem-calc($level3);
+  padding-left: rem-calc($level3);
 }
 
 
 .button--medium {
   padding: rem-calc($level2);
-  padding-right: rem-calc($level3);
-  padding-left: rem-calc($level3);
-  @include h6();
+  padding-right: rem-calc($level4);
+  padding-left: rem-calc($level4);
 }
 
 .button--large {
     padding: rem-calc(15px);
     padding-right: rem-calc($level3);
     padding-left: rem-calc($level3);
-    @include type-setting(0);
 }
 
 .button--kilo {
     padding: rem-calc(16);
     padding-right: rem-calc($level6);
     padding-left: rem-calc($level6); 
-    @include type-setting(0);
 }
 
 .button--mega {

@@ -164,7 +164,7 @@
     @extend %display-block;
     @extend %position-relative; 
     @extend %text-center; 
-    @include transition(all .4s ease-in-out); 
+    transition: all .2s ease-in-out; 
 
     &:after,
     &:before {
@@ -175,7 +175,7 @@
       left: 0; 
       right: 0; 
       @extend %position-absolute; 
-      @include transition(all .2s ease-in-out); 
+      transition: all .2s ease-in-out; 
     }
 
     &:after {

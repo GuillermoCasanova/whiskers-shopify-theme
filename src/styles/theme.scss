@@ -12,7 +12,8 @@
 /*================ UTILS ================*/
 @import url('tools/mixins.scss');
 @import url('tools/compassFlexboxMixins.scss');
-@import url('vendor/sassListMaps.scss');
+@import url('vendor/foundationFunctions.scss');
+
 
 
 /*================ ABSTRACTS ================*/
@@ -24,7 +25,6 @@
 
 
 /*================ VENDOR ================*/
-@import url('vendor/foundationFunctions.scss');
 @import url('vendor/foundationGlobals.scss');
 @import url('vendor/foundationGrid.scss');
 @import url('vendor/foundationVisibility.scss');
