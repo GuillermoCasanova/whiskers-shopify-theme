@@ -179,7 +179,6 @@
       top: auto; 
       bottom: rem-calc(-18px); 
     }
-
   }
 
   .featuredLaces {
@@ -201,7 +200,6 @@
       .featuredLaces-thumb {
         padding-right: rem-calc(12px);
       }
-  
     }
 
     .featuredLaces-headline {
@@ -231,14 +229,17 @@
         height: rem-calc($level6);
       }
 
-      .featuredStyles-cta-link {
-        color: #fff; 
+      .featuredStyles-linkGroup {
+        position: relative;
+        top: rem-calc(-12px);
+        height: rem-calc($level7);
 
         @include media-query($medium-up) {
           position: absolute; 
           min-width: rem-calc(110px); 
-          right: rem-calc(-40px); 
-          @include h6(); 
+          top: auto; 
+          height: auto; 
+          right: rem-calc(-48px); 
         }
       } 
     }
