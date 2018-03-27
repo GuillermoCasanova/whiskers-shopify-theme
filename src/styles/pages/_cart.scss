@@ -1,0 +1,167 @@
+
+
+/*------------------------------------*\
+    #Cart Page 
+\*------------------------------------*/
+
+
+.cart {
+
+  @include media-query($large-up) {
+    margin-top: rem-calc($level7);
+  }
+  
+  .cart-headline {
+    max-width: rem-calc(160px);
+  }
+
+  .cart-contents  {
+    border-top: 1px solid $quaternaryColor;
+    border-bottom: 1px solid $quaternaryColor;
+    padding-top: rem-calc($level3);
+    margin-bottom: rem-calc($level3);   
+
+    @include media-query($medium-up) {
+      padding-right: rem-calc($level3);
+      padding-left: rem-calc($level3);
+
+      li:nth-child(odd) {
+        padding-right: rem-calc($level2);
+      }
+    } 
+  }
+
+  .cart-total {
+    border-bottom: 1px solid $quaternaryColor;
+    padding-bottom: rem-calc($level3);    
+    margin-bottom: rem-calc($level3);    
+
+    p {
+      margin-bottom: 0;
+      @include h3();
+    }
+
+    .cart-total-amount {
+      font-weight: bold;
+      margin-bottom: 0;
+      @include h2();
+    }
+  }
+
+  .cart-product {
+    position: relative;
+    margin-bottom: rem-calc($level3); 
+
+    .cart-product-image {
+      max-width: rem-calc(132px);
+
+      @include media-query($medium-up) {
+        max-width: rem-calc(100px);
+      }
+    }
+
+    .cart-product-info {
+      padding: rem-calc($level3);
+      margin-bottom: 0; 
+      @include h4();
+
+      @include media-query($medium-up) {
+        padding-right: rem-calc($level4); 
+      }
+
+      .cart-product-name {
+        color: #fff; 
+        font-family: $secondary-font-family; 
+        font-weight: bold; 
+        text-transform: uppercase;
+        @include h3();
+
+        @include media-query($medium-up) {
+          @include h4();
+        }
+
+        &:hover, 
+        &:focus {
+          color: #fff; 
+          text-decoration: underline;
+        }
+      }
+
+      .cart-product-type {
+        color: $quaternaryColor; 
+      }
+
+      .cart-product-price {
+        text-transform: uppercase;
+        color: #fff; 
+        margin-bottom: rem-calc($level2);
+        display: block; 
+      }
+
+      .cart-product-qty {
+        label {
+          text-transform: uppercase;
+          color: #fff; 
+          display: block; 
+          margin-right: rem-calc($level1);
+          font-weight: bold; 
+          @include text-micro();
+        }
+
+        input {
+          max-width: rem-calc(42px);
+          text-align: center;
+          padding: rem-calc(2px);
+          border: 2px solid $secondaryColor;
+        }
+      }
+
+      .cart-product-remove {
+        color: #fff; 
+        fill: #fff;   
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: rem-calc($level3);
+        width: rem-calc($level3); 
+        display: block; 
+        @include transition(all .4s ease-in-out); 
+        
+        @include media-query($medium-up) {
+          right: rem-calc($level2);
+          top: rem-calc($level2)
+        }
+
+        &:hover, 
+        &:focus {
+          &:after,
+          &:before {
+            background-color: $secondaryColor;
+          }
+        }
+
+        &:after,
+        &:before {
+          content: ""; 
+          height: rem-calc(2px);
+          background-color: $quaternaryColor; 
+          width: 100%;  
+          left: 0; 
+          right: 0; 
+          position: absolute;
+          @include transition(all .2s ease-in-out); 
+        }
+
+        &:before {
+          top: 50%; 
+          transform: translateY(0) rotate(-45deg); 
+        }
+
+        &:after {
+          top: 50%; 
+          transform: translateY(0) rotate(45deg); 
+        }
+      }
+    }
+  }
+}

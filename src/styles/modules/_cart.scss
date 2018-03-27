@@ -11,7 +11,7 @@
 \*------------------------------------*/
 
 
-.cartToggle {
+.offCanvasCartToggle {
   background-color: transparent;
   margin-bottom: 0;  
   display: inline-block; 
@@ -19,7 +19,7 @@
   @extend %uc; 
   @include type-setting(0); 
 
-  .cartToggle-total  {
+  .offCanvasCartToggle-total  {
     color: $accentColor; 
     display: inline-block; 
     padding-left: rem-calc(3px); 
@@ -27,7 +27,7 @@
 }
 
 
-.cart {
+.offCanvasCart {
   z-index: 200;
   background-color: #fff;
   top: 0;
@@ -48,7 +48,7 @@
   &.is-open {
     transform: translateX(0);
 
-    .cart-items {
+    .offCanvasCart-items {
       opacity: 1; 
       @include transition(opacity .6s ease-in-out .7s); 
     } 
@@ -56,27 +56,27 @@
 }
 
 
-.cart-items {
+.offCanvasCart-items {
   opacity: 0; 
   @include transition(opacity .6s ease-in-out); 
 }
 
 
-.cart-total {
+.offCanvasCart-total {
   border-bottom: 2px solid $primaryColor; 
   padding-bottom: rem-calc($level1); 
   margin-bottom: rem-calc($level2); 
 }
 
 
-.cart-inventory{
+.offCanvasCart-inventory{
   border-top: 2px solid $primaryColor;
   border-bottom: 2px solid $primaryColor;  
   padding-top: rem-calc($level4); 
   margin-bottom: rem-calc($level1); 
 }
 
-.cart-overlay {
+.offCanvasCart-overlay {
   opacity: 0; 
   top: 0; 
   bottom: 0; 
