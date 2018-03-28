@@ -19,7 +19,7 @@
   @extend %uc; 
   @include type-setting(0); 
 
-  .offCanvasCartToggle-total  {
+  .cartToggle-total  {
     color: $accentColor; 
     display: inline-block; 
     padding-left: rem-calc(3px); 

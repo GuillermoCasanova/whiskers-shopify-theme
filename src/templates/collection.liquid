@@ -1,4 +1,3 @@
-{% paginate collection.products by 12 %}
 <header class="section--main">
   
   <!--Page Header--> 
@@ -30,19 +29,19 @@
       
           <div class="pageHeader-bg">
             
-           <!--  <picture  ng-if="$stateParams.productType === 'laces'">
+            <picture>
                 
               <source media="(min-width: 1024px)"
-                      srcset="assets/images/hero_subpage_header_large1.png">
+                      srcset="{{'shopHeaders--all--large.jpg' | asset_url}}">
             
               <source media="(min-width: 640px)"
-                      srcset="assets/images/hero_subpage_header_medium1.png">
+                      srcset="{{'shopHeaders--all--medium.jpg' | asset_url}}">
             
-              <img src="assets/images/hero_subpage_header_small1.png"
+              <img src="{{'shopHeaders--all--small.jpg' | asset_url}}"
                    class="pageHeader-bg-img"
                    alt="" 
                    >
-            </picture> -->
+            </picture>
           </div>
         
       </div>
@@ -167,8 +166,3 @@
   </div>
   <!--Collection Ends--> 
 
-
-  {% if paginate.pages > 1 %}
-    {% include 'pagination' %}
-  {% endif %}
-{% endpaginate %}
