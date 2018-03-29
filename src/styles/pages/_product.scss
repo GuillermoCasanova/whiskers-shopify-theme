@@ -221,12 +221,14 @@
 
 
     .product-description {
-      margin-bottom: rem-calc($level5); 
-      
+
       p {
-        @include media-query($large-up) {
-          @include h4();
-        }
+        margin-bottom: rem-calc($level2);
+        @include h4(); 
+      }
+
+      ul {
+        @include text-micro();
       }
     }
 
@@ -283,7 +285,7 @@
     margin-bottom: rem-calc($level1);
 
     @include media-query($medium-up) {
-      max-width: rem-calc(120px); 
+      max-width: 6.5rem; 
     }
   }
 }

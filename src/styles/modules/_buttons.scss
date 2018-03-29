@@ -27,6 +27,22 @@ button,
 
 
 .button--primary {
+  background-color: transparent;
+  position: relative; 
+  color: #fff; 
+  border: 3px solid $accentColor; 
+  transition: all .2s ease-in-out; 
+
+  &:hover,
+  &:focus {
+    color: $secondaryColor;
+    background-color: $accentColor; 
+    border: 3px solid $accentColor; 
+  }
+}
+
+
+.button--secondary {
   background-color: $accentColor;
   position: relative; 
   color: $secondaryColor; 
@@ -38,22 +54,6 @@ button,
   &:focus {
     color: #fff; 
     background-color: transparent;
-    border: 3px solid $accentColor; 
-  }
-}
-
-
-.button--secondary {
-  background-color: transparent;
-  position: relative; 
-  color: #fff; 
-  border: 3px solid $accentColor; 
-  transition: all .2s ease-in-out; 
-
-  &:hover,
-  &:focus {
-    color: $secondaryColor;
-    background-color: $accentColor; 
     border: 3px solid $accentColor; 
   }
 }

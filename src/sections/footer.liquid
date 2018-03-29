@@ -16,66 +16,28 @@
           <div class="small-12 columns medium-9 large-8">
 
             <div class="row">
-              <div class="small-12  medium-4 columns">
-                  
-                <ul class="footer-menu">
-              
-                  <li class="footer-menu-title">
-                    Shop
-                  </li>
-                  
-                  <li class="footer-menu-item">
-                    <a ui-sref="main.shopLaces({productType: 'laces'})" class="footer-menu-link">Laces</a>
-                  </li>
-              
-                  <li class="footer-menu-item">
-                    <a ui-sref="main.shopBoxes" class="footer-menu-link">Lace Box Sets</a>
-                  </li>
-              
-                </ul>
-              
-              </div>
-              
-              <div class="small-12  medium-4  columns">
-                  
-                <ul class="footer-menu">
-              
-                  <li class="footer-menu-title">
-                    Info
-                  </li>
-                  
-                  <li class="footer-menu-item">
-                    <a ui-sref="main.lacingStyles"  class="footer-menu-link">Lacing Styles</a>
-                  </li>
-              
-                  <li class="footer-menu-item">
-                    <a ui-sref="main.ethos" class="footer-menu-link">Ethos</a>
-                  </li>
-                  
-                </ul>
-              
-              </div>
-              
-              
-              <div class="small-12  medium-4 columns">
-                  
-                <ul class="footer-menu">
-              
-                  <li class="footer-menu-title">
-                    Support
-                  </li>
-                  
-                  <li class="footer-menu-item">
-                    <a ui-sref="main.sales" class="footer-menu-link">Sales</a>
-                  </li>
-              
-                  <li class="footer-menu-item">
-                    <a ui-sref="main.faq" class="footer-menu-link">Faq</a>
-                  </li>
-                  
-                </ul>
-              
-              </div>
+
+              {% for block in section.blocks %}
+
+              {{block.settings.type}}
+                <div class="small-12  medium-4 columns  end">
+                {% case block.type %}
+                  {% when 'menu' %}
+                    <ul class="footer-menu">
+                      <h1 class="footer-menu-title">
+                          {{ block.settings.menu_title | escape}}
+                      </h1>
+                      {% for link in linklists[block.settings.menu].links %}
+                        <li class="footer-menu-item" >
+                          <a href="{{ link.url }}" class="footer-menu-link">{{ link.title | escape }}</a>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                    {% else %}
+                {% endcase %}
+                </div>
+              {% endfor %}
+
             </div>
 
           </div>
@@ -147,18 +109,31 @@
 {% schema %}
   {
     "name": "Footer",
+    "max_blocks": 4,
     "settings": [
-      {
-        "type": "link_list",
-        "id": "footer_linklist",
-        "label": "First menu",
-        "default": "footer"
-      },
       {
         "type": "checkbox",
         "id": "show_payment_icons",
         "label": "Show payment icons",
         "default": false
+      }
+    ],
+    "blocks": [
+      {
+        "type": "menu",
+        "name": "Footer Section",
+        "settings": [
+        {
+          "id" : "menu_title",
+          "type" : "text",
+          "label": "Menu Title",
+          "default": "Title"
+        },
+        {
+          "id": "menu",
+          "type": "link_list",
+          "label": "Footer Link List"
+        }]
       }
     ]
   }
