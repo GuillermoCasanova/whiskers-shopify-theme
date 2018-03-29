@@ -38,7 +38,7 @@
                         {% for image in product.images %}
                           {% if forloop.first == false %}
                           <div class="product-photoSlideshow-slide">
-                              <img src="{{ image | img_url: '480x480' }}" alt="{{ image.alt | escape }}">
+                              <img src="{{ image | img_url: '1200x1200' }}" alt="{{ image.alt | escape }}">
                           </div>
                           {% endif %}
                         {% endfor %}
@@ -181,9 +181,9 @@
                             {% for image in product.images %}
                               {% if forloop.first == false %}
                               <li>
-                                <a href="{{ image.src | img_url: '480x480' }}" data-product-single-thumbnail>
+                                <a href="{{ image.src | img_url: '300x300' }}" data-product-single-thumbnail>
                                 <div class="productPhotoThumbnails-thumb">
-                                  <img src="{{ image.src | img_url: '160x160' }}" alt="{{ image.alt | escape }}">
+                                  <img src="{{ image.src | img_url: '1000x1000' }}" alt="{{ image.alt | escape }}">
                                 </div>
                                 </a>
                               </li>

@@ -1,0 +1,71 @@
+
+
+<section class="section--main  faq">
+  <div class="row">
+    <div class="small-12  medium-9  large-7  large-push-1 columns">
+      <div class="faq-inner">
+        <div class="faq-accent">
+          <img src="{{'whiskIcon--rock.svg' | asset_url}}" 
+               alt=""
+               role="presentation">    
+        </div>  
+
+        <div class="row">
+          <div class="small-12 columns">
+            <h1 class="headline  faq-headline">{{section.settings.title}}</h1>
+          </div>
+        </div>
+        <ul class="row">
+         {% for block in section.blocks %}
+           <li class="small-12  columns">
+            <div class="faq-item">
+              <h2 class="subline faq-question">
+              {{block.settings.question}}
+              </h2>  
+              <p class="faq-answer">
+              {{block.settings.answer}}
+              </p>
+            </div>
+           </li>
+         {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% schema %}
+  {
+    "name": "FAQ",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Frequently Asked Questions"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "text",
+        "name": "FAQ",
+        "settings": [
+          {
+            "id": "question",
+            "type": "text",
+            "label": "Question",
+            "default": "Type Question"
+          },
+          {
+            "id": "answer",
+            "type": "textarea",
+            "label": "Answer",
+            "default": "Answer for a commonly asked question"
+          }
+        ]
+      }
+    ]
+  }
+
+{% endschema %}

@@ -1,9 +1,9 @@
 
 
 <footer>
-<div class="iconWallpaper">
-  <img  class="iconWallpaper-img" src="{{'icon_wallpaper.svg' | asset_url}}" alt="" role="presentation">
-</div>
+  <div class="iconWallpaper">
+    <img  class="iconWallpaper-img" src="{{'icon_wallpaper.svg' | asset_url}}" alt="" role="presentation">
+  </div>
 
   <div class="footer-inner">
     
@@ -19,7 +19,6 @@
 
               {% for block in section.blocks %}
 
-              {{block.settings.type}}
                 <div class="small-12  medium-4 columns  end">
                 {% case block.type %}
                   {% when 'menu' %}
@@ -34,6 +33,23 @@
                       {% endfor %}
                     </ul>
                     {% else %}
+                    
+                  <div class="footer-menu">
+                    <label class="footer-menu-title">
+                        
+                        Newsletter
+                        
+                    </label>
+                    
+                    <input type="text" 
+                           placeholder="Your Email"
+                           class="input--small"> 
+
+                    <button class="button--micro  button--tertiary">
+                      Sign Up
+                    </button>
+                  </div>
+          
                 {% endcase %}
                 </div>
               {% endfor %}
@@ -45,22 +61,7 @@
           
           <div class="small-12  medium-3 large-4 columns">
                     
-         <!--    <div class="footer-menu">
-              <label class="footer-menu-title">
-                  
-                  Newsletter
-                  
-              </label>
-              
-              <input type="text" 
-                     placeholder="Your Email"
-                     class="input--small"> 
 
-              <button class="button--micro  button--tertiary">
-                Sign Up
-              </button>
-            </div>
-           -->
           </div>
 
         </div>

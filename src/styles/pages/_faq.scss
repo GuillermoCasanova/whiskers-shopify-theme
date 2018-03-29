@@ -1,0 +1,64 @@
+
+
+/*------------------------------------*\
+    #FAQ
+\*------------------------------------*/
+
+
+.faq {
+  margin-bottom: rem-calc($level5);
+
+  @include media-query($medium-up) {
+    margin-top: rem-calc($level5);
+  }
+
+  @include media-query($large-up) {
+    margin-top: rem-calc($level7 + $level7 + $level3);
+  }
+  .faq-headline {
+    @include text-kilo();
+
+    @include media-query($medium-up) {
+      margin-bottom: rem-calc($level6); 
+    }
+  }
+
+  .faq-item {
+    margin-bottom: rem-calc($level6); 
+
+    @include media-query($medium-up) {
+      margin-bottom: rem-calc($level7); 
+    }
+  }
+
+  .faq-question {
+    margin-bottom: rem-calc($level1);
+    @include h5();
+  }
+
+  .faq-answer {
+    @include media-query($large-up) {
+      @include h4();
+    }
+  }
+
+  .faq-inner {
+    background-color: $secondaryColor;
+    padding: rem-calc($level4);
+    padding-bottom: rem-calc($level5);
+    position: relative;
+
+    @include media-query($medium-up) {
+      padding: rem-calc($level6);
+    }
+
+    .faq-accent {
+      right: 0; 
+      left: 0; 
+      margin: auto;  
+      width: rem-calc(30px);
+      bottom: -1rem;
+      position: absolute;
+    }
+  }
+}

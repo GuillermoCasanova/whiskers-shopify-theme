@@ -56,7 +56,7 @@ section {
 
 
 .section--main {
-  padding-top: rem-calc($level7 + $level2); 
+  padding-top: rem-calc($level7 + $level6); 
   @include media-query($large-up) {
     padding-top: 0; 
   }
