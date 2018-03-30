@@ -27,15 +27,15 @@
   
       </div>
 
+
       <div class="mainNav-menuToggleWrapper  grid  grid--center  grid--justifyCenter">
          
-         <a href="/cart"  rel="interna" class="cartToggle show-for-medium-up">
+         <a href="/cart"  rel="internal" class="cartToggle show-for-medium-up">
               Cart <span class="cartToggle-total">{{cart.item_count}}</span>
          </a>
 
         <button class="mainNav-menuToggle  grid grid--center "
                 data-menu-toggle>
-            
             <span class="menuToggle-label  show-for-medium-up">
                Menu
             </span>
@@ -43,10 +43,9 @@
             <span class="menuToggle-icon">
               
             </span>
-        
         </button>
-
       </div>
+
 
       <!-- Off canvas navigation for small devices--> 
       <aside class="mainNav--offCanvas"
@@ -60,16 +59,17 @@
             <div>
 
               <ul class="mainNav-menu ">
-
                 {% for link in linklists[section.settings.main_linklist].links %}
                   {%- assign child_list_handle = link.title | handleize -%}
                   {% if menus[child_list_handle].links != blank %}
-
-                    <li class="mainNav-menu-item  site-nav--has-submenu{% if link.active %} site-nav--active{% endif %}">
-                      <a href="{{ link.url }}" class="site-nav__link  mainNav-menu-link   mainNav-animElem">
+                    <li class="mainNav-menu-item">
+                      <h1 class="site-nav__link  mainNav-menu-link   mainNav-animElem"
+                          data-toggle-id="{{ forloop.index }}"
+                          data-drop-down-toggle>
                         {{ link.title }}
-                      </a>
-                      <ul class="mainNav-dropDown">
+                      </h1>
+                      <ul class="mainNav-dropDown"
+                          data-dropdown-id="{{ forloop.index }}">
                         {% for childlink in menus[child_list_handle].links %}
                           <li class="mainNav-dropDown-item {% if childlink.active %}site-nav--active{% endif %}" >
                             <a href="{{ childlink.url }}" class="mainNav-dropDown-link">{{ childlink.title | escape }}</a>
@@ -83,36 +83,25 @@
                     </li>
                   {% endif %}
                 {% endfor %}
-
                 <li class="hide-for-medium-up">
-                
-                    <a ui-sref="main.cart"
-                       ng-click="mainNav.toggleMainNav()"
-                       class="">Cart (0)</a>
-              
+                  <a href="/cart"  rel="internal" class="cartToggle hide-for-medium-up">
+                        Cart <span class="cartToggle-total">{{cart.item_count}}</span>
+                   </a>
                 </li>
-                
-            
               </ul>
               
       
               <ul class="[ grid  grid--center  grid--justifyStart ]  [ mainNav-social mainNav-animElem ]">
-                                              
                  <li>
-              
                    <a href="https://www.instagram.com/humanaut.is/" target="_blank" class="mainNav-social-link   icon-instagram icon--medium  mr1">
               
                    </a> 
-              
                  </li>
                             
                  <li>
-              
                    <a href="https://twitter.com/humanaut?lang=en" target="_blank" class="mainNav-social-link   icon-twitter icon--medium  ml1">
               
                    </a>
-                            
-                 </li>
                 
                </ul>
 

@@ -10,7 +10,8 @@ theme.Header = (function() {
 
   var selectors = {
     offCanvasMenu: '[data-off-canvas-menu]',
-    menuToggle: '[data-menu-toggle]'
+    menuToggle: '[data-menu-toggle]',
+    dropDownToggle: '[data-drop-down-toggle]'
   };
 
   function Header(container) {
@@ -32,6 +33,24 @@ theme.Header = (function() {
         menuToggle.removeClass('is-menu-closed'); 
         menuToggle.addClass('is-menu-open');
       }
+    }); 
+
+
+    $(selectors.dropDownToggle).on('click', function(event, target) {
+      var id = $(event.target).data('toggle-id'); 
+
+      $('[data-dropdown-id]').each(function() {
+        if($(this).hasClass('is-open') && $(this).data('dropdown-id') !== id) {
+          $(this).removeClass('is-open');
+        }
+      });
+
+      if($('[data-dropdown-id=' + id + ']').hasClass('is-open')) {
+        $('[data-dropdown-id=' + id + ']').removeClass('is-open');
+      } else {
+        $('[data-dropdown-id=' + id + ']').addClass('is-open');
+      }
+
     }); 
 
   };
