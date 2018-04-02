@@ -30,12 +30,11 @@
 
       <div class="mainNav-menuToggleWrapper  grid  grid--center  grid--justifyCenter">
          
-         <a href="/cart"  rel="internal" class="cartToggle show-for-medium-up">
+         <button  data-menu-toggle  data-target="cart"  class="cartToggle show-for-medium-up">
               Cart <span class="cartToggle-total">{{cart.item_count}}</span>
-         </a>
+         </button>
 
-        <button class="mainNav-menuToggle  grid grid--center "
-                data-menu-toggle>
+        <button class="mainNav-menuToggle  grid grid--center"  data-menu-toggle data-target="menu">
             <span class="menuToggle-label  show-for-medium-up">
                Menu
             </span>
@@ -48,15 +47,11 @@
 
 
       <!-- Off canvas navigation for small devices--> 
-      <aside class="mainNav--offCanvas"
-             role="navigation"
-             data-off-canvas-menu>
+      <aside class="mainNav--offCanvas  is-open"  data-off-canvas-menu>
 
-         <div class="mainNav-container  grid 
-                    grid--flexDirectionColumn 
-                    grid--justifySpaceBetween">
+         <div class="mainNav-container    grid grid--flexDirectionColumn grid--justifySpaceBetween">
 
-            <div>
+            <nav role="navigation" data-menu class="mainNav-menuContainer">
 
               <ul class="mainNav-menu ">
                 {% for link in linklists[section.settings.main_linklist].links %}
@@ -89,7 +84,6 @@
                    </a>
                 </li>
               </ul>
-              
       
               <ul class="[ grid  grid--center  grid--justifyStart ]  [ mainNav-social mainNav-animElem ]">
                  <li>
@@ -103,27 +97,31 @@
               
                    </a>
                 
-               </ul>
+              </ul>
 
-            </div>
-
-            <div class="mainNav-tagline">
-              
-              <div class="mainNav-tagline-icon">
-                <img src="{{'whiskIcon--iceCream_red.svg' | asset_url}}" alt="">
+              <div class="mainNav-tagline">
+                
+                <div class="mainNav-tagline-icon">
+                  <img src="{{'whiskIcon--iceCream_red.svg' | asset_url}}" alt="">
+                </div>
+                Tastefully Wrong.
               </div>
 
-              Tastefully Wrong.
+            </nav>
 
-            </div>
-           
+             <div data-cart  class="mainNav-cartContainer  grid  show-for-medium-up  grid--flexDirectionColumn grid--justifySpaceBetween is-showing">
+                <div class="offCanvasCart">
+                  <div id="CartContainer" class="drawer__cart"></div>
+                </div>
+             </div>
          </div>
+
 
       </aside>
       <!--End off canvas navigation--> 
-  
+
     </nav>
-  
+
   </header>
   <!--End small devices navigation--> 
 

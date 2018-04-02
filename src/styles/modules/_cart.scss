@@ -10,7 +10,6 @@
     #Cart Toggle
 \*------------------------------------*/
 
-
 .cartToggle {
   background-color: transparent;
   margin-bottom: 0;  
@@ -28,69 +27,175 @@
 
 
 .offCanvasCart {
-  z-index: 200;
-  background-color: #fff;
-  top: 0;
-  right: 0;
-  overflow: hidden;
-  height: 100%; 
-  width: rem-calc(420px); 
-  color: $primaryColor; 
-  padding-right: rem-calc($level3); 
-  padding-left: rem-calc($level3); 
-  @include transition(all .8s ease-in-out); 
-  transform: translateX(130%); 
+  padding-top: 10%;
 
-  @media #{$medium-up} {
-    transform: translateX(130%); 
+  .offCanvasCart-primaryPanel {
+    height: 100%;
+    max-height: rem-calc(500px);
   }
 
-  &.is-open {
-    transform: translateX(0);
-
-    .offCanvasCart-items {
-      opacity: 1; 
-      @include transition(opacity .6s ease-in-out .7s); 
-    } 
+  .offCanvasCart-secondaryPanel {
+    height: rem-calc(200px);
   }
-}
 
-
-.offCanvasCart-items {
-  opacity: 0; 
-  @include transition(opacity .6s ease-in-out); 
-}
-
-
-.offCanvasCart-total {
-  border-bottom: 2px solid $primaryColor; 
-  padding-bottom: rem-calc($level1); 
-  margin-bottom: rem-calc($level2); 
-}
-
-
-.offCanvasCart-inventory{
-  border-top: 2px solid $primaryColor;
-  border-bottom: 2px solid $primaryColor;  
-  padding-top: rem-calc($level4); 
-  margin-bottom: rem-calc($level1); 
-}
-
-.offCanvasCart-overlay {
-  opacity: 0; 
-  top: 0; 
-  bottom: 0; 
-  left: 0; 
-  z-index: 145; 
-  height: 100%; 
-  width: 100%; 
-  background: rgba(0, 0, 0, .9); 
-  @extend %position-fixed; 
-  transform: translateX(100%); 
-
-  &.is-visible {
-    opacity: 1; 
-    transform: translateX(0);
+  .offCanvasCart-contents {
+    max-height: rem-calc(500px);
+    padding: rem-calc($level1);
   }
+
+  .offCanvasCart-product {
+    width: 100%; 
+    background-color: #3E3C49; 
+    margin-bottom: rem-calc($level1);
+    padding: rem-calc($level1);
+
+    .offCanvasCart-product-name {
+      color: #fff; 
+      font-family: $secondary-font-family; 
+      font-weight: $bold; 
+      text-transform: uppercase;
+      @include text-micro();
+
+      &:hover, 
+      &:focus {
+        color: #fff; 
+      }
+    }
+  
+    .offCanvasCart-product-info {
+      padding-left: rem-calc($level1);
+    }
+
+    .offCanvasCart-product-price {
+      color: $primaryColor;
+    }
+
+    .offCanvasCart-product-image {
+      max-width: rem-calc(80px);
+    }
+
+    .offCanvasCart-product-qty {
+      label {
+        text-transform: uppercase;
+        color: #fff; 
+        display: block; 
+        margin-right: rem-calc($level1);
+        font-weight: bold; 
+        @include text-micro();
+      }
+
+      input {
+        max-width: rem-calc(42px);
+        text-align: center;
+        padding: rem-calc(2px);
+        border: 2px solid $secondaryColor;
+      }
+    }
+  }
+  
+  .offCanvasCart-total {
+    border-top: 1px solid $primaryColor; 
+    border-bottom: 1px solid $primaryColor;
+    width: 100%; 
+    padding-top: rem-calc($level2);
+    padding-bottom: rem-calc($level2);
+    margin-bottom: rem-calc($level2);
+
+    p {
+      margin-bottom: 0; 
+    }
+
+  }
+
+  .offCanvasCart-actions {
+    width: 100%; 
+    padding-right: rem-calc($level2);
+  }
+
+
+  .offCanvasCart-product-remove {
+        color: #fff; 
+        fill: #fff;   
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: rem-calc($level3);
+        width: rem-calc($level3); 
+        display: block; 
+        @include transition(all .4s ease-in-out); 
+        
+        @include media-query($medium-up) {
+          right: rem-calc($level2);
+          top: rem-calc($level2)
+        }
+
+        &:hover, 
+        &:focus {
+          &:after,
+          &:before {
+            background-color: $secondaryColor;
+          }
+        }
+
+        &:after,
+        &:before {
+          content: ""; 
+          height: rem-calc(2px);
+          background-color: $quaternaryColor; 
+          width: 100%;  
+          left: 0; 
+          right: 0; 
+          position: absolute;
+          @include transition(all .2s ease-in-out); 
+        }
+
+        &:before {
+          top: 50%; 
+          transform: translateY(0) rotate(-45deg); 
+        }
+
+        &:after {
+          top: 50%; 
+          transform: translateY(0) rotate(45deg); 
+        }
+      }
+
 }
+// .offCanvasCart-items {
+//   opacity: 0; 
+//   @include transition(opacity .6s ease-in-out); 
+// }
+
+
+// .offCanvasCart-total {
+//   border-bottom: 2px solid $primaryColor; 
+//   padding-bottom: rem-calc($level1); 
+//   margin-bottom: rem-calc($level2); 
+// }
+
+
+// .offCanvasCart-inventory{
+//   border-top: 2px solid $primaryColor;
+//   border-bottom: 2px solid $primaryColor;  
+//   padding-top: rem-calc($level4); 
+//   margin-bottom: rem-calc($level1); 
+// }
+
+// .offCanvasCart-overlay {
+//   opacity: 0; 
+//   top: 0; 
+//   bottom: 0; 
+//   left: 0; 
+//   z-index: 145; 
+//   height: 100%; 
+//   width: 100%; 
+//   background: rgba(0, 0, 0, .9); 
+//   @extend %position-fixed; 
+//   transform: translateX(100%); 
+
+//   &.is-visible {
+//     opacity: 1; 
+//     transform: translateX(0);
+//   }
+// }
 

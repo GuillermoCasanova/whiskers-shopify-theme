@@ -21,6 +21,8 @@ theme.Product = (function() {
     productThumbs: '[data-product-single-thumbnail]',
     singleOptionSelector: '[data-single-option-selector]'
   };
+  
+
 
   /**
    * Product section constructor. Runs on page load as well as Theme Editor
@@ -29,6 +31,9 @@ theme.Product = (function() {
    */
   function Product(container) {
     this.$container = $(container);
+
+    var $container = (this.$container = $(container));
+    var sectionId = $container.attr('data-section-id');
 
     var slideshow = $(container).find('[data-ui-component="product-photo-slideshow"]'); 
 
@@ -94,7 +99,14 @@ theme.Product = (function() {
       this.$container.on('variantImageChange' + this.namespace, this.updateProductImage.bind(this));
     }
 
-
+    
+     ajaxCart.init({
+          formSelector: '#AddToCartForm--' + sectionId,
+          cartContainer: '#CartContainer',
+          addToCartSelector: '#AddToCart--' + sectionId,
+          enableQtySelectors: true,
+          moneyFormat: theme.strings.moneyFormat
+    });
   }
 
   Product.prototype = $.extend({}, Product.prototype, {
@@ -168,6 +180,7 @@ theme.Product = (function() {
       this.$container.off(this.namespace);
     }
   });
+
 
   return Product;
 })();

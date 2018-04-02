@@ -41,7 +41,8 @@
       strings: {
         addToCart: {{ 'products.product.add_to_cart' | t | json }},
         soldOut: {{ 'products.product.sold_out' | t | json }},
-        unavailable: {{ 'products.product.unavailable' | t | json }}
+        unavailable: {{ 'products.product.unavailable' | t | json }},
+        moneyFormat: {{ shop.money_format | json }}
       },
       moneyFormat: {{ shop.money_format | json }}
     };
@@ -52,10 +53,10 @@
     <!--[if lte IE 9]><script src="{{ 'shopify_common.js' | shopify_asset_url }}"></script><![endif]-->
   {% endif %}
 
-  <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'vendor.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+  <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'vendor.js' | asset_url }}"></script><!--<![endif]-->
   <!--[if lt IE 9]><script src="{{ 'vendor.js' | asset_url }}"></script><![endif]-->
 
-  <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'theme.js' | asset_url }}" defer="defer"></script><!--<![endif]-->
+  <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'theme.js' | asset_url }}"></script><!--<![endif]-->
   <!--[if lt IE 9]><script src="{{ 'theme.js' | asset_url }}"></script><![endif]-->
 
   {{ content_for_header }}
@@ -63,13 +64,30 @@
 
 <body id="{{ page_title | handle }}" class="template-{{ template.name | handle }}">
 
-  <a class="in-page-link visually-hidden skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
+  <a class="in-page-link visually-hidden skip-link" href="#MainContent">
+  {{ 'general.accessibility.skip_to_content' | t }}
+  </a>
 
   {% section 'header' %}
 
   <main role="main" id="MainContent">
     {{ content_for_layout }}
   </main>
+
+  {% include 'ajax-cart-template' %}
+
+  {% if template.name == 'product' or template.name == 'index' %}
+      <script>
+        // Override default values of shop.strings for each template.
+        // Alternate product templates can change values of
+        // add to cart button, sold out, and unavailable states here.
+        theme.productStrings = {
+          addToCart: {{ 'products.product.add_to_cart' | t | json }},
+          soldOut: {{ 'products.product.sold_out' | t | json }},
+          unavailable: {{ 'products.product.unavailable' | t | json }}
+        }
+      </script>
+    {% endif %}
 
   {% section 'footer' %}
 

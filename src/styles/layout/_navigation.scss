@@ -102,7 +102,7 @@
   } 
 
   @include media-query($medium-up) {
-    width: 12rem;
+    width: 15rem;
     height: 5rem;
     right: 0; 
   }
@@ -253,8 +253,21 @@
     @extend %position-fixed; 
 
     @include media-query($medium-up) {
-      width: 12rem; 
+      width: 15rem; 
       left: auto; 
+    }
+
+    &.is-closed {  // for when nav is closed
+        animation: main-nav-disappear .6s ease-in-out forwards; 
+    }
+
+    &.is-open { // for when nav is open
+        animation: main-nav-appear .8s ease-in-out forwards; 
+
+      .mainNav-animElem {
+          opacity: 1; 
+          transform: translateX(0); 
+      }
     }
 
     .mainNav-navToggle {
@@ -273,6 +286,15 @@
       }
 
     }
+
+
+    .mainNav-animElem {
+      opacity: 0; 
+      transform: translateY(-70px); 
+      @include transition(all .4s ease-in-out); 
+    }
+
+
 
     .mainNav-container {
       height: 100vh; 
@@ -327,12 +349,6 @@
     
     }
 
-
-    .mainNav-animElem {
-      opacity: 0; 
-      transform: translateY(-70px); 
-      @include transition(all .4s ease-in-out); 
-    }
 
     .mainNav-social {
       margin-bottom: rem-calc($level6); 
@@ -392,19 +408,6 @@
     }
 
 
-    &.is-closed {  // for when nav is closed
-        animation: main-nav-disappear .6s ease-in-out forwards; 
-    }
-
-    &.is-open { // for when nav is open
-        animation: main-nav-appear .8s ease-in-out forwards; 
-
-      .mainNav-animElem {
-          opacity: 1; 
-          transform: translateX(0); 
-      }
-    }
-
     .mainNav-dropDown {
       margin-bottom: 0; 
 
@@ -447,6 +450,38 @@
   }
 }
 
+
+
+
+
+.mainNav-menuContainer {
+  opacity: 0;  
+  position: absolute;
+  z-index: 0; 
+  transition: all .2s ease-in-out;
+  transform: translateZ(0);
+
+  &.is-showing {
+    z-index: 1; 
+    opacity: 1;  
+  }
+}
+
+
+
+
+.mainNav-cartContainer {
+  opacity: 0; 
+  z-index: 0; 
+  position: absolute;
+  transition: all .2s ease-in-out;
+  transform: translateZ(0);
+
+  &.is-showing {
+    z-index: 1; 
+    opacity: 1; 
+  }
+}
 
 
 

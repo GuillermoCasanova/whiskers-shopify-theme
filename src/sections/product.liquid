@@ -96,7 +96,8 @@
                             <meta itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
                             <link itemprop="availability" href="http://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}">
 
-                            <form action="/cart/add" method="post" enctype="multipart/form-data">
+                            <form action="/cart/add" method="post" enctype="multipart/form-data"
+                                  id="AddToCartForm--{{ section.id }}">
                               {% unless product.has_only_default_variant %}
                                 {% for option in product.options_with_values %}
                                   <div class="selector-wrapper js">
@@ -142,15 +143,9 @@
                                 name="add"
                                 class="button  button--small  button--expanded  button--primary  product-buyBtn"
                                 data-add-to-cart
+                                id="AddToCart--{{ section.id }}"
                                 {% unless current_variant.available %}disabled="disabled"{% endunless %}>
                                   <span data-add-to-cart-text class="button-textState1">
-                                    {% if current_variant.available %}
-                                      {{ 'products.product.add_to_cart' | t }}
-                                    {% else %}
-                                      {{ 'products.product.sold_out' | t }}
-                                    {% endif %}
-                                  </span>
-                                  <span data-add-to-cart-text class="button-textState2">
                                     {% if current_variant.available %}
                                       {{ 'products.product.add_to_cart' | t }}
                                     {% else %}
