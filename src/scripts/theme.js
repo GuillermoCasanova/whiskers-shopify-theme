@@ -1,10 +1,6 @@
 window.slate = window.slate || {};
 window.theme = window.theme || {};
 
-
-
-
-
 /*================ Slate ================*/
 // =require slate/a11y.js
 // =require slate/cart.js
@@ -23,6 +19,8 @@ window.theme = window.theme || {};
 /*================ Templates ================*/
 // =require templates/customers-addresses.js
 // =require templates/customers-login.js
+
+
 
 $(document).ready(function() {
   var sections = new slate.Sections();
@@ -60,8 +58,76 @@ $(document).ready(function() {
   }
 
 
+  theme.initCache = function() {
+    theme.cache = {
+      $window                 : $(window),
+      $html                   : $('html'),
+      $body                   : $('body'),
+      $drawerRight            : $('.drawer--right'),
+
+      $hero                   : $('#Hero'),
+      $customSelect           : $('.js-selector'),
+
+      $collectionImage        : $('.collection-hero__image'),
+
+      $siteNav                : $('.site-nav'),
+      $siteNavOpen            : $('.site-nav--open'),
+      $cartBuggle             : $('.cart-link__bubble'),
+      $logoWrapper            : $('.site-header__logo'),
+      $logo                   : $('.site-header__logo img'),
+      $toggleSearchModal      : $('.js-toggle-search-modal'),
+
+      $productImages          : $('.product-single__photos'),
+      $productImagePhoto      : $('.product-single__photo'),
+
+      $indentedRteImages      : $('.rte--indented-images'),
+
+      $productGridRows        : $('.collage-grid__row'),
+      $productGridPhotosLarge : $('.grid__item--large .grid-product__image-link'),
+
+      // Equal height elements
+      $productGridImages      : $('.grid-uniform .grid-product__image-wrapper'),
+
+      $returnLink             : $('.return-link')
+    };
+  };
+
+  theme.init = function() {
+    theme.initCache();
+    theme.cartInit();
+    theme.afterCartLoad(); 
+  };
+
+
+  theme.afterCartLoad = function() {
+    theme.cache.$body.on('ajaxCart.afterCartLoad', function(evt, cart) {
+      console.log('hello open');
+
+      console.log(theme.Header); 
+      theme.Header.openCart(); 
+
+      // // Show cart bubble in nav if items exist
+      // if (cart.items.length > 0) {
+      //   theme.cache.$cartBuggle.addClass('cart-link__bubble--visible');
+      // } else {
+      //   theme.cache.$cartBuggle.removeClass('cart-link__bubble--visible');
+      // }
+    });
+  };
+
+  theme.cartInit = function() {
+    if (!slate.cart.cookiesEnabled()) {
+      theme.cache.$body.addClass('cart--no-cookies');
+    }
+  };
+
+  theme.init(); 
+
 
 });
+
+
+
 
 
 
@@ -282,7 +348,6 @@ var ajaxCart = (function(module, $) {
     $cartCountSelector = $(settings.cartCountSelector);
     $cartCostSelector = $(settings.cartCostSelector);
 
-    console.log($formContainer); 
     
     // General Selectors
     $body = $('body');
@@ -653,3 +718,8 @@ var ajaxCart = (function(module, $) {
 
   return module;
 })(ajaxCart || {}, jQuery);
+
+
+
+
+

@@ -16,9 +16,11 @@ theme.Header = (function() {
     cartContainer: '[data-cart]'
   };
 
-  function Header(container) {
+
+  var Header = function(container) {
 
     this.$container = $(container); 
+
     var offCanvasMenu = $(selectors.offCanvasMenu);
     var menuToggle = $(selectors.menuToggle); 
     var cartContainer = $(selectors.cartContainer);
@@ -135,6 +137,20 @@ theme.Header = (function() {
 
   };
 
+  Header.openCart = function() {
+    $(selectors.offCanvasMenu).addClass('is-open');
+    $(selectors.cartContainer).addClass('is-showing');      
+
+    // offCanvasMenu.removeClass('is-closed');
+    // menuToggle.removeClass('is-menu-open');
+    // menuToggle.addClass('is-menu-closed');
+    // menuContainer.removeClass('is-showing'); 
+  }; 
+
+  setTimeout(function() {
+   ajaxCart.load(); 
+  }, 400); 
+ 
   return Header;
 
 })();
