@@ -1,5 +1,5 @@
 
-<div data-section-id="{{ section.id }}" data-section-type="header">
+<div data-section-id="{{ section.id }}" data-section-type="header"  data-template="{{ template.name }}">
 
   <!-- Navigation for small devices--> 
   <header role="banner">
@@ -31,7 +31,7 @@
       <div class="mainNav-menuToggleWrapper  grid  grid--center  grid--justifyCenter">
          
          <button  data-menu-toggle  data-target="cart"  class="cartToggle show-for-medium-up">
-              Cart <span class="cartToggle-total">{{cart.item_count}}</span>
+              Cart <span class="cartToggle-total" id="cart-count">{{cart.item_count}}</span>
          </button>
 
         <button class="mainNav-menuToggle  grid grid--center"  data-menu-toggle data-target="menu">
@@ -47,7 +47,7 @@
 
 
       <!-- Off canvas navigation for small devices--> 
-      <aside class="mainNav--offCanvas  is-open"  data-off-canvas-menu>
+      <aside class="mainNav--offCanvas"  data-off-canvas-menu>
 
          <div class="mainNav-container    grid grid--flexDirectionColumn grid--justifySpaceBetween">
 
@@ -110,8 +110,7 @@
             </nav>
 
              <div data-cart  class="mainNav-cartContainer  grid  show-for-medium-up  grid--flexDirectionColumn grid--justifySpaceBetween is-showing">
-                <div class="offCanvasCart ">
-                  <div id="CartContainer" class="drawer__cart"></div>
+                <div class="offCanvasCart" id="CartContainer">
 
                 </div>
              </div>

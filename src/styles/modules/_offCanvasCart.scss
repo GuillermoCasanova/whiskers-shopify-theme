@@ -27,33 +27,52 @@
 
 
 .offCanvasCart {
-  padding-top: 10%;
-
-  .offCanvasCart-primaryPanel {
-    height: 100%;
-    max-height: rem-calc(500px);
-  }
-
-  .offCanvasCart-secondaryPanel {
-    height: rem-calc(200px);
+  padding-top: 18%;
+  width: 100%; 
+  height: 100%; 
+  
+  .offCanvasCart-inner {
+    width: 100%; 
+    height: 100%; 
   }
 
   .offCanvasCart-contents {
-    max-height: rem-calc(500px);
-    padding: rem-calc($level1);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    width: 100%; 
+    margin-bottom: rem-calc($level2); 
+    position: relative;
+    max-height: 66%; 
+    
+    &::-webkit-scrollbar {
+      width: rem-calc(12px);
+      background: $primaryColor;
+      display: block;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $quaternaryColor;
+    }
   }
 
   .offCanvasCart-product {
     width: 100%; 
     background-color: #3E3C49; 
-    margin-bottom: rem-calc($level1);
+    margin-bottom: rem-calc(1px);
     padding: rem-calc($level1);
+    position: relative;
+
+    @include media-query($medium-up) {
+      padding: rem-calc($level2);
+    }
 
     .offCanvasCart-product-name {
       color: #fff; 
       font-family: $secondary-font-family; 
       font-weight: $bold; 
       text-transform: uppercase;
+      display: block; 
+      margin-bottom: rem-calc($level2);
       @include text-micro();
 
       &:hover, 
@@ -63,15 +82,22 @@
     }
   
     .offCanvasCart-product-info {
-      padding-left: rem-calc($level1);
+      padding-left: rem-calc($level2);
+      margin-bottom:  0; 
+      min-width: rem-calc(142px);
+
+      li {
+        width: 100%; 
+      }
     }
 
     .offCanvasCart-product-price {
       color: $primaryColor;
+      @include text-micro(); 
     }
 
     .offCanvasCart-product-image {
-      max-width: rem-calc(80px);
+      max-width: rem-calc(60px);
     }
 
     .offCanvasCart-product-qty {
@@ -85,35 +111,18 @@
       }
 
       input {
-        max-width: rem-calc(42px);
+        width: rem-calc(24px);
+        height: rem-calc(24px);
         text-align: center;
         padding: rem-calc(2px);
-        border: 2px solid $secondaryColor;
+        background-color: $secondaryColor;
+        color: #fff; 
+        border: 2px solid #fff;
+        @include text-micro(); 
       }
     }
-  }
-  
-  .offCanvasCart-total {
-    border-top: 1px solid $primaryColor; 
-    border-bottom: 1px solid $primaryColor;
-    width: 100%; 
-    padding-top: rem-calc($level2);
-    padding-bottom: rem-calc($level2);
-    margin-bottom: rem-calc($level2);
 
-    p {
-      margin-bottom: 0; 
-    }
-
-  }
-
-  .offCanvasCart-actions {
-    width: 100%; 
-    padding-right: rem-calc($level2);
-  }
-
-
-  .offCanvasCart-product-remove {
+   .offCanvasCart-product-remove {
         color: #fff; 
         fill: #fff;   
         position: absolute;
@@ -159,43 +168,47 @@
           transform: translateY(0) rotate(45deg); 
         }
       }
+  }
 
+
+  .offCanvasCart-footer {
+    height: 12rem;
+    background-color: $secondaryColor;
+    position: relative;
+    position: absolute;
+    bottom: 0;
+    width: 100%; 
+    padding-top: 12px;
+    padding-right: 0.75rem;
+    padding-left: 0.75rem;
+    left: 0;
+    right: 0;
+  }
+
+  .offCanvasCart-total {
+    border-top: 1px solid $primaryColor; 
+    border-bottom: 1px solid $primaryColor;
+    width: 100%; 
+    padding-top: rem-calc($level2);
+    padding-bottom: rem-calc($level2);
+    padding-left: rem-calc($level1);
+    padding-right: rem-calc($level1);
+    margin-bottom: rem-calc($level2);
+  @include text-micro();
+
+    .offCanvasCart-total-amount {
+      @include media-query($medium-up) {
+        font-weight: bold; 
+        @include h4();
+      }
+    }
+
+    p {
+      margin-bottom: 0; 
+    }
+  }
+
+  .offCanvasCart-actions {
+    width: 100%; 
+  }
 }
-// .offCanvasCart-items {
-//   opacity: 0; 
-//   @include transition(opacity .6s ease-in-out); 
-// }
-
-
-// .offCanvasCart-total {
-//   border-bottom: 2px solid $primaryColor; 
-//   padding-bottom: rem-calc($level1); 
-//   margin-bottom: rem-calc($level2); 
-// }
-
-
-// .offCanvasCart-inventory{
-//   border-top: 2px solid $primaryColor;
-//   border-bottom: 2px solid $primaryColor;  
-//   padding-top: rem-calc($level4); 
-//   margin-bottom: rem-calc($level1); 
-// }
-
-// .offCanvasCart-overlay {
-//   opacity: 0; 
-//   top: 0; 
-//   bottom: 0; 
-//   left: 0; 
-//   z-index: 145; 
-//   height: 100%; 
-//   width: 100%; 
-//   background: rgba(0, 0, 0, .9); 
-//   @extend %position-fixed; 
-//   transform: translateX(100%); 
-
-//   &.is-visible {
-//     opacity: 1; 
-//     transform: translateX(0);
-//   }
-// }
-

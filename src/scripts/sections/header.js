@@ -20,6 +20,20 @@ theme.Header = (function() {
   var Header = function(container) {
 
     this.$container = $(container); 
+    var $container = (this.$container = $(container));
+    this.template = $container.attr('data-template');
+
+    // ajaxCart.init will run from Product.prototype when on the product page
+    if (this.template.indexOf('product') === -1) {
+      ajaxCart.init({
+        formSelector: '.add-to-cart__form',
+        cartContainer: '#CartContainer',
+        addToCartSelector: '.add-to-cart',
+        enableQtySelectors: true,
+        moneyFormat: theme.strings.moneyFormat
+      });
+    }
+
 
     var offCanvasMenu = $(selectors.offCanvasMenu);
     var menuToggle = $(selectors.menuToggle); 
@@ -27,7 +41,6 @@ theme.Header = (function() {
     var menuContainer = $(selectors.menuContainer);
     var menuIsOpen = false; 
     var openSection = false; 
-
 
     var toggleMenuContainerCSS = function() {
       if(offCanvasMenu.hasClass('is-open')) {
@@ -38,10 +51,6 @@ theme.Header = (function() {
         offCanvasMenu.addClass('is-open');
       }
     };
-
-    $(selectors.menuToggle).on('click', function(event) {
-
-      var currentTarget = $(event.currentTarget).data('target');
 
       var closeEverything = function() {
         menuContainer.removeClass('is-showing');
@@ -76,6 +85,10 @@ theme.Header = (function() {
         menuToggle.addClass('is-menu-closed');
       };
 
+    $(selectors.menuToggle).on('click', function(event) {
+
+      var currentTarget = $(event.currentTarget).data('target');
+
       if(!menuIsOpen) {
         openNavigation();
         if($(event.currentTarget).data('target') == 'menu') {
@@ -86,6 +99,7 @@ theme.Header = (function() {
         } else {
           openSection = 'cart';
           closeEverything();
+          ajaxCart.load();
           cartContainer.addClass('is-showing');        
         }
       } else {
@@ -110,6 +124,7 @@ theme.Header = (function() {
               closeMenuIcon();
               closeEverything();
               openNavigation();
+              ajaxCart.load();
               cartContainer.addClass('is-showing');      
             }
           });
@@ -140,7 +155,6 @@ theme.Header = (function() {
   Header.openCart = function() {
     $(selectors.offCanvasMenu).addClass('is-open');
     $(selectors.cartContainer).addClass('is-showing');      
-
     // offCanvasMenu.removeClass('is-closed');
     // menuToggle.removeClass('is-menu-open');
     // menuToggle.addClass('is-menu-closed');
