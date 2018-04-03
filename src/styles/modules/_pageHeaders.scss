@@ -25,7 +25,7 @@
 
   @include media-query($large-up) {
     width: 90%; 
-    margin-bottom: rem-calc($level7 + $level1);
+    margin-bottom: rem-calc($level5);
   }
   
   .pageHeader-bg {

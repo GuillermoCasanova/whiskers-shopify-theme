@@ -27,6 +27,8 @@ textarea {
 
 /*================ Custom select style ================*/
 select {
+  margin-bottom: rem-calc($base-magic-number); 
+  font-family: $primary-font-family; 
   @include prefix(appearance, none, webkit moz spec);
   background-position: right center;
   background: {
@@ -50,6 +52,30 @@ select {
 select::-ms-expand {
   display: none;
 }
+
+
+.select--primary {
+  background-color: transparent;
+  border: 2px solid $secondaryColor; 
+  color: #fff; 
+  font-weight: bold; 
+}
+
+
+/*================ Custom select style ================*/
+
+.select--small {
+  padding: rem-calc($level1);
+}
+
+
+.select--medium {
+  padding: rem-calc($level2);
+}
+
+
+
+
 
 /*================ Error styles ================*/
 input,

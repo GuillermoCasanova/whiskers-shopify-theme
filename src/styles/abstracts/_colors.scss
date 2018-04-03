@@ -29,19 +29,20 @@ $quaternaryColor--translucent: rgba(58,38,30, .7);
 $accentColor: #3FD5AE; 
 $accentColor--dark: darken($accentColor, 45%); 
 $accentColor--translucent: rgba(68, 219, 228, 0.7);  
-   
+  
+
+//LIghter Whiskers Gray
+$quintenaryColor: #BCBEC0; 
+$quintenaryColor--dark: darken($quintenaryColor, 25%); 
+$quintenaryColor--translucent: rgba(58,38,30, .7); 
+
+
 $translucentBlack:  rgba(14, 14, 14, 0.9);
 
 $body-color: $tertiaryColor; 
 
 
 $white--translucent: rgba(255,255,255, .7); 
-
-//Darker Gray
-$quintenaryColor: #BCBEC0; 
-$quintenaryColor--dark: darken($quintenaryColor, 25%); 
-$quintenaryColor--translucent: rgba(58,38,30, .7); 
-
 
 /*------------------------------------*\
     #Blacks n greys

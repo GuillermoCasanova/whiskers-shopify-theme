@@ -1,0 +1,40 @@
+
+
+<div data-section-id="{{ section.id }}" data-section-type="collection_nav">
+  <div class="collectionNav">
+    <ul>
+      {% for link in linklists[section.settings.collection_nav].links %}
+        {%- assign child_list_handle = link.title | handleize -%}
+          <li class="collectionNav-menu-item  {% if link.active %}site-nav--active{% endif %}">
+            <a href="{{ link.url }}" class="mainNav-menu-link">{{ link.title }}</a>
+          </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- /snippets/collection-sorting.liquid -->
+  <div class="hide-for-medium-up">
+    <select name="NavigateTo" data-collection-nav-select>
+      {% for link in linklists[section.settings.collection_nav].links %}
+          <option value="{{ link.url }}">{{ link.title}}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+</div>
+
+
+{% schema %}
+  {
+    "name": "Collection Nav",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "collection_nav",
+        "label": "Collection_Nav",
+        "default" : "main-menu"
+      }
+    ]
+  }
+{% endschema %}
+

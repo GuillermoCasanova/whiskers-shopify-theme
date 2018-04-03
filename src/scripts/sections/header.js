@@ -161,10 +161,6 @@ theme.Header = (function() {
     // menuContainer.removeClass('is-showing'); 
   }; 
 
-  setTimeout(function() {
-   ajaxCart.load(); 
-  }, 400); 
- 
   return Header;
 
 })();

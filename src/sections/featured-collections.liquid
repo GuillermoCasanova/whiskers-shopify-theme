@@ -1,0 +1,137 @@
+
+<section class="section" data-section-id="{{ section.id }}" data-section-type="featured-laces-collection">
+  <div class="row small-collapse">
+    <div class="small-12  medium-11  large-12  medium-centered  columns  ">
+    {%for block in section.blocks %}
+
+    {%- assign collection = collections[block.settings.collection] -%}
+     <div class="grid  grid--justifyCenter">
+       <div class="collectionContainer">
+         <div class="categoryHeader"> 
+           
+           <h2 class="categoryHeader-title">{{ collection.title }}</h2>
+           
+           <div class="categoryHeader-icon">
+           
+          <!--      <img src="assets/images/whiskIcon--cat_teal.svg" 
+                  alt="">
+            -->
+           </div>
+         </div>
+           
+         <div class="row">
+           <div class="small-12 columns">
+             <ul class="grid  
+                        grid--flexDirectionRow
+                        grid--1of2
+                        med-grid--1of3
+                        grid--flexWrap
+                        med-grid--flexDirectionRow
+                        large-grid--1of4
+                        productThumbs">
+         
+               {% for product in collection.products %}
+               <li class="grid-cell">
+                 {% if product.featured_image != blank %}
+                 <div class="productThumb  {% unless product.available %}productThumb--soldOut{% endunless %}">
+                   <a href="{{ product.url | within: collection }}">
+                     <div class="productThumb-inner">
+                       <div class="productThumb-bg">
+                       {{ product.featured_image.src | img_url: '480x480' | img_tag: product.featured_image.alt }}
+                       </div>
+                       <div class="productThumb-description text-center grid grid--center grid--justifySpaceBetween">
+                         <h3 class="productThumb-title">{{ product.title }}</h3>
+                         <div>
+                           {% if product.compare_at_price > product.price %}
+         
+                             {% if product.price_varies %}
+                               {%- assign sale_price = product.price | money -%}
+                               {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+                             {% else %}
+                               {{ 'products.product.on_sale' | t }}
+                               {{ product.price | money }}
+                             {% endif %}
+         
+                           {% else %}
+         
+                             {% if product.price_varies %}
+                               {%- assign price = product.price | money -%}
+                               {{ 'products.product.from_text_html' | t: price: price }}
+                             {% else %}
+                               {{ product.price | money }}
+                             {% endif %}
+         
+                           {% endif %}
+         
+                           {% if product.compare_at_price > product.price %}
+                             <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+                             <s>{{ product.compare_at_price | money }}</s>
+                           {% endif %}
+                           
+                         </div>
+                       </div>
+                     </div>
+                   </a>
+                 </div>
+                 {% endif %}
+                 {% else %}
+                   {% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}
+                     {% for i in (1..8) %}
+                       <a href="#">
+                         {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                         {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
+                       </a>
+         
+                       <p>
+                         <a href="#">{{ 'homepage.onboarding.product_title' | t }}</a>
+                       </p>
+         
+                       <p>
+                         {{ 1999 | money }}
+                       </p>
+                     {% endfor %}
+                   {% else %}
+                     <p>{{ 'collections.general.no_matches' | t }}</p>
+                   {% endif %}
+         
+               </li>
+               {% endfor %}
+         
+             </ul>
+           </div>
+         </div>
+       </div>
+     </div>
+    {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+{% schema %}
+  {
+    "name": "Featured Lace Collections",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Featured Lace Collections"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "Collection",
+        "settings": [
+          {
+            "label": "Collection",
+            "id": "collection",
+            "type": "collection"
+          }
+        ]
+      }
+    ]
+  }
+
+{% endschema %}

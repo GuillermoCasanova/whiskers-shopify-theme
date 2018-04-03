@@ -12,9 +12,11 @@ window.theme = window.theme || {};
 // =require slate/variants.js
 
 /*================ Sections ================*/
+// =require sections/collection-nav.js
 // =require sections/product.js
 // =require sections/header.js
 // =require sections/ajaxCart.js
+
 
 
 /*================ Templates ================*/
@@ -27,6 +29,8 @@ $(document).ready(function() {
   var sections = new slate.Sections();
   sections.register('product', theme.Product);
   sections.register('header', theme.Header);
+  sections.register('collection_nav', theme.collectionNav);
+
 
   // Common a11y fixes
   slate.a11y.pageLinkFocus($(window.location.hash));

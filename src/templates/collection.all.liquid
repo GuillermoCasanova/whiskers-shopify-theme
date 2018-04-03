@@ -1,0 +1,82 @@
+<header class="section--main">
+  
+  <!--Page Header--> 
+  <div class="row small-collapse">
+
+    <div class="small-12 large-11 columns">
+
+      <div class="pageHeader">
+            
+          <div class="pageHeader-contentContainer  grid  grid--bottom">
+          
+            <div class="row">
+          
+              <div class="small-12 columns large-push-1 large-10">
+                <div class="pageHeader-content">
+
+                  <h1 class="pageHeader-headline">
+                    Shop <br> 
+                    {{ collection.title }}
+                  </h1>
+
+                </div>
+
+              </div>
+
+            </div>
+      
+          </div>
+      
+          <div class="pageHeader-bg">
+            
+            <picture>
+                
+              <source media="(min-width: 1024px)"
+                      srcset="{{'shopHeaders--all--large.jpg' | asset_url}}">
+            
+              <source media="(min-width: 640px)"
+                      srcset="{{'shopHeaders--all--medium.jpg' | asset_url}}">
+            
+              <img src="{{'shopHeaders--all--small.jpg' | asset_url}}"
+                   class="pageHeader-bg-img"
+                   alt="" 
+                   >
+            </picture>
+          </div>
+        
+      </div>
+
+    </div>
+<!-- 
+    <div class="show-for-large-up large-1 columns">
+      
+     <div class="noticeBanner"> 
+  
+        <div class="noticeBanner-headline">You Can't Not Notice Us</div>
+
+      </div>
+
+    </div> -->
+
+  </header>
+  <!--Page header Ends--> 
+  
+
+  <!--Collections Filter Begins--> 
+  <div class="row">
+    <div class="small-12  medium-11  large-10  medium-centered  columns">
+       {% section 'collection-nav' %}
+    </div>
+  </div>
+  <!--Collection Filter Ends--> 
+  
+  <!--Collection Begins--> 
+  <div class="section">
+    <div class="row small-collapse">
+      <div class="small-12  medium-11  large-12  medium-centered  columns  ">
+        {% section 'featured-collections' %}
+      </div>
+    </div>
+  </div>
+  <!--Collection Ends--> 
+
