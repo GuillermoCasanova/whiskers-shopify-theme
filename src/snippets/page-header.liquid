@@ -99,6 +99,34 @@
                        alt="" 
                        >
                 </picture>    
+              {% when 'fiver-boxes' %}
+                <picture>
+                    
+                  <source media="(min-width: 1024px)"
+                          srcset="{{'shopHeaders--boxes--large.jpg' | asset_url}}">
+                
+                  <source media="(min-width: 640px)"
+                          srcset="{{'shopHeaders--boxes--medium.jpg' | asset_url}}">
+                
+                  <img src="{{'shopHeaders--boxes--small.jpg' | asset_url}}"
+                       class="pageHeader-bg-img"
+                       alt="" 
+                       >
+                </picture> 
+              {% when 'laces' %}
+                <picture>
+                    
+                  <source media="(min-width: 1024px)"
+                          srcset="{{'shopHeaders--all-laces--large.jpg' | asset_url}}">
+                
+                  <source media="(min-width: 640px)"
+                          srcset="{{'shopHeaders--all-laces--medium.jpg' | asset_url}}">
+                
+                  <img src="{{'shopHeaders--all-laces--small.jpg' | asset_url}}"
+                       class="pageHeader-bg-img"
+                       alt="" 
+                       >
+                </picture>     
               {% else %}
                 <picture>
                     

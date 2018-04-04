@@ -29,21 +29,19 @@
                        data-stellar-ratio="1.3">
         
                    <h1 class="headline  [ copySection-headline  copySection-headline--secondary ]">
-                     Our 
-                     <br>
-                     Laces
+                    {{section.settings.title}}
                    </h1>
                 
-                    <p class="copySection-body">
-                    Whiskers are colored shoelaces with premium aglets. And they could beat your basic laces up anyday. They come wrapped around a wooden spool because they'll try to take over your dresser otherwise.
-                    </p>
+                    <div class="copySection-body">
+                    {{section.settings.description}}
+                    </div>
                             
                     <div class="row small-collapse">
                 
                       <div class="small-12 columns">
                 
-                        <a href="collections/all" rel="internal" class="button--expanded  button button--primary button--small">
-                        Shop Laces
+                        <a href="{{section.settings.cta}}" rel="internal" class="button--expanded  button button--primary button--small">
+                        {{section.settings.cta_label}}
                         </a>
                       </div>
                 
@@ -100,9 +98,19 @@
       },
       {
         "type": "richtext",
-        "id": "column_richtext",
+        "id": "description",
         "label": "Description",
         "default": "<p>About this section</p>"
+      },
+      {
+        "type": "text",
+        "id": "cta_label",
+        "label": "CTA Label"
+      },
+      {
+        "type": "url",
+        "id": "cta",
+        "label": "Call to Action"
       }
     ],
     "presets": [
