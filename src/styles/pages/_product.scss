@@ -283,9 +283,21 @@
   .productPhotoThumbnails-thumb {
     margin-right: rem-calc($level1);
     margin-bottom: rem-calc($level1);
+    border: 2px solid transparent;
+    transform: scale(1);
+    transition: all .2s ease-in-out;
+
+    &:hover, 
+    &:focus {
+      transform: scale(1.05);
+    }
 
     @include media-query($medium-up) {
-      max-width: 6.5rem; 
+    max-width: 8rem; 
+    }
+
+    @include media-query($medium-up) {
+      max-width: 6rem; 
     }
   }
 }

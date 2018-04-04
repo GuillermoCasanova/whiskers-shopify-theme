@@ -1,0 +1,135 @@
+<header class="section--main">
+  
+  <!--Page Header--> 
+  <div class="row small-collapse">
+
+    <div class="small-12  medium-12 large-11 columns">
+
+      <div class="pageHeader">
+        <div class="pageHeader-contentContainer  grid  grid--bottom">
+          
+          <div class="pageHeader-content">
+            <div class="row">
+        
+              <div class="small-12 columns medium-push-1  medium-11 large-push-1 large-10">
+                  <h1 class="pageHeader-headline">
+                    Shop <br> 
+                    {{ collection.title }}
+                  </h1>
+
+                </div>
+
+              </div>
+
+            </div>
+      
+          </div>
+      
+          <div class="pageHeader-bg">
+
+            {% case collection.handle %}
+
+              {% when 'diamond-weave' %}
+                <picture>
+                    
+                  <source media="(min-width: 1024px)"
+                          srcset="{{'shopHeaders--braided--large.jpg' | asset_url}}">
+                
+                  <source media="(min-width: 640px)"
+                          srcset="{{'shopHeaders--braided--medium.jpg' | asset_url}}">
+                
+                  <img src="{{'shopHeaders--braided--small.jpg' | asset_url}}"
+                       class="pageHeader-bg-img"
+                       alt="" 
+                       >
+                </picture>        
+              {% when 'solids' %}
+                <picture>
+                    
+                  <source media="(min-width: 1024px)"
+                          srcset="{{'shopHeaders--solids--large.jpg' | asset_url}}">
+                
+                  <source media="(min-width: 640px)"
+                          srcset="{{'shopHeaders--solids--medium.jpg' | asset_url}}">
+                
+                  <img src="{{'shopHeaders--solids--small.jpg' | asset_url}}"
+                       class="pageHeader-bg-img"
+                       alt="" 
+                       >
+                </picture>      
+              {% when 'striped' %}
+                <picture>
+                    
+                  <source media="(min-width: 1024px)"
+                          srcset="{{'shopHeaders--striped--large.jpg' | asset_url}}">
+                
+                  <source media="(min-width: 640px)"
+                          srcset="{{'shopHeaders--striped--medium.jpg' | asset_url}}">
+                
+                  <img src="{{'shopHeaders--striped--small.jpg' | asset_url}}"
+                       class="pageHeader-bg-img"
+                       alt="" 
+                       >
+                </picture>    
+              {% when 'ticked' %}
+                <picture>
+                    
+                  <source media="(min-width: 1024px)"
+                          srcset="{{'shopHeaders--ticked--large.jpg' | asset_url}}">
+                
+                  <source media="(min-width: 640px)"
+                          srcset="{{'shopHeaders--ticked--medium.jpg' | asset_url}}">
+                
+                  <img src="{{'shopHeaders--ticked--small.jpg' | asset_url}}"
+                       class="pageHeader-bg-img"
+                       alt="" 
+                       >
+                </picture>    
+              {% when 'tailgate-collection' %}
+                <picture>
+                    
+                  <source media="(min-width: 1024px)"
+                          srcset="{{'shopHeaders--tailgate--large.jpg' | asset_url}}">
+                
+                  <source media="(min-width: 640px)"
+                          srcset="{{'shopHeaders--tailgate--medium.jpg' | asset_url}}">
+                
+                  <img src="{{'shopHeaders--tailgate--small.jpg' | asset_url}}"
+                       class="pageHeader-bg-img"
+                       alt="" 
+                       >
+                </picture>    
+              {% else %}
+                <picture>
+                    
+                  <source media="(min-width: 1024px)"
+                          srcset="{{'shopHeaders--all--large.jpg' | asset_url}}">
+                
+                  <source media="(min-width: 640px)"
+                          srcset="{{'shopHeaders--all--medium.jpg' | asset_url}}">
+                
+                  <img src="{{'shopHeaders--all--small.jpg' | asset_url}}"
+                       class="pageHeader-bg-img"
+                       alt="" 
+                       >
+                </picture>
+              {% endcase %}
+
+          </div>
+        
+      </div>
+
+    </div>
+<!-- 
+    <div class="show-for-large-up large-1 columns">
+      
+     <div class="noticeBanner"> 
+  
+        <div class="noticeBanner-headline">You Can't Not Notice Us</div>
+
+      </div>
+
+    </div> -->
+
+  </header>
+  <!--Page header Ends--> 

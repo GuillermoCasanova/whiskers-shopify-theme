@@ -1,26 +1,15 @@
-  
-  
-  <!--Page Header Begins--> 
+
   {% include 'page-header' %}
-  <!--Page Header Ends--> 
-
-
-  <!--Collection Navigation Begins--> 
-  <div class="row">
-    <div class="small-12  medium-11  large-10  medium-centered  columns">
-       {% section 'collection-nav' %}
-    </div>
-  </div>
-  <!--Collection Navigation Ends--> 
   
 
   <!--Collection Begins--> 
   <div class="section">
     <div class="row small-collapse">
-      <div class="small-12  medium-11  large-12  medium-centered  columns  ">
+      <div class="small-12  medium-11  large-10  medium-centered  columns  ">
 
           <div class="grid  grid--justifyCenter">
             <div class="collectionContainer">
+              
               <div class="categoryHeader  show-for-medium-up"> 
                 
                 <h2 class="categoryHeader-title">{{ collection.title }}</h2>
@@ -32,26 +21,25 @@
                  -->
                 </div>
               </div>
-                
+              
               <div class="row">
                 <div class="small-12 columns">
                   <ul class="grid  
                              grid--flexDirectionRow
                              grid--1of2
-                             med-grid--1of3
                              grid--flexWrap
                              med-grid--flexDirectionRow
-                             large-grid--1of4
+                             large-grid--1of2
                              productThumbs">
               
                     {% for product in collection.products %}
                     <li class="grid-cell">
                       {% if product.featured_image != blank %}
-                      <div class="productThumb  {% unless product.available %}productThumb--soldOut{% endunless %}">
+                      <div class="productThumb   productThumb--alt {% unless product.available %}productThumb--soldOut{% endunless %}">
                         <a href="{{ product.url | within: collection }}">
                           <div class="productThumb-inner">
                             <div class="productThumb-bg">
-                            {{ product.featured_image.src | img_url: '480x480' | img_tag: product.featured_image.alt }}
+                            {{ product.featured_image.src | img_url: '700x700' | img_tag: product.featured_image.alt }}
                             </div>
                             <div class="productThumb-description text-center grid grid--center grid--justifySpaceBetween">
                               <h3 class="productThumb-title">{{ product.title }}</h3>

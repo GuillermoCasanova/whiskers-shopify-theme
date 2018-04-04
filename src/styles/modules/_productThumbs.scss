@@ -98,10 +98,5 @@
     margin-right: rem-calc($level5); 
     margin-bottom: rem-calc($level5); 
   }
-
-  @include media-query($large-up) {
-    margin-right: rem-calc($level7); 
-    margin-bottom: rem-calc($level7); 
-  }
 }
 

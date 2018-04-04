@@ -5,7 +5,6 @@
 
 .pageHeader {
   margin-bottom: rem-calc($level7);
-  margin-top: rem-calc($level4);
   @extend %position-relative; 
 
   .pageHeader-bg {
@@ -24,8 +23,7 @@
   }
 
   @include media-query($large-up) {
-    width: 90%; 
-    margin-bottom: rem-calc($level5);
+    margin-bottom: rem-calc($level4);
   }
   
   .pageHeader-bg {
@@ -59,21 +57,11 @@
   .pageHeader-headline  {
     text-transform: capitalize;
     font-family: $tertiary-font-family; 
-    @include text-mega();
+    max-width: 60%; 
+    @include text-kilo();
 
-    @media #{$medium-up} {
-      padding-left: rem-calc($level7); 
+    @include media-query($medium-up) {
       @include text-giga();
-    }
-  }
-
-  .pageHeader-subline {
-    font-weight: $normal;
-    @media #{$medium-up} {
-      @include line-height(0);  
-    }
-    @media #{$large-up} {
-      @include line-height(0);  
     }
   }
 }

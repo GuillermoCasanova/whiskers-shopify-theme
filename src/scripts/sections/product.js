@@ -34,7 +34,6 @@ theme.Product = (function() {
 
     var $container = (this.$container = $(container));
     var sectionId = $container.attr('data-section-id');
-
     var slideshow = $(container).find('[data-ui-component="product-photo-slideshow"]'); 
 
     slideshow.slick({
@@ -54,6 +53,8 @@ theme.Product = (function() {
           'breakpoint': 960, 
           'settings': {
             slidesToShow: 1,
+          'centerMode': false,
+          'infinite': false, 
             'centerPadding': '0px'
           }
         }
@@ -66,6 +67,24 @@ theme.Product = (function() {
 
     nextBtn.text('');
     prevBtn.text('');
+
+
+    var focusProductImage = function(pIndex) {
+      if(slideshow) {
+        slideshow.slick('slickGoTo', pIndex); 
+      } else{
+          return
+      }
+    }; 
+
+
+    $(selectors.productThumbs).each(function() {
+      $(this).on('click',function() {
+        var id = $(this).data('slide-index') - 2; 
+        console.log(id ); 
+        focusProductImage(id); 
+      }); 
+    }); 
 
     // Stop parsing if we don't have the product json script tag when loading
     // section in the Theme Editor

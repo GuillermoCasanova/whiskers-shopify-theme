@@ -82,9 +82,10 @@
             
                           </ul>
                           
-                          <p class="product-description">
+                          <div class="product-description">
                             {{ product.description }}
-                          </p>
+                          </div>
+                          
                           {% unless product == empty %}
                             <script type="application/json" data-product-json>
                               {{ product | json }}
@@ -167,19 +168,15 @@
                       
                         <div class="productPhotoThumbnails">
 
-                          <h2 class="productPhotoThumbnails-title">
-                            Product Images 
-                          </h2>
-                          
                           {% if product.images.size > 1 %}
                           <ul class="productPhotoThumbnails-thumbnails grid grid--flexWrap grid--flexDirectionRow grid--1of2 large-grid--flexDirectionRow large-grid--fit">
                             {% for image in product.images %}
                               {% if forloop.first == false %}
                               <li>
-                                <a href="{{ image.src | img_url: '300x300' }}" data-product-single-thumbnail>
-                                <div class="productPhotoThumbnails-thumb">
-                                  <img src="{{ image.src | img_url: '1000x1000' }}" alt="{{ image.alt | escape }}">
-                                </div>
+                                <a  data-product-single-thumbnail data-slide-index="{{forloop.index}}">
+                                  <div class="productPhotoThumbnails-thumb">
+                                    <img src="{{ image.src | img_url: '1000x1000' }}" alt="{{ image.alt | escape }}">
+                                  </div>
                                 </a>
                               </li>
                               {% endif %}
@@ -187,7 +184,6 @@
                           </ul>
                           {% endif %}
                         </div>
-                      
                       </div>
                     </div>
                   </div>

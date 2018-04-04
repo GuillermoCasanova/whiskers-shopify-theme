@@ -8,13 +8,6 @@
 .faq {
   margin-bottom: rem-calc($level5);
 
-  @include media-query($medium-up) {
-    margin-top: rem-calc($level5);
-  }
-
-  @include media-query($large-up) {
-    margin-top: rem-calc($level7 + $level7 + $level3);
-  }
   .faq-headline {
     @include text-kilo();
 
