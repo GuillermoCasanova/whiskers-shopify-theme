@@ -1,0 +1,80 @@
+
+<section class="newsletter">
+  <div class="copySection  copySection--center">   
+    <div class="row  small-collapse">
+      <div class="small-12  medium-11  large-9 medium-centered  columns">
+        <div class="copySection-inner">  
+          <div class="relative  grid  grid--center  grid--flexDirectionColumn   med-grid--flexDirectionRow   grid--gutters">   
+
+            <div class=" grid-cell">  
+              {% unless section.settings.heading == blank %}
+               <div class="section-header text-left">
+                 <h1 class="headline  copySection-headline mb2">{{ section.settings.heading | escape }}</h1>
+                 {% if section.settings.subheading == blank %}
+                   <hr class="hr--small">
+                 {% endif %}
+               </div>
+              {% endunless %}
+              {% unless section.settings.subheading == blank %}
+               <div class="text-left">
+                 <p>{{ section.settings.subheading | escape }}</p>
+               </div>
+              {% endunless %}
+            </div>
+
+            <div class="grid-cell"> 
+              {% form 'customer' %}
+                {{ form.errors | default_errors }}
+                {% if form.posted_successfully? %}
+                  <div class="newsletter--form">
+                    <div class="note form-success">{{ 'general.newsletter_form.newsletter_confirmation' | t }}</div>
+                  </div>
+                {% else %}
+                  <label for="Email" class="newsletter__label hidden-label hide-elem">Email</label>
+                  <input type="hidden" name="contact[tags]" value="newsletter">
+                  <div class="newsletter--form  grid  grid--center  grid--stretch grid--flexDirectionColumn  med-grid--flexDirectionRow">
+                    <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_placeholder' | t }}" name="contact[email]" id="Email" class="input--primary  input--medium input--expanded" autocorrect="off" autocapitalize="off">
+                      <button type="submit" class="button--small  button--tertiary  button--expanded" name="commit" id="Subscribe">
+                        <span class="newsletter__submit-text--large">{{ 'general.newsletter_form.submit' | t }}</span>
+                      </button>
+                  </div>
+                {% endif %}
+              {% endform %}
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Newsletter",
+    "class": "index-newsletter-section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Subscribe to our newsletter"
+      },
+      {
+        "type": "text",
+        "id": "subheading",
+        "label": "Subheading",
+        "default": "A short sentence describing what someone will receive by subscribing"
+      },
+      {
+        "type": "paragraph",
+        "content": "Any customers who sign up will have an account created for them in Shopify. [View customers](/admin/customers?query=&accepts_marketing=1)"
+      }
+    ],
+    "presets": [{
+      "name": "Newsletter signup",
+      "category": "Promotional"
+    }],
+    "blocks" : []
+  }
+{% endschema %}
