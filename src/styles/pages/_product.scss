@@ -4,50 +4,49 @@
     #Product Page
 \*------------------------------------*/
 
-.product-header {
-  margin-bottom: 48px;
-  width: 100%;
-  text-align: center;
+// .product-header {
+//   width: 100%;
+//   text-align: center;
 
-  @include media-query($large-up) {
-    margin-bottom: rem-calc($level4); 
-  }
+//   @include media-query($large-up) {
+//     margin-bottom: rem-calc($level4); 
+//   }
 
-  .product-header-backBtn {
-    height: rem-calc(30px);
-    width: rem-calc(30px);
-    display: block; 
-    position: relative;
+//   .product-header-backBtn {
+//     height: rem-calc(30px);
+//     width: rem-calc(30px);
+//     display: block; 
+//     position: relative;
 
-    span {
-      height: rem-calc(12px);
-      width: rem-calc(12px);
-      display: block; 
-      margin-right: rem-calc(3px); 
-      margin-bottom: rem-calc(3px); 
-      background-color: $secondaryColor; 
-      position: absolute;
-    }
+//     span {
+//       height: rem-calc(12px);
+//       width: rem-calc(12px);
+//       display: block; 
+//       margin-right: rem-calc(3px); 
+//       margin-bottom: rem-calc(3px); 
+//       background-color: $secondaryColor; 
+//       position: absolute;
+//     }
 
-    span:nth-child(1) {
-      left: 0; 
-      top: 0; 
-    }
-    span:nth-child(2) {
-      right: 0; 
-      top: 0; 
-    }
-    span:nth-child(3) {
-      left: 0; 
-      bottom: 0; 
-    }
-    span:nth-child(4) {
-      right: 0; 
-      bottom: 0; 
-    }
+//     span:nth-child(1) {
+//       left: 0; 
+//       top: 0; 
+//     }
+//     span:nth-child(2) {
+//       right: 0; 
+//       top: 0; 
+//     }
+//     span:nth-child(3) {
+//       left: 0; 
+//       bottom: 0; 
+//     }
+//     span:nth-child(4) {
+//       right: 0; 
+//       bottom: 0; 
+//     }
 
-  }
-}
+//   }
+// }
 
 
 
@@ -60,62 +59,63 @@
 
 .product {
   margin-top: 4.5rem;
-  max-width: rem-calc(620px);
+  max-width: rem-calc(580px);
   margin-right: auto; 
   margin-left: auto; 
+  position: relative;
   margin-bottom: rem-calc($level7 + $level7);
 
   @include media-query($medium-up) {
-    margin-top: rem-calc($level7 + $level7);
     max-width: 100%;
+    margin-top: 0; 
   }
 
   @include media-query($large-up) {
     max-width: none; 
-    margin-top: rem-calc($level7);
+    margin-top: 0; 
+  }
+  
+  .product-bg {
+    content: " ";
+    background-color: #43414F;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0; 
+    height: 100%;
+    width: 100%;
+
+    @include media-query($medium-up) {
+      margin-right: $column-gutter / 2;
+    }
+
+    @include media-query($large-up) {
+      width: 91.66667%;
+    }
   }
 
   .product-inner {
     position: relative;
+    padding-top: rem-calc($level7);
+    padding-bottom: rem-calc($level3);
+
+    @include media-query($medium-up) {
+      padding-top: rem-calc($level7 + $level7);
+    }
 
     @include media-query($large-up) {
-      padding-top: rem-calc($level6);
-      padding-bottom: rem-calc($level6);
-      padding-right: rem-calc($level1);
-      padding-left: rem-calc($level1);
-      max-width: rem-calc(960px);
+      padding-top: rem-calc($level7 + $level6);
+      padding-left: rem-calc($level3);
       margin-right: auto; 
       margin-left: auto; 
       display: block; 
     }
 
-    &:before {
-      content: " ";
-      background-color: $secondaryColor;
-      width: 90%;
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      right: 0; 
-      left: 0; 
-      margin: auto;
-      height: 108%;
-
-      @include media-query($large-up) {
-        height: 100%; 
-        width: 100%; 
-      }
-    }
-
     .product-photoSlideshow {
-      margin-bottom: rem-calc($level5);   
-
-      @include media-query($medium-up) {
-        margin-bottom: rem-calc($level6);   
-      }
+      margin-bottom: rem-calc($level4);   
 
       @include media-query($large-up) {
-        margin-bottom: 0; 
+        margin-bottom: rem-calc($level2); 
       }
 
       .product-photoSlideshow-slide {
@@ -191,17 +191,21 @@
   
       @include media-query($large-up) {
         padding: 0;
-        min-width: rem-calc(440px); 
+        margin-right: auto;
+        margin-left: auto; 
+        display: block; 
       }
     }
     
     .product-name {
       font-family: $tertiary-font-family; 
       margin-bottom: rem-calc($level1);
+      max-width: rem-calc(300px); 
       @include text-kilo(); 
 
       @include media-query($large-up) {
         margin-bottom: 0;
+        max-width: 100%; 
         @include text-mega(); 
       }
     }
@@ -211,6 +215,10 @@
 
       @include media-query($medium-up) {
         margin-bottom: rem-calc($level2);
+      }
+
+      @include media-query($large-up) {
+        margin-bottom: rem-calc($level3);
       }
 
       .product-price {
@@ -255,7 +263,7 @@
     }
 
     .product-buyBtn {
-      margin-bottom: rem-calc($level4);
+      max-width: rem-calc(220px); 
     }
   }
 }
@@ -269,6 +277,7 @@
 \*------------------------------------*/
 
 .productPhotoThumbnails {
+  margin-bottom: rem-calc($level4); 
   
   .productPhotoThumbnails-thumbnails {
     margin-bottom: 0; 

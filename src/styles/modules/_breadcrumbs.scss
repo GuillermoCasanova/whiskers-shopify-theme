@@ -1,0 +1,20 @@
+
+/*------------------------------------*\
+    #Breadcrumbs
+\*------------------------------------*/
+
+.breadcrumb {
+  margin-bottom: rem-calc($level5);
+  color: $quintenaryColor;
+  @include text-micro();
+
+  a {
+    color: $quintenaryColor;
+    @include text-micro();
+
+    &:hover, 
+    &:focus {
+      color: #fff; 
+    }
+  }
+}

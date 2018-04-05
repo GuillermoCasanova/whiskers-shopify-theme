@@ -11,179 +11,199 @@
   <meta itemprop="brand" content="{{ product.vendor }}">
   <meta itemprop="image" content="{{ featured_image | img_url: '600x600' }}">
   <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
-
-
-  <div class="product-header  grid  grid--center  grid--justifyCenter">
-    <a href="/collections/all" rel="internal" class="product-header-backBtn">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-    </a>
+    
+  <div class="product-bg">
+    
   </div>
 
   <div class="row small-collapse">
-    <div class="small-12  large-11 large-centered  columns">
+    <div class="small-12 large-10 large-centered">
+      <div class="product-inner">
 
-        <div class="product-inner">
-          <div class="row small-collapse [ grid  grid--center  grid--flexDirectionColumn  large-grid--flexDirectionRow ]">
-          
-            <div class="small-12 large-7  columns large-push-5">
-              <div class="row  small-collapse  large-uncollapse">
-                <div class="small-12 columns">
-                  <div class="row  small-collapse  large-uncollapse">
-                    <div class="small-12 columns">
-                     <!--    <img src="{{ image | img_url: '480x480' }}" alt="{{ image.alt | escape }}" data-product-featured-image> -->
-                      <div class="product-photoSlideshow"  data-ui-component="product-photo-slideshow">
-                        {% for image in product.images %}
-                          {% if forloop.first == false %}
-                          <div class="product-photoSlideshow-slide">
-                              <img src="{{ image | img_url: '1200x1200' }}" alt="{{ image.alt | escape }}">
-                          </div>
-                          {% endif %}
-                        {% endfor %}
-                      </div>
+        <div class="row">
+          <div class="small-12 columns large-8  large-push-1">
+            <div class="product-header  [ grid  grid--justifyLeft ]">
+              {% include 'breadcrumbs' %}
+            </div>
+          </div>
+        </div>
+
+        <div class="row small-collapse">
+          <div class="small-12 large-6  columns large-push-6">
+            <div class="row  small-collapse  large-uncollapse">
+              <div class="small-12 columns">
+                <!--    <img src="{{ image | img_url: '480x480' }}" alt="{{ image.alt | escape }}" data-product-featured-image> -->
+                <div class="product-photoSlideshow"  data-ui-component="product-photo-slideshow">
+                  {% for image in product.images %}
+                    {% if forloop.first == false %}
+                    <div class="product-photoSlideshow-slide">
+                        <img src="{{ image | img_url: '1200x1200' }}" alt="{{ image.alt | escape }}">
                     </div>
-                  </div>
+                    {% endif %}
+                  {% endfor %}
                 </div>
               </div>
             </div>
-        
-            <div class="small-12 columns large-5 large-pull-7 ">
-          
-              <div class="product-information">
-          
-                <div class="row small-collapse  large-uncollapse">
-        
-                  <div class="small-12 columns medium-6  large-12">
-        
-                    <div class="row  small-collapse  medium-uncollapse">
-                      <div class="small-12 columns">
-                          <h1 class="product-name">
-                            {{ product.title }}
-                          </h1>
-                          
-                          <ul class="product-details  grid  grid--center">
-                         
-                            <li data-price-wrapper class="product-price">
-                              <span data-product-price>
-                                {{ current_variant.price | money }}
-                              </span>
-
-                              {% if product.compare_at_price_max > product.price %}
-                                <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
-                                <s data-compare-price>
-                                  {% if current_variant.compare_at_price > current_variant.price %}
-                                    {{ current_variant.compare_at_price | money }}
-                                  {% endif %}
-                                </s>
-                              {% endif %}
-                            </li>
+            <div class="row show-for-large-up">
             
-                          </ul>
-                          
-                          <div class="product-description">
-                            {{ product.description }}
+              <div class="small-12 columns">
+              
+                <div class="productPhotoThumbnails">
+
+                  {% if product.images.size > 1 %}
+                  <ul class="productPhotoThumbnails-thumbnails grid grid--flexWrap grid--flexDirectionRow grid--1of2 large-grid--flexDirectionRow large-grid--fit">
+                    {% for image in product.images %}
+                      {% if forloop.first == false %}
+                      <li>
+                        <a  data-product-single-thumbnail data-slide-index="{{forloop.index}}">
+                          <div class="productPhotoThumbnails-thumb">
+                            <img src="{{ image.src | img_url: '1000x1000' }}" alt="{{ image.alt | escape }}">
                           </div>
-                          
-                          {% unless product == empty %}
-                            <script type="application/json" data-product-json>
-                              {{ product | json }}
-                            </script>
-                          {% endunless %}
-                          
-                          <div itemprop="offers" itemscope itemtype="http://schema.org/Offer"  class="product-actions">
-                            <meta itemprop="priceCurrency" content="{{ shop.currency }}">
-                            <meta itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
-                            <link itemprop="availability" href="http://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}">
-
-                            <form action="/cart/add" method="post" enctype="multipart/form-data"
-                                  id="AddToCartForm--{{ section.id }}">
-                              {% unless product.has_only_default_variant %}
-                                {% for option in product.options_with_values %}
-                                  <div class="selector-wrapper js">
-                                    <label for="SingleOptionSelector-{{ forloop.index0 }}">
-                                      {{ option.name }}
-                                    </label>
-
-                                    <select
-                                      id="SingleOptionSelector-{{ forloop.index0 }}"
-                                      data-single-option-selector
-                                      data-index="option{{ option.position }}">
-                                      {% for value in option.values %}
-                                        <option
-                                          value="{{ value | escape }}"
-                                          {% if option.selected_value == value %}selected="selected"{% endif %}>
-                                            {{ value }}
-                                        </option>
-                                      {% endfor %}
-                                    </select>
-                                  </div>
-                                {% endfor %}
-                              {% endunless %}
-
-                              <select name="id" class="no-js" data-product-select>
-                                {% for variant in product.variants %}
-                                  <option
-                                    {% if variant == current_variant %}selected="selected"{% endif %}
-                                    {% unless variant.available %}disabled="disabled"{% endunless %}
-                                    value="{{ variant.id }}">
-                                      {{ variant.title }}
-                                  </option>
-                                {% endfor %}
-                              </select>
-
-                             <div class="product-qty  grid  grid--center">
-                              <label for="Quantity">QTY.</label>
-                              <!--<label for="Quantity">{{ 'products.product.quantity' | t }}</label> -->
-                              <input type="number" id="Quantity" name="quantity" value="1" min="1" class="input--small" >
-                            </div>
-
-                              <button
-                                type="submit"
-                                name="add"
-                                class="button  button--small  button--expanded  button--primary  product-buyBtn"
-                                data-add-to-cart
-                                id="AddToCart--{{ section.id }}"
-                                {% unless current_variant.available %}disabled="disabled"{% endunless %}>
-                                  <span data-add-to-cart-text class="button-textState1">
-                                    {% if current_variant.available %}
-                                      {{ 'products.product.add_to_cart' | t }}
-                                    {% else %}
-                                      {{ 'products.product.sold_out' | t }}
-                                    {% endif %}
-                                  </span>
-                              </button>
-                            </form>
-
-                          </div>
-                        </div>
-                    </div>
-                  </div>
+                        </a>
+                      </li>
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+      
+          <div class="small-12 columns large-5 large-pull-6 ">
         
-                  <div class="small-12 columns medium-6  large-12">
-                    <div class="row  small-collapse  medium-uncollapse">
-                    
-                      <div class="small-12 columns">
-                      
-                        <div class="productPhotoThumbnails">
+            <div class="product-information">
+        
+              <div class="row small-collapse  large-uncollapse">
+      
+                <div class="small-12 columns medium-6  large-12">
+      
+                  <div class="row  small-collapse">
+                    <div class="small-12 columns">
+                        <h1 class="product-name">
+                          {{ product.title }}
+                        </h1>
+                        
+                        <ul class="product-details  grid  grid--center">
+                       
+                          <li data-price-wrapper class="product-price">
+                            <span data-product-price>
+                              {{ current_variant.price | money }}
+                            </span>
 
-                          {% if product.images.size > 1 %}
-                          <ul class="productPhotoThumbnails-thumbnails grid grid--flexWrap grid--flexDirectionRow grid--1of2 large-grid--flexDirectionRow large-grid--fit">
-                            {% for image in product.images %}
-                              {% if forloop.first == false %}
-                              <li>
-                                <a  data-product-single-thumbnail data-slide-index="{{forloop.index}}">
-                                  <div class="productPhotoThumbnails-thumb">
-                                    <img src="{{ image.src | img_url: '1000x1000' }}" alt="{{ image.alt | escape }}">
-                                  </div>
-                                </a>
-                              </li>
-                              {% endif %}
-                            {% endfor %}
-                          </ul>
-                          {% endif %}
+                            {% if product.compare_at_price_max > product.price %}
+                              <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
+                              <s data-compare-price>
+                                {% if current_variant.compare_at_price > current_variant.price %}
+                                  {{ current_variant.compare_at_price | money }}
+                                {% endif %}
+                              </s>
+                            {% endif %}
+                          </li>
+          
+                        </ul>
+                        
+                        <div class="product-description">
+                          {{ product.description }}
                         </div>
+                        
+                        {% unless product == empty %}
+                          <script type="application/json" data-product-json>
+                            {{ product | json }}
+                          </script>
+                        {% endunless %}
+                        
+                        <div itemprop="offers" itemscope itemtype="http://schema.org/Offer"  class="product-actions">
+                          <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+                          <meta itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
+                          <link itemprop="availability" href="http://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}">
+
+                          <form action="/cart/add" method="post" enctype="multipart/form-data"
+                                id="AddToCartForm--{{ section.id }}">
+                            {% unless product.has_only_default_variant %}
+                              {% for option in product.options_with_values %}
+                                <div class="selector-wrapper js">
+                                  <label for="SingleOptionSelector-{{ forloop.index0 }}">
+                                    {{ option.name }}
+                                  </label>
+
+                                  <select
+                                    id="SingleOptionSelector-{{ forloop.index0 }}"
+                                    data-single-option-selector
+                                    data-index="option{{ option.position }}">
+                                    {% for value in option.values %}
+                                      <option
+                                        value="{{ value | escape }}"
+                                        {% if option.selected_value == value %}selected="selected"{% endif %}>
+                                          {{ value }}
+                                      </option>
+                                    {% endfor %}
+                                  </select>
+                                </div>
+                              {% endfor %}
+                            {% endunless %}
+
+                            <select name="id" class="no-js" data-product-select>
+                              {% for variant in product.variants %}
+                                <option
+                                  {% if variant == current_variant %}selected="selected"{% endif %}
+                                  {% unless variant.available %}disabled="disabled"{% endunless %}
+                                  value="{{ variant.id }}">
+                                    {{ variant.title }}
+                                </option>
+                              {% endfor %}
+                            </select>
+
+                           <div class="product-qty  grid  grid--center">
+                            <label for="Quantity">QTY.</label>
+                            <!--<label for="Quantity">{{ 'products.product.quantity' | t }}</label> -->
+                            <input type="number" id="Quantity" name="quantity" value="1" min="1" class="input--small" >
+                          </div>
+
+                            <button
+                              type="submit"
+                              name="add"
+                              class="button  button--small  button--expanded  button--primary  product-buyBtn"
+                              data-add-to-cart
+                              id="AddToCart--{{ section.id }}"
+                              {% unless current_variant.available %}disabled="disabled"{% endunless %}>
+                                <span data-add-to-cart-text class="button-textState1">
+                                  {% if current_variant.available %}
+                                    {{ 'products.product.add_to_cart' | t }}
+                                  {% else %}
+                                    {{ 'products.product.sold_out' | t }}
+                                  {% endif %}
+                                </span>
+                            </button>
+                          </form>
+
+                        </div>
+                      </div>
+                  </div>
+                </div>
+      
+                <div class="small-12 columns medium-6  large-12  hide-for-large-up">
+                  <div class="row small-collapse">
+                  
+                    <div class="small-12 columns">
+                    
+                      <div class="productPhotoThumbnails">
+
+                        {% if product.images.size > 1 %}
+                        <ul class="productPhotoThumbnails-thumbnails grid grid--flexWrap grid--flexDirectionRow grid--1of2 large-grid--flexDirectionRow large-grid--fit">
+                          {% for image in product.images %}
+                            {% if forloop.first == false %}
+                            <li>
+                              <a  data-product-single-thumbnail data-slide-index="{{forloop.index}}">
+                                <div class="productPhotoThumbnails-thumb">
+                                  <img src="{{ image.src | img_url: '1000x1000' }}" alt="{{ image.alt | escape }}">
+                                </div>
+                              </a>
+                            </li>
+                            {% endif %}
+                          {% endfor %}
+                        </ul>
+                        {% endif %}
                       </div>
                     </div>
                   </div>
@@ -192,7 +212,7 @@
             </div>
           </div>
         </div>
-
+      </div>
     </div>
 
   </div>

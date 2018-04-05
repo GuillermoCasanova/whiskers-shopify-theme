@@ -1,22 +1,37 @@
-<section>
+
+<section  data-section-type="hero_header">
   <div class="heroHeader grid grid--flexDirectionColumn med-grid--flexDirectionRow med-grid--flexDirectionRowReverse  ">
-    
     <div class="heroHeader-bg">
-        
        <div class="heroHeader-bg-inner">
-  
-        <img src="{{'headers_small1.png' | asset_url}}" alt="" class="hide-for-medium-up  heroHeader-bg-img">
-  
-        <div class="heroHeader-bg-slideshow  heroSlideshow show-for-medium-up">
-          <div class="heroSlideshow-slide">
-        
-            <div class="heroSlideshow-slide-img"  
-                 style="background-image: url({{'headers_large1.png' | asset_url}});">
+
+          <img src="{{'headers_small1.png' | asset_url}}" alt="Whiskers Shoelaces" class="hide-for-medium-up  heroHeader-bg-img" role="presentation">
+    
+          <div class="heroHeader-bg-slideshow  heroSlideshow show-for-medium-up"  role="presentation"  data-slideshow>
+            <div class="heroSlideshow-slide">
+          
+              <div class="heroSlideshow-slide-img"  
+                   style="background-image: url({{'headers_large1.png' | asset_url}});">
+              </div>
+                
             </div>
-      
-          </div>
+
+            <div class="heroSlideshow-slide">
+          
+              <div class="heroSlideshow-slide-img"  
+                   style="background-image: url({{'headers_large3.png' | asset_url}});">
+              </div>
+                
+            </div>
+
+            <div class="heroSlideshow-slide">
+          
+              <div class="heroSlideshow-slide-img"  
+                   style="background-image: url({{'headers_large4.png' | asset_url}});">
+              </div>
+                
+            </div>
+            
         </div>
-  
       </div>
   
     </div>
@@ -30,15 +45,15 @@
           <div class="small-12  large-11 large-centered  columns">
         
             <h1 class="heroHeader-headline  text-center">
-               Fill Your Boring Shoe Holes
+               {{section.settings.headline}}
             </h1>
         
             <div class="row">
         
               <div class="small-8 columns small-centered">
         
-                <a href="/collections/laces" class="button  button--small  button--expanded  button--primary">
-                  <span class="button-textState1">Shop Laces</span>
+                <a href="{{section.settings.cta}}" rel="internal" class="button  button--small  button--expanded  button--primary">
+                  <span class="button-textState1">{{section.settings.cta_label}}</span>
                 </a>
   
                 <div class="text-center">
@@ -49,36 +64,40 @@
                 </div>
         
               </div>
-        
             </div>
-        
           </div>
         </div>
-  
       </div>
-  
     </div>
-  
   </div>
-  
-  
-  {% schema %}
-    {
-      "name": "Hero Header",
-      "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Heading",
-          "default": "Title for header"
-        }
-      ],
-      "presets": [
-        {
-          "name": "Hero Header",
-          "category": "Hero Header"
-        }
-      ]
-    }
-  {% endschema %}
-  </section>
+</section>
+
+{% schema %}
+  {
+    "name": "Hero Header",
+    "settings": [
+      {
+        "type": "text",
+        "id": "headline",
+        "label": "Headline",
+        "default": "Headline for hero header"
+      },
+      {
+        "type": "text",
+        "id": "cta_label",
+        "label": "CTA Label"
+      },
+      {
+        "type": "url",
+        "id": "cta",
+        "label": "Call to Action"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Hero Header",
+        "category": "Hero Header"
+      }
+    ]
+  }
+{% endschema %}

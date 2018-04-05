@@ -12,10 +12,11 @@ window.theme = window.theme || {};
 // =require slate/variants.js
 
 /*================ Sections ================*/
+// =require sections/ajaxCart.js
 // =require sections/collection-nav.js
 // =require sections/product.js
 // =require sections/header.js
-// =require sections/ajaxCart.js
+// =require sections/heroHeader.js
 
 
 
@@ -30,6 +31,7 @@ $(document).ready(function() {
   sections.register('product', theme.Product);
   sections.register('header', theme.Header);
   sections.register('collection_nav', theme.collectionNav);
+  sections.register('hero_header', theme.heroHeader);
 
 
   // Common a11y fixes

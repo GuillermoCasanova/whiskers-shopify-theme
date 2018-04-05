@@ -11,6 +11,7 @@ theme.Product = (function() {
   var selectors = {
     addToCart: '[data-add-to-cart]',
     addToCartText: '[data-add-to-cart-text]',
+    backBtn: '[data-back-btn]',
     comparePrice: '[data-compare-price]',
     comparePriceText: '[data-compare-text]',
     originalSelectorId: '[data-product-select]',
@@ -37,29 +38,30 @@ theme.Product = (function() {
     var slideshow = $(container).find('[data-ui-component="product-photo-slideshow"]'); 
 
     slideshow.slick({
-
       'centerMode': true,
       'centerPadding': '36px',
       'slidesToShow:': 1,
       'mobileFirst': true,
+      'arrows': false, 
       'responsive': [ {
           'breakpoint': 720, 
           'settings': {
-            slidesToShow: 1,
+            'slidesToShow': 1,
+            'arrows': false, 
             'centerPadding': '150px'
           }
         },
         {
           'breakpoint': 960, 
           'settings': {
-            slidesToShow: 1,
-          'centerMode': false,
-          'infinite': false, 
+            'slidesToShow': 1,
+            'centerMode': false,
+            'infinite': false, 
+            'arrows': true, 
             'centerPadding': '0px'
           }
         }
       ]
-
     });
 
     var nextBtn = $(container).find('.slick-next');
@@ -119,6 +121,9 @@ theme.Product = (function() {
     }
 
     
+    //
+    // Initializes the AJAX cart properties 
+    // 
      ajaxCart.init({
           formSelector: '#AddToCartForm--' + sectionId,
           cartContainer: '#CartContainer',

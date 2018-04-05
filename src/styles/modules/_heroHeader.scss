@@ -33,8 +33,8 @@
     @include media-query($medium-up) {
       height: 100%; 
       max-height: none;
-      background-color: $quaternaryColor; 
       width: 65%; 
+      background-color: transparent;
       max-width: rem-calc(600px); 
     }
 
@@ -109,14 +109,18 @@
   width: 100%;
   height: 100%; 
   @extend %position-relative; 
+  
+  .slick-track,
+  .slick-list {
+    width: 100% !important; 
+    height: 100% !important; 
+  }
 
   .heroSlideshow-slide {
-
     height: 100%; 
     width: 100%; 
 
     .heroSlideshow-slide-img {
-
       background-repeat: no-repeat;
       background-size: cover;
       background-position-y: 100%;
