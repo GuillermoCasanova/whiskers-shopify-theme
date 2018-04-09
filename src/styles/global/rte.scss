@@ -10,7 +10,7 @@
 
   ul,
   ol {
-    margin: 0 0 ($gutter / 2) $gutter;
+    margin: 0 0 ($column-gutter / 2) $column-gutter;
   }
 
   // Match the styles from RTE nested lists

@@ -1,0 +1,36 @@
+
+
+/*------------------------------------*\
+    #Info Pages 
+\*------------------------------------*/
+
+.infoPage {
+  h1 {
+    font-family: $tertiary-font-family; 
+  }
+
+  h2 {
+    font-weight: bold; 
+    font-family: $secondary-font-family; 
+    text-transform: uppercase;
+  }
+
+  h2 {
+    @include h2();     
+  }
+
+  h3 {
+    margin-bottom: rem-calc($level2);
+    font-weight: bold; 
+    @include h4();     
+  }
+
+  p {
+    margin-bottom: rem-calc($level7); 
+  }
+
+  ul {
+    margin-bottom: rem-calc($level7); 
+  }
+
+}

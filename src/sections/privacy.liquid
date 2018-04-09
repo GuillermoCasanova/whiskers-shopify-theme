@@ -1,12 +1,10 @@
-
-<section class="section--main" data-section-id="{{ section.id }}" data-section-type="info-page">
-<!--Page Header--> 
-<div class="row small-collapse">
-
-  <div class="small-12 large-11 columns">
-
-    <div class="pageHeader">
-          
+<article>
+  
+  <div class="pageHeader" data-section-id="{{ section.id }}" data-section-type="info-page">
+    <!--Page Header--> 
+    <div class="row small-collapse">
+      <div class="small-12 large-11 columns">
+    
         <div class="pageHeader-contentContainer  grid  grid--bottom">
         
           <div class="row">
@@ -39,28 +37,28 @@
           </picture>
         </div>
       
+      </div>
     </div>
+    <!--Page header Ends--> 
   </div>
-</section>
-<!--Page header Ends--> 
-
-
-<section>
-  <div class="row">
-    <div class="small-12  medium-9  large-10  large-centered  columns">
-        <div class="row">
-          <div class="small-12 medium-7   columns">
-            {{section.settings.main_column}}
-          </div>
- 
-          <div class="small-12  medium-5  columns">
-            {{section.settings.side_column}}
+  
+  <div class="infoPage">
+    <div class="row">
+      <div class="small-12  medium-11  large-10  large-centered  columns">
+          <div class="row">
+            <div class="small-12 medium-7   columns">
+              {{section.settings.main_column}}
+            </div>
+   
+            <div class="small-12  medium-5  columns">
+              {{section.settings.side_column}}
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</section>
+</article>
 
 {% schema %}
   {

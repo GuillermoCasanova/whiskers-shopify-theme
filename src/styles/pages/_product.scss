@@ -141,7 +141,7 @@
         opacity: .6;
         border: none;
         outline: none; 
-        @include transition(all .2s ease-in-out); 
+        transition: all .2s ease-in-out; 
 
         &:before {
           content: "";

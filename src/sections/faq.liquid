@@ -1,72 +1,57 @@
 
-<section class="section--main" data-section-id="{{ section.id }}" data-section-type="info-page">
-<!--Page Header--> 
-<div class="row small-collapse">
+<section class="pageHeader" data-section-id="{{ section.id }}" data-section-type="info-page">
+  <!--Page Header--> 
+  <div class="row small-collapse">
 
-  <div class="small-12 large-11 columns">
+    <div class="small-12 medium-11  large-11 columns">
 
-    <div class="pageHeader">
-          
-        <div class="pageHeader-contentContainer  grid  grid--bottom">
-        
-          <div class="row">
-        
-            <div class="small-12 columns large-push-1 large-10">
-              <div class="pageHeader-content">
-                <h1 class="headline  pageHeader-headline">{{section.settings.title}}</h1>
-              </div>
-
+      <div class="pageHeader-contentContainer  grid  grid--bottom">
+      
+        <div class="row">
+      
+          <div class="small-12 columns large-push-1 large-10">
+            <div class="pageHeader-content">
+              <h1 class="headline  pageHeader-headline">{{section.settings.title}}</h1>
             </div>
 
           </div>
-    
+
         </div>
-    
-        <div class="pageHeader-bg">
-          
-          <picture>
-              
-            <source media="(min-width: 1024px)"
-                    srcset="{{'shopHeaders--all--large.jpg' | asset_url}}">
-          
-            <source media="(min-width: 640px)"
-                    srcset="{{'shopHeaders--all--medium.jpg' | asset_url}}">
-          
-            <img src="{{'shopHeaders--all--small.jpg' | asset_url}}"
-                 class="pageHeader-bg-img"
-                 alt="" 
-                 >
-          </picture>
-        </div>
-      
+  
+      </div>
+  
+      <div class="pageHeader-bg">
+        
+        <picture>
+            
+          <source media="(min-width: 1024px)"
+                  srcset="{{'shopHeaders--all--large.jpg' | asset_url}}">
+        
+          <source media="(min-width: 640px)"
+                  srcset="{{'shopHeaders--all--medium.jpg' | asset_url}}">
+        
+          <img src="{{'shopHeaders--all--small.jpg' | asset_url}}"
+               class="pageHeader-bg-img"
+               alt="" 
+               >
+        </picture>
+      </div>
     </div>
   </div>
 </section>
 <!--Page header Ends--> 
 
 
-<section class="section--main  faq" data-section-id="{{ section.id }}" data-section-type="info-page">
+<section class="faq" data-section-id="{{ section.id }}" data-section-type="info-page">
   <div class="row">
     <div class="small-12  medium-9  large-7  large-push-1 columns">
-      <div class="faq-inner">
-        <div class="faq-accent">
-          <img src="{{'whiskIcon--rock.svg' | asset_url}}" 
-               alt=""
-               role="presentation">    
-        </div>  
-
-        <div class="row">
-          <div class="small-12 columns">
-            <h1 class="headline  faq-headline">{{section.settings.title}}</h1>
-          </div>
-        </div>
         <ul class="row">
          {% for block in section.blocks %}
            <li class="small-12  columns">
             <div class="faq-item">
-              <h2 class="subline faq-question">
+              <h1 class="subline faq-question">
               {{block.settings.question}}
-              </h2>  
+              </h1>  
               <p class="faq-answer">
               {{block.settings.answer}}
               </p>
@@ -74,7 +59,6 @@
            </li>
          {% endfor %}
         </ul>
-      </div>
     </div>
   </div>
 </section>

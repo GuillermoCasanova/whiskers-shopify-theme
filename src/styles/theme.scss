@@ -11,9 +11,7 @@
 
 /*================ UTILS ================*/
 @import url('tools/mixins.scss');
-@import url('tools/compassFlexboxMixins.scss');
 @import url('vendor/foundationFunctions.scss');
-
 
 
 /*================ ABSTRACTS ================*/
@@ -24,33 +22,28 @@
 @import url('abstracts/_utility.scss');
 
 
+/*================ GOBAL ================*/
+@import url('global/blank-states.scss');
+@import url('global/forms.scss');
+@import url('vendor/foundationGrid.scss');
+@import url('global/helper-classes.scss');
+@import url('global/normalize.scss');
+@import url('global/slate-reset.scss');
+@import url('global/rte.scss');
+@import url('global/links-buttons.scss');
+
+
 /*================ VENDOR ================*/
 @import url('vendor/foundationGlobals.scss');
-@import url('vendor/foundationGrid.scss');
 @import url('vendor/foundationVisibility.scss');
 @import url('vendor/foundationMixins.scss');
 @import url('vendor/slick.scss');
-
-
-/*================ COMMON ================*/
-@import url('global/normalize.scss');
-@import url('global/slate-reset.scss');
-@import url('global/helper-classes.scss');
-//@import url('global/grid.scss');
-@import url('global/layout.scss');
-@import url('global/icons.scss');
-@import url('global/rte.scss');
-@import url('global/responsive-tables.scss');
-@import url('global/links-buttons.scss');
-@import url('global/forms.scss');
-@import url('global/blank-states.scss');
 
 
 /*================ BASE ================*/
 @import url('base/_flexbox.scss');
 @import url('base/_icons.scss');
 @import url('base/_responsiveType.scss');
-@import url('base/_theme.scss');
 @import url('base/_typography.scss');
 @import url('base/_utility.scss');
 @import url('base/_webfonts.scss');
@@ -83,4 +76,13 @@
 @import url('pages/_home.scss');
 @import url('pages/_collection.scss');
 @import url('pages/_faq.scss');
+@import url('pages/_infoPages.scss');
 
+
+
+
+
+//@import url('global/grid.scss');
+// @import url('global/layout.scss');
+// @import url('global/icons.scss');
+// @import url('global/responsive-tables.scss');

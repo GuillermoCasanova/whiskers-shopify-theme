@@ -1,13 +1,9 @@
 
-/*------------------------------------*\
-    #Typograp#hy  (Extends variables/placeholders from typography abstract)
-\*------------------------------------*/
-
-
 
 /*------------------------------------*\
-    #Base   (Extends from typography.scss module)
+    #Typography  (Extends variables/placeholders from typography abstract)
 \*------------------------------------*/
+
 /*  Base font sizes, margin-bottoms, and properties */
 
 body, html {
@@ -48,7 +44,7 @@ p {
     color: $body-color;
     text-decoration: none; 
     border-bottom: $accentColor 2px solid; 
-    @include transition(all .3s ease-in-out); 
+    transition: all .3s ease-in-out; 
 
     &:hover,
     &:focus {
@@ -67,7 +63,7 @@ a.styled-link {
     color: $body-color;
     text-decoration: none; 
     border-bottom: $accentColor 2px solid; 
-    @include transition(all .3s ease-in-out); 
+    transition: all .3s ease-in-out; 
 
     &:hover,
     &:focus {
@@ -87,15 +83,13 @@ a.styled-link2 {
   @extend %position-relative; 
 
   &:after {
-
     content: " ";
     left: 0;
     bottom: -8px; 
     width: rem-calc(36px); 
     border-bottom: 4px solid $accentColor; 
-    @include transition(all .2s ease-in-out); 
+    transition: all .2s ease-in-out; 
     @extend %position-absolute; 
-
   }
 
   &:hover, 

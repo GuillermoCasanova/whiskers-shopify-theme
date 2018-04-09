@@ -48,9 +48,9 @@
 // $property - Default: all, Options: http://www.w3.org/TR/css3-transitions/#animatable-properties
 // $speed - Default: 300ms
 // $ease - Default: ease-out, Options: http://css-tricks.com/almanac/properties/t/transition-timing-function/
-@mixin single-transition($property:all, $speed:300ms, $ease:ease-out) {
-  @include transition($property, $speed, $ease);
-}
+// @mixin single-transition($property:all, $speed:300ms, $ease:ease-out) {
+//   @include transition($property, $speed, $ease);
+// }
 
 // // @mixins
 // //

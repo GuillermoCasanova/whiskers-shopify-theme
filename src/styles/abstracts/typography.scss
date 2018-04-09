@@ -408,33 +408,3 @@ $type-settings: (
 %lh4 {
     line-height:  $base-magic-number / 24;
 } 
-
-
-
-
-/*------------------------------------*\
-    #Paragraph Sizes 
-\*------------------------------------*/
-
-%p1 {
-  @include h6(); 
-  @media #{$medium-up} {
-    @include h5(); 
-  }
-}
-
-
-%p2 {
-  @include h5(); 
-  @media #{$medium-up} {
-    @include h4(); 
-  }
-}
-
-
-%p3 {
-  @include h4(); 
-  @media #{$medium-up} {
-    @include h3(); 
-  }
-}

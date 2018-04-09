@@ -24,7 +24,7 @@
 
   .mainNav-title {
     z-index: 190; 
-    @include transition(all .8s ease-in-out); 
+    transition: all .8s ease-in-out; 
   }
 }
 
@@ -291,7 +291,7 @@
     .mainNav-animElem {
       opacity: 0; 
       transform: translateY(-70px); 
-      @include transition(all .4s ease-in-out); 
+      transition: all .4s ease-in-out; 
     }
 
 
@@ -323,7 +323,7 @@
         @extend %tertiary-font-family; 
         @include h1(); 
 
-        @include transition(all .200s ease-in-out); 
+        transition: all .200s ease-in-out; 
 
         @include media-query($medium-up) {
           margin-bottom: rem-calc($level1); 

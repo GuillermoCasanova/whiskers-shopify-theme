@@ -4,8 +4,19 @@
 \*------------------------------------*/
 
 .pageHeader {
-  margin-bottom: rem-calc($level7);
+  margin-top: rem-calc(60px);
+  padding-top: 0; 
+  padding-bottom: rem-calc($level7);
   @extend %position-relative; 
+    
+  @include media-query($medium-up) {
+    padding-bottom: rem-calc($level5);
+    margin-top: 0; 
+  }
+
+  @include media-query($large-up) {
+    padding-bottom: rem-calc($level7);
+  }
 
   .pageHeader-bg {
     background-image: url("../assets/shopHeaders--all--small.jpg");
@@ -17,14 +28,7 @@
     }
   }
 
-  @include media-query($medium-up) {
-    margin-bottom: rem-calc($level7);
-    margin-top: 0; 
-  }
 
-  @include media-query($large-up) {
-    margin-bottom: rem-calc($level4);
-  }
   
   .pageHeader-bg {
     width: 100%;
@@ -74,6 +78,15 @@
 \*------------------------------------*/
 
 
+.pageHeader--collection {
+  padding-bottom: rem-calc($level6); 
+
+  @include media-query($medium-up) {
+    padding-bottom: rem-calc($level4); 
+  }
+} 
+
+
 .pageHeader--primary {
   .pageHeader-content-inner {
     @media #{$medium-up} {
@@ -110,27 +123,3 @@
   }
 }
 
-
-
-.pageHeader--Striped {
-  
-  .pageHeader-bg {
-    background-image: url("../assets/shopHeaders--striped--small.jpg");
-
-    @include media-query($large-up) {
-      background-image: url("../assets/shopHeaders--striped--large.jpg");
-    }
-  }
-}
-
-
-
-.pageHeader--Solid {
-  .pageHeader-bg {
-    background-image: url("../assets/shopHeaders--solid--small.jpg");
-
-    @include media-query($large-up) {
-      background-image: url("../assets/shopHeaders--solid--large.jpg");
-    }
-  }
-}

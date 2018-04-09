@@ -230,7 +230,7 @@ body.fancymodal-open {
                 right: -10px; 
                 font-size: rem-calc(40px); 
                 color: $primaryColor; 
-                @include transition(transform .2s ease-in-out); 
+               transition: transform .2s ease-in-out; 
             }
 
             &:hover,
@@ -293,7 +293,7 @@ body.fancymodal-open {
                 right: rem-calc($level2); 
                 font-size: rem-calc(40px); 
                 color: #fff; 
-                @include transition(transform .2s ease-in-out); 
+               transition: transform .2s ease-in-out; 
             }
 
             &:hover,
