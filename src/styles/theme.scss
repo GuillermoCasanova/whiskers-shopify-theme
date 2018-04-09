@@ -27,10 +27,11 @@
 @import url('global/forms.scss');
 @import url('vendor/foundationGrid.scss');
 @import url('global/helper-classes.scss');
-@import url('global/normalize.scss');
-@import url('global/slate-reset.scss');
-@import url('global/rte.scss');
+@import url('global/icons.scss');
 @import url('global/links-buttons.scss');
+@import url('global/normalize.scss');
+@import url('global/rte.scss');
+@import url('global/slate-reset.scss');
 
 
 /*================ VENDOR ================*/
@@ -65,6 +66,7 @@
 @import url('modules/_headlines.scss');
 @import url('modules/_heroHeader.scss');
 @import url('modules/_linkGroups.scss');
+@import url('modules/_newsletter.scss');
 @import url('modules/_pageHeaders.scss');
 @import url('modules/_productThumbs.scss');
 @import url('modules/site-header.scss');
@@ -84,5 +86,4 @@
 
 //@import url('global/grid.scss');
 // @import url('global/layout.scss');
-// @import url('global/icons.scss');
 // @import url('global/responsive-tables.scss');

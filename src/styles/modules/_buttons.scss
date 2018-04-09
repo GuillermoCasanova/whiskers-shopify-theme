@@ -16,8 +16,7 @@ button,
   color: #fff; 
   outline: none; 
   border: none; 
-  @include h4();
-  @extend %uc; 
+  text-transform: uppercase;
 
   &.is-inactive {
     opacity: .2; 

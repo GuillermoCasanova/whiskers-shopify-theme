@@ -4,44 +4,49 @@
     <div class="row  small-collapse">
       <div class="small-12  medium-11  large-9 medium-centered  columns">
         <div class="copySection-inner">  
-          <div class="relative  grid  grid--center  grid--flexDirectionColumn   med-grid--flexDirectionRow   grid--gutters">   
+          <div class="row [ grid  grid--flexDirectionColumn  med-grid--flexDirectionRow grid--center ]">   
 
-            <div class=" grid-cell">  
-              {% unless section.settings.heading == blank %}
-               <div class="section-header text-left">
-                 <h1 class="headline  copySection-headline mb2">{{ section.settings.heading | escape }}</h1>
-                 {% if section.settings.subheading == blank %}
-                   <hr class="hr--small">
-                 {% endif %}
-               </div>
-              {% endunless %}
-              {% unless section.settings.subheading == blank %}
-               <div class="text-left">
-                 <p>{{ section.settings.subheading | escape }}</p>
-               </div>
-              {% endunless %}
+            <div class="small-12 columns  medium-6  large-5">  
+              <div class="row small-collapse">
+                <div class="small-12 columns  grid  grid--justifyCenter">
+                    <div class="newsletter-description">
+                      {% unless section.settings.heading == blank %}
+                        <h1 class="subline  newsletter-headline">{{ section.settings.heading | escape }}</h1>
+                      {% endunless %}
+                      {% unless section.settings.subheading == blank %}
+                         <p class="newsletter-body">{{ section.settings.subheading | escape }}</p>
+                      {% endunless %}
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div class="grid-cell"> 
-              {% form 'customer' %}
-                {{ form.errors | default_errors }}
-                {% if form.posted_successfully? %}
-                  <div class="newsletter--form">
-                    <div class="note form-success">{{ 'general.newsletter_form.newsletter_confirmation' | t }}</div>
+            <div class="small-12 columns  medium-6  large-7"> 
+              <div class="row small-collapse">
+                <div class="small-12 columns   grid  grid--justifyCenter">
+                  <div class="newsletter-form">
+                    {% form 'customer' %}
+                    <div class="newsletter-form-errors"> {{ form.errors | default_errors }}</div>
+                    {% if form.posted_successfully? %}
+                      <div class="newsletter-form-success">
+                        <div class="note form-success">{{ 'general.newsletter_form.newsletter_confirmation' | t }}</div>
+                      </div>
+                    {% else %}
+                      <label for="Email" class="newsletter__label hidden-label hide-elem">Email</label>
+                      <input type="hidden" name="contact[tags]" value="newsletter">
+                    
+                      <div class="grid  grid--center  grid--stretch grid--flexDirectionColumn med-grid--bottom">
+                        <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_placeholder' | t }}" name="contact[email]" id="Email" class="newsletter-form-input {%if form.errors %}has-error{% endif %}" autocorrect="off" autocapitalize="off">
+                          <button type="submit" class="button--small  button--tertiary  button--expanded  newsletter-form-button" name="commit" id="Subscribe">
+                            {{ 'general.newsletter_form.submit' | t }}
+                          </button>
+                      </div>
+                    {% endif %}
+                    {% endform %}
                   </div>
-                {% else %}
-                  <label for="Email" class="newsletter__label hidden-label hide-elem">Email</label>
-                  <input type="hidden" name="contact[tags]" value="newsletter">
-                  <div class="newsletter--form  grid  grid--center  grid--stretch grid--flexDirectionColumn  med-grid--flexDirectionRow">
-                    <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_placeholder' | t }}" name="contact[email]" id="Email" class="input--primary  input--medium input--expanded" autocorrect="off" autocapitalize="off">
-                      <button type="submit" class="button--small  button--tertiary  button--expanded" name="commit" id="Subscribe">
-                        <span class="newsletter__submit-text--large">{{ 'general.newsletter_form.submit' | t }}</span>
-                      </button>
-                  </div>
-                {% endif %}
-              {% endform %}
+                </div>
+              </div>
             </div>
-
           </div>
         </div>
       </div>
