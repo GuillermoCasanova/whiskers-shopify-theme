@@ -258,19 +258,24 @@ var ajaxCart = (function(module, $) {
 
   formOverride = function() {
     $formContainer.on('submit', function(evt) {
-      evt.preventDefault();
 
-      // Add class to be styled if desired
-      $addToCart.removeClass('is-added').addClass('is-adding');
+      if(window.innerWidth > 680) {
 
-      // Remove any previous quantity errors
-      $('.qty-error').remove();
+        evt.preventDefault();
 
-      ShopifyAPI.addItemFromForm(
-        evt.target,
-        itemAddedCallback,
-        itemErrorCallback
-      );
+        // Add class to be styled if desired
+        $addToCart.removeClass('is-added').addClass('is-adding');
+
+        // Remove any previous quantity errors
+        $('.qty-error').remove();
+
+        ShopifyAPI.addItemFromForm(
+          evt.target,
+          itemAddedCallback,
+          itemErrorCallback
+        );
+      }  
+
     });
   };
 
