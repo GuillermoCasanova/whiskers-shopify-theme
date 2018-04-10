@@ -82,59 +82,64 @@
     #About Laces
 \*------------------------------------*/
 
-.copySection--aboutLaces {
+.aboutLaces-slideshow {
+  right: 0; 
+  width: 100%;
+  overflow: hidden; 
+  @extend %position-relative; 
 
-  .aboutLaces-slideshow {
-    right: 0; 
-    width: 100%;
+  // @include media-query($large-up) {
+  //   padding-right: rem-calc($level3); 
+  //   padding-left: rem-calc($level3); 
+  // }
+
+  .aboutLaces-slideshow-slide {
     height: 100%; 
-    @extend %position-relative; 
+    width: 100%; 
+    top: 0; 
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
+    transition: all 0.6s ease-in-out;
+    z-index: 29; 
+    position: absolute;
 
-    @include media-query($medium-up) {
-      top: -30%;
-    }
-
-    @include media-query($large-up) {
-      top: -46%; 
-    }
-
-    @include media-query($large-up) {
-      padding-right: rem-calc($level3); 
-      padding-left: rem-calc($level3); 
-    }
-
-    .aboutLaces-slideshow-slide {
-      height: 100%; 
+    .aboutLaces-slideshow-slide-img {
       width: 100%; 
-
-      .aboutLaces-slideshow-slide-img {
-        width: 100%; 
-      }
-
-    }
-
-    .aboutLaces-slideshow-slide.ng-animate {
-      transition: all 0.6s ease-in-out;
-    }
-
-    .aboutLaces-slideshow-slide.ng-enter {
-      z-index: 29; 
-    }
-    .aboutLaces-slideshow-slide.ng-enter.ng-enter-active {
-      position: absolute; 
-      z-index: 29; 
-
-    }
-
-    .aboutLaces-slideshow-slide.ng-leave {
-      z-index: 30; 
-      position: absolute; 
-      transform: translateY(0);
-    }
-    .aboutLaces-slideshow-slide.ng-leave.ng-leave-active {
-      transform: translateY(-100%);
     }
   }
+
+  .aboutLaces-slideshow-slide.is-active {
+    z-index: 30; 
+    position: relative;
+  }
+
+  // .aboutLaces-slideshow-slide.is-inactive {
+  //   z-index: 29; 
+  //   position: relative;
+  //   display: none; 
+  // }
+
+
+
+
+  // .aboutLaces-slideshow-slide.ng-enter {
+  //   z-index: 29; 
+  // }
+  // .aboutLaces-slideshow-slide.ng-enter.ng-enter-active {
+  //   position: absolute; 
+  //   z-index: 29; 
+
+  // }
+
+  // .aboutLaces-slideshow-slide.ng-leave {
+  //   z-index: 30; 
+  //   position: absolute; 
+  //   transform: translateY(0);
+  // }
+  // .aboutLaces-slideshow-slide.ng-leave.ng-leave-active {
+  //   transform: translateY(-100%);
+  // }
 }
 
 

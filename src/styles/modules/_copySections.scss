@@ -149,13 +149,13 @@
     }
 
     @include media-query($large-up) {
-      left: rem-calC(-24px);
+      left: rem-calc(-24px);
     }
   }
 
   .copySection-copy {
      @include media-query($large-up) {
-      right: rem-calC(-12px);
+      right: rem-calc(-12px);
     }
   }
 }
@@ -248,6 +248,7 @@
 
   @include media-query($medium-up) {
     height: rem-calc(260px); 
+    width: 100%; 
   }
 
   .copySection-imageContainer-inner {

@@ -53,9 +53,11 @@ $small: $small-up;
 $medium: $medium-up;
 $large: $large-up;
 
-$row-width: 100%;
+$row-width: rem-calc(1200px);
 $total-columns: 12;
 $column-gutter: rem-calc(48px);
+
+
 
 .row {
   margin: 0 auto;
@@ -91,6 +93,15 @@ $column-gutter: rem-calc(48px);
         display: table; }
       .row .row.collapse:after {
         clear: both; }
+
+
+.row--full {
+  width: 100%;
+  padding-left: 0; 
+  padding-right: 0;
+  margin: 0;  
+}
+
 
 .column,
 .columns {

@@ -1,3 +1,4 @@
+
 window.slate = window.slate || {};
 window.theme = window.theme || {};
 
@@ -12,6 +13,7 @@ window.theme = window.theme || {};
 // =require slate/variants.js
 
 /*================ Sections ================*/
+// =require sections/aboutLaces.js
 // =require sections/ajaxCart.js
 // =require sections/collection-nav.js
 // =require sections/product.js
@@ -32,6 +34,7 @@ $(document).ready(function() {
   sections.register('header', theme.Header);
   sections.register('collection_nav', theme.collectionNav);
   sections.register('hero_header', theme.heroHeader);
+  sections.register('about_laces', theme.aboutLaces);
 
 
   // Common a11y fixes

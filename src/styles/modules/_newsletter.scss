@@ -34,6 +34,10 @@
       max-width: 100%; 
       min-width: 17.75rem;
     }
+
+    @include media-query($large-up) {
+      right: rem-calc($level4);
+    }
   }
   
   .newsletter-form-errors {
@@ -53,6 +57,10 @@
     color: $grey--med;
     transition: all .2s ease-in-out; 
     @include h2(); 
+
+    @include media-query($large-up) {
+      @include h1(); 
+    }
 
     /* Changes default input placeholder color for al browsers*/
     &::-webkit-input-placeholder {
