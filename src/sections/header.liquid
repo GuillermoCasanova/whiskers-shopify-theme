@@ -156,3 +156,19 @@
     ]
   }
 {% endschema %}
+
+
+{% javascript %}
+  setTimeout(function() {
+    $.stellar({
+     horizontalScrolling: false,
+    verticalScrolling: true,
+    hideDistantElements: false,
+    responsive: true,
+    positionProperty: 'transform'
+    }); 
+
+    console.log('hello'); 
+
+  }, 200);  
+{% endjavascript %}

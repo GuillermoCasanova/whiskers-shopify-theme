@@ -24,3 +24,9 @@
  * slick-1.8.0 
  */
 // =require vendor/slick.min.js
+
+
+/*!
+ * stellar.js
+ */
+// =require vendor/stellar.js

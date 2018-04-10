@@ -73,6 +73,7 @@
   @include media-query($large-up) {
     max-width: none; 
     margin-top: 0; 
+    margin-bottom: rem-calc($level7);
   }
   
   .product-bg {
@@ -232,7 +233,6 @@
 
       p {
         margin-bottom: rem-calc($level2);
-        @include h4(); 
       }
 
       ul {

@@ -28,26 +28,33 @@ theme.aboutLaces = (function() {
     var setActiveSlide = function(pId, pSlides) {
 
       pSlides.each(function() {
-          var slide = $(this); 
-          var index = slide.data('slide-index');
+        var slide = $(this); 
+        var index = slide.data('slide-index');
 
-          if(index == activeSlide) {
-            slide.addClass('is-active');
-          } else {
-            slide.removeClass('is-active');
-          }
+        if(index == activeSlide) {
+          slide.addClass('is-active');
+          slide.removeClass('is-hidden');
+        } else if(index == 2) {
+          slide.removeClass('is-active');
+          setTimeout(function() {
+            slide.addClass('is-hidden'); 
+          }, 600); 
+        } else {
+          slide.removeClass('is-active');
+        }
       }); 
 
     }; 
-
+    
+    setActiveSlide(activeSlide, slides); 
 
     setInterval(function() {
       activeSlide = activeSlide + 1; 
-      if(activeSlide === slideTotal) {
+      if(activeSlide > slideTotal - 1) {
         activeSlide = 0;
       }
       setActiveSlide(activeSlide, slides); 
-    }, 3000); 
+    }, 4000); 
 
   };
 
