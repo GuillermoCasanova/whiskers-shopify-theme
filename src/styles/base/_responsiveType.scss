@@ -9,12 +9,12 @@
 //http://robertmaple.co.uk/fluid-responsive-type-with-media-queries/
 
 //Set your font size min/max (px)
-$max-font-size : 19;
+$max-font-size : 22;
 $min-font-size : 16;
  
 //Set your viewport size min/max (px)
-$max-media : 1660;
-$min-media : 400;
+$max-media : 2300;
+$min-media : 320;
  
 // Internal variables for the font/viewport ranges
 $viewport-range : $max-media - $min-media;
@@ -56,3 +56,4 @@ $i : 0;
         font-size: $max-root-font * 1%; 
     } 
 }
+

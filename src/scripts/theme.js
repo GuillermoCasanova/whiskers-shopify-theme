@@ -19,6 +19,7 @@ window.theme = window.theme || {};
 // =require sections/product.js
 // =require sections/header.js
 // =require sections/heroHeader.js
+// =require sections/lacingStyles.js
 
 
 
@@ -35,6 +36,7 @@ $(document).ready(function() {
   sections.register('collection_nav', theme.collectionNav);
   sections.register('hero_header', theme.heroHeader);
   sections.register('about_laces', theme.aboutLaces);
+  sections.register('lacing_styles', theme.lacingStyles);
 
 
   // Common a11y fixes

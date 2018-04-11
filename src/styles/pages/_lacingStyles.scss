@@ -1,0 +1,222 @@
+
+
+/*------------------------------------*\
+    #Lacing Styles
+\*------------------------------------*/
+
+
+.lacingStyles {
+  width: 100%; 
+  position: relative;
+
+  li {
+    display: inline-block; 
+    margin-bottom: rem-calc($level7); 
+    
+    a {
+      position: relative;
+      display: block;
+    }
+  }
+}
+
+
+li.is-expanded {
+    
+    a {
+    position: relative;
+
+    &::after {
+    top: auto;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-bottom-color: $secondaryColor;
+    border-width: 15px;
+    left: 50%;
+    margin: -20px 0 0 -15px;
+  }
+    }
+
+}
+
+.lacingStyle {
+  width: 100%; 
+  position: relative;
+  
+  .lacingStyle-inner {
+    position: relative;
+  }
+
+  img {
+    position: relative;
+    padding-right: rem-calc($level4);
+    padding-left: rem-calc($level4);
+    width: 100%; 
+  }
+  
+  .lacingStyle-img {
+    margin-bottom: rem-calc($level2); 
+    width: 100%;
+    max-width: rem-calc(480px);
+  }
+
+  .lacingStyle-title {
+    text-align: center; 
+    @include text-micro(); 
+  }
+
+
+}
+
+.lacingSteps {
+  width: 100%;
+  background-color: $secondaryColor;
+  position: absolute; 
+  left: 0; 
+  right: 0; 
+  overflow: hidden;
+  z-index: 1; 
+  top: auto; 
+  height: 0; 
+
+  .lacingSteps-inner {
+    height: 100%; 
+    width: 100%; 
+    position: relative;
+    padding: rem-calc($level4); 
+  }
+
+  .lacingSteps-images {
+    max-width: rem-calc(148px); 
+    width: 100%; 
+    margin-bottom: rem-calc($level4); 
+
+    @include media-query($medium-up) {
+      max-width: rem-calc(260px); 
+    }
+
+    @include media-query($large-up) {
+      max-width: rem-calc(240px); 
+    }
+
+
+      .slick-prev, 
+      .slick-next {
+        position: absolute;
+        z-index: 10; 
+        top: 45%; 
+        background-color: transparent;
+        color: black; 
+        width: rem-calc(76px); 
+        height: rem-calc(42px);
+        margin-bottom: 0; 
+        opacity: .6;
+        border: none;
+        outline: none; 
+        transition: all .2s ease-in-out; 
+
+        &:before {
+          content: "";
+          background-image: url('../assets/icon--arrow--secondary.svg'); 
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center; 
+          position: absolute;
+          width: 100%; 
+          height: rem-calc(36px); 
+          top:0; 
+        }
+      }
+
+      .slick-prev {
+        left: rem-calc(-36px);
+       transform: scaleX(-1);
+
+        &:hover, 
+        &:focus {
+          opacity: 1; 
+         transform: scaleX(-1) translateX(3px);
+        }
+      }
+
+      .slick-next {
+        right: rem-calc(-36px);
+
+        &:hover, 
+        &:focus {
+          opacity: 1; 
+         transform: translateX(3px);
+        }
+      }
+
+    .slick-arrow {
+      position: absolute;
+      bottom: 0; 
+      left: 0; 
+      right: 0; 
+      width: 100%; 
+      color: $grey--med; 
+      height: rem-calc($level3);
+    }
+  }
+
+  .lacingSteps-details {
+    width: 100%; 
+    max-width: rem-calc(340px); 
+    @include h4(); 
+    @include media-query($large-up) {
+      padding-bottom: rem-calc($level5); 
+    }
+  }
+
+  .lacingSteps-number {
+    padding-right: rem-calc($level1);
+    font-family: $tertiary-font-family;
+    padding-top: rem-calc($level1);  
+    margin-bottom: rem-calc($level5);
+    @include h2();
+
+    @include media-query($large-up) {
+      @include text-kilo();
+    }
+  }
+
+  .lacingSteps-number,
+  .lacingSteps-body {
+    display: inline-block;
+  }
+
+  .lacingSteps-close {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+  }
+
+  .lacingSteps-close::before,
+  .lacingSteps-close::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    height: 1px;
+    background: #888;
+    transform: rotate(45deg);
+  }
+
+  .lacingSteps-close::after {
+    transform: rotate(-45deg);
+  }
+
+  .lacingSteps-close:hover::before,
+  .lacingSteps-close:hover::after {
+    background: #333;
+  }
+
+}
