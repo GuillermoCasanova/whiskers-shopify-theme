@@ -15,10 +15,14 @@
   height: rem-calc(420px); 
   position: relative;
   margin-bottom: rem-calc($level7); 
-
+  
+  @include media-query($medium-up) {
+    margin-bottom: rem-calc($level7 + $level3); 
+  }
 
   @include media-query($large-up) {
     height: 40rem; 
+    margin-bottom: rem-calc($level6); 
   }
 
   .lookBookHeader-bg {
@@ -42,6 +46,10 @@
 
     }
   }
+  
+  .lookBookheader-copy {
+    max-width: rem-calc(370px);
+  }
 
   .lookBookHeader-headline {
     font-family: $tertiary-font-family; 
@@ -51,7 +59,7 @@
     margin-right: auto;
     margin-left: auto;
     position: relative;
-    @include text-kilo(); 
+    @include text-mega(); 
 
     @include media-query($medium-up) {
       padding-top: rem-calc(132px);
@@ -75,13 +83,179 @@
     background-color: $primaryColor ; 
 
     @include media-query($medium-up) {
-      max-width: 72%; 
-      bottom: rem-calc(-100px);
+      max-width: 80%; 
     }
 
     @include media-query($large-up) {
       max-width: 50%; 
       bottom: -7.875rem;
+      @include h4(); 
+    }
+  }
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Lookbook Intro
+\*------------------------------------*/
+
+.lookBookIntro {
+  position: relative;
+  width: 100%; 
+  padding-right: $column-gutter / 2; 
+  padding-left: $column-gutter / 2; 
+  margin-top: rem-calc($level4); 
+
+  @include media-query($medium-up) {
+    padding: 0; 
+    margin-bottom: rem-calc($level7); 
+    margin-top: rem-calc(40px); 
+  }
+
+  @include media-query($large-up) {
+    margin-top: rem-calc(60px); 
+  }
+
+  .lookBookIntro-inner {
+    position: relative;
+    &:before {
+      content: " ";
+      background-color: rgb(56, 54, 65);
+      width: 100%;
+      height: 100%; 
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+
+      @include media-query($medium-up) {
+        right: 0; 
+        width: 86%;
+      }
+
+      @include media-query($large-up) {
+        width: 80%; 
+      }
+    }
+  }
+  
+  .lookBookIntro-image {
+    position: relative;
+    transform: scale(1.25); 
+    margin-bottom: rem-calc($level7); 
+
+    @include media-query($medium-up) {
+      top: rem-calc(-40px);
+      margin-bottom: 0; 
+      transform: scale(1.2); 
+      right: -.5rem;
+    }
+
+    @include media-query($large-up) {
+      top: rem-calc(-60px); 
+    }
+  }
+
+  .lookBookIntro-copy {
+    position: relative;
+    max-width: rem-calc(370px);
+    padding-bottom: $column-gutter / 2; 
+
+    @include media-query($medium-up) {
+      margin-bottom: 0; 
+      max-width: 14rem; 
+      margin-right: auto; 
+      margin-left: auto; 
+      display: block; 
+      padding: rem-calc($level7); 
+      padding-left: 0; 
+      padding-right: 0;
+      right: rem-calc(-18px); 
+    }
+  
+    @include media-query($large-up) {
+      max-width: 19rem; 
+      padding-left: rem-calc($level4);  
+      padding-right: rem-calc($level4); 
+      padding-top: rem-calc($level7 + $level3);
+      padding-bottom: rem-calc($level7 + $level3); 
+    }
+
+    .lookBookIntro-headline {
+      font-family: $tertiary-font-family; 
+      margin-bottom: rem-calc($level2);
+
+      @include media-query($medium-up) {
+        @include h2(); 
+      }
+
+      @include media-query($large-up) {
+        @include h1(); 
+      }
+    }
+
+    p {
+      margin-bottom: 0; 
+      @include media-query($medium-up) {
+        @include text-micro(); 
+      }
+
+      @include media-query($large-up) {
+        @include h6(); 
+      }
+    }
+  }
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Lookbook Slideshow 
+\*------------------------------------*/
+
+
+.lookBookSlideshow {
+  // padding-right: $column-gutter / 2; 
+  // padding-left: $column-gutter / 2; 
+  
+  .lookBookSlideshow-slideshow {
+    margin-bottom: 0; 
+  }
+
+  .lookBookSlideshow-slideForMore { 
+    color: $quintenaryColor; 
+    text-align: center;
+    text-transform: uppercase;
+    font-family: $secondary-font-family;
+  }
+
+  .slick-list {
+    overflow: visible;
+  }
+
+  .slick-arrow {
+   display: none; 
+  }
+
+  .lookBookSlideshow-look {
+    margin-bottom: rem-calc($level4); 
+    margin-right: rem-calc($level2);
+    margin-left: rem-calc($level2);
+
+    img {
+      box-shadow: 0px 0px 16px rgba(0,0,0, .6);
+      margin-bottom: rem-calc($level1);
+    }
+
+    .lookBookSlideshow-look-name {
+      text-transform: uppercase;
+      font-family: $secondary-font-family; 
+      @include text-micro(); 
     }
   }
 }

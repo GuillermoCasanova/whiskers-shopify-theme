@@ -12,7 +12,7 @@
     width: 100%;
     padding-top: $column-gutter / 2; 
     padding-bottom: $column-gutter / 2; 
-    @extend %position-relative; 
+    position: relative;
 
     &:before {
       content: " ";
@@ -42,7 +42,7 @@
   }
 
   .copySection-accent {
-    @extend %position-absolute; 
+    position: absolute;
   }
   
   .copySection-copy {
