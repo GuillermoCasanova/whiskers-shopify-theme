@@ -31,20 +31,12 @@ theme.lacingStyles = (function() {
         marginExpanded = 10,
         $window = $( window ), winsize,
         $body = $( 'html, body' ),
-        // transitionend events
-        transEndEventNames = {
-          'WebkitTransition' : 'webkitTransitionEnd',
-          'MozTransition' : 'transitionend',
-          'OTransition' : 'oTransitionEnd',
-          'msTransition' : 'MSTransitionEnd',
-          'transition' : 'transitionend'
-        },
-        transEndEventName = transEndEventNames['transition'],
+        transEndEventName = 'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',
         // support for csstransitions
         support = Modernizr.csstransitions,
         // default settings
         settings = {
-          minHeight : 600,
+          minHeight : 660,
           speed : 600,
           easing : 'ease-in-out'
         };
@@ -61,56 +53,7 @@ theme.lacingStyles = (function() {
         initEvents();
       }
 
-      // add more items to the grid.
-      // the new items need to appended to the grid.
-      // after that call Grid.addItems(theItems);
-      function addItems( $newitems ) {
 
-        $items = $items.add( $newitems );
-
-        $newitems.each( function() {
-          var $item = $( this );
-          $item.data( {
-            offsetTop : $item.offset().top,
-            height : $item.height()
-          } );
-        } );
-
-        initItemsEvents( $newitems );
-
-      }
-
-
-       function initSlideshow() {
-
-        $(selectors.stepsSlideshow).slick({
-          'arrows': false,
-          'slidesToShow': 1,
-          'mobileFirst': true,
-          'autoplay': false,
-          'fade': true,
-          'infinite': false,
-          'swipe': false
-        });
-
-        $(selectors.imagesSlideshow).slick({
-          'arrows': true,
-          'slidesToShow': 1,
-          'mobileFirst': true,
-          'autoplay': false,
-          'fade': true,
-          'infinite': false,
-          'swipe': false,
-          'asNavFor': selectors.stepsSlideshow
-        });
-
-        var nextBtn = $(selectors.imagesSlideshow).find('.slick-next');
-        var prevBtn = $(selectors.imagesSlideshow).find('.slick-prev');
-
-        nextBtn.text('');
-        prevBtn.text('');
-
-      };
 
 
       // saves the item´s offset top and height (if saveheight is true)
@@ -169,15 +112,16 @@ theme.lacingStyles = (function() {
 
       function showPreview( $item ) {
 
-        var preview = $.data( this, 'preview' ),
-          // item´s offset top
-          position = $item.data( 'offsetTop' );
+        var preview = $.data( this, 'preview' );
+        
+        // item´s offset top to indicate its position on the document
+        var position = $item.data( 'offsetTop' );
 
         scrollExtra = 0;
 
         // if a preview exists and previewPos is different (different row) from item´s top then close it
-        if( typeof preview != 'undefined' ) {
-
+        if(typeof preview != 'undefined' ) {
+          console.log('there is a preview here'); 
           // not in the same row
           if( previewPos !== position ) {
             // if position > previewPos then we need to take te current preview´s height in consideration when scrolling the window
@@ -219,23 +163,48 @@ theme.lacingStyles = (function() {
       }
 
       Preview.prototype = {
-        create : function() {
-          // create Preview structure:
 
-          //var template = this.$item.data('lacing-template');
-          var id = this.$item.data('handle'); 
-          console.log('#' + id); 
-          var template = $('#' + id).html();
-          this.$previewEl = $( '<div class="lacingSteps"></div>').append(template);
+         // inits the slideshow inside the expanded content 
+         initSlideshow: function() {
+
+          this.stepsSlideshow = $(selectors.stepsSlideshow).slick({
+            'arrows': false,
+            'slidesToShow': 1,
+            'mobileFirst': true,
+            'autoplay': false,
+            'fade': true,
+            'infinite': false,
+            'swipe': false
+          });
+
+          this.imagesSlideshow = $(selectors.imagesSlideshow).slick({
+            'arrows': true,
+            'slidesToShow': 1,
+            'mobileFirst': true,
+            'autoplay': false,
+            'fade': true,
+            'infinite': false,
+            'swipe': false,
+            'asNavFor': selectors.stepsSlideshow
+          });
+
+          var nextBtn = $(selectors.imagesSlideshow).find('.slick-next');
+          var prevBtn = $(selectors.imagesSlideshow).find('.slick-prev');
+
+          nextBtn.text('');
+          prevBtn.text('');
+
+        },
+
+        create : function() {
+
+          // create preview structure component 
+          this.$previewEl = $( '<div class="lacingSteps"></div>');
 
           // append preview element to the item
           this.$item.append( this.getEl() );
           // set the transitions for the preview and the item
           this.setTransition();
-        
-          if(!$(selectors.stepsSlideshow).hasClass('slick-slider')) {
-            initSlideshow();
-          }
 
         },
         update : function( $item ) {
@@ -251,21 +220,28 @@ theme.lacingStyles = (function() {
             this.$item.addClass( 'is-expanded' );
             // position the preview correctly
             this.positionPreview();
-
-            if($(selectors.stepsSlideshow).hasClass('slick-slider')) {
-                $(selectors.stepsSlideshow).slick("unslick"); 
-                $(selectors.imagesSlideshow).slick("unslick"); 
-              initSlideshow()
-            }
           }
 
           // update current value
           current = this.$item.index();
 
-          // // update preview´s content
-          // var id = this.$item.data('handle'); 
-          // var template = $('#' + id).html();
-          // this.$previewEl = $( '<div class="lacingSteps"></div>').append(template);
+          // update preview´s content
+          var id = this.$item.data('handle'); 
+          var template = $('#' + id).html();
+
+          var self = this; 
+
+          // if there are contents in the expander alread, we unslick, delete them and recreate the insides with a new template
+          if(self.$previewEl.children('.lacingSteps-inner').length > 0 ) {
+            self.stepsSlideshow.slick("unslick"); 
+            self.imagesSlideshow.slick("unslick");     
+            self.$previewEl.children('.lacingSteps-inner').remove();
+            self.$previewEl.append(template);
+            self.initSlideshow();
+          } else {
+            self.$previewEl.append(template);
+            self.initSlideshow();
+          }
 
         },
         open : function() {
@@ -275,34 +251,33 @@ theme.lacingStyles = (function() {
             this.setHeights();
             // scroll to position the preview in the right place
             this.positionPreview();
-            if(!$(selectors.stepsSlideshow).hasClass('slick-slider')) {
-              initSlideshow()
-            }
           }, this ), 25 );
 
         },
         close : function() {
-
           var self = this;  
 
           var onEndFn = function() {
 
-              if( support ) {
-                $( this ).off( transEndEventName );
-              }
+            console.log('on end is getting called');
 
+            if( support ) {
+              $( this ).off( transEndEventName );
+            }
 
-              self.$item.removeClass( 'is-expanded' );
-             // self.$previewEl.remove();
-            };
+            self.$item.removeClass( 'is-expanded' );
+
+            if(self.stepsSlideshow.hasClass('slick-slider')) {
+              self.stepsSlideshow.slick("unslick"); 
+              self.imagesSlideshow.slick("unslick"); 
+              self.imagesSlideshow.on('destroy', function() {
+                self.$previewEl.remove(); 
+              })
+            }
+
+          };
 
           setTimeout( $.proxy( function() {
-
-            if($(selectors.stepsSlideshow).hasClass('slick-slider')) {
-                $(selectors.stepsSlideshow).slick("unslick"); 
-                $(selectors.imagesSlideshow).slick("unslick"); 
-              }
-              
 
             if( typeof this.$largeImg !== 'undefined' ) {
               this.$largeImg.fadeOut( 'fast' );
@@ -377,8 +352,7 @@ theme.lacingStyles = (function() {
       }
 
       return { 
-        init : init,
-        addItems : addItems
+        init : init
       };
 
     })();

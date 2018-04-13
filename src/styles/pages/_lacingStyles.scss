@@ -59,7 +59,6 @@ li.is-expanded {
   }
   
   .lacingStyle-img {
-    margin-bottom: rem-calc($level2); 
     width: 100%;
     max-width: rem-calc(480px);
   }
@@ -91,67 +90,68 @@ li.is-expanded {
   }
 
   .lacingSteps-images {
-    max-width: rem-calc(148px); 
+    max-width: rem-calc(136px); 
     width: 100%; 
     margin-bottom: rem-calc($level4); 
+    position: relative;
 
     @include media-query($medium-up) {
       max-width: rem-calc(260px); 
     }
 
     @include media-query($large-up) {
-      max-width: rem-calc(240px); 
+      top: rem-calc(-24px);
+      max-width: rem-calc(270px); 
     }
 
+    .slick-prev, 
+    .slick-next {
+      position: absolute;
+      z-index: 10; 
+      top: 45%; 
+      background-color: transparent;
+      color: black; 
+      width: rem-calc(76px); 
+      height: rem-calc(42px);
+      margin-bottom: 0; 
+      opacity: .6;
+      border: none;
+      outline: none; 
+      transition: all .2s ease-in-out; 
 
-      .slick-prev, 
-      .slick-next {
+      &:before {
+        content: "";
+        background-image: url('../assets/icon--arrow--secondary.svg'); 
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center; 
         position: absolute;
-        z-index: 10; 
-        top: 45%; 
-        background-color: transparent;
-        color: black; 
-        width: rem-calc(76px); 
-        height: rem-calc(42px);
-        margin-bottom: 0; 
-        opacity: .6;
-        border: none;
-        outline: none; 
-        transition: all .2s ease-in-out; 
-
-        &:before {
-          content: "";
-          background-image: url('../assets/icon--arrow--secondary.svg'); 
-          background-size: contain;
-          background-repeat: no-repeat;
-          background-position: center; 
-          position: absolute;
-          width: 100%; 
-          height: rem-calc(36px); 
-          top:0; 
-        }
+        width: 100%; 
+        height: rem-calc(36px); 
+        top:0; 
       }
+    }
 
-      .slick-prev {
-        left: rem-calc(-36px);
-       transform: scaleX(-1);
+    .slick-prev {
+      left: rem-calc(-36px);
+     transform: scaleX(-1);
 
-        &:hover, 
-        &:focus {
-          opacity: 1; 
-         transform: scaleX(-1) translateX(3px);
-        }
+      &:hover, 
+      &:focus {
+        opacity: 1; 
+       transform: scaleX(-1) translateX(3px);
       }
+    }
 
-      .slick-next {
-        right: rem-calc(-36px);
+    .slick-next {
+      right: rem-calc(-36px);
 
-        &:hover, 
-        &:focus {
-          opacity: 1; 
-         transform: translateX(3px);
-        }
+      &:hover, 
+      &:focus {
+        opacity: 1; 
+       transform: translateX(3px);
       }
+    }
 
     .slick-arrow {
       position: absolute;
@@ -169,7 +169,8 @@ li.is-expanded {
     max-width: rem-calc(340px); 
     @include h4(); 
     @include media-query($large-up) {
-      padding-bottom: rem-calc($level5); 
+      padding-top: rem-calc($level7); 
+      max-width: rem-calc(360px); 
     }
   }
 
@@ -177,11 +178,15 @@ li.is-expanded {
     padding-right: rem-calc($level1);
     font-family: $tertiary-font-family;
     padding-top: rem-calc($level1);  
-    margin-bottom: rem-calc($level5);
     @include h2();
 
-    @include media-query($large-up) {
+    @include media-query($medium-up) {
+      margin-bottom: rem-calc($level5);
       @include text-kilo();
+    }
+
+    @include media-query($large-up) {
+      @include text-giga();
     }
   }
 
@@ -197,6 +202,8 @@ li.is-expanded {
     top: 20px;
     right: 20px;
     cursor: pointer;
+    transition: all .2s ease-in-out;
+    transform: translateZ(0);
   }
 
   .lacingSteps-close::before,
@@ -205,8 +212,8 @@ li.is-expanded {
     position: absolute;
     width: 100%;
     top: 50%;
-    height: 1px;
-    background: #888;
+    height: 3px;
+    background: #fff;
     transform: rotate(45deg);
   }
 
@@ -214,9 +221,9 @@ li.is-expanded {
     transform: rotate(-45deg);
   }
 
-  .lacingSteps-close:hover::before,
-  .lacingSteps-close:hover::after {
-    background: #333;
+  .lacingSteps-close:hover,
+  .lacingSteps-close:focus {
+    transform: rotate(-45deg); 
   }
 
 }

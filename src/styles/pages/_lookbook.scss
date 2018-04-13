@@ -1,0 +1,88 @@
+
+
+/*------------------------------------*\
+    #Lookbook Specific Styles
+\*------------------------------------*/
+
+
+
+/*------------------------------------*\
+    #Lookbook Header
+\*------------------------------------*/
+
+
+.lookBookHeader {
+  height: rem-calc(420px); 
+  position: relative;
+  margin-bottom: rem-calc($level7); 
+
+
+  @include media-query($large-up) {
+    height: 40rem; 
+  }
+
+  .lookBookHeader-bg {
+    background-image: url('lookbook-bg_small.svg');
+    background-size: cover; 
+    background-repeat: no-repeat;
+    background-position: center; 
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0;
+
+    @include media-query($medium-up) {
+      background-image: url('lookbook-bg_medium.svg');
+      background-position: top;
+    } 
+
+    @include media-query($large-up) {
+      background-image: url('lookbook-bg_large.svg');
+
+    }
+  }
+
+  .lookBookHeader-headline {
+    font-family: $tertiary-font-family; 
+    padding-top: rem-calc(162px);
+    width: 100%; 
+    max-width: rem-calc(340px); 
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+    @include text-kilo(); 
+
+    @include media-query($medium-up) {
+      padding-top: rem-calc(132px);
+      @include text-mega(); 
+    }
+
+    @include media-query($large-up) {
+      max-width: 28.75rem; 
+      background-size: contain; 
+      font-size: 4rem; 
+      padding-top: 0; 
+    }
+  }
+
+  .lookBookHeader-descriptor {
+    position: relative;
+    bottom: rem-calc(-74px);
+    width: 84%;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: $primaryColor ; 
+
+    @include media-query($medium-up) {
+      max-width: 72%; 
+      bottom: rem-calc(-100px);
+    }
+
+    @include media-query($large-up) {
+      max-width: 50%; 
+      bottom: -7.875rem;
+    }
+  }
+}
+
