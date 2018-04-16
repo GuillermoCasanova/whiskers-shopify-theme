@@ -259,7 +259,7 @@ var ajaxCart = (function(module, $) {
   formOverride = function() {
     $formContainer.on('submit', function(evt) {
 
-      if(window.innerWidth > 680) {
+      if(window.innerWidth > 640) {
 
         evt.preventDefault();
 

@@ -4,13 +4,13 @@
  * ------------------------------------------------------------------------------
  * A file that contains scripts highly couple code to the lookbook Slideshow Template
  *
-   * @namespace lookbookSlideshow
+   * @namespace lookbookSlideshow2
  */
 
-theme.lookbookSlideshow = (function() {
+theme.lookbookSlideshow2 = (function() {
 
   var selectors = {
-    lookbookSlideshow: '[data-lookbook-slideshow]'
+    lookbookSlideshow: '[data-lookbook-slideshow-2]'
   };
 
   var lookbookSlideshow = function(container) { 
@@ -24,7 +24,6 @@ theme.lookbookSlideshow = (function() {
       'centerMode': true,
       'centerPadding': '40px',
       'touchThreshold': 10,
-      'rtl': true,
       'responsive' : [
           {
             breakpoint: 640, 

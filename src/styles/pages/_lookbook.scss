@@ -12,23 +12,17 @@
 
 
 .lookBookHeader {
-  height: rem-calc(420px); 
+  height: 30rem; 
   position: relative;
-  margin-bottom: rem-calc($level7); 
-  
-  @include media-query($medium-up) {
-    margin-bottom: rem-calc($level7 + $level3); 
-  }
+  margin-bottom: rem-calc($level4); 
 
   @include media-query($large-up) {
     height: 40rem; 
-    margin-bottom: rem-calc($level6); 
   }
 
   .lookBookHeader-bg {
-    background-image: url('lookbook-bg_small.svg');
+    background-image: url('lookbook-bg_small10.svg');
     background-size: cover; 
-    background-repeat: no-repeat;
     background-position: center; 
     position: absolute;
     top: 0; 
@@ -37,13 +31,14 @@
     bottom: 0;
 
     @include media-query($medium-up) {
-      background-image: url('lookbook-bg_medium.svg');
+      background-image: url('lookbook-bg_medium3.svg');
       background-position: top;
     } 
 
     @include media-query($large-up) {
-      background-image: url('lookbook-bg_large.svg');
-
+      background-image: url('lookbook-bg_large8.svg');
+      background-position: center;
+      background-size: cover; 
     }
   }
   
@@ -53,16 +48,29 @@
 
   .lookBookHeader-headline {
     font-family: $tertiary-font-family; 
-    padding-top: rem-calc(162px);
+    padding-top: 9.5rem;
     width: 100%; 
     max-width: rem-calc(340px); 
     margin-right: auto;
     margin-left: auto;
     position: relative;
-    @include text-mega(); 
+    @include text-kilo(); 
+
+    &:after {
+      content: " "; 
+      bottom: rem-calc(-12px); 
+      width: rem-calc(48px); 
+      height: rem-calc(4px); 
+      right: 0; 
+      left: 0; 
+      margin-right: auto;
+      margin-left: auto; 
+      position: absolute;
+      background-color: $accentColor;
+    }
 
     @include media-query($medium-up) {
-      padding-top: rem-calc(132px);
+      padding-top: 4rem;
       @include text-mega(); 
     }
 
@@ -76,19 +84,22 @@
 
   .lookBookHeader-descriptor {
     position: relative;
-    bottom: rem-calc(-74px);
+    bottom: -5.25rem;
     width: 84%;
     margin-right: auto;
     margin-left: auto;
-    background-color: $primaryColor ; 
-
+    max-width: rem-calc(290px);
+    margin-bottom: 0; 
+  
     @include media-query($medium-up) {
-      max-width: 80%; 
+      max-width: 74%; 
+      bottom: -6.5rem;
+      min-width: 30rem; 
     }
 
     @include media-query($large-up) {
       max-width: 50%; 
-      bottom: -7.875rem;
+      bottom: -8.5rem;
       @include h4(); 
     }
   }
@@ -220,8 +231,13 @@
 
 
 .lookBookSlideshow {
+  overflow: hidden; 
   // padding-right: $column-gutter / 2; 
   // padding-left: $column-gutter / 2; 
+
+  @include media-query($large-up) {
+    margin-bottom: rem-calc($level4); 
+  }
   
   .lookBookSlideshow-slideshow {
     margin-bottom: 0; 
@@ -238,17 +254,73 @@
     overflow: visible;
   }
 
-  .slick-arrow {
-   display: none; 
-  }
+  // .slick-arrow {
+  //    @include media-query($medium-up) {
+  //     position: absolute;
+  //    } 
+  //  }
+
+      .slick-prev, 
+      .slick-next {
+        position: absolute;
+        z-index: 10; 
+        top: 45%; 
+        background-color: transparent;
+        color: black; 
+        width: rem-calc(76px); 
+        height: rem-calc(42px);
+        margin-bottom: 0; 
+        opacity: .6;
+        border: none;
+        outline: none; 
+        transition: all .2s ease-in-out; 
+
+        &:before {
+          content: "";
+          background-image: url('../assets/icon--arrow--secondary.svg'); 
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center; 
+          position: absolute;
+          width: 100%; 
+          height: rem-calc(36px); 
+          top:0; 
+        }
+      }
+
+      .slick-prev {
+        left: rem-calc(34px);
+        transform: scaleX(-1);
+
+        &:hover, 
+        &:focus {
+          opacity: 1; 
+         transform: scaleX(-1) translateX(3px);
+        }
+      }
+
+      .slick-next {
+        right: rem-calc(34px);
+
+        &:hover, 
+        &:focus {
+          opacity: 1; 
+         transform: translateX(3px);
+        }
+      }
 
   .lookBookSlideshow-look {
     margin-bottom: rem-calc($level4); 
     margin-right: rem-calc($level2);
     margin-left: rem-calc($level2);
 
+    @include media-query($large-up) {
+      margin-right: rem-calc($level3);
+      margin-left: rem-calc($level3);
+    }
+
     img {
-      box-shadow: 0px 0px 16px rgba(0,0,0, .6);
+      box-shadow: 0px 0px 14px rgba(0,0,0, .6);
       margin-bottom: rem-calc($level1);
     }
 
@@ -260,3 +332,62 @@
   }
 }
 
+
+
+
+/*------------------------------------*\
+    #Lookbook Art 
+\*------------------------------------*/
+
+.lookbookArt {
+  .lookbookArt-headline {
+    font-family: $tertiary-font-family; 
+    @include text-kilo(); 
+
+    @include media-query($medium-up) {
+      margin-bottom: rem-calc($level5); 
+      @include text-mega(); 
+    }
+
+    @include media-query($large-up) {
+      margin-bottom: rem-calc($level6); 
+      @include text-giga(); 
+    }
+  }
+
+  .lookbookArt-img {
+    margin-bottom: rem-calc($level4); 
+
+    @include media-query($medium-up) {
+      margin-bottom: rem-calc($level5); 
+    }
+
+    @include media-query($large-up) {
+      margin-bottom: rem-calc($level6); 
+    }
+  }
+
+  p {
+    width: 84%;
+    margin-right: auto;
+    margin-left: auto; 
+
+    @include media-query($medium-up) {
+      max-width: 80%; 
+    }
+
+    @include media-query($large-up) {
+      width: rem-calc(520px);
+      bottom: -7.875rem;
+      @include h4(); 
+    }
+  }
+
+  .lookbookArt-icon {
+    color: red; 
+    text-align: center; 
+    display: block; 
+    width: 100%;
+    display: none;
+  }
+}

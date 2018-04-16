@@ -15,7 +15,7 @@ section {
   @extend %position-relative; 
 
   @include media-query($medium-up) {
-    padding-bottom: rem-calc($level5);
+    padding-bottom: rem-calc($level7);
   }
 
   @include media-query($large-up) {
@@ -37,7 +37,7 @@ section {
   padding-top: rem-calc($level7);
 
   @include media-query($medium-up) {
-    padding-top: rem-calc($level5);
+    padding-top: rem-calc($level7);
   }
 
   @include media-query($large-up) {
