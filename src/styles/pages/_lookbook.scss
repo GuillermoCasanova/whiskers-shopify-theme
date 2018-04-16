@@ -371,14 +371,17 @@
     width: 84%;
     margin-right: auto;
     margin-left: auto; 
+    margin-bottom: rem-calc($level4); 
 
     @include media-query($medium-up) {
       max-width: 80%; 
+      margin-bottom: rem-calc($level5); 
     }
 
     @include media-query($large-up) {
       width: rem-calc(520px);
       bottom: -7.875rem;
+      margin-bottom: rem-calc($level6); 
       @include h4(); 
     }
   }
@@ -388,6 +391,7 @@
     text-align: center; 
     display: block; 
     width: 100%;
-    display: none;
+    fill: pink; 
+    margin-bottom: rem-calc($level5); 
   }
 }

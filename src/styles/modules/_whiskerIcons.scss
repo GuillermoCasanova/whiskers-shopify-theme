@@ -1,0 +1,21 @@
+
+
+/*------------------------------------*\
+    #Whisker Icon Styles 
+\*------------------------------------*/
+
+.whiskerIcon {
+  fill: $secondaryColor; 
+  width: rem-calc(33px); 
+  height: rem-calc(33px); 
+}
+
+
+.whiskerIcon--pink {
+  fill: $lace-pink;  
+}
+
+
+.whiskerIcon--yellow {
+  fill: $lace-yellow;  
+}

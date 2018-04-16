@@ -81,6 +81,14 @@
 
     }
   }
+
+  .copySection-imageContainer {
+    width: 100%; 
+    
+      img {
+        width: 100%; 
+      }
+  }
 }
 
 
@@ -144,6 +152,7 @@
   }
 
   .copySection-imageContainer {
+
     @include media-query($medium-up) {
       left: rem-calc(-12px);
     }
@@ -151,6 +160,7 @@
     @include media-query($large-up) {
       left: rem-calc(-24px);
     }
+
   }
 
   .copySection-copy {

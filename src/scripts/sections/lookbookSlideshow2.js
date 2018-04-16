@@ -24,6 +24,7 @@ theme.lookbookSlideshow2 = (function() {
       'centerMode': true,
       'centerPadding': '40px',
       'touchThreshold': 10,
+      'rtl': true,
       'responsive' : [
           {
             breakpoint: 640, 
