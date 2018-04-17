@@ -13,6 +13,127 @@ theme.lacingStyles = (function() {
 
   var lacingStyles = function() { 
 
+    // ======================= imagesLoaded Plugin ===============================
+    // https://github.com/desandro/imagesloaded
+
+    // $('#my-container').imagesLoaded(myFunction)
+    // execute a callback when all images have loaded.
+    // needed because .load() doesn't work on cached images
+
+    // callback function gets image collection as argument
+    //  this is the container
+
+    // original: MIT license. Paul Irish. 2010.
+    // contributors: Oren Solomianik, David DeSandro, Yiannis Chatzikonstantinou
+
+    // blank image data-uri bypasses webkit log warning (thx doug jones)
+    var BLANK = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
+
+    $.fn.imagesLoaded = function( callback ) {
+      var $this = this,
+        deferred = $.isFunction($.Deferred) ? $.Deferred() : 0,
+        hasNotify = $.isFunction(deferred.notify),
+        $images = $this.find('img').add( $this.filter('img') ),
+        loaded = [],
+        proper = [],
+        broken = [];
+
+      // Register deferred callbacks
+      if ($.isPlainObject(callback)) {
+        $.each(callback, function (key, value) {
+          if (key === 'callback') {
+            callback = value;
+          } else if (deferred) {
+            deferred[key](value);
+          }
+        });
+      }
+
+      function doneLoading() {
+        var $proper = $(proper),
+          $broken = $(broken);
+
+        if ( deferred ) {
+          if ( broken.length ) {
+            deferred.reject( $images, $proper, $broken );
+          } else {
+            deferred.resolve( $images );
+          }
+        }
+
+        if ( $.isFunction( callback ) ) {
+          callback.call( $this, $images, $proper, $broken );
+        }
+      }
+
+      function imgLoaded( img, isBroken ) {
+        // don't proceed if BLANK image, or image is already loaded
+        if ( img.src === BLANK || $.inArray( img, loaded ) !== -1 ) {
+          return;
+        }
+
+        // store element in loaded images array
+        loaded.push( img );
+
+        // keep track of broken and properly loaded images
+        if ( isBroken ) {
+          broken.push( img );
+        } else {
+          proper.push( img );
+        }
+
+        // cache image and its state for future calls
+        $.data( img, 'imagesLoaded', { isBroken: isBroken, src: img.src } );
+
+        // trigger deferred progress method if present
+        if ( hasNotify ) {
+          deferred.notifyWith( $(img), [ isBroken, $images, $(proper), $(broken) ] );
+        }
+
+        // call doneLoading and clean listeners if all images are loaded
+        if ( $images.length === loaded.length ){
+          setTimeout( doneLoading );
+          $images.unbind( '.imagesLoaded' );
+        }
+      }
+
+      // if no images, trigger immediately
+      if ( !$images.length ) {
+        doneLoading();
+      } else {
+        $images.bind( 'load.imagesLoaded error.imagesLoaded', function( event ){
+          // trigger imgLoaded
+          imgLoaded( event.target, event.type === 'error' );
+        }).each( function( i, el ) {
+          var src = el.src;
+
+          // find out if this image has been already checked for status
+          // if it was, and src has not changed, call imgLoaded on it
+          var cached = $.data( el, 'imagesLoaded' );
+          if ( cached && cached.src === src ) {
+            imgLoaded( el, cached.isBroken );
+            return;
+          }
+
+          // if complete is true and browser supports natural sizes, try
+          // to check for image status manually
+          if ( el.complete && el.naturalWidth !== undefined ) {
+            imgLoaded( el, el.naturalWidth === 0 || el.naturalHeight === 0 );
+            return;
+          }
+
+          // cached images don't fire load sometimes, so we reset src, but only when
+          // dealing with IE, or image is complete (loaded) and failed manual check
+          // webkit hack from http://groups.google.com/group/jquery-dev/browse_thread/thread/eee6ab7b2da50e1f
+          if ( el.readyState || el.complete ) {
+            el.src = BLANK;
+            el.src = src;
+          }
+        });
+      }
+
+      return deferred ? deferred.promise( $this ) : $this;
+    };
 
     var Grid = (function() {
 
@@ -36,27 +157,36 @@ theme.lacingStyles = (function() {
         support = Modernizr.csstransitions,
         // default settings
         settings = {
-          minHeight : 660,
+          minHeight : 600,
           speed : 600,
           easing : 'ease-in-out'
         };
 
+
+      //
+      // Initializes the grid expander functionality with settings once all images are loaded 
+      //
       function init( config ) {
           
         // the settings..
         settings = $.extend( true, {}, settings, config );
-        // save item´s size and offset
-        saveItemInfo( true );
-        // get window´s size
-        getWinSize();
-        // initialize some events
-        initEvents();
+
+        $grid.imagesLoaded(function() {
+
+          // save item´s size and offset
+          saveItemInfo( true );
+          // get window´s size
+          getWinSize();
+          // initialize some events
+          initEvents();
+
+        }); 
       }
 
 
-
-
+      //
       // saves the item´s offset top and height (if saveheight is true)
+      //
       function saveItemInfo( saveheight ) {
         $items.each( function() {
           var $item = $( this );
@@ -67,11 +197,12 @@ theme.lacingStyles = (function() {
         } );
       }
 
+
+      //
+      // Initializes the events that we will be listening to
+      //
       function initEvents() {
         
-        // when clicking an item, show the preview with the item´s info and large image.
-        // close the item if already expanded.
-        // also close if clicking on the item´s cross
         initItemsEvents( $items );
         
         // on window resize get the window´s size again
@@ -92,11 +223,16 @@ theme.lacingStyles = (function() {
 
       }
 
+      //
+      // when clicking an item, show the preview with the item´s info and large image.
+      // close the item if already expanded.
+      // also close if clicking on the item´s cross
+      //
       function initItemsEvents( $items ) {
         $items.on( 'click', '.lacingSteps-close', function() {
           hidePreview();
           return false;
-        } ).children( 'a' ).on( 'click', function(e) {
+        }).children( '[data-lacing-thumb]' ).on( 'click', function(e) {
 
           var $item = $( this ).parent();
           // check if item already opened
@@ -121,7 +257,6 @@ theme.lacingStyles = (function() {
 
         // if a preview exists and previewPos is different (different row) from item´s top then close it
         if(typeof preview != 'undefined' ) {
-          console.log('there is a preview here'); 
           // not in the same row
           if( previewPos !== position ) {
             // if position > previewPos then we need to take te current preview´s height in consideration when scrolling the window
@@ -135,8 +270,7 @@ theme.lacingStyles = (function() {
             preview.update( $item );
             return false;
           }
-          
-        }
+        } 
 
         // update previewPos
         previewPos = position;
@@ -164,37 +298,41 @@ theme.lacingStyles = (function() {
 
       Preview.prototype = {
 
-         // inits the slideshow inside the expanded content 
-         initSlideshow: function() {
+        // inits the slideshow inside the expanded content 
+        initSlideshow: function() {
 
-          this.stepsSlideshow = $(selectors.stepsSlideshow).slick({
-            'arrows': false,
-            'slidesToShow': 1,
-            'mobileFirst': true,
-            'autoplay': false,
-            'fade': true,
-            'infinite': false,
-            'swipe': false
-          });
+            this.stepsSlideshow = this.$previewEl.find(selectors.stepsSlideshow).slick({
+              'arrows': false,
+              'slidesToShow': 1,
+              'mobileFirst': true,
+              'autoplay': false,
+              'fade': true,
+              'infinite': false,
+              'swipe': false
+            });
 
-          this.imagesSlideshow = $(selectors.imagesSlideshow).slick({
-            'arrows': true,
-            'slidesToShow': 1,
-            'mobileFirst': true,
-            'autoplay': false,
-            'fade': true,
-            'infinite': false,
-            'swipe': false,
-            'asNavFor': selectors.stepsSlideshow
-          });
+            this.imagesSlideshow = this.$previewEl.find(selectors.imagesSlideshow).slick({
+              'arrows': true,
+              'slidesToShow': 1,
+              'mobileFirst': true,
+              'autoplay': false,
+              'fade': true,
+              'infinite': false,
+              'swipe': false,
+              'asNavFor': selectors.stepsSlideshow
+            });
 
-          var nextBtn = $(selectors.imagesSlideshow).find('.slick-next');
-          var prevBtn = $(selectors.imagesSlideshow).find('.slick-prev');
+            var nextBtn = $(selectors.imagesSlideshow).find('.slick-next');
+            var prevBtn = $(selectors.imagesSlideshow).find('.slick-prev');
 
-          nextBtn.text('');
-          prevBtn.text('');
+            nextBtn.text('');
+            prevBtn.text('');
 
         },
+        destroySlideshows: function() {
+          this.stepsSlideshow.slick("unslick"); 
+          this.imagesSlideshow.slick("unslick");     
+        }, 
 
         create : function() {
 
@@ -231,17 +369,14 @@ theme.lacingStyles = (function() {
 
           var self = this; 
 
-          // if there are contents in the expander alread, we unslick, delete them and recreate the insides with a new template
+          // if there are contents in the expander already, we unslick, delete them
           if(self.$previewEl.children('.lacingSteps-inner').length > 0 ) {
-            self.stepsSlideshow.slick("unslick"); 
-            self.imagesSlideshow.slick("unslick");     
-            self.$previewEl.children('.lacingSteps-inner').remove();
-            self.$previewEl.append(template);
-            self.initSlideshow();
-          } else {
-            self.$previewEl.append(template);
-            self.initSlideshow();
+            self.destroySlideshows(); 
+            this.$previewEl.children('.lacingSteps-inner').remove();
           }
+        
+          self.$previewEl.append(template);
+          self.initSlideshow();
 
         },
         open : function() {
@@ -257,32 +392,22 @@ theme.lacingStyles = (function() {
         close : function() {
           var self = this;  
 
+
           var onEndFn = function() {
 
-            console.log('on end is getting called');
-
-            if( support ) {
-              $( this ).off( transEndEventName );
-            }
-
+            // if( support ) {
+            //   $( this ).off( transEndEventName );
+            // }
             self.$item.removeClass( 'is-expanded' );
-
-            if(self.stepsSlideshow.hasClass('slick-slider')) {
-              self.stepsSlideshow.slick("unslick"); 
-              self.imagesSlideshow.slick("unslick"); 
-              self.imagesSlideshow.on('destroy', function() {
-                self.$previewEl.remove(); 
-              })
-            }
+            self.destroySlideshows(); 
+            self.$previewEl.remove(); 
 
           };
 
           setTimeout( $.proxy( function() {
-
-            if( typeof this.$largeImg !== 'undefined' ) {
-              this.$largeImg.fadeOut( 'fast' );
-            }
+       
             this.$previewEl.css( 'height', 0 );
+            this.$previewEl.css( 'overflow', 'hidden' );
             // the current expanded item (might be different from this.$item)
             var $expandedItem = $items.eq( this.expandedIdx );
             $expandedItem.css( 'height', $expandedItem.data( 'height' ) ).on( transEndEventName, onEndFn );
@@ -314,19 +439,20 @@ theme.lacingStyles = (function() {
 
           var self = this,
             onEndFn = function() {
-              if( support ) {
-                self.$item.off( transEndEventName );
-              }
+              // if( support ) {
+              //   self.$item.off( transEndEventName );
+              // }
               self.$item.addClass( 'is-expanded' );
+              self.$previewEl.css( 'overflow', 'visible' );
             };
 
           this.calcHeight();
           this.$previewEl.css( 'height', this.height );
           this.$item.css( 'height', this.itemHeight ).on( transEndEventName, onEndFn );
 
-          if( !support ) {
-            onEndFn.call();
-          }
+          // if( !support ) {
+          //   onEndFn.call();
+          // }
 
         },
         positionPreview : function() {
@@ -357,9 +483,10 @@ theme.lacingStyles = (function() {
 
     })();
 
-      $(function() {
-        Grid.init();
-      });
+
+    $(function() {
+      Grid.init();
+    });
 
   };
 

@@ -50,11 +50,10 @@
       <ul class="lacingStyles  [ grid  grid--flexDirectionColumn  grid--justifyCenter med-grid--justifySpaceAround med-grid--flexDirectionRow  med-grid--1of3  med-grid--justifyLeft  med-grid--flexWrap ]" 
           data-grid>
 
-
         {% for block in section.blocks %}
         <li class="grid-cell" data-title="{{block.settings.name}}" data-handle="{{block.settings.handle}}" data-lacing-template="{{block.settings.steps | escape}}">  
 
-          <a class="lacingStyle" title="{{block.settings.name}}" data-title="{{block.settings.name}}" data-lacing-template="{{block.settings.steps | escape}}" >
+          <a class="lacingStyle" title="{{block.settings.name}}" data-title="{{block.settings.name}}" data-lacing-thumb data-lacing-template="{{block.settings.steps | escape}}" >
             <div class="lacingStyle-inner">
              <div class="lacingStyle-img">
               <img src="{{block.settings.thumbnail | img_url: '483x853'}}" alt="{{block.settings.name}}">
@@ -77,49 +76,50 @@
 <script id="cross-stitch" type="text/x-custom-template">
   <div class="lacingSteps-inner">
     <div class="lacingSteps-close"></div>
-
-      <div>
+    <div class="grid grid--flexDirectionColumn [ grid--justifyCenter grid--center med-grid--justifySpaceAround med-grid--flexDirectionRow ]">
+    
+      <div class="lacingSteps-images" data-images-slideshow>
         <div>
-          <div class="grid grid--flexDirectionColumn [ grid--justifyCenter grid--center med-grid--justifySpaceAround med-grid--flexDirectionRow ]">
-          
-            <div class="lacingSteps-images" data-images-slideshow>
-              <div>
-                <img alt="" src="{{'style--theCrosStitch_1.svg' | asset_url }}">
-              </div>
-              <div>
-                <img alt="" src="{{'style--theCrosStitch_2.svg' | asset_url }}">
-              </div>
-              <div>
-                <img alt="" src="{{'style--theCrosStitch_3.svg' | asset_url }}">
-              </div>
-              <div>
-                <img alt="" src="{{'style--theCrosStitch_4.svg' | asset_url }}">
-              </div>
-            </div>
-          
-            <ul class="lacingSteps-details   grid  grid--center  grid--justifyCenter" data-steps-slideshow>
-              <li class="lacingSteps-step  grid  grid--top">
-                <span class="lacingSteps-number">01</span>
-                <p class="lacingSteps-body">Your meemaw’s cross stitch, this is not. Begin with your Whiskers coming out of the bottom eyelets, away from the tongue.</p>
-              </li>
-              <li class="lacingSteps-step  grid  grid--top">
-                <span class="lacingSteps-number">02</span>
-                <p class="lacingSteps-body">Jump three eyelets above, cross over and insert. Bring each lace out of the eyelet above, keep them on their same side.</p>
-              </li>
-              <li  class="lacingSteps-step  grid  grid--top">
-                <span class="lacingSteps-number">03</span>
-                <p class="lacingSteps-body">Repeat but upside down. Drop your laces down three eyelets and insert, being sure to cross over and weave as you do so. Pull the laces out through the empty eyelets above.</p>
-              </li>
-              <li  class="lacingSteps-step grid  grid--top">
-                <span class="lacingSteps-number">04</span>
-                <p class="lacingSteps-body">Jump three eyelets one last time, crossing over and weaving again. Now you can cross this one off your list.</p>
-              </li>
-            </ul>
-          
-          </div>
+          <img alt="" src="{{'style--theCrosStitch_1.svg' | asset_url }}">
         </div>
-
+        <div>
+          <img alt="" src="{{'style--theCrosStitch_2.svg' | asset_url }}">
+        </div>
+        <div>
+          <img alt="" src="{{'style--theCrosStitch_3.svg' | asset_url }}">
+        </div>
+        <div>
+          <img alt="" src="{{'style--theCrosStitch_4.svg' | asset_url }}">
+        </div>
       </div>
+    
+      <ul class="lacingSteps-details   grid  grid--center  grid--justifyCenter" data-steps-slideshow>
+        <li class="lacingSteps-step">
+          <div class="grid grid--flexDirectionRow grid--top  med-grid--flexDirectionColumn">
+            <span class="lacingSteps-number">01</span>
+            <p class="lacingSteps-body">Your meemaw’s cross stitch, this is not. Begin with your Whiskers coming out of the bottom eyelets, away from the tongue.</p>
+          </div>
+        </li>
+        <li class="lacingSteps-step">
+          <div class="grid grid--flexDirectionRow grid--top  med-grid--flexDirectionColumn">
+            <span class="lacingSteps-number">02</span>
+            <p class="lacingSteps-body">Jump three eyelets above, cross over and insert. Bring each lace out of the eyelet above, keep them on their same side.</p>
+          </div>
+        </li>
+        <li  class="lacingSteps-step">
+          <div class="grid grid--flexDirectionRow grid--top  med-grid--flexDirectionColumn">
+            <span class="lacingSteps-number">03</span>
+            <p class="lacingSteps-body">Repeat but upside down. Drop your laces down three eyelets and insert, being sure to cross over and weave as you do so. Pull the laces out through the empty eyelets above.</p>
+          </div>
+        </li>
+        <li  class="lacingSteps-step">
+          <div class="grid grid--flexDirectionRow grid--top  med-grid--flexDirectionColumn">
+            <span class="lacingSteps-number">04</span>
+            <p class="lacingSteps-body">Jump three eyelets one last time, crossing over and weaving again. Now you can cross this one off your list.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </script>
 
@@ -127,49 +127,51 @@
 <script id="hypotenuse" type="text/x-custom-template">
   <div class="lacingSteps-inner">
     <div class="lacingSteps-close"></div>
-
-      <div>
+    <div class="grid grid--flexDirectionColumn [ grid--justifyCenter grid--center med-grid--justifySpaceAround med-grid--flexDirectionRow ]">
+    
+      <div class="lacingSteps-images" data-images-slideshow>
         <div>
-          <div class="grid grid--flexDirectionColumn [ grid--justifyCenter grid--center med-grid--justifySpaceAround med-grid--flexDirectionRow ]">
-          
-            <div class="lacingSteps-images" data-images-slideshow>
-              <div>
-                <img alt="" src="{{'style--hypotenuse_1.svg' | asset_url }}">
-              </div>
-              <div>
-                <img alt="" src="{{'style--hypotenuse_2.svg' | asset_url }}">
-              </div>
-              <div>
-                <img alt="" src="{{'style--hypotenuse_3.svg' | asset_url }}">
-              </div>
-              <div>
-                <img alt="" src="{{'style--hypotenuse_4.svg' | asset_url }}">
-              </div>
-            </div>
-          
-            <ul class="lacingSteps-details  grid  grid--center  grid--justifyCenter" data-steps-slideshow>
-              <li class="lacingSteps-step  grid  grid--top">
-                <span class="lacingSteps-number">01</span>
-                <p class="lacingSteps-body">If you’re angling for a new look, here it is. Start by inserting your Whiskers into the bottom eyelets towards the tongue. Pull the right side of the laces through the eyelet above. </p>
-              </li>
-              <li class="lacingSteps-step  grid  grid--top">
-                <span class="lacingSteps-number">02</span>
-                <p class="lacingSteps-body">Cross the left side of the laces diagonally over to the right side and pull out through the next empty eyelet. Then, take the side that was originally on the right and cross it straight left into the empty eyelet and insert it.</p>
-              </li>
-              <li  class="lacingSteps-step  grid  grid--top">
-                <span class="lacingSteps-number">03</span>
-                <p class="lacingSteps-body">Repeat. Cross the new left side over diagonally and into the empty eyelet on the right. Cross the lace that was originally on the right side straight over and into the empty eyelet on the left. Repeat again.</p>
-              </li>
-              <li  class="lacingSteps-step grid  grid--top">
-                <span class="lacingSteps-number">04</span>
-                <p class="lacingSteps-body">Once you’ve hypontenused all you can, finish with one final cross to the right side. On the left, pull the lace through up through the empty eyelet above. When lacing your next shoes, you can flip directions for a mirrored look or keep them the same for a repeating vibe. We trust you to make the right decision.</p>
-              </li>
-            </ul>
-          
-          </div>
+          <img alt="" src="{{'style--hypotenuse_1.svg' | asset_url }}">
         </div>
-
+        <div>
+          <img alt="" src="{{'style--hypotenuse_2.svg' | asset_url }}">
+        </div>
+        <div>
+          <img alt="" src="{{'style--hypotenuse_3.svg' | asset_url }}">
+        </div>
+        <div>
+          <img alt="" src="{{'style--hypotenuse_4.svg' | asset_url }}">
+        </div>
       </div>
+    
+      <ul class="lacingSteps-details  grid  grid--center  grid--justifyCenter" data-steps-slideshow>
+        <li class="lacingSteps-step">
+          <div class="grid grid--flexDirectionRow grid--top  med-grid--flexDirectionColumn">
+            <span class="lacingSteps-number">01</span>
+            <p class="lacingSteps-body">If you’re angling for a new look, here it is. Start by inserting your Whiskers into the bottom eyelets towards the tongue. Pull the right side of the laces through the eyelet above. </p>
+          </div>
+        </li>
+        <li class="lacingSteps-step">
+          <div class="grid grid--flexDirectionRow grid--top  med-grid--flexDirectionColumn">
+            <span class="lacingSteps-number">02</span>
+            <p class="lacingSteps-body">Cross the left side of the laces diagonally over to the right side and pull out through the next empty eyelet. Then, take the side that was originally on the right and cross it straight left into the empty eyelet and insert it.</p>
+          </div>
+        </li>
+        <li  class="lacingSteps-step">
+          <div class="grid grid--flexDirectionRow grid--top  med-grid--flexDirectionColumn">
+            <span class="lacingSteps-number">03</span>
+            <p class="lacingSteps-body">Repeat. Cross the new left side over diagonally and into the empty eyelet on the right. Cross the lace that was originally on the right side straight over and into the empty eyelet on the left. Repeat again.</p>
+          </div>
+        </li>
+        <li  class="lacingSteps-ste">
+          <div class="grid grid--flexDirectionRow grid--top  med-grid--flexDirectionColumn">
+            <span class="lacingSteps-number">04</span>
+            <p class="lacingSteps-body">Once you’ve hypontenused all you can, finish with one final cross to the right side. On the left, pull the lace through up through the empty eyelet above. When lacing your next shoes, you can flip directions for a mirrored look or keep them the same for a repeating vibe. We trust you to make the right decision.</p>
+          </div>
+        </li>
+      </ul>
+    
+    </div>
   </div>
 </script>
 
@@ -178,98 +180,102 @@
 <script id="gentleman" type="text/x-custom-template">
   <div class="lacingSteps-inner">
     <div class="lacingSteps-close"></div>
-
-      <div>
+    <div class="grid grid--flexDirectionColumn [ grid--justifyCenter grid--center med-grid--justifySpaceAround med-grid--flexDirectionRow ]">
+    
+      <div class="lacingSteps-images" data-images-slideshow>
         <div>
-          <div class="grid grid--flexDirectionColumn [ grid--justifyCenter grid--center med-grid--justifySpaceAround med-grid--flexDirectionRow ]">
-          
-            <div class="lacingSteps-images" data-images-slideshow>
-              <div>
-                <img alt="" src="{{'style--gentleman_1.svg' | asset_url }}">
-              </div>
-              <div>
-                <img alt="" src="{{'style--gentleman_2.svg' | asset_url }}">
-              </div>
-              <div>
-                <img alt="" src="{{'style--gentleman_3.svg' | asset_url }}">
-              </div>
-              <div>
-                <img alt="" src="{{'style--gentleman_4.svg' | asset_url }}">
-              </div>
-            </div>
-          
-            <ul class="lacingSteps-details   grid  grid--center  grid--justifyCenter  " data-steps-slideshow>
-              <li class="lacingSteps-step  grid  grid--top">
-                <span class="lacingSteps-number">01</span>
-                <p class="lacingSteps-body">Every gentleman wears a tie. Begin five eyelets from the bottom and insert your Whiskers towards the tongue, crossing over underneath.</p>
-              </li>
-              <li class="lacingSteps-step  grid  grid--top">
-                <span class="lacingSteps-number">02</span>
-                <p class="lacingSteps-body">Drop two eyelets and bring the laces over the top, insert towards the tongue. Repeat again, crossing over underneath, dropping two more eyelets, bringing the laces over the top and inserting towards the tongue. Then pull the laces up and out through the empty eyelets above.</p>
-              </li>
-              <li  class="lacingSteps-step  grid  grid--top">
-                <span class="lacingSteps-number">03</span>
-                <p class="lacingSteps-body">Weave through the laces, crossing over in the middle and pull the laces through the empty eyelets two above.</p>
-              </li>
-              <li  class="lacingSteps-step grid  grid--top">
-                <span class="lacingSteps-number">04</span>
-                <p class="lacingSteps-body">Once again, weave and cross over, pulling the laces out the top eyelets. Well done, sir.</p>
-              </li>
-            </ul>
-          
-          </div>
+          <img alt="" src="{{'style--gentleman_1.svg' | asset_url }}">
         </div>
-
+        <div>
+          <img alt="" src="{{'style--gentleman_2.svg' | asset_url }}">
+        </div>
+        <div>
+          <img alt="" src="{{'style--gentleman_3.svg' | asset_url }}">
+        </div>
+        <div>
+          <img alt="" src="{{'style--gentleman_4.svg' | asset_url }}">
+        </div>
       </div>
+    
+      <ul class="lacingSteps-details   grid  grid--center  grid--justifyCenter  " data-steps-slideshow>
+        <li class="lacingSteps-step">
+          <div class="grid grid--flexDirectionRow grid--top  med-grid--flexDirectionColumn">
+            <span class="lacingSteps-number">01</span>
+            <p class="lacingSteps-body">Every gentleman wears a tie. Begin five eyelets from the bottom and insert your Whiskers towards the tongue, crossing over underneath.</p>
+          </div>
+        </li>
+        <li class="lacingSteps-step">
+          <div class="grid grid--flexDirectionRow grid--top  med-grid--flexDirectionColumn">
+            <span class="lacingSteps-number">02</span>
+            <p class="lacingSteps-body">Drop two eyelets and bring the laces over the top, insert towards the tongue. Repeat again, crossing over underneath, dropping two more eyelets, bringing the laces over the top and inserting towards the tongue. Then pull the laces up and out through the empty eyelets above.</p>
+          </div>
+        </li>
+        <li  class="lacingSteps-step">
+          <div class="grid grid--flexDirectionRow grid--top  med-grid--flexDirectionColumn">
+            <span class="lacingSteps-number">03</span>
+            <p class="lacingSteps-body">Weave through the laces, crossing over in the middle and pull the laces through the empty eyelets two above.</p>
+          </div>
+        </li>
+        <li  class="lacingSteps-ste">
+          <div class="grid grid--flexDirectionRow grid--top  med-grid--flexDirectionColumn">
+            <span class="lacingSteps-number">04</span>
+            <p class="lacingSteps-body">Once again, weave and cross over, pulling the laces out the top eyelets. Well done, sir.</p>
+          </div>
+        </li>
+      </ul>
+    
+    </div>
   </div>
 </script>
 
 <script id="brigadier" type="text/x-custom-template">
   <div class="lacingSteps-inner">
     <div class="lacingSteps-close"></div>
-
-      <div>
+    <div class="grid grid--flexDirectionColumn [ grid--justifyCenter grid--center med-grid--justifySpaceAround med-grid--flexDirectionRow ]">
+    
+      <div class="lacingSteps-images" data-images-slideshow>
         <div>
-          <div class="grid grid--flexDirectionColumn [ grid--justifyCenter grid--center med-grid--justifySpaceAround med-grid--flexDirectionRow ]">
-          
-            <div class="lacingSteps-images" data-images-slideshow>
-              <div>
-                <img alt="" src="{{'style--brigadier_1.svg' | asset_url }}">
-              </div>
-              <div>
-                <img alt="" src="{{'style--brigadier_2.svg' | asset_url }}">
-              </div>
-              <div>
-                <img alt="" src="{{'style--brigadier_3.svg' | asset_url }}">
-              </div>
-              <div>
-                <img alt="" src="{{'style--brigadier_4.svg' | asset_url }}">
-              </div>
-            </div>
-          
-            <ul class="lacingSteps-details   grid  grid--center  grid--justifyCenter  " data-steps-slideshow>
-              <li class="lacingSteps-step  grid  grid--top">
-                <span class="lacingSteps-number">01</span>
-                <p class="lacingSteps-body">Like any upstanding man of rank, you start with a strong base. Insert your Whiskers into the bottom eyelets, pointing towards the tongue. Cross the laces over and bring them out the next eyelets.</p>
-              </li>
-              <li class="lacingSteps-step  grid  grid--top">
-                <span class="lacingSteps-number">02</span>
-                <p class="lacingSteps-body">Bring the lacers over the top, cross over again—now with the other side of the lace on top—and dive back into the eyelets.</p>
-              </li>
-              <li  class="lacingSteps-step  grid  grid--top">
-                <span class="lacingSteps-number">03</span>
-                <p class="lacingSteps-body">Repeat once more.</p>
-              </li>
-              <li  class="lacingSteps-step grid  grid--top">
-                <span class="lacingSteps-number">04</span>
-                <p class="lacingSteps-body">Carry on until you’ve fully saluted your shoe. Huzzah!</p>
-              </li>
-            </ul>
-          
-          </div>
+          <img alt="" src="{{'style--brigadier_1.svg' | asset_url }}">
         </div>
-
+        <div>
+          <img alt="" src="{{'style--brigadier_2.svg' | asset_url }}">
+        </div>
+        <div>
+          <img alt="" src="{{'style--brigadier_3.svg' | asset_url }}">
+        </div>
+        <div>
+          <img alt="" src="{{'style--brigadier_4.svg' | asset_url }}">
+        </div>
       </div>
+    
+      <ul class="lacingSteps-details   grid  grid--center  grid--justifyCenter  " data-steps-slideshow>
+        <li class="lacingSteps-step">
+          <div class="grid grid--flexDirectionRow grid--top  med-grid--flexDirectionColumn">
+            <span class="lacingSteps-number">01</span>
+            <p class="lacingSteps-body">Like any upstanding man of rank, you start with a strong base. Insert your Whiskers into the bottom eyelets, pointing towards the tongue. Cross the laces over and bring them out the next eyelets.</p>
+          </div>
+        </li>
+        <li class="lacingSteps-step">
+          <div class="grid grid--flexDirectionRow grid--top  med-grid--flexDirectionColumn">
+            <span class="lacingSteps-number">02</span>
+            <p class="lacingSteps-body">Bring the lacers over the top, cross over again—now with the other side of the lace on top—and dive back into the eyelets.</p>
+          </div>
+        </li>
+        <li  class="lacingSteps-step">
+          <div class="grid grid--flexDirectionRow grid--top  med-grid--flexDirectionColumn">
+            <span class="lacingSteps-number">03</span>
+            <p class="lacingSteps-body">Repeat once more.</p>
+          </div>
+        </li>
+        <li  class="lacingSteps-ste">
+          <div class="grid grid--flexDirectionRow grid--top  med-grid--flexDirectionColumn">
+            <span class="lacingSteps-number">04</span>
+            <p class="lacingSteps-body">Carry on until you’ve fully saluted your shoe. Huzzah!</p>
+          </div>
+        </li>
+      </ul>
+    
+    </div>
   </div>
 </script>
 
@@ -277,97 +283,102 @@
 <script id="handshake" type="text/x-custom-template">
   <div class="lacingSteps-inner">
     <div class="lacingSteps-close"></div>
-
-      <div>
+    <div class="grid grid--flexDirectionColumn [ grid--justifyCenter grid--center med-grid--justifySpaceAround med-grid--flexDirectionRow ]">
+    
+      <div class="lacingSteps-images" data-images-slideshow>
         <div>
-          <div class="grid grid--flexDirectionColumn [ grid--justifyCenter grid--center med-grid--justifySpaceAround med-grid--flexDirectionRow ]">
-          
-            <div class="lacingSteps-images" data-images-slideshow>
-              <div>
-                <img alt="" src="{{'style--handshake_1.svg' | asset_url }}">
-              </div>
-              <div>
-                <img alt="" src="{{'style--handshake_2.svg' | asset_url }}">
-              </div>
-              <div>
-                <img alt="" src="{{'style--handshake_3.svg' | asset_url }}">
-              </div>
-              <div>
-                <img alt="" src="{{'style--handshake_4.svg' | asset_url }}">
-              </div>
-            </div>
-          
-            <ul class="lacingSteps-details   grid  grid--center  grid--justifyCenter  " data-steps-slideshow>
-              <li class="lacingSteps-step  grid  grid--top">
-                <span class="lacingSteps-number">01</span>
-                <p class="lacingSteps-body">Like a firm handshake, this look will leave an impression. Start by pulling your Whiskers through the bottom eyelets away from the tongue. Then, twist them a half-twist in the middle.</p>
-              </li>
-              <li class="lacingSteps-step  grid  grid--top">
-                <span class="lacingSteps-number">02</span>
-                <p class="lacingSteps-body">Insert the laces through the next set of eyelets, from underneath and away from the tongue.</p>
-              </li>
-              <li  class="lacingSteps-step  grid  grid--top">
-                <span class="lacingSteps-number">03</span>
-                <p class="lacingSteps-body">Repeat. Twist in the middle and pull through the next set of eyelets from below.</p>
-              </li>
-              <li  class="lacingSteps-step grid  grid--top">
-                <span class="lacingSteps-number">04</span>
-                <p class="lacingSteps-body">Carry on. Just like that long, strong handshake.</p>
-              </li>
-            </ul>
-          
-          </div>
+          <img alt="" src="{{'style--handshake_1.svg' | asset_url }}">
         </div>
-
+        <div>
+          <img alt="" src="{{'style--handshake_2.svg' | asset_url }}">
+        </div>
+        <div>
+          <img alt="" src="{{'style--handshake_3.svg' | asset_url }}">
+        </div>
+        <div>
+          <img alt="" src="{{'style--handshake_4.svg' | asset_url }}">
+        </div>
       </div>
+    
+      <ul class="lacingSteps-details   grid  grid--center  grid--justifyCenter  " data-steps-slideshow>
+        <li class="lacingSteps-step">
+          <div class="grid grid--flexDirectionRow grid--top  med-grid--flexDirectionColumn">
+            <span class="lacingSteps-number">01</span>
+            <p class="lacingSteps-body">Like a firm handshake, this look will leave an impression. Start by pulling your Whiskers through the bottom eyelets away from the tongue. Then, twist them a half-twist in the middle.</p>
+          </div>
+        </li>
+        <li class="lacingSteps-step">
+          <div class="grid grid--flexDirectionRow grid--top  med-grid--flexDirectionColumn">
+            <span class="lacingSteps-number">02</span>
+            <p class="lacingSteps-body">Insert the laces through the next set of eyelets, from underneath and away from the tongue.</p>
+          </div>
+        </li>
+        <li  class="lacingSteps-step">
+          <div class="grid grid--flexDirectionRow grid--top  med-grid--flexDirectionColumn">
+            <span class="lacingSteps-number">03</span>
+            <p class="lacingSteps-body">Repeat. Twist in the middle and pull through the next set of eyelets from below.</p>
+          </div>
+        </li>
+        <li  class="lacingSteps-ste">
+          <div class="grid grid--flexDirectionRow grid--top  med-grid--flexDirectionColumn">
+            <span class="lacingSteps-number">04</span>
+            <p class="lacingSteps-body">Carry on. Just like that long, strong handshake.</p>
+          </div>
+        </li>
+      </ul>
+    
+    </div>
   </div>
 </script>
 
 <script id="over-under" type="text/x-custom-template">
   <div class="lacingSteps-inner">
     <div class="lacingSteps-close"></div>
-
-      <div>
+    <div class="grid grid--flexDirectionColumn [ grid--justifyCenter grid--center med-grid--justifySpaceAround med-grid--flexDirectionRow ]">
+    
+      <div class="lacingSteps-images" data-images-slideshow>
         <div>
-          <div class="grid grid--flexDirectionColumn [ grid--justifyCenter grid--center med-grid--justifySpaceAround med-grid--flexDirectionRow ]">
-          
-            <div class="lacingSteps-images" data-images-slideshow>
-              <div>
-                <img alt="" src="{{'style--overUnder_1.svg' | asset_url }}">
-              </div>
-              <div>
-                <img alt="" src="{{'style--overUnder_2.svg' | asset_url }}">
-              </div>
-              <div>
-                <img alt="" src="{{'style--overUnder_3.svg' | asset_url }}">
-              </div>
-              <div>
-                <img alt="" src="{{'style--overUnder_4.svg' | asset_url }}">
-              </div>
-            </div>
-          
-            <ul class="lacingSteps-details   grid  grid--center  grid--justifyCenter  " data-steps-slideshow>
-              <li class="lacingSteps-step  grid  grid--top">
-                <span class="lacingSteps-number">01</span>
-                <p class="lacingSteps-body">This one’s always a great bet. Start by pulling your Whiskers out the bottom eyelets, away from the tongue. Bring them up one eyelet and insert them into their same side.</p>
-              </li>
-              <li class="lacingSteps-step  grid  grid--top">
-                <span class="lacingSteps-number">02</span>
-                <p class="lacingSteps-body">Cross the laces underneath and pull through the empty eyelet above.</p>
-              </li>
-              <li  class="lacingSteps-step  grid  grid--top">
-                <span class="lacingSteps-number">03</span>
-                <p class="lacingSteps-body">Bring them up and over, inserting them into the next eyelets above on their same side.</p>
-              </li>
-              <li  class="lacingSteps-step grid  grid--top">
-                <span class="lacingSteps-number">04</span>
-                <p class="lacingSteps-body">Cross them underneath, pull them out the next eyelets, bring them up and over and then reinsert them in the next eyelets aboves. Odds are, you look great now.</p>
-              </li>
-            </ul>
-          
-          </div>
+          <img alt="" src="{{'style--overUnder_1.svg' | asset_url }}">
+        </div>
+        <div>
+          <img alt="" src="{{'style--overUnder_2.svg' | asset_url }}">
+        </div>
+        <div>
+          <img alt="" src="{{'style--overUnder_3.svg' | asset_url }}">
+        </div>
+        <div>
+          <img alt="" src="{{'style--overUnder_4.svg' | asset_url }}">
         </div>
       </div>
+    
+      <ul class="lacingSteps-details   grid  grid--center  grid--justifyCenter  " data-steps-slideshow>
+        <li class="lacingSteps-step">
+          <div class="grid grid--flexDirectionRow grid--top  med-grid--flexDirectionColumn">
+            <span class="lacingSteps-number">01</span>
+            <p class="lacingSteps-body">This one’s always a great bet. Start by pulling your Whiskers out the bottom eyelets, away from the tongue. Bring them up one eyelet and insert them into their same side.</p>
+          </div>
+        </li>
+        <li class="lacingSteps-step">
+          <div class="grid grid--flexDirectionRow grid--top  med-grid--flexDirectionColumn">
+            <span class="lacingSteps-number">02</span>
+            <p class="lacingSteps-body">Cross the laces underneath and pull through the empty eyelet above.</p>
+          </div>
+        </li>
+        <li  class="lacingSteps-step">
+          <div class="grid grid--flexDirectionRow grid--top  med-grid--flexDirectionColumn">
+            <span class="lacingSteps-number">03</span>
+            <p class="lacingSteps-body">Bring them up and over, inserting them into the next eyelets above on their same side.</p>
+          </div>
+        </li>
+        <li  class="lacingSteps-ste">
+          <div class="grid grid--flexDirectionRow grid--top  med-grid--flexDirectionColumn">
+            <span class="lacingSteps-number">04</span>
+            <p class="lacingSteps-body">Cross them underneath, pull them out the next eyelets, bring them up and over and then reinsert them in the next eyelets aboves. Odds are, you look great now.</p>
+          </div>
+        </li>
+      </ul>
+    
+    </div>
   </div>
 </script>
 

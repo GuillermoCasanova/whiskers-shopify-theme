@@ -11,41 +11,45 @@
 
   li {
     display: inline-block; 
-    margin-bottom: rem-calc($level7); 
     
     a {
       position: relative;
       display: block;
     }
   }
-}
 
-
-li.is-expanded {
-    
+  li.is-expanded {
+      
     a {
-    position: relative;
+      position: relative;
 
-    &::after {
-    top: auto;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    border-bottom-color: $secondaryColor;
-    border-width: 15px;
-    left: 50%;
-    margin: -20px 0 0 -15px;
-  }
+      &::after {
+        top: auto;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+        border-bottom-color: $secondaryColor;
+        border-width: 15px;
+        left: 50%;
+        margin: -28px 0 0 -15px;
+     }
     }
-
+  }
 }
 
 .lacingStyle {
   width: 100%; 
   position: relative;
+  max-width: rem-calc(324px); 
+  margin-right: auto; 
+  margin-left: auto;
+
+  @include media-query($large-up) {
+    margin-bottom: rem-calc($level2); 
+  }
   
   .lacingStyle-inner {
     position: relative;
@@ -56,6 +60,7 @@ li.is-expanded {
     padding-right: rem-calc($level4);
     padding-left: rem-calc($level4);
     width: 100%; 
+    margin-bottom: rem-calc($level3); 
   }
   
   .lacingStyle-img {
@@ -65,10 +70,8 @@ li.is-expanded {
 
   .lacingStyle-title {
     text-align: center; 
-    @include text-micro(); 
+    @include h5();
   }
-
-
 }
 
 .lacingSteps {
@@ -77,64 +80,74 @@ li.is-expanded {
   position: absolute; 
   left: 0; 
   right: 0; 
-  overflow: hidden;
   z-index: 1; 
   top: auto; 
+  overflow: hidden; 
   height: 0; 
-
+ 
   .lacingSteps-inner {
     height: 100%; 
     width: 100%; 
     position: relative;
-    padding: rem-calc($level4); 
+    padding-right: $column-gutter / 2; 
+    padding-left: $column-gutter / 2; 
   }
 
   .lacingSteps-images {
-    max-width: rem-calc(136px); 
+    max-width: rem-calc(160px); 
     width: 100%; 
-    margin-bottom: rem-calc($level4); 
+    margin-bottom: rem-calc($level7); 
     position: relative;
 
     @include media-query($medium-up) {
       max-width: rem-calc(260px); 
+      margin-bottom: 0;
     }
 
     @include media-query($large-up) {
       top: rem-calc(-24px);
-      max-width: rem-calc(270px); 
     }
 
     .slick-prev, 
     .slick-next {
       position: absolute;
       z-index: 10; 
-      top: 45%; 
       background-color: transparent;
       color: black; 
-      width: rem-calc(76px); 
-      height: rem-calc(42px);
       margin-bottom: 0; 
       opacity: .6;
       border: none;
       outline: none; 
+      position: absolute;
+      bottom: -2rem; 
+      width: 100%; 
+      color: $grey--med; 
+      width: rem-calc(50px); 
+      height: rem-calc(20px); 
       transition: all .2s ease-in-out; 
-
+    
       &:before {
         content: "";
-        background-image: url('../assets/icon--arrow--secondary.svg'); 
+        background-image: url('../assets/icon--arrow--white.svg'); 
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center; 
         position: absolute;
         width: 100%; 
-        height: rem-calc(36px); 
         top:0; 
+        right: 0;
+        bottom: 0; 
+        left: 0; 
       }
     }
 
     .slick-prev {
-      left: rem-calc(-36px);
+     left: rem-calc($level2); 
      transform: scaleX(-1);
+
+     @include media-query($medium-up) {
+      left: 3.875rem;
+     }
 
       &:hover, 
       &:focus {
@@ -144,7 +157,11 @@ li.is-expanded {
     }
 
     .slick-next {
-      right: rem-calc(-36px);
+      right: rem-calc($level2);
+      
+      @include media-query($medium-up) {
+        right: 3.875rem;
+      }
 
       &:hover, 
       &:focus {
@@ -152,22 +169,17 @@ li.is-expanded {
        transform: translateX(3px);
       }
     }
-
-    .slick-arrow {
-      position: absolute;
-      bottom: 0; 
-      left: 0; 
-      right: 0; 
-      width: 100%; 
-      color: $grey--med; 
-      height: rem-calc($level3);
-    }
   }
 
   .lacingSteps-details {
     width: 100%; 
     max-width: rem-calc(340px); 
-    @include h4(); 
+    margin-bottom: 0; 
+
+    @include media-query($medium-up) {
+      max-width: rem-calc(272px); 
+    }
+
     @include media-query($large-up) {
       padding-top: rem-calc($level7); 
       max-width: rem-calc(360px); 
@@ -175,10 +187,10 @@ li.is-expanded {
   }
 
   .lacingSteps-number {
-    padding-right: rem-calc($level1);
+    padding-right: rem-calc($level2);
     font-family: $tertiary-font-family;
     padding-top: rem-calc($level1);  
-    @include h2();
+    @include h3();
 
     @include media-query($medium-up) {
       margin-bottom: rem-calc($level5);
@@ -190,10 +202,12 @@ li.is-expanded {
     }
   }
 
-  .lacingSteps-number,
-  .lacingSteps-body {
-    display: inline-block;
+  p {
+    @include media-query($medium-up) {
+      @include h4(); 
+    }
   }
+
 
   .lacingSteps-close {
     position: absolute;
@@ -225,5 +239,4 @@ li.is-expanded {
   .lacingSteps-close:focus {
     transform: rotate(-45deg); 
   }
-
 }
