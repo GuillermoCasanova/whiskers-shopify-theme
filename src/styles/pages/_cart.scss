@@ -118,7 +118,9 @@
           max-width: rem-calc(42px);
           text-align: center;
           padding: rem-calc(2px);
-          border: 2px solid $secondaryColor;
+          color: #fff; 
+          background-color: $secondaryColor;
+          border: 1px solid $grey--med;
         }
       }
 

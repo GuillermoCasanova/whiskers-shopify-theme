@@ -82,8 +82,12 @@
                   {% endif %}
         
                   <div class="cart-actions  grid  grid--center grid--justifyRight  grid--gutters">
-                      <button type="submit" name="update" class="button  button--tertiary  button--medium">{{ 'cart.general.update' | t }}</button>
-                      <button type="submit" name="checkout" class="button  button--primary  button--medium">{{ 'cart.general.checkout' | t }}</button>
+                      <button type="submit" name="update" class="button  button--tertiary  button--medium" data-text="{{ 'cart.general.update' | t }}">
+                        <span>{{ 'cart.general.update' | t }}</span>
+                      </button>
+                      <button type="submit" name="checkout" class="button  button--primary  button--medium" data-text="{{ 'cart.general.checkout' | t }}">
+                        <span>{{ 'cart.general.checkout' | t }}</span>
+                      </button>
                   </div>
                   
                   <p class="text-right">{{ 'cart.general.shipping_at_checkout' | t }}</p>

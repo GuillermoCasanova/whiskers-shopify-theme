@@ -28,15 +28,46 @@ button,
 .button--primary {
   background-color: transparent;
   position: relative; 
-  color: #fff; 
   border: 3px solid $accentColor; 
-  transition: all .2s ease-in-out; 
+  overflow: hidden;
+
+  span {
+    position: relative;
+    opacity: 1; 
+    display: block; 
+    transform: translateZ(0); 
+    will-change: transform; 
+    transition: all .3s cubic-bezier(0.23, 1, 0.32, 1); 
+  }
+  
+  &:after {
+    content: attr(data-text);
+    position: absolute;
+    width: 105%;
+    height: 105%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; 
+    color: $secondaryColor;
+    background-color: $accentColor;
+    will-change: transform; 
+    border: 3px solid $accentColor; 
+    transform: translateY(100%) translateZ(0);
+    transition: all .3s cubic-bezier(0.23, 1, 0.32, 1) .1s; 
+  }
 
   &:hover,
   &:focus {
-    color: $secondaryColor;
-    background-color: $accentColor; 
-    border: 3px solid $accentColor; 
+
+    span {
+      transform: translateY(-110%); 
+      opacity: 0; 
+    }
+
+    &:after {
+      transform: translateY(0); 
+    }
   }
 }
 
@@ -47,7 +78,7 @@ button,
   color: $secondaryColor; 
   fill: #fff; 
   border: 3px solid transparent; 
-  transition: all .2s ease-in-out; 
+  transition: all .3s cubic-bezier(0.23, 1, 0.32, 1); 
 
   &:hover,
   &:focus {
@@ -59,17 +90,48 @@ button,
 
 
 .button--tertiary {
-  background-color: $quaternaryColor;
+  background-color: transparent;
   position: relative; 
-  color: $secondaryColor; 
   border: 3px solid $quaternaryColor; 
-  transition: all .2s ease-in-out; 
+  overflow: hidden;
+
+  span {
+    position: relative;
+    opacity: 1; 
+    display: block; 
+    transform: translateZ(0); 
+    will-change: transform; 
+    transition: all .3s cubic-bezier(0.23, 1, 0.32, 1); 
+  }
+  
+  &:after {
+    content: attr(data-text);
+    position: absolute;
+    width: 105%;
+    height: 105%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; 
+    color: $secondaryColor;
+    background-color: $quaternaryColor;
+    will-change: transform; 
+    border: 3px solid $quaternaryColor; 
+    transform: translateY(100%) translateZ(0);
+    transition: all .3s cubic-bezier(0.23, 1, 0.32, 1) .1s; 
+  }
 
   &:hover,
   &:focus {
-    color: #fff;
-    background-color: transparent; 
-    border: 3px solid $quaternaryColor; 
+
+    span {
+      transform: translateY(-110%); 
+      opacity: 0; 
+    }
+
+    &:after {
+      transform: translateY(0); 
+    }
   }
 }
 
@@ -130,6 +192,10 @@ button,
   padding: rem-calc($level1);
   padding-right: rem-calc($level3);
   padding-left: rem-calc($level3);
+
+  &:after {
+    padding: rem-calc(3px); 
+  }
 }
 
 
@@ -137,32 +203,18 @@ button,
   padding: rem-calc($level2);
   padding-right: rem-calc($level4);
   padding-left: rem-calc($level4);
+  &:after {
+    padding: rem-calc(11px); 
+  }
 }
 
 .button--large {
-    padding: rem-calc(15px);
-    padding-right: rem-calc($level3);
-    padding-left: rem-calc($level3);
-}
-
-.button--kilo {
-    padding: rem-calc(16);
-    padding-right: rem-calc($level6);
-    padding-left: rem-calc($level6); 
-}
-
-.button--mega {
-    padding: rem-calc(18);
-    padding-right: rem-calc($level7);
-    padding-left: rem-calc($level7); 
-    @extend %h1; 
-}
-
-.button--giga {
-    padding: rem-calc(22);
-    padding-right: rem-calc($level7);
-    padding-left: rem-calc($level7); 
-    @extend %h1; 
+  padding: rem-calc(15px);
+  padding-right: rem-calc($level3);
+  padding-left: rem-calc($level3);
+  &:after {
+  padding: rem-calc(18px); 
+  }
 }
 
 

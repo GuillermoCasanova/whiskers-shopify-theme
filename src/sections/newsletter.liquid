@@ -37,8 +37,8 @@
                     
                       <div class="grid  grid--center  grid--stretch grid--flexDirectionColumn med-grid--bottom">
                         <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="{{ 'general.newsletter_form.newsletter_placeholder' | t }}" name="contact[email]" id="Email" class="newsletter-form-input {%if form.errors %}has-error{% endif %}" autocorrect="off" autocapitalize="off">
-                          <button type="submit" class="button--small  button--tertiary  button--expanded  newsletter-form-button" name="commit" id="Subscribe">
-                            {{ 'general.newsletter_form.submit' | t }}
+                          <button type="submit" class="button--small  button--tertiary  button--expanded  newsletter-form-button" name="commit" id="Subscribe" data-text="{{ 'general.newsletter_form.submit' | t }}">
+                           <span> {{ 'general.newsletter_form.submit' | t }}</span>
                           </button>
                       </div>
                     {% endif %}
