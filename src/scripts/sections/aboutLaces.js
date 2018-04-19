@@ -14,14 +14,10 @@ theme.aboutLaces = (function() {
     aboutSlides: '[data-slide]'
   };
 
-  var aboutLaces = function() { 
+  var aboutLaces = function(container) { 
 
-
-    // pSlides.each(function() {
-    //    $(this).addClass('ng-leave'); 
-    // }); 
-
-    var slides = $(selectors.aboutSlides); 
+    var $container = $(container); 
+    var slides = $container.find(selectors.aboutSlides); 
     var activeSlide = 0; 
     var slideTotal = slides.length;
 

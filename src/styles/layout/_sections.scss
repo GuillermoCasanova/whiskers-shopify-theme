@@ -19,9 +19,8 @@ section {
   }
 
   @include media-query($large-up) {
-    padding-bottom: rem-calc($level6);
+    padding-bottom: rem-calc($level7 + $level2);
   }
-    
 }
 
 
@@ -41,7 +40,7 @@ section {
   }
 
   @include media-query($large-up) {
-    padding-top: rem-calc($level6);
+    padding-top: rem-calc($level7 + $level2);
   }
 }
 
@@ -67,7 +66,6 @@ section {
   .section-text {
     color:  $tertiaryColor; 
   }
-
 }
 
 .section--secondary {

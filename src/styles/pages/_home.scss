@@ -4,6 +4,40 @@
 \*------------------------------------*/
 
 
+
+.whiskersIntro {
+
+  .copySection-inner {
+    @include media-query($medium-up) {
+      padding-top: rem-calc($level7  + $level7);
+      padding-bottom: rem-calc($level7  + $level7);
+    }
+  
+    @include media-query($large-up) {
+      padding-top: rem-calc($level7 + $level3);
+      padding-bottom: rem-calc($level7 + $level3);
+    }
+
+    .copySection-headline {
+      @include h1(); 
+
+      @include media-query($large-up) {
+        @include text-kilo(); 
+      }
+    }
+
+    p {
+      @include media-query($large-up) {
+        margin-bottom: 0; 
+      }
+    }
+  }
+}
+
+
+
+
+
 /*------------------------------------*\
     #Shoe Showcase
 \*------------------------------------*/
@@ -15,6 +49,9 @@
     padding-bottom: 0; 
   }
 }
+
+
+
 
 
 /*------------------------------------*\
@@ -33,7 +70,6 @@
       width:18rem;
       max-width: none; 
       height: rem-calc(220px);
-      transform: translateY(12px); 
     } 
 
     @include media-query($large-up) {
@@ -128,43 +164,98 @@
     #About Laces
 \*------------------------------------*/
 
+.aboutLaces {
 
-.aboutLaces-slideshow {
-  right: 0; 
-  width: 100%;
-  overflow: hidden; 
-  @extend %position-relative; 
+  .copySection-inner {
 
-  // @include media-query($large-up) {
-  //   padding-right: rem-calc($level3); 
-  //   padding-left: rem-calc($level3); 
-  // }
+    @include media-query($medium-up) {
+      padding-top: rem-calc($level4);
+      padding-bottom: rem-calc($level4);
+    }
+  
+    @include media-query($large-up) {
+      padding-top: rem-calc($level7 + $level6);
+      padding-bottom: rem-calc($level7 + $level6);
+    }
 
-  .aboutLaces-slideshow-slide {
-    height: 100%; 
-    width: 100%; 
-    top: 0; 
-    bottom: 0; 
-    left: 0; 
-    right: 0; 
-    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-    z-index: 29; 
-    position: absolute;
-    visibility: normal; 
 
-    .aboutLaces-slideshow-slide-img {
-      width: 100%; 
+    &:before {
+      content: " ";
+      background-color: rgb(56, 54, 65);
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+
+      @include media-query($medium-up) {
+        height: 68%; 
+      }
+
+    }
+    
+    .copySection-headline {
+      max-width: rem-calc(120px);
+
+      @include media-query($medium-up) {
+        max-width: rem-calc(200px);
+        @include text-giga(); 
+      }
+
+      @include media-query($large-up) {
+        @include text-giga(); 
+      }
+
+    }
+    
+    .copySection-copy {
+   
     }
   }
 
-  .aboutLaces-slideshow-slide.is-active {
-    position: relative;
-    visibility: normal; 
-    animation: about-lace-enter .8s cubic-bezier(0.23, 1, 0.32, 1) forwards; 
+  .copySection-imageContainer {
+    @include media-query($medium-up) {
+      transform: scale(1.05); 
+    }
+
+    @include media-query($large-up) {
+      transform: scale(1); 
+    }
   }
-  
-  .aboutLaces-slideshow-slide.is-hidden {
-    z-index: 28; 
+
+  .aboutLaces-slideshow {
+    right: 0; 
+    width: 100%;
+    overflow: hidden; 
+    position: relative;
+
+    .aboutLaces-slideshow-slide {
+      height: 100%; 
+      width: 100%; 
+      top: 0; 
+      bottom: 0; 
+      left: 0; 
+      right: 0; 
+      transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+      z-index: 29; 
+      position: absolute;
+      visibility: normal; 
+
+      .aboutLaces-slideshow-slide-img {
+        width: 100%; 
+      }
+    }
+
+    .aboutLaces-slideshow-slide.is-active {
+      position: relative;
+      visibility: normal; 
+      animation: about-lace-enter .8s cubic-bezier(0.23, 1, 0.32, 1) forwards; 
+    }
+    
+    .aboutLaces-slideshow-slide.is-hidden {
+      z-index: 28; 
+    }
   }
 }
 
@@ -187,18 +278,41 @@
 
 
 
+
+
 /*------------------------------------*\
     #Featured Styles
 \*------------------------------------*/
 
 
-.copySection--featuredLaces {
+.featuredLaces {
+  padding-right: rem-calc($level4);
+  padding-left: rem-calc($level4);
 
-  @include media-query($medium-up) {
-    padding-top: rem-calc($level6);
-    padding-bottom: rem-calc($level6);
+  .copySection-inner {
+
+    @include media-query($medium-up) {
+      margin-top: -3rem; 
+      margin-bottom: -3rem; 
+      padding-top: rem-calc($level7  + $level7);
+      padding-bottom: rem-calc($level7  + $level7);
+    }
+  
+    @include media-query($large-up) {
+      padding-top: rem-calc($level7 + $level6);
+      padding-bottom: rem-calc($level7 + $level6);
+    }
+
+    &:before {
+      @include media-query($medium-up) {
+        height: 70%; 
+      }
+
+      @include media-query($large-up) {
+        height: 76%; 
+      }
+    }
   }
-
 
   .copySection-copy {
 
@@ -226,67 +340,131 @@
     }
   }
 
-  .featuredLaces {
+  .featuredLaces-container {
+    position: relative; 
+  }
 
-    .featuredLaces-container {
-      position: relative; 
+  .featuredLaces-laces {
+    margin-right: rem-calc(-12px);
+    margin-bottom: rem-calc($level2);
+
+    @include media-query($medium-up) {
+      width: 100%;
+      margin-right: -1rem;
+      transform: scale(1.2); 
     }
 
-    .featuredLaces-laces {
-      margin-right: rem-calc(-12px);
-      margin-bottom: rem-calc($level2);
+    .featuredLaces-thumb {
+      padding-right: rem-calc(12px);
+    }
+  }
+
+  .featuredLaces-headline {
+    max-width: rem-calc(160px);
+     
+    @include media-query($medium-up) {
+      margin-bottom: -60px;
+      position: absolute;
+      padding-left: rem-calc(12px); 
+      transform: translateY(-40px);
+    }
+    
+    @include media-query($large-up) {
+      transform: translateY(-52px);
+      @include text-kilo(); 
+    }
+  }
+
+  .featuredLaces-cta {
+    position: relative; 
+    width: 100%; 
+
+    @include media-query($medium-up) {
+      height: rem-calc(18px);
+    }
+
+    @include media-query($large-up) {
+      height: rem-calc($level6);
+    }
+
+    .featuredStyles-linkGroup {
+      position: relative;
+      top: rem-calc(-12px);
+      height: rem-calc($level7);
 
       @include media-query($medium-up) {
-        width: 100%;
-        margin-right: -1rem;
-        transform: scale(1.15); 
+        position: absolute; 
+        min-width: rem-calc(110px); 
+        top: auto; 
+        height: auto; 
+        right: rem-calc(-48px); 
       }
+    } 
+  }
+}
+
+
+
+
+
+/*------------------------------------*\
+    #About Boxes
+\*------------------------------------*/
+
+.aboutBoxes {
+
+  .copySection-inner {
+
+    @include media-query($medium-up) {
+      padding-top: rem-calc($level4);
+      padding-bottom: rem-calc($level4);
+    }
   
-      .featuredLaces-thumb {
-        padding-right: rem-calc(12px);
+    @include media-query($large-up) {
+      padding-top: rem-calc($level7 + $level6);
+      padding-bottom: rem-calc($level7 + $level6);
+    }
+
+
+    &:before {
+      content: " ";
+      background-color: rgb(56, 54, 65);
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+
+      @include media-query($medium-up) {
+        height: 68%; 
+      }
+
+    }
+    
+    .copySection-headline {
+      max-width: rem-calc(120px);
+
+      @include media-query($medium-up) {
+        max-width: rem-calc(200px);
+        @include text-giga(); 
+      }
+
+      @include media-query($large-up) {
+        @include text-giga(); 
       }
     }
 
-    .featuredLaces-headline {
-      max-width: rem-calc(160px);
-       
+    .copySection-imageContainer {
       @include media-query($medium-up) {
-        margin-bottom: -60px;
-        position: absolute;
-        padding-left: rem-calc(12px); 
-        transform: translateY(-40px);
-      }
-      
-      @include media-query($large-up) {
-        transform: translateY(-52px);
-      }
-    }
-
-    .featuredLaces-cta {
-      position: relative; 
-      width: 100%; 
-
-      @include media-query($medium-up) {
-        height: rem-calc(18px);
+        transform: scale(1.05); 
       }
 
       @include media-query($large-up) {
-        height: rem-calc($level6);
+        transform: scale(1); 
       }
-
-      .featuredStyles-linkGroup {
-        position: relative;
-        top: rem-calc(-12px);
-        height: rem-calc($level7);
-
-        @include media-query($medium-up) {
-          position: absolute; 
-          min-width: rem-calc(110px); 
-          top: auto; 
-          height: auto; 
-          right: rem-calc(-48px); 
-        }
-      } 
     }
   }
 }
+
+

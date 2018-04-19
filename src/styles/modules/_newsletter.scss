@@ -4,7 +4,22 @@
 \*------------------------------------*/
 
 .newsletter {
+  padding-right: rem-calc($level4);
+  padding-left: rem-calc($level4);
+
+  .copySection-inner {
+
+    @include media-query($medium-up) {
+      padding-top: rem-calc($level7  + $level3);
+      padding-bottom: rem-calc($level7  + $level3);
+    }
   
+    @include media-query($large-up) {
+      padding-top: rem-calc($level7 + $level3);
+      padding-bottom: rem-calc($level7 + $level3);
+    }
+  }
+
   .newsletter-description {
     max-width: 23.125rem; 
 

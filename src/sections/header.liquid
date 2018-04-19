@@ -160,15 +160,19 @@
 
 {% javascript %}
   setTimeout(function() {
-    $.stellar({
-     horizontalScrolling: false,
-    verticalScrolling: true,
-    hideDistantElements: false,
-    responsive: true,
-    positionProperty: 'transform'
-    }); 
 
-    console.log('hello'); 
+    if(window.innerWidth > 640) {
+        $.stellar({
+         horizontalScrolling: false,
+        verticalScrolling: true,
+        hideDistantElements: false,
+        responsive: true,
+        positionProperty: 'transform'
+        }); 
+    }
 
   }, 200);  
 {% endjavascript %}
+
+
+
