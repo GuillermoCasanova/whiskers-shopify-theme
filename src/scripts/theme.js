@@ -23,7 +23,7 @@ window.theme = window.theme || {};
 // =require sections/header.js
 // =require sections/heroHeader.js
 // =require sections/lacingStyles.js
-
+// =require sections/whiskersIntro.js
 
 
 /*================ Templates ================*/
@@ -43,6 +43,8 @@ $(document).ready(function() {
   sections.register('lookbook_slideshow', theme.lookbookSlideshow);
   sections.register('lookbook_slideshow2', theme.lookbookSlideshow2);
   sections.register('lookbook_cta', theme.lookbookCta);
+  sections.register('whiskers_intro', theme.whiskersIntro);
+
 
 
   // Common a11y fixes

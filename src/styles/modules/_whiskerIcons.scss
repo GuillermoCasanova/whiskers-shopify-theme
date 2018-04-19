@@ -7,7 +7,15 @@
 .whiskerIcon {
   fill: $secondaryColor; 
   width: rem-calc(33px); 
-  height: rem-calc(33px); 
+  height: rem-calc(33px);
+  
+  &.is-hidden {
+    opacity: 0; 
+  }
+
+  &.is-active {
+      opacity: 1;
+  }
 }
 
 
