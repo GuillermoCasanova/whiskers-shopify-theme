@@ -158,22 +158,34 @@
                             <!--<label for="Quantity">{{ 'products.product.quantity' | t }}</label> -->
                             <input type="number" id="Quantity" name="quantity" value="1" min="1" class="input--small" >
                           </div>
-
+                            
+                            {% if current_variant.available %}
                             <button
                               type="submit"
                               name="add"
                               class="button  button--small  button--expanded  button--primary  product-buyBtn"
                               data-add-to-cart
                               id="AddToCart--{{ section.id }}"
+                              data-text="{{ 'products.product.add_to_cart' | t }}"
                               {% unless current_variant.available %}disabled="disabled"{% endunless %}>
                                 <span data-add-to-cart-text class="button-textState1">
-                                  {% if current_variant.available %}
                                     {{ 'products.product.add_to_cart' | t }}
-                                  {% else %}
-                                    {{ 'products.product.sold_out' | t }}
-                                  {% endif %}
                                 </span>
                             </button>
+                             {% else %}
+                              <button
+                                type="submit"
+                                name="add"
+                                class="button  button--small  button--expanded  button--primary  button--disabled  product-buyBtn  "
+                                data-add-to-cart
+                                id="AddToCart--{{ section.id }}"
+                                data-text="{{ 'products.product.sold_out' | t }}"
+                                {% unless current_variant.available %}disabled="disabled"{% endunless %}>
+                                  <span data-add-to-cart-text class="button-textState1">
+                                      {{ 'products.product.sold_out' | t }}
+                                  </span>
+                              </button>
+                              {% endif %}
                           </form>
 
                         </div>

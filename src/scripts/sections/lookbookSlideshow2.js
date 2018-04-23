@@ -15,7 +15,7 @@ theme.lookbookSlideshow2 = (function() {
 
   var lookbookSlideshow = function(container) { 
 
-    $(selectors.lookbookSlideshow).slick({
+    $(container).find(selectors.lookbookSlideshow).slick({
       'arrows': false,
       'slidesToShow': 1,
       'mobileFirst': true,
@@ -28,21 +28,7 @@ theme.lookbookSlideshow2 = (function() {
       'responsive' : [
           {
             breakpoint: 640, 
-            settings: {
-              slidesToShow: 2,
-              arrows: true,
-              initialSlide: 1,
-              centerPadding: '60px',
-            }
-          },
-          {
-            breakpoint: 960, 
-            settings: {
-              slidesToShow: 3,
-              arrows: true,
-              initialSlide: 1,
-              centerPadding: '60px',
-            }
+            settings: 'unslick'
           }
         ]
       });
@@ -53,6 +39,20 @@ theme.lookbookSlideshow2 = (function() {
       nextBtn.text('');
       prevBtn.text('');
 
+      var controller = new ScrollMagic.Controller(); 
+
+      var wipeAnimation = new TimelineMax()
+        .fromTo(container, 12, { x: "-30%"}, { x: "50%"}, '+=.3');
+
+        new ScrollMagic.Scene({
+          triggerElement: '[data-trigger-2]',
+          triggerHook: 'onLeave', 
+          offset: '-100%',
+          duration: '400%'
+        })
+        .setPin(container)
+        .setTween(wipeAnimation)
+        .addTo(controller); 
   };
 
   return lookbookSlideshow;

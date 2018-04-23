@@ -47,11 +47,10 @@
                     {% for product in collection.products %}
                     <li class="grid-cell">
                       {% if product.featured_image != blank %}
-                      <div class="productThumb  {% unless product.available %}productThumb--soldOut{% endunless %}">
-                        <a href="{{ product.url | within: collection }}">
+                        <a class="productThumb  {% unless product.available %}productThumb--soldOut{% endunless %}" href="{{ product.url | within: collection }}">
                           <div class="productThumb-inner">
                             <div class="productThumb-bg">
-                            {{ product.featured_image.src | img_url: '480x480' | img_tag: product.featured_image.alt }}
+                            {{ product.featured_image.src | img_url: '360x360' | img_tag: product.featured_image.alt }}
                             </div>
                             <div class="productThumb-description text-center grid grid--center grid--justifySpaceBetween">
                               <h3 class="productThumb-title">{{ product.title }}</h3>
@@ -86,7 +85,6 @@
                             </div>
                           </div>
                         </a>
-                      </div>
                       {% endif %}
                       {% else %}
                         {% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}

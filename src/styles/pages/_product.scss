@@ -253,11 +253,30 @@
         input {
           margin-bottom: 0; 
         }
+
+        label {
+          color: $quintenaryColor; 
+          font-weight: bold; 
+          @include text-micro(); 
+        }
         
         input {
           margin-left: rem-calc($level1);
           margin-right: 0; 
           text-align: center; 
+          padding: rem-calc($level1); 
+          width: rem-calc(72px);
+          background-color: transparent;
+          border: 3px solid $primaryColor; 
+          outline-width: 0;
+          color: #fff; 
+          transition: all .3s cubic-bezier(0.23, 1, 0.32, 1); 
+          @include h4();
+
+          &:active,
+          &:focus {
+            border: 3px solid #fff; 
+          }
         }
       }
     }

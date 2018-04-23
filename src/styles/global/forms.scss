@@ -10,8 +10,8 @@ select {
   border-radius: 0;
   max-width: 100%;
   margin-bottom: rem-calc($base-magic-number); 
-  font-family: $primary-font-family; 
-  
+  font-family: $secondary-font-family; 
+
   &:focus {
     // You should add some focus styles
   }
