@@ -1,9 +1,9 @@
 
 /**
-   * @namespace Lacing Styles
+   * @namespace Lacing Guide
  */
 
-theme.lacingStyles = (function() {
+theme.lacingGuide = (function() {
 
   var selectors = {
     grid: '[data-grid]',
@@ -11,7 +11,7 @@ theme.lacingStyles = (function() {
     imagesSlideshow: '[data-images-slideshow]'
   };
 
-  var lacingStyles = function() { 
+  var lacingGuide = function() { 
 
     // ======================= imagesLoaded Plugin ===============================
     // https://github.com/desandro/imagesloaded
@@ -149,7 +149,7 @@ theme.lacingStyles = (function() {
         // extra amount of pixels to scroll the window
         scrollExtra = 0,
         // extra margin when expanded (between preview overlay and the next items)
-        marginExpanded = 10,
+        marginExpanded = 36,
         $window = $( window ), winsize,
         $body = $( 'html, body' ),
         transEndEventName = 'webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend',
@@ -191,6 +191,7 @@ theme.lacingStyles = (function() {
         $items.each( function() {
           var $item = $( this );
           $item.data( 'offsetTop', $item.offset().top );
+          console.log($item); 
           if( saveheight ) {
             $item.data( 'height', $item.height() );
           }
@@ -298,36 +299,34 @@ theme.lacingStyles = (function() {
 
       Preview.prototype = {
 
-        // inits the slideshow inside the expanded content 
         initSlideshow: function() {
 
-            this.stepsSlideshow = this.$previewEl.find(selectors.stepsSlideshow).slick({
-              'arrows': false,
-              'slidesToShow': 1,
-              'mobileFirst': true,
-              'autoplay': false,
-              'fade': true,
-              'infinite': false,
-              'swipe': false
-            });
+          this.stepsSlideshow = this.$previewEl.find(selectors.stepsSlideshow).slick({
+            'arrows': false,
+            'slidesToShow': 1,
+            'mobileFirst': true,
+            'autoplay': false,
+            'fade': true,
+            'infinite': true,
+            'swipe': false
+          });
 
-            this.imagesSlideshow = this.$previewEl.find(selectors.imagesSlideshow).slick({
-              'arrows': true,
-              'slidesToShow': 1,
-              'mobileFirst': true,
-              'autoplay': false,
-              'fade': true,
-              'infinite': false,
-              'swipe': false,
-              'asNavFor': selectors.stepsSlideshow
-            });
+          this.imagesSlideshow = this.$previewEl.find(selectors.imagesSlideshow).slick({
+            'arrows': true,
+            'slidesToShow': 1,
+            'mobileFirst': true,
+            'autoplay': false,
+            'fade': true,
+            'infinite': true,
+            'swipe': false,
+            'asNavFor': selectors.stepsSlideshow
+          });
 
-            var nextBtn = $(selectors.imagesSlideshow).find('.slick-next');
-            var prevBtn = $(selectors.imagesSlideshow).find('.slick-prev');
+          this.nextBtn = $(selectors.imagesSlideshow).find('.slick-next');
+          this.prevBtn = $(selectors.imagesSlideshow).find('.slick-prev');
 
-            nextBtn.text('');
-            prevBtn.text('');
-
+          this.nextBtn.text('');
+          this.prevBtn.text('');
         },
         destroySlideshows: function() {
           this.stepsSlideshow.slick("unslick"); 
@@ -461,11 +460,11 @@ theme.lacingStyles = (function() {
           // case 1 : preview height + item height fits in window´s height
           // case 2 : preview height + item height does not fit in window´s height and preview height is smaller than window´s height
           // case 3 : preview height + item height does not fit in window´s height and preview height is bigger than window´s height
-          var position = this.$item.data( 'offsetTop' ),
-            previewOffsetT = this.$previewEl.offset().top - scrollExtra,
-            scrollVal = this.height + this.$item.data( 'height' ) + marginExpanded <= winsize.height ? position : this.height < winsize.height ? previewOffsetT - ( winsize.height - this.height ) : previewOffsetT;
-          
-          $body.animate( { scrollTop : scrollVal }, settings.speed );
+          var position = this.$item.data( 'offsetTop' );
+          var previewOffsetT = this.$previewEl.offset().top - scrollExtra;
+          var scrollVal = this.height + this.$item.data( 'height' ) + marginExpanded  <= winsize.height ? position : this.height < winsize.height ? previewOffsetT - (this.$item.data('height') / 4) : previewOffsetT;
+
+          $body.animate( { scrollTop : scrollVal }, settings.speed);
 
         },
         setTransition  : function() {
@@ -490,7 +489,7 @@ theme.lacingStyles = (function() {
 
   };
 
-  return lacingStyles;
+  return lacingGuide;
 
 })();
 

@@ -69,6 +69,18 @@ theme.Product = (function() {
 
     nextBtn.text('');
     prevBtn.text('');
+    prevBtn.addClass('is-hidden'); 
+
+    slideshow.on('afterChange', function(event, slick, currentSlide, nextSlide) {
+      if(currentSlide === (slick.$slides.length - 1)) {
+        nextBtn.addClass('is-hidden')
+      } else if(currentSlide === 0) {
+        prevBtn.addClass('is-hidden')
+      } else {
+        prevBtn.removeClass('is-hidden')
+        nextBtn.removeClass('is-hidden')  
+      }
+    }); 
 
 
     var focusProductImage = function(pIndex) {
@@ -83,7 +95,6 @@ theme.Product = (function() {
     $(selectors.productThumbs).each(function() {
       $(this).on('click',function() {
         var id = $(this).data('slide-index') - 2; 
-        console.log(id ); 
         focusProductImage(id); 
       }); 
     }); 

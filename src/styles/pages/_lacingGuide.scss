@@ -1,11 +1,11 @@
 
 
 /*------------------------------------*\
-    #Lacing Styles
+    #Lacing Guide
 \*------------------------------------*/
 
 
-.lacingStyles {
+.lacingGuide {
   width: 100%; 
   position: relative;
 
@@ -124,7 +124,7 @@
       color: $grey--med; 
       width: rem-calc(50px); 
       height: rem-calc(20px); 
-      transition: all .2s ease-in-out; 
+      transition: all .2s cubic-bezier(0.23, 1, 0.32, 1); 
     
       &:before {
         content: "";
@@ -216,7 +216,7 @@
     top: 20px;
     right: 20px;
     cursor: pointer;
-    transition: all .2s ease-in-out;
+    transition: all .2s cubic-bezier(0.23, 1, 0.32, 1);
     transform: translateZ(0);
   }
 

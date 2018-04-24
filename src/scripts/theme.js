@@ -22,7 +22,7 @@ window.theme = window.theme || {};
 // =require sections/product.js
 // =require sections/header.js
 // =require sections/heroHeader.js
-// =require sections/lacingStyles.js
+// =require sections/lacingGuide.js
 // =require sections/whiskersIntro.js
 
 
@@ -39,7 +39,7 @@ $(document).ready(function() {
   sections.register('collection_nav', theme.collectionNav);
   sections.register('hero_header', theme.heroHeader);
   sections.register('about_laces', theme.aboutLaces);
-  sections.register('lacing_styles', theme.lacingStyles);
+  sections.register('lacing_styles', theme.lacingGuide);
   sections.register('lookbook_slideshow', theme.lookbookSlideshow);
   sections.register('lookbook_slideshow2', theme.lookbookSlideshow2);
   sections.register('lookbook_cta', theme.lookbookCta);

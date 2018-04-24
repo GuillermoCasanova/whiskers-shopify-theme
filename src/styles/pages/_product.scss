@@ -4,53 +4,6 @@
     #Product Page
 \*------------------------------------*/
 
-// .product-header {
-//   width: 100%;
-//   text-align: center;
-
-//   @include media-query($large-up) {
-//     margin-bottom: rem-calc($level4); 
-//   }
-
-//   .product-header-backBtn {
-//     height: rem-calc(30px);
-//     width: rem-calc(30px);
-//     display: block; 
-//     position: relative;
-
-//     span {
-//       height: rem-calc(12px);
-//       width: rem-calc(12px);
-//       display: block; 
-//       margin-right: rem-calc(3px); 
-//       margin-bottom: rem-calc(3px); 
-//       background-color: $secondaryColor; 
-//       position: absolute;
-//     }
-
-//     span:nth-child(1) {
-//       left: 0; 
-//       top: 0; 
-//     }
-//     span:nth-child(2) {
-//       right: 0; 
-//       top: 0; 
-//     }
-//     span:nth-child(3) {
-//       left: 0; 
-//       bottom: 0; 
-//     }
-//     span:nth-child(4) {
-//       right: 0; 
-//       bottom: 0; 
-//     }
-
-//   }
-// }
-
-
-
-
 
 /*------------------------------------*\
     #Product 
@@ -142,7 +95,7 @@
         opacity: .6;
         border: none;
         outline: none; 
-        transition: all .2s ease-in-out; 
+        transition: all .2s cubic-bezier(0.23, 1, 0.32, 1); 
 
         &:before {
           content: "";
@@ -154,6 +107,10 @@
           width: 100%; 
           height: rem-calc(36px); 
           top:0; 
+        }
+
+        &.is-hidden {
+          opacity: 0; 
         }
       }
 
@@ -383,7 +340,7 @@
       width: rem-calc(26px); 
       height: rem-calc(26px); 
       fill: $accentColor;
-      transition: all .2s ease-in-out; 
+      transition: all .2s cubic-bezier(0.23, 1, 0.32, 1); 
     }
   
 
@@ -431,7 +388,7 @@
     margin-bottom: rem-calc($level1);
     border: 2px solid transparent;
     transform: scale(1);
-    transition: all .2s ease-in-out;
+    transition: all .2s cubic-bezier(0.23, 1, 0.32, 1);
 
     &:hover, 
     &:focus {
