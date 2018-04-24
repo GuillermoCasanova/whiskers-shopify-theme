@@ -310,11 +310,13 @@ var ajaxCart = (function(module, $) {
 
     // Show empty cart
     if (cart.item_count === 0) {
-      $cartContainer.append(
-        '<p class="cart--empty-message">' +
-          theme.strings.cartEmpty +
-          '</p>\n'
-      );
+      var source = $('#EmptyCartTemplate').html();
+      var template = Handlebars.compile(source);
+      var data = {
+          emptyState: theme.strings.cartEmpty
+      };
+      console.log(data); 
+      $cartContainer.append(template(data));
       cartCallback(cart);
       return;
     }

@@ -373,6 +373,7 @@
       top: 0; 
       }
   }
+  
   a {
     color: #fff; 
     position: relative;
@@ -396,6 +397,7 @@
 
     &:hover, 
     &:focus {
+      color: #fff; 
       .icon {
         fill: #fff; 
       }

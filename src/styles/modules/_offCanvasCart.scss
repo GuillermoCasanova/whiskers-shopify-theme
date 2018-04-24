@@ -36,6 +36,17 @@
     height: 100%; 
   }
 
+  .offCanvasCart-emptyMessage {
+    padding-right: $column-gutter /2; 
+    padding-left: $column-gutter /2; 
+
+    p {
+      text-transform: uppercase;
+      font-family: $secondary-font-family; 
+      @include text-micro(); 
+    }
+  }
+
   .offCanvasCart-contents {
     overflow-y: scroll;
     overflow-x: hidden;
