@@ -1,38 +1,46 @@
 
-<section data-section-id="{{ section.id }}" data-section-type="lookbook_slideshow">
+<section data-section-id="{{ section.id }}" data-section-type="lookbook_slideshow"  data-trigger> 
   <div  class="lookBookSlideshow" >
-    <ul class="lookBookSlideshow-slideshow" data-lookbook-slideshow>
-      <li>
-        <div class="lookBookSlideshow-look">
-          <img  src="{{ 'look_1.jpg' | asset_url}}" alt="">
-          <span class="lookBookSlideshow-look-name">
-            Light Blue Solids
-          </span>
-        </div>
+    <ul class="lookBookSlideshow-slideshow   grid  grid--center  grid--justifySpaceAround  med-grid--1of3" data-lookbook-slideshow>
+      <li class="grid-cell  grid-cell--autoSize">
+        <a href="/collections/solids/products/solid-light-blue"  title="Whiskers Light blue & Dark Blue Striped">
+          <div class="lookBookSlideshow-look">
+            <img  src="{{ 'look_1.jpg' | asset_url}}" alt="Light Blue Solids">
+            <span class="lookBookSlideshow-look-name">
+              Solid Light Blue
+            </span>
+          </div>
+        </a>
       </li>
-      <li>
-        <div class="lookBookSlideshow-look">
-          <img  src="{{ 'look_2.jpg' | asset_url}}" alt="">
-          <span class="lookBookSlideshow-look-name">
-            Light blue & Dark Blue Striped
-          </span>
-        </div>
+      <li class="grid-cell  grid-cell--autoSize">
+        <a href="/collections/striped/products/blue-light-blue-striped" title="Whiskers Light blue & Dark Blue Striped">
+          <div class="lookBookSlideshow-look">
+            <img  src="{{ 'look_2.jpg' | asset_url}}" alt="Light blue & Dark Blue Striped">
+            <span class="lookBookSlideshow-look-name">
+              Light blue & Dark Blue Striped
+            </span>
+          </div>
+        </a>
       </li>
-      <li>
+      <li class="grid-cell  grid-cell--autoSize">
+        <a href="/collections/striped/products/solid-red" title="Red Solids">
         <div class="lookBookSlideshow-look">
-          <img  src="{{ 'look_3.jpg' | asset_url}}" alt="">
+          <img  src="{{ 'look_3.jpg' | asset_url}}" alt="Red Solids">
           <span class="lookBookSlideshow-look-name">
            Red Solids
           </span>
         </div>
+        </a>
       </li>
-      <li>
+      <li class="grid-cell  grid-cell--autoSize">
+        <a href="/collections/diamond-weave/products/red-black-white-braided" title="Whiskers Black, Red & White Braided">
         <div class="lookBookSlideshow-look">
           <img  src="{{ 'look_4.jpg' | asset_url}}" alt="">
           <span class="lookBookSlideshow-look-name">
             Black, Red & White Braided
           </span>
         </div>
+      </a>
       </li>
     </ul>
     <div class="lookBookSlideshow-slideForMore  hide-for-large-up">

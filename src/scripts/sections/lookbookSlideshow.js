@@ -15,6 +15,8 @@ theme.lookbookSlideshow = (function() {
 
   var lookbookSlideshow = function(container) { 
 
+    var containerWidth = $(container).find(selectors.lookbookSlideshow).innerWidth(); 
+
     $(selectors.lookbookSlideshow).slick({
       'arrows': false,
       'slidesToShow': 1,
@@ -42,13 +44,13 @@ theme.lookbookSlideshow = (function() {
       var controller = new ScrollMagic.Controller(); 
 
       var wipeAnimation = new TimelineMax()
-        .fromTo(container, 12, { x: "30%"}, { x: "-50%"}, '+=.3');
+        .fromTo(container, 20, { x: "50%"}, { x: "-30%"});
 
         new ScrollMagic.Scene({
           triggerElement: '[data-trigger]',
           triggerHook: 'onLeave', 
-          offset: '-100%',
-          duration: '400%'
+          offset: -100,
+          duration:  (containerWidth * 2) + 'px'
         })
         .setPin(container)
         .setTween(wipeAnimation)
