@@ -11,8 +11,8 @@
     color: #fff; 
     font-family: $secondary-font-family; 
     text-transform: uppercase;
-    padding-right: rem-calc($level1);
   }
+  
 
   &:hover, 
   &:focus {
@@ -25,6 +25,11 @@
     .linkGroup-icon {
       transform: translateX(5px);
     }
+  }
+  
+
+  .linkGroup-label {
+    padding-right: rem-calc($level1);
   }
   
   .linkGroup-icon {

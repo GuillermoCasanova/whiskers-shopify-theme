@@ -7,30 +7,22 @@
           <img src="{{'headers_small1.png' | asset_url}}" alt="Whiskers Shoelaces" class="hide-for-medium-up  heroHeader-bg-img" role="presentation">
     
           <div class="heroHeader-bg-slideshow  heroSlideshow show-for-medium-up"  role="presentation"  data-slideshow>
-            <div class="heroSlideshow-slide">
-          
+            <div class="heroSlideshow-slide" data-slide  data-index="0">
               <div class="heroSlideshow-slide-img"  
                    style="background-image: url({{'headers_large1.png' | asset_url}});">
               </div>
-                
             </div>
-
-            <div class="heroSlideshow-slide">
-          
+            <div class="heroSlideshow-slide" data-slide  data-index="1">
               <div class="heroSlideshow-slide-img"  
                    style="background-image: url({{'headers_large3.png' | asset_url}});">
               </div>
-                
             </div>
 
-            <div class="heroSlideshow-slide">
-          
+            <div class="heroSlideshow-slide" data-slide  data-index="2">
               <div class="heroSlideshow-slide-img"  
                    style="background-image: url({{'headers_large4.png' | asset_url}});">
               </div>
-                
             </div>
-            
         </div>
       </div>
   
@@ -49,20 +41,29 @@
             </h1>
         
             <div class="row">
-        
               <div class="small-8 columns small-centered">
-        
-                <a href="{{section.settings.cta}}" rel="internal" class="button  button--small  button--expanded  button--primary" data-text="{{section.settings.cta_label}}">
-                  <span>{{section.settings.cta_label}}</span>
-                </a>
-  
-                <div class="text-center">
-              
-                  <img src="{{'whiskIcon--glasses_teal.svg' | asset_url}}" alt=""
-                  width="60">
-  
+                <div class="grid grid--justifyCenter grid--flexDirectionColumn  grid--center">
+                  <a href="{{section.settings.cta}}" rel="internal" class="button  button--small  button--expanded  button--primary" data-text="{{section.settings.cta_label}}">
+                    <span>{{section.settings.cta_label}}</span>
+                  </a>
+                    
+                  <div class="heroHeader-accentContainer">
+                     <svg class="heroHeader-accent  whiskerIcon"  style="fill: #9ad4b8;" data-accent  data-index="0">
+                        <use xlink:href="#icon--pepper"/>
+                  
+                      </svg>
+                      
+                     <svg class="heroHeader-accent  whiskerIcon"  style="fill: #c11e37;"  data-accent  data-index="1">
+                        <use xlink:href="#icon--ice_cream"/>
+                  
+                      </svg>
+                  
+                     <svg class="heroHeader-accent  whiskerIcon"  style="fill: pink;" data-accent  data-index="2">
+                        <use xlink:href="#icon--dolphin"/>
+                  
+                      </svg>
+                  </div>
                 </div>
-        
               </div>
             </div>
           </div>

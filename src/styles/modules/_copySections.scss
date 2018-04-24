@@ -35,19 +35,11 @@
 
   .copySection-accent {
     position: absolute;
-    width: rem-calc(30px);
-    height: rem-calc(30px);
-
-    @include media-query($medium-up) {
-      width: rem-calc(48px);
-      height: rem-calc(48px);
-    }
   }
   
   .copySection-copy {
     max-width: rem-calc(370px);
     position: relative;
-
 
     @include media-query($medium-up) {
       margin-bottom: 0; 
@@ -57,6 +49,18 @@
     @include media-query($large-up) {
       max-width: 19rem; 
       margin-bottom: rem-calc($level7);
+    }
+
+    .copySection-button {
+      max-width: re-calc(200px); 
+
+      @include media-query($medium-up) {
+        max-width: rem-calc(160px); 
+      }
+      
+      @include media-query($large-up) {
+        max-width: rem-calc(200px); 
+      }
     }
   }
 
@@ -94,7 +98,6 @@
       @include media-query($medium-up) {
         height: 55%; 
       }
-
     }
     
     .copySection-headline {
@@ -106,9 +109,9 @@
       }
 
       @include media-query($large-up) {
+        max-width: 16.5rem; 
         @include text-giga(); 
       }
-
     }
     
     .copySection-copy {
@@ -142,7 +145,6 @@
     @include media-query($large-up) {
       left: rem-calc(-24px);
     }
-
   }
 
   .copySection-copy {
@@ -162,8 +164,7 @@
   }
 
   .copySection-accent {
-    right: -.9rem; 
-    width: rem-calc(30px);
+    right: -1.4rem; 
     bottom: 0;
     top: 45%;
   }
@@ -184,7 +185,6 @@
       left: rem-calc(-12px);
     }
   }
-
 }
 
 

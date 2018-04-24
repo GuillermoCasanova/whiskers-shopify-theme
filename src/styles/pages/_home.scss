@@ -19,9 +19,15 @@
     }
 
     .copySection-headline {
+      max-width: rem-calc(220px); 
       @include h1(); 
 
+      @include media-query($medium-up) {
+        max-width: rem-calc(220px); 
+      }
+
       @include media-query($large-up) {
+        max-width: 100%; 
         @include text-kilo(); 
       }
     }

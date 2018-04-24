@@ -17,9 +17,9 @@ theme.whiskersIntro = (function() {
 
   var whiskersIntro = function(container) { 
 
-    var $container = $(container); 
-    var slides = $container.find(selectors.shoeSlideshowSlides); 
-    var accents = $container.find(selectors.accents); 
+    this.$container = $(container); 
+    var slides = this.$container.find(selectors.shoeSlideshowSlides); 
+    var accents = this.$container.find(selectors.accents); 
     var activeSlide = 0; 
     var slideTotal = slides.length;
 

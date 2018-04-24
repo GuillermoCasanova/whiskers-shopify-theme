@@ -4,14 +4,20 @@
     <div class="small-12 medium-11 large-9  medium-centered columns [ grid  grid--justifyCenter ]">
       <div class="copySection-inner">
 
-        <div class="copySection-accent">
-         
-            <img src="{{'whiskIcon--dolphin.svg' | asset_url}}" 
-                 alt=""
-                 role="presentation"
-                 width="350">    
+        <svg class="copySection-accent  whiskerIcon"  style="fill: #7e6dc2;"  data-accent  data-index="1">
+          <use xlink:href="#icon--ice_cream"/>
 
-        </div>  
+        </svg>
+
+        <svg class="copySection-accent  whiskerIcon"  style="fill: yellow;" data-accent  data-index="0">
+          <use xlink:href="#icon--dolphin"/>
+
+        </svg>
+
+        <svg class="copySection-accent  whiskerIcon"  style="fill: #7e6dc2;" data-accent  data-index="2">
+          <use xlink:href="#icon--pepper"/>
+
+        </svg>
 
         <div class="row  grid  grid--flexDirectionColumn  med-grid--flexDirectionRowReverse  grid--center">
         
@@ -38,7 +44,7 @@
                 
                       <div class="small-12 columns">
                 
-                        <a href="{{section.settings.cta}}" rel="internal" class="button--expanded  button button--primary button--small" data-text="{{section.settings.cta_label}}">
+                        <a href="{{section.settings.cta}}" rel="internal" class="button--expanded  button button--primary button--small copySection-button" data-text="{{section.settings.cta_label}}">
                         <span>{{section.settings.cta_label}}</span>
                         </a>
                       </div>

@@ -11,78 +11,97 @@ theme.heroHeader = (function() {
 
   var selectors = {
     slideshow: '[data-slideshow]',
-    slides: '[data-slide]'
+    slides: '[data-slide]',
+    accents: '[data-accent]'
   };
 
   var heroHeader = function(container) { 
 
-    var $container = $(container); 
+    this.$container = $(container); 
+    this.slides = this.$container.find(selectors.slides); 
+    this.accents = this.$container.find(selectors.accents); 
+    this.activeSlide = 0; 
+    this.slideTotal = this.slides.length;
 
+    this.loadSlideshow  = function() {
 
-    function loadSlideshow() {
+      var self = this; 
+
+      var setActiveSlide = function(pId, pSlides, pAccents) {
+        
+        pSlides.each(function() {
+          var slide = $(this); 
+          var index = slide.data('index');
+
+          if(index == self.activeSlide) {
+            slide.addClass('is-active');
+            slide.removeClass('is-hidden');
+          } else if(index == 2) {
+            slide.removeClass('is-active');
+            setTimeout(function() {
+              slide.addClass('is-hidden'); 
+            }, 600); 
+          } else {
+            slide.removeClass('is-active');
+          }
+        }); 
+
+        pAccents.each(function() {
+          var elem = $(this); 
+          var index = elem.data('index');
+
+          if(index == self.activeSlide) {
+            elem.addClass('is-active');
+            elem.removeClass('is-hidden');
+          } else {
+            elem.removeClass('is-active');
+            elem.addClass('is-hidden');
+          }
+        }); 
+
+      }; 
+
+      var loadImages = function(pSlides) {
+        pSlides.each(function() {
+          var slide = $(this); 
+          var imgUrl = slide.data('image'); 
+          slide.find('[data-image]').css('background-image', 'url(' + imgUrl + ')'); 
+        })
+      };
+
 
       if(window.innerWidth > 640) {
 
-        var slides = $container.find(selectors.slides); 
-        var activeSlide = 0; 
-        var slideTotal = slides.length;
+        loadImages(self.slides); 
+        setActiveSlide(self.activeSlide, self.slides, self.accents); 
 
-        var setActiveSlide = function(pId, pSlides) {
-          
-          pSlides.each(function() {
-            var slide = $(this); 
-            var index = slide.data('index');
+        setTimeout(function() {
 
-            if(index == activeSlide) {
-              slide.addClass('is-active');
-              slide.removeClass('is-hidden');
-            } else if(index == 2) {
-              slide.removeClass('is-active');
-              setTimeout(function() {
-                slide.addClass('is-hidden'); 
-              }, 600); 
-            } else {
-              slide.removeClass('is-active');
+          setInterval(function() {
+            self.activeSlide = self.activeSlide + 1; 
+            if(self.activeSlide > self.slideTotal - 1) {
+              self.activeSlide = 0;
             }
-          }); 
+            setActiveSlide(self.activeSlide, self.slides, self.accents); 
+          }, 4000); 
 
-        }; 
+        }, 400); 
 
-        var loadImages = function(pSlides) {
+      } else {
+        setActiveSlide(self.activeSlide, self.slides, self.accents); 
+      }
 
-          pSlides.each(function() {
-            var slide = $(this); 
-            var imgUrl = slide.data('image'); 
-            slide.find('[data-image]').css('background-image', 'url(' + imgUrl + ')'); 
-          })
-        }
-
-        loadImages(slides); 
-
-        setActiveSlide(activeSlide, slides); 
-
-        setInterval(function() {
-          activeSlide = activeSlide + 1; 
-          if(activeSlide > slideTotal - 1) {
-            activeSlide = 0;
-          }
-          setActiveSlide(activeSlide, slides); 
-        }, 4000); 
-
-      }  
     }
-
 
     $(window).resize(function() {
 
       setTimeout(function() {
-        loadSlideshow();
+        this.loadSlideshow();
       }, 200); 
 
     }); 
 
-    loadSlideshow();
-
+    this.loadSlideshow();
 
   };
 
