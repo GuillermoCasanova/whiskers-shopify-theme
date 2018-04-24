@@ -295,6 +295,122 @@
     #Product Photo Thumbnails
 \*------------------------------------*/
 
+
+.product-social {
+  width: 100%; 
+  position: relative;
+  padding-bottom: rem-calc($level7);  
+  color: #fff;
+  text-transform: uppercase;
+  font-family: $secondary-font-family; 
+  @include text-micro(); 
+  
+  @include media-query($medium-up) {
+    margin-left: $column-gutter; 
+  }
+
+  @include media-query($large-up) {
+    position: absolute;
+    width: 8.3333%; 
+    top: 8.5rem; 
+    right: 0; 
+    color: $secondaryColor;
+
+     &:after {
+      content: " ";
+      width: 8px; 
+      border-right: 2px solid $secondaryColor; 
+      position: absolute; 
+      z-index: 8; 
+      right: 8px; 
+      left: 0; 
+      bottom: -88px; 
+      margin: auto;
+      height: 65%; 
+    }
+  }
+  
+  .product-social-tag {
+    @include media-query($large-up) {
+      background-color: $primaryColor;
+      position: relative;
+      transform: rotate(90deg);
+      display: block;
+      bottom: -248px;
+      z-index: 9; 
+    }
+  }
+
+  .product-social-item {
+    margin-right: rem-calc($level2); 
+    display: table; 
+    vertical-align: middle; 
+
+    @include media-query($large-up) {
+      margin-right: 0; 
+      margin-bottom: rem-calc($level2); 
+    }
+  }
+
+  .product-social-title {
+    position: relative;
+
+    @include media-query($large-up) {
+      background-color: $primaryColor;
+      position: relative;
+      transform: rotate(90deg);
+      display: block; 
+      top: rem-calc(-18px);
+    }
+
+    &:after {
+      content: " "; 
+      height: rem-calc(4px);
+      width: rem-alc(30px); 
+      background-color: red;
+      position: absolute;
+      right: 0; 
+      top: 0; 
+      }
+  }
+  a {
+    color: #fff; 
+    position: relative;
+    display: table; 
+    vertical-align: middle; 
+    .icon {
+      width: rem-calc(26px); 
+      height: rem-calc(26px); 
+      fill: $accentColor;
+      transition: all .2s ease-in-out; 
+    }
+  
+
+    @include media-query($large-up) {
+      color: $secondaryColor;
+
+      .icon {
+        fill: $secondaryColor;
+      }
+    }
+
+    &:hover, 
+    &:focus {
+      .icon {
+        fill: #fff; 
+      }
+    }
+  }
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Product Photo Thumbnails
+\*------------------------------------*/
+
 .productPhotoThumbnails {
   margin-bottom: rem-calc($level4); 
   

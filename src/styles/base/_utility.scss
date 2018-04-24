@@ -109,7 +109,7 @@
     overflow: hidden; 
     clip: rect(1px, 1px, 1px, 1px); 
     left: -9999px; 
-    @extend %position-absolute; 
+    position: absolute;
 }
 
 

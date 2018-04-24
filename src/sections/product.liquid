@@ -75,7 +75,7 @@
         
               <div class="row small-collapse  large-uncollapse">
       
-                <div class="small-12 columns medium-6  large-12">
+                <div class="small-12 columns medium-7  large-12">
       
                   <div class="row  small-collapse">
                     <div class="small-12 columns">
@@ -193,11 +193,11 @@
                   </div>
                 </div>
       
-                <div class="small-12 columns medium-6  large-12  hide-for-large-up">
+                <div class="small-12 columns medium-5  large-12  hide-for-large-up">
                   <div class="row small-collapse">
                   
                     <div class="small-12 columns">
-                    
+           
                       <div class="productPhotoThumbnails">
 
                         {% if product.images.size > 1 %}
@@ -227,7 +227,10 @@
     </div>
 
   </div>
-
+  
+  {% if section.settings.show_share_buttons %}
+      {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
+    {% endif %}
 </div>
 
 
