@@ -13,7 +13,6 @@
     text-transform: uppercase;
   }
   
-
   &:hover, 
   &:focus {
   
@@ -27,7 +26,6 @@
     }
   }
   
-
   .linkGroup-label {
     padding-right: rem-calc($level1);
   }
@@ -37,6 +35,6 @@
     width: 45px;
     height: 22px; 
     transform: translateX(0);
-    transition: all .2s ease-in-out; 
+    transition: all .3s cubic-bezier(0.23, 1, 0.32, 1); 
   }
 }

@@ -269,7 +269,7 @@
         opacity: .6;
         border: none;
         outline: none; 
-        transition: all .2s ease-in-out; 
+        transition: all .2s cubic-bezier(0.23, 1, 0.32, 1); 
 
         &:before {
           content: "";
@@ -400,5 +400,64 @@
     width: 100%;
     fill: pink; 
     margin-bottom: rem-calc($level5); 
+  }
+}
+
+
+
+/*------------------------------------*\
+    #Lookbook CTA
+\*------------------------------------*/
+
+
+.lookbookCta {
+
+  .copySection-inner {
+
+    @include media-query($medium-up) {
+      padding-top: rem-calc($level4);
+      padding-bottom: rem-calc($level4);
+    }
+  
+    @include media-query($large-up) {
+      padding-top: rem-calc($level7 + $level6);
+      padding-bottom: rem-calc($level7 + $level6);
+    }
+
+
+    &:before {
+      content: " ";
+      background-color: rgb(56, 54, 65);
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+
+      @include media-query($medium-up) {
+        height: 68%; 
+      }
+
+    }
+    
+    .copySection-headline {
+      max-width: rem-calc(120px);
+
+      @include media-query($medium-up) {
+        max-width: 16rem;
+        @include text-giga(); 
+      }
+    }
+  }
+
+  .copySection-imageContainer {
+    @include media-query($medium-up) {
+      transform: scale(1.05); 
+    }
+
+    @include media-query($large-up) {
+      transform: scale(1); 
+    }
   }
 }

@@ -137,42 +137,6 @@ button,
 }
 
 
-.button--link {
-  color: $tertiaryColor;
-  position: relative; 
-  text-transform: capitalize; 
-  @extend %fwn; 
-  transition: all .2s ease-in-out; 
-
-  &:before {
-    content: " "; 
-    left: 0; 
-    bottom: -2px; 
-    width: 100%; 
-    height: 2px; 
-    background-color: $primaryColor; 
-    position: absolute; 
-    opacity: 0; 
-    transform: translateY(3px); 
-    transition: all .2s ease-in-out; 
-  }
-
-  &:hover,
-  &:focus {
-    color: $primaryColor;
-    
-    &:after {
-      opacity: 0; 
-      transform: translateY(-4px); 
-    }
-
-    &:before {
-      opacity: 1; 
-      transform: translateY(0); 
-    }
-  }
-}
-
 
 
 

@@ -17,14 +17,16 @@
   margin-left: auto; 
   position: relative;
   margin-bottom: rem-calc($level7 + $level7);
-
+  max-width: 100%;
+  width: 100vw;
+  overflow-x: hidden;
+  
   @include media-query($medium-up) {
     max-width: 100%;
     margin-top: 0; 
   }
 
   @include media-query($large-up) {
-    max-width: none; 
     margin-top: 0; 
     margin-bottom: rem-calc($level7);
   }
@@ -249,7 +251,7 @@
 
 
 /*------------------------------------*\
-    #Product Photo Thumbnails
+    #Product Socoal Sharing
 \*------------------------------------*/
 
 
@@ -281,9 +283,9 @@
       z-index: 8; 
       right: 8px; 
       left: 0; 
-      bottom: -88px; 
+      bottom: -45px; 
       margin: auto;
-      height: 65%; 
+      height: 52%; 
     }
   }
   
@@ -293,7 +295,7 @@
       position: relative;
       transform: rotate(90deg);
       display: block;
-      bottom: -248px;
+      bottom: -207px;
       z-index: 9; 
     }
   }
@@ -336,14 +338,15 @@
     position: relative;
     display: table; 
     vertical-align: middle; 
+    transition: all .3s cubic-bezier(0.23, 1, 0.32, 1); 
+
     .icon {
-      width: rem-calc(26px); 
-      height: rem-calc(26px); 
+      width: rem-calc(20px); 
+      height: rem-calc(20px); 
       fill: $accentColor;
-      transition: all .2s cubic-bezier(0.23, 1, 0.32, 1); 
+      transition: all .3s cubic-bezier(0.23, 1, 0.32, 1); 
     }
   
-
     @include media-query($large-up) {
       color: $secondaryColor;
 

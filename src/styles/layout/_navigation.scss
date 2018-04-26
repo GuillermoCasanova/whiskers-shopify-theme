@@ -24,7 +24,7 @@
 
   .mainNav-title {
     z-index: 190; 
-    transition: all .8s ease-in-out; 
+    transition: all .8s cubic-bezier(0.23, 1, 0.32, 1); 
   }
 }
 
@@ -164,7 +164,7 @@
     @extend %display-block;
     @extend %position-relative; 
     @extend %text-center; 
-    transition: all .2s ease-in-out; 
+    transition: all .2s cubic-bezier(0.23, 1, 0.32, 1); 
 
     &:after,
     &:before {
@@ -175,7 +175,7 @@
       left: 0; 
       right: 0; 
       @extend %position-absolute; 
-      transition: all .2s ease-in-out; 
+      transition: all .2s cubic-bezier(0.23, 1, 0.32, 1); 
     }
 
     &:after {
@@ -258,11 +258,11 @@
     }
 
     &.is-closed {  // for when nav is closed
-        animation: main-nav-disappear .6s ease-in-out forwards; 
+        animation: main-nav-disappear .7s cubic-bezier(0.23, 1, 0.32, 1) forwards; 
     }
 
     &.is-open { // for when nav is open
-        animation: main-nav-appear .8s ease-in-out forwards; 
+        animation: main-nav-appear .8s cubic-bezier(0.23, 1, 0.32, 1) forwards; 
 
       .mainNav-animElem {
           opacity: 1; 
@@ -291,7 +291,7 @@
     .mainNav-animElem {
       opacity: 0; 
       transform: translateY(-70px); 
-      transition: all .4s ease-in-out; 
+      transition: all .4s cubic-bezier(0.23, 1, 0.32, 1); 
     }
 
 
@@ -323,7 +323,7 @@
         @extend %tertiary-font-family; 
         @include h1(); 
 
-        transition: all .200s ease-in-out; 
+        transition: all .200s cubic-bezier(0.23, 1, 0.32, 1); 
 
         @include media-query($medium-up) {
           margin-bottom: rem-calc($level1); 
@@ -452,53 +452,50 @@
 
 
 
-  @include media-query($medium-up) {
+@include media-query($medium-up) {
+
+    .mainNav-menuContainer {
+      opacity: 0;  
+      position: absolute;
+      z-index: 0; 
+      transition: all .2s cubic-bezier(0.23, 1, 0.32, 1);
+      transform: translateZ(0);
+
+      &.is-showing {
+        z-index: 1; 
+        opacity: 1;  
+      }
+    }
 
 
-.mainNav-menuContainer {
 
-    
-  opacity: 0;  
-  position: absolute;
-  z-index: 0; 
-  transition: all .2s ease-in-out;
-  transform: translateZ(0);
 
-  &.is-showing {
-    z-index: 1; 
-    opacity: 1;  
-  }
+    .mainNav-cartContainer {
+      opacity: 0; 
+      z-index: 0; 
+      position: absolute;
+      transition: all .2s cubic-bezier(0.23, 1, 0.32, 1);
+      transform: translateZ(0);
+      width: 100%; 
+      height: 100%; 
+
+      &.is-showing {
+        z-index: 1; 
+        opacity: 1; 
+      }
+    }
+
 }
-
-
-
-
-.mainNav-cartContainer {
-  opacity: 0; 
-  z-index: 0; 
-  position: absolute;
-  transition: all .2s ease-in-out;
-  transform: translateZ(0);
-  width: 100%; 
-  height: 100%; 
-
-  &.is-showing {
-    z-index: 1; 
-    opacity: 1; 
-  }
-}
-
-  }
 
 
 @keyframes  main-nav-appear {
 
   0% {
-    transform: translateY(-300%); 
+    transform: translateY(-120vh); 
   }
 
   1% {
-    transform: translateY(-300%); 
+    transform: translateY(-120vh); 
   }
 
  100% {
@@ -513,11 +510,11 @@
   }
 
   99% {
-    transform: translateY(-300%); 
+    transform: translateY(-120vh); 
   }
 
  100% {
-    transform: translateY(-300%); 
+    transform: translateY(-120vh); 
   }
 }
 

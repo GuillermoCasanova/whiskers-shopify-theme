@@ -17,22 +17,11 @@
   @include media-query($large-up) {
     padding-bottom: rem-calc($level7);
   }
-
-  .pageHeader-bg {
-    background-image: url("../assets/shopHeaders--all--small.jpg");
-    background-size: cover; 
-    background-position: bottom; 
-
-    @include media-query($large-up) {
-      background-image: url("../assets/shopHeaders--all--large.jpg");
-    }
-  }
-
-
-  
   .pageHeader-bg {
     width: 100%;
-
+    background-size: cover; 
+    background-position: bottom; 
+    
     .pageHeader-bg-img {
       width: 100%; 
     }
@@ -52,10 +41,6 @@
 
   .pageHeader-content  {
     width: 100%;
-
-    @media #{$large-up} {
-      padding-bottom: rem-calc($level3); 
-    }
   }
 
   .pageHeader-headline  {
@@ -156,8 +141,8 @@
       right: 8px; 
       left: 0; 
       margin: auto;
-      height: 65%; 
-      bottom: -66px;
+      height: 52%; 
+      bottom: -45px;
 
       @include media-query($large-up) {
         bottom: -88px; 
@@ -171,7 +156,7 @@
       position: relative;
       transform: rotate(90deg);
       display: block;
-      bottom: -189px; 
+      bottom: -207px; 
       z-index: 9; 
     }
 
@@ -221,22 +206,15 @@
     position: relative;
     display: block;
     color: $secondaryColor;
-    transition: all .2s ease-in-out; 
+    transition: all .3s cubic-bezier(0.23, 1, 0.32, 1); 
 
     .icon {
       width: rem-calc(20px); 
       height: rem-calc(20px); 
-      fill: $accentColor;
-      transition: all .2s ease-in-out; 
       fill: $secondaryColor;
-
-      @include media-query($large-up) {
-        width: rem-calc(26px); 
-        height: rem-calc(26px); 
-      }
+      transition: all .3s cubic-bezier(0.23, 1, 0.32, 1); 
     }
   
-
     &:hover, 
     &:focus {
       color: #fff; 

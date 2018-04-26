@@ -28,7 +28,10 @@ theme.heroHeader = (function() {
       var self = this; 
 
       var setActiveSlide = function(pId, pSlides, pAccents) {
-        
+      
+        // var imgUrl =  $(pSlides[pId]).data('image-src'); 
+        // $(pSlides[pId]).find('[data-image]').css('background-image', 'url(' + imgUrl + ')'); 
+
         pSlides.each(function() {
           var slide = $(this); 
           var index = slide.data('index');
@@ -64,16 +67,15 @@ theme.heroHeader = (function() {
       var loadImages = function(pSlides) {
         pSlides.each(function() {
           var slide = $(this); 
-          var imgUrl = slide.data('image'); 
-          slide.find('[data-image]').css('background-image', 'url(' + imgUrl + ')'); 
+          var imgUrl = slide.data('image-src'); 
+         slide.find('[data-image]').css('background-image', 'url(' + imgUrl + ')'); 
         })
       };
 
 
       if(window.innerWidth > 640) {
-
-        loadImages(self.slides); 
         setActiveSlide(self.activeSlide, self.slides, self.accents); 
+        loadImages(self.slides);
 
         setTimeout(function() {
 
@@ -84,21 +86,16 @@ theme.heroHeader = (function() {
             }
             setActiveSlide(self.activeSlide, self.slides, self.accents); 
           }, 4000); 
-
         }, 400); 
-
       } else {
         setActiveSlide(self.activeSlide, self.slides, self.accents); 
       }
-
     }
 
     $(window).resize(function() {
-
       setTimeout(function() {
         this.loadSlideshow();
       }, 200); 
-
     }); 
 
     this.loadSlideshow();

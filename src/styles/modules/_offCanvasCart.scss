@@ -142,7 +142,7 @@
         height: rem-calc($level3);
         width: rem-calc($level3); 
         display: block; 
-        transition: all .4s ease-in-out; 
+        transition: all .4s cubic-bezier(0.23, 1, 0.32, 1); 
         
         @include media-query($medium-up) {
           right: rem-calc($level2);
@@ -166,7 +166,7 @@
           left: 0; 
           right: 0; 
           position: absolute;
-          transition: all .2s ease-in-out; 
+          transition: all .2s cubic-bezier(0.23, 1, 0.32, 1); 
         }
 
         &:before {
