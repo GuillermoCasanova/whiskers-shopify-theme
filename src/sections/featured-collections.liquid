@@ -8,15 +8,7 @@
      <div class="grid  grid--justifyCenter">
        <div class="collectionContainer">
          <div class="categoryHeader"> 
-           
            <h2 class="categoryHeader-title">{{ collection.title }}</h2>
-           
-           <div class="categoryHeader-icon">
-           
-          <!--      <img src="assets/images/whiskIcon--cat_teal.svg" 
-                  alt="">
-            -->
-           </div>
          </div>
            
          <div class="row">
@@ -37,7 +29,7 @@
                    <a href="{{ product.url | within: collection }}">
                      <div class="productThumb-inner">
                        <div class="productThumb-bg">
-                       {{ product.featured_image.src | img_url: '480x480' | img_tag: product.featured_image.alt }}
+                        <img data-src="{{ product.featured_image.src | img_url: '360x360'}}" alt="{{product.featured_image.alt}}" class="lazyload">
                        </div>
                        <div class="productThumb-description text-center grid grid--center grid--justifySpaceBetween">
                          <h3 class="productThumb-title">{{ product.title }}</h3>

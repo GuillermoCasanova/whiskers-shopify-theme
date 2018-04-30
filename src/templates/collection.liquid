@@ -50,7 +50,7 @@
                         <a class="productThumb  {% unless product.available %}productThumb--soldOut{% endunless %}" href="{{ product.url | within: collection }}">
                           <div class="productThumb-inner">
                             <div class="productThumb-bg">
-                            {{ product.featured_image.src | img_url: '360x360' | img_tag: product.featured_image.alt }}
+                              <img data-src="{{ product.featured_image.src | img_url: '360x360'}}" alt="{{product.featured_image.alt}}" class="lazyload">
                             </div>
                             <div class="productThumb-description text-center grid grid--center grid--justifySpaceBetween">
                               <h3 class="productThumb-title">{{ product.title }}</h3>

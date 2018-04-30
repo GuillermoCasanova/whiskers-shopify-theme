@@ -49,7 +49,7 @@
   
                               {% if collection.image != blank %}
                                 <div class="featuredProductThumb-bg">
-                                  {{ collection | img_url: '480x480' | img_tag: collection.title }}
+                                     <img data-src="{{ collection| img_url: '360x360'}}" alt="{{collection.title}}" class="lazyload">
                                  </div>
                               {% elsif collection.products.first != blank %}
                                 <div class="featuredProductThumb-bg">

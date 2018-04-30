@@ -46,6 +46,11 @@ $(document).ready(function() {
   sections.register('whiskers_intro', theme.whiskersIntro);
 
 
+  window.lazySizesConfig = window.lazySizesConfig || {}; 
+  window.lazySizesConfig.throttleDelay = 2000; 
+  window.lazySizesConfig.expand = 300; 
+  window.lazySizesConfig.init = true;
+
 
   // Common a11y fixes
   slate.a11y.pageLinkFocus($(window.location.hash));
@@ -109,6 +114,7 @@ $(document).ready(function() {
   };
 
   theme.init(); 
+
 
 });
 

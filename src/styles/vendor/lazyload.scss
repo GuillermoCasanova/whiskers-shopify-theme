@@ -1,0 +1,16 @@
+
+/*------------------------------------*\
+    #Lazy Load Styles  
+\*------------------------------------*/
+
+
+/* fade image in after load */
+.lazyload,
+.lazyloading {
+  opacity: 0;
+  will-change: opacity; 
+}
+.lazyloaded {
+ opacity: 1;
+  transition: opacity .4s  cubic-bezier(0.23, 1, 0.32, 1);
+}

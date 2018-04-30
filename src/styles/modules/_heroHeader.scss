@@ -19,13 +19,16 @@
   overflow: hidden; 
   margin-top: rem-calc($level7 + $level1); 
 
+
   @include media-query($medium-up) {
     margin-top: 0; 
     height: 29.5rem;
   }
 
   @include media-query($large-up) {
-    height: 35rem; 
+    min-height: 38rem;
+    max-height:38rem;
+    height: 100vh; 
   }
 
   .heroHeader-bg {
