@@ -231,10 +231,12 @@
 
 
 .lookBookSlideshow {
-  // padding-right: $column-gutter / 2; 
-  // padding-left: $column-gutter / 2; 
+  overflow: hidden; 
+  padding-top: rem-calc($level2);  
+  width: 100vw; 
+  max-width: 100%; 
+  position: relative;
 
-  
   .lookBookSlideshow-slideshow {
     margin-bottom: 0; 
   }
@@ -250,80 +252,30 @@
     overflow: visible;
   }
 
-  // .slick-arrow {
-  //    @include media-query($medium-up) {
-  //     position: absolute;
-  //    } 
-  //  }
-
-      .slick-prev, 
-      .slick-next {
-        position: absolute;
-        z-index: 10; 
-        top: 45%; 
-        background-color: transparent;
-        color: black; 
-        width: rem-calc(76px); 
-        height: rem-calc(42px);
-        margin-bottom: 0; 
-        opacity: .6;
-        border: none;
-        outline: none; 
-        transition: all .2s cubic-bezier(0.23, 1, 0.32, 1); 
-
-        &:before {
-          content: "";
-          background-image: url('../assets/icon--arrow--secondary.svg'); 
-          background-size: contain;
-          background-repeat: no-repeat;
-          background-position: center; 
-          position: absolute;
-          width: 100%; 
-          height: rem-calc(36px); 
-          top:0; 
-        }
-      }
-
-      .slick-prev {
-        left: rem-calc(34px);
-        transform: scaleX(-1);
-
-        &:hover, 
-        &:focus {
-          opacity: 1; 
-         transform: scaleX(-1) translateX(3px);
-        }
-      }
-
-      .slick-next {
-        right: rem-calc(34px);
-
-        &:hover, 
-        &:focus {
-          opacity: 1; 
-         transform: translateX(3px);
-        }
-      }
 
   .lookBookSlideshow-look {
     margin-bottom: rem-calc($level4); 
     margin-right: rem-calc($level2);
     margin-left: rem-calc($level2);
     color: #fff; 
+    max-width: rem-calc(420px); 
 
-    &:hover,
-    &:focus {
-      img {
-        transform: scale(1.03);
+    @include media-query($medium-up) {
+      width: rem-calc(300px); 
+      max-width: auto; 
+      &:hover,
+      &:focus {
+        img {
+          transform: scale(1.03);
+        }
       }
     }
 
     @include media-query($large-up) {
       margin-bottom: rem-calc($level2); 
       max-width: rem-calc(320px);
-      margin-right: 0;
-      margin-left: 0;
     }
+
 
     img {
       box-shadow: 0px 0px 14px rgba(0,0,0, .6);

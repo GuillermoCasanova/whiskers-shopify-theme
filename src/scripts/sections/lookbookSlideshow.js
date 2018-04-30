@@ -15,46 +15,73 @@ theme.lookbookSlideshow = (function() {
 
   var lookbookSlideshow = function(container) { 
 
-    var containerWidth = $(container).find(selectors.lookbookSlideshow).innerWidth(); 
+    this.$carousel = $(selectors.lookbookSlideshow); 
+    this.animCtrl = null; 
+    this.scrollScene = null; 
+    this.reInitTimeout = null; 
 
-    $(selectors.lookbookSlideshow).slick({
-      'arrows': false,
-      'slidesToShow': 1,
-      'mobileFirst': true,
-      'autoplaySpeed': 2500,
-      'infinite': false,
-      'centerMode': true,
-      'centerPadding': '40px',
-      'touchThreshold': 10,
-      'rtl': true,
-      'responsive' : [
-          {
-            breakpoint: 640, 
-            settings: 'unslick'
-          }
-        ]
-      });
+    var self = this; 
 
-      var nextBtn = $(container).find('.slick-next');
-      var prevBtn = $(container).find('.slick-prev');
 
-      nextBtn.text('');
-      prevBtn.text('');
+    this.initInteractivity = function() {
 
-      var controller = new ScrollMagic.Controller(); 
+      if(this.animCtrl) {
+        this.animCtrl.destroy(this.scrollScene); 
+        this.animCtrl.destroy();
+        this.animCtrl = null; 
+        this.scrollScene.destroy(); 
+        this.scrollScene = null; 
+        this.$carousel.removeAttr("style");
+      }
 
-      var wipeAnimation = new TimelineMax()
-        .fromTo(container, 20, { x: "50%"}, { x: "-30%"});
+      if(window.innerWidth < 641) {
+        this.$carousel.removeClass("grid  grid--center  med-grid--justifySpaceAround  med-grid--1of3");
+        this.$carousel.not('.slick-initialized').slick({
+          'arrows': false,
+          'slidesToShow': 1,
+          'mobileFirst': true,
+          'autoplaySpeed': 2500,
+          'infinite': false,
+          'centerPadding': '40px',
+          'responsive' : [
+              {
+                breakpoint: 640, 
+                settings: 'unslick'
+              }
+            ]
+          });
+          var nextBtn = $(container).find('.slick-next');
+          var prevBtn = $(container).find('.slick-prev');
+          nextBtn.text('');
+          prevBtn.text('');
+      } else {
+        this.$carousel.addClass("grid  grid--center  med-grid--justifySpaceAround  med-grid--1of3");
+        this.animCtrl = new ScrollMagic.Controller(); 
+        var containerWidth = $(container).find(selectors.lookbookSlideshow).innerWidth(); 
 
-        new ScrollMagic.Scene({
-          triggerElement: '[data-trigger]',
-          triggerHook: 'onLeave', 
-          offset: -100,
-          duration:  (containerWidth * 2) + 'px'
-        })
-        .setPin(container)
-        .setTween(wipeAnimation)
-        .addTo(controller); 
+        var wipeAnimation = new TimelineMax()
+          .fromTo(selectors.lookbookSlideshow, 20, { x: "50%"}, { x: "-30%"});
+
+        this.scrollScene = new ScrollMagic.Scene({
+            triggerElement: '[data-trigger]',
+            triggerHook: 'onLeave', 
+            offset: -100,
+            duration:  (containerWidth) + 'px'
+          })
+          .setPin(container)
+          .setTween(wipeAnimation)
+          .addTo(this.animCtrl); 
+      }
+    }
+
+    setTimeout(function() {
+      self.initInteractivity(); 
+    }, 200); 
+
+    window.addEventListener('resize', function() {
+      clearTimeout(this.reInitTimeout); 
+      this.reInitTimeout = setTimeout(self.initInteractivity(), 1400); 
+    }); 
   };
 
   return lookbookSlideshow;
