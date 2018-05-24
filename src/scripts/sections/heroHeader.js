@@ -18,14 +18,17 @@ theme.heroHeader = (function() {
   var heroHeader = function(container) { 
 
     this.$container = $(container); 
+    this.$slideshow = $(selectors.slideshow); 
     this.slides = this.$container.find(selectors.slides); 
     this.accents = this.$container.find(selectors.accents); 
     this.activeSlide = 0; 
     this.slideTotal = this.slides.length;
+    this.$slideshow.addClass('is-loading'); 
 
     this.loadSlideshow  = function() {
 
       var self = this; 
+
 
       var setActiveSlide = function(pId, pSlides, pAccents) {
       
@@ -38,6 +41,7 @@ theme.heroHeader = (function() {
 
           if(index == self.activeSlide) {
             slide.addClass('is-active');
+            slide.css('visibility', 'visible'); 
             slide.removeClass('is-hidden');
           } else if(index == 2) {
             slide.removeClass('is-active');
@@ -53,13 +57,15 @@ theme.heroHeader = (function() {
           var elem = $(this); 
           var index = elem.data('index');
 
-          if(index == self.activeSlide) {
-            elem.addClass('is-active');
-            elem.removeClass('is-hidden');
-          } else {
-            elem.removeClass('is-active');
-            elem.addClass('is-hidden');
-          }
+          setTimeout(function() {
+            if(index == self.activeSlide) {
+              elem.addClass('is-active');
+              elem.removeClass('is-hidden');
+            } else {
+              elem.removeClass('is-active');
+              elem.addClass('is-hidden');
+            }
+          }, 200); 
         }); 
 
       }; 
@@ -74,10 +80,13 @@ theme.heroHeader = (function() {
 
 
       if(window.innerWidth > 640) {
-        setActiveSlide(self.activeSlide, self.slides, self.accents); 
         loadImages(self.slides);
 
         setTimeout(function() {
+          setActiveSlide(self.activeSlide, self.slides, self.accents); 
+          if(self.$slideshow.hasClass('is-loading')) {
+            self.$slideshow.removeClass('is-loading'); 
+          }
 
           setInterval(function() {
             self.activeSlide = self.activeSlide + 1; 
@@ -86,7 +95,7 @@ theme.heroHeader = (function() {
             }
             setActiveSlide(self.activeSlide, self.slides, self.accents); 
           }, 4000); 
-        }, 400); 
+        }, 500); 
       } else {
         setActiveSlide(self.activeSlide, self.slides, self.accents); 
       }
