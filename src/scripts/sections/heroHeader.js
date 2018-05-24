@@ -54,16 +54,17 @@ theme.heroHeader = (function() {
         }); 
 
         pAccents.each(function() {
-          var elem = $(this); 
-          var index = elem.data('index');
+          var accent = $(this); 
+          var index = accent.data('index');
 
           setTimeout(function() {
             if(index == self.activeSlide) {
-              elem.addClass('is-active');
-              elem.removeClass('is-hidden');
+              accent.addClass('is-active');
+              accent.css('visibility', 'visible'); 
+              accent.removeClass('is-hidden');
             } else {
-              elem.removeClass('is-active');
-              elem.addClass('is-hidden');
+              accent.removeClass('is-active');
+              accent.addClass('is-hidden');
             }
           }, 200); 
         }); 

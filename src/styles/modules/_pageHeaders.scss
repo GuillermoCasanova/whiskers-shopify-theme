@@ -7,10 +7,12 @@
   margin-top: rem-calc(60px);
   padding-top: 0; 
   padding-bottom: rem-calc($level7);
-  @extend %position-relative; 
-    
+  min-height: rem-calc(240px); 
+  position: relative;
+
   @include media-query($medium-up) {
     padding-bottom: rem-calc($level5);
+    min-height: rem-calc(290px); 
     margin-top: 0; 
   }
 
@@ -21,6 +23,7 @@
     width: 100%;
     background-size: cover; 
     background-position: bottom; 
+    background-color: $senaryColor;
     
     .pageHeader-bg-img {
       width: 100%; 
@@ -99,7 +102,7 @@
 
   .pageHeader-headline  {
     text-transform: none;
-    @extend %fwn; 
+    font-weight: normal; 
     @include h1();
     
     @media #{$large-up} {
