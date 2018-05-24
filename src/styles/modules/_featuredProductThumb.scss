@@ -49,27 +49,29 @@
 
 .featuredProductThumb--Solids {
   &:after {
-    background-color: #66eac9; 
+    background-color: #d8244c
+    ; 
   }
 }
 
 
 .featuredProductThumb--Striped {
   &:after {
-    background-color: #d7b8e0; 
+    background-color: #e6d763; 
   }
 }
 
 
 .featuredProductThumb--Braided {
   &:after {
-    background-color: #9082d8; 
+    background-color: #77ddce
+    ; 
   }
 }
 
 
 .featuredProductThumb--Ticked {
   &:after {
-    background-color: #4967bf; 
+    background-color: #6c63bf; 
   }
 }

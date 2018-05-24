@@ -262,17 +262,16 @@
   color: #fff;
   text-transform: uppercase;
   font-family: $secondary-font-family; 
+  margin-left: $column-gutter; 
   @include text-micro(); 
   
-  @include media-query($medium-up) {
-    margin-left: $column-gutter; 
-  }
 
   @include media-query($large-up) {
     position: absolute;
     width: 8.3333%; 
     top: 8.5rem; 
     right: 0; 
+    margin-left: 0; 
     color: $secondaryColor;
 
      &:after {
@@ -302,7 +301,6 @@
 
   .product-social-item {
     margin-right: rem-calc($level2); 
-    display: table; 
     vertical-align: middle; 
 
     @include media-query($large-up) {
@@ -318,8 +316,8 @@
       background-color: $primaryColor;
       position: relative;
       transform: rotate(90deg);
-      display: block; 
       top: rem-calc(-18px);
+      display: block; 
     }
 
     &:after {
@@ -330,13 +328,12 @@
       position: absolute;
       right: 0; 
       top: 0; 
-      }
+    }
   }
   
   a {
     color: #fff; 
     position: relative;
-    display: table; 
     vertical-align: middle; 
     transition: all .3s cubic-bezier(0.23, 1, 0.32, 1); 
 

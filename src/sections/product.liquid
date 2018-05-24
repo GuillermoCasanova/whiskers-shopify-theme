@@ -192,33 +192,7 @@
                       </div>
                   </div>
                 </div>
-      
-                <div class="small-12 columns medium-5  large-12  hide-for-medium-up">
-                  <div class="row small-collapse">
-                  
-                    <div class="small-12 columns">
-           
-                      <div class="productPhotoThumbnails">
-
-                        {% if product.images.size > 1 %}
-                        <ul class="productPhotoThumbnails-thumbnails grid grid--flexWrap grid--flexDirectionRow grid--1of2 large-grid--flexDirectionRow large-grid--fit">
-                          {% for image in product.images %}
-                            {% if forloop.first == false %}
-                            <li>
-                              <a  data-product-single-thumbnail data-slide-index="{{forloop.index}}">
-                                <div class="productPhotoThumbnails-thumb">
-                                  <img src="{{ image.src | img_url: '1000x1000' }}" alt="{{ image.alt | escape }}">
-                                </div>
-                              </a>
-                            </li>
-                            {% endif %}
-                          {% endfor %}
-                        </ul>
-                        {% endif %}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+        
               </div>
             </div>
           </div>
@@ -229,7 +203,7 @@
   </div>
   
   {% if section.settings.show_share_buttons %}
-      {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
+      {% include 'social-sharing-product', share_title: product.title, share_permalink: product.url, share_image: product %}
     {% endif %}
 </div>
 

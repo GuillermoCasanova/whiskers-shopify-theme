@@ -161,21 +161,6 @@
 {% endschema %}
 
 
-{% javascript %}
-  setTimeout(function() {
-
-    if(window.innerWidth > 640) {
-        $.stellar({
-         horizontalScrolling: false,
-        verticalScrolling: true,
-        hideDistantElements: false,
-        responsive: true,
-        positionProperty: 'transform'
-        }); 
-    }
-
-  }, 200);  
-{% endjavascript %}
 
 
 

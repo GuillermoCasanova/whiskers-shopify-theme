@@ -36,3 +36,28 @@
  * lazysizes.js
  */
 // =require vendor/lazysizes.js
+
+
+
+/*!
+ * TweenMax.min.js
+ */
+// =require vendor/TweenMax.min.js
+
+
+/*!
+ * TimelineMax.min.js
+ */
+// =require vendor/TimelineMax.min.js
+
+
+/*!
+ * ScrollMagic.js
+ */
+// =require vendor/ScrollMagic.js
+
+
+/*!
+ * animation.gsap.min.js
+ */
+// =require vendor/animation.gsap.min.js
