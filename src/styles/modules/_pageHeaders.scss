@@ -6,32 +6,20 @@
 .pageHeader {
   margin-top: rem-calc(60px);
   padding-top: 0; 
-  padding-bottom: rem-calc($level7);
-  min-height: rem-calc(240px); 
+  margin-bottom: rem-calc($level7);
   position: relative;
 
   @include media-query($medium-up) {
-    padding-bottom: rem-calc($level5);
+    margin-bottom: rem-calc($level5);
     min-height: rem-calc(290px); 
     margin-top: 0; 
   }
 
   @include media-query($large-up) {
-    padding-bottom: rem-calc($level7);
+    margin-bottom: rem-calc($level7);
   }
-  .pageHeader-bg {
-    width: 100%;
-    background-size: cover; 
-    background-position: bottom; 
-    background-color: $senaryColor;
-    
-    .pageHeader-bg-img {
-      width: 100%; 
-    }
-  }
-  
-  .pageHeader-contentContainer {
-    height: 100%; 
+
+  .pageHeader-inner {
     z-index: 2;
     left: 0;
     bottom: 0;
@@ -39,17 +27,50 @@
     top: 0;
     margin: auto;
     width: 100%; 
-    @extend %position-absolute; 
+    padding-bottom: 56%; 
+    position: relative;
+    background-color: $senaryColor;
+    overflow: hidden;
+
+    @include media-query($medium-up) {
+      padding-bottom: 50%; 
+    }
+
+    @include media-query($large-up) {
+      padding-bottom: 35%; 
+    }
   }
+
+
+  .pageHeader-bg {
+    width: 100%;
+    background-size: cover; 
+    background-position: bottom; 
+    position: absolute;
+    z-index: 0; 
+    height: 100%;
+
+    .pageHeader-bg-img {
+      width: 100%; 
+      visibility: hidden;  
+      will-change: transform; 
+    }
+  }
+  
 
   .pageHeader-content  {
     width: 100%;
+    height: 100%; 
+    position: absolute;
+    z-index: 2; 
   }
 
   .pageHeader-headline  {
     text-transform: capitalize;
     font-family: $tertiary-font-family; 
     max-width: 60%; 
+    visibility: hidden;  
+    will-change: transform; 
     @include text-kilo();
 
     @include media-query($medium-up) {
@@ -61,16 +82,18 @@
 
 
 
+
+
 /*------------------------------------*\
     #Page Header Types 
 \*------------------------------------*/
 
 
 .pageHeader--collection {
-  padding-bottom: rem-calc($level6); 
+  margin-bottom: rem-calc($level6); 
 
   @include media-query($medium-up) {
-    padding-bottom: rem-calc($level4); 
+    margin-bottom: rem-calc($level4); 
   }
 } 
 

@@ -1,50 +1,10 @@
 
 
 <section class="pageHeader" data-section-id="{{ section.id }}" data-section-type="lacing_styles">
-  <!--Page Header--> 
-  <div class="row small-collapse">
 
-    <div class="small-12 medium-11  large-11 columns">
-
-      <div class="pageHeader-contentContainer  grid  grid--bottom">
-      
-        <div class="row">
-      
-          <div class="small-12 columns large-push-1 large-10">
-            <div class="pageHeader-content">
-              <h1 class="headline  pageHeader-headline">{{section.settings.title}}</h1>
-            </div>
-
-          </div>
-
-        </div>
-  
-      </div>
-  
-      <div class="pageHeader-bg">
-        
-        <picture>
-            
-          <source media="(min-width: 1024px)"
-                  srcset="{{'shopHeaders--all--large.jpg' | asset_url}}">
-        
-          <source media="(min-width: 640px)"
-                  srcset="{{'shopHeaders--all--medium.jpg' | asset_url}}">
-        
-          <img src="{{'shopHeaders--all--small.jpg' | asset_url}}"
-               class="pageHeader-bg-img"
-               alt="" 
-               >
-        </picture>
-      </div>
-    </div>
-  </div>
-  
-  {% include 'social-sharing-header', share_title:section.settings.title, share_permalink: page.url, share_image: {{'shopHeaders--all--medium.jpg' | asset_url}} %}
-
-</section>
-<!--Page header Ends--> 
-
+<!--Page Header Begins--> 
+{% include 'page-header' %}
+<!--Page Header Ends--> 
 
 <!-- Lacing Styles--> 
 <div>
@@ -75,6 +35,9 @@
   </div>
 
 
+{% comment %}
+  Below are all the different template files for each lacing style
+{% endcomment %}
 
 <script id="cross-stitch" type="text/x-custom-template">
   <div class="lacingSteps-inner">

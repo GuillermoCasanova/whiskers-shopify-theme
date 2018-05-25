@@ -1,47 +1,9 @@
-<article>
-  
-  <div class="pageHeader" data-section-id="{{ section.id }}" data-section-type="info-page">
-    <!--Page Header--> 
-    <div class="row small-collapse">
-      <div class="small-12 large-11 columns">
-    
-        <div class="pageHeader-contentContainer  grid  grid--bottom">
-        
-          <div class="row">
-        
-            <div class="small-12 columns large-push-1 large-10">
-              <div class="pageHeader-content">
-                <h1 class="headline  pageHeader-headline">{{section.settings.title}}</h1>
-              </div>
+<article data-section-id="{{ section.id }}" data-section-type="info-page">
 
-            </div>
+  <!--Page Header Begins--> 
+  {% include 'page-header' %}
+  <!--Page Header Ends-->
 
-          </div>
-    
-        </div>
-    
-        <div class="pageHeader-bg">
-          
-          <picture>
-              
-            <source media="(min-width: 1024px)"
-                    srcset="{{'shopHeaders--all--large.jpg' | asset_url}}">
-          
-            <source media="(min-width: 640px)"
-                    srcset="{{'shopHeaders--all--medium.jpg' | asset_url}}">
-          
-            <img src="{{'shopHeaders--all--small.jpg' | asset_url}}"
-                 class="pageHeader-bg-img"
-                 alt="" 
-                 >
-          </picture>
-        </div>
-      
-      </div>
-    </div>
-    <!--Page header Ends--> 
-  </div>
-  
   <div class="infoPage">
     <div class="row">
       <div class="small-12  medium-11  large-10  large-centered  columns">

@@ -54,8 +54,18 @@
 
   .productThumb-bg {
     width: 100%; 
+    background-color: $senaryColor;
+    position: relative;
+    padding-bottom: 137%; 
+
     img {
+      visibility: hidden; 
       width: 100%; 
+      position: absolute;
+      top: 0; 
+      left: 0; 
+      right: 0;
+      will-change: transform;  
     }
   }
 
@@ -95,8 +105,21 @@
   }
 }
 
+
+
+
+
+/*------------------------------------*\
+    #Alternative Landscape Product Thumbnail 
+\*------------------------------------*/
+
+
 .productThumb--alt {
   margin-bottom: rem-calc($level4); 
+
+  .productThumb-bg {
+    padding-bottom: 66%; 
+  }
 
   @include media-query($medium-up) {
     margin-right: rem-calc($level5); 
@@ -118,6 +141,7 @@
     left: 0; 
     width: 100%; 
     height: 100%; 
+    z-index: 1; 
   }
 
   &:after {
@@ -134,5 +158,6 @@
     color: #fff; 
     text-transform: uppercase;
     font-weight: bold; 
+    z-index: 2; 
   }
 }

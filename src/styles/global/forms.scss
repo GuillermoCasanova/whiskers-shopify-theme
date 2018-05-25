@@ -43,6 +43,10 @@ select {
   text-indent: 0.01px;
   text-overflow: '';
   cursor: pointer;
+  color: #fff; 
+  background-color: transparent;
+  font-weight: bold; 
+
 
   /*================ Hide the svg arrow in IE9 ================*/
   .ie9 & {
@@ -57,10 +61,12 @@ select::-ms-expand {
 
 
 .select--primary {
-  background-color: transparent;
-  border: 2px solid $secondaryColor; 
-  color: #fff; 
-  font-weight: bold; 
+  border: 3px solid $primaryColor; 
+}
+
+
+.select--secondary {
+  border: 3px solid $secondaryColor; 
 }
 
 

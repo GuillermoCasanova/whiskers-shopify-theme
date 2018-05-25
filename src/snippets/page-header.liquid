@@ -1,29 +1,34 @@
-<div class="pageHeader  pageHeader--collection">
+
+<div class="pageHeader  pageHeader--collection" data-page-header>
   
   <!--Page Header--> 
   <div class="row   row--full  small-collapse">
 
     <div class="small-12  medium-11    large-11 columns">
 
-        <div class="pageHeader-contentContainer  grid  grid--bottom">
+        <div class="pageHeader-inner">
           
-          <div class="pageHeader-content">
+          <div class="pageHeader-content  grid  grid--bottom">
             <div class="row">
         
               <div class="small-12 columns medium-push-1  medium-11 large-push-1 large-10">
-                  <h1 class="pageHeader-headline">
+                  
+                  {%if collection %}
+                  <h1 class="pageHeader-headline"  data-page-headline>
                     Shop <br> 
                     {{ collection.title }}
                   </h1>
-
-                </div>
-
+                  {%else%}
+                  <h1 class="pageHeader-headline"  data-page-headline>
+                    {{ section.settings.title }}
+                  </h1>
+                  {% endif%}
               </div>
 
             </div>
-      
+
           </div>
-      
+
           <div class="pageHeader-bg">
 
             {% case collection.handle %}
@@ -32,59 +37,68 @@
                 <picture>
                     
                   <source media="(min-width: 1024px)"
-                          data-srcset="{{'shopHeaders--braided--large.jpg' | asset_url}}">
+                          srcset="{{'shopHeaders--braided--large.jpg' | asset_url}}">
                 
-                  <source media="(min-width: 640px)"
-                          data-srcset="{{'shopHeaders--braided--medium.jpg' | asset_url}}">
-                
-                  <img src="{{'shopHeaders--braided--small.jpg' | asset_url}}"
-                       data-size="auto"
-                       class="pageHeader-bg-img lazyload"
-                       alt="" 
+                  <source media="(min-width: 640px)  and (max-width: 1023px)"
+                          srcset="{{'shopHeaders--braided--medium.jpg' | asset_url}}">
+
+
+                  <source media="(min-width: 0) and (max-width: 639px)"
+                          srcset="{{'shopHeaders--braided--medium.jpg' | asset_url}}">
+                                
+
+                  <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                       data-sizes="auto" 
+                       data-header-bg
+                       class="pageHeader-bg-img "
+                       alt="Whiskers Diamond Weave Lace Hero Shot" 
                        >
                 </picture>        
               {% when 'solids' %}
                 <picture>
                     
                   <source media="(min-width: 1024px)"
-                          data-srcset="{{'shopHeaders--solids--large.jpg' | asset_url}}">
+                          srcset="{{'shopHeaders--solids--large.jpg' | asset_url}}">
                 
                   <source media="(min-width: 640px)"
-                          data-srcset="{{'shopHeaders--solids--medium.jpg' | asset_url}}">
+                          srcset="{{'shopHeaders--solids--medium.jpg' | asset_url}}">
                 
                   <img src="{{'shopHeaders--solids--small.jpg' | asset_url}}"
-                       data-size="auto"
-                       class="pageHeader-bg-img lazyload"
-                       alt="" 
+                       data-sizes="auto" 
+                       data-header-bg
+                       class="pageHeader-bg-img "
+                       alt="Whiskers Solid Lace Hero Shot" 
                        >
                 </picture>      
               {% when 'striped' %}
                 <picture>
                     
                   <source media="(min-width: 1024px)"
-                          data-srcset="{{'shopHeaders--striped--large.jpg' | asset_url}}">
+                          srcset="{{'shopHeaders--striped--large.jpg' | asset_url}}">
                 
                   <source media="(min-width: 640px)"
-                          data-srcset="{{'shopHeaders--striped--medium.jpg' | asset_url}}">
+                          srcset="{{'shopHeaders--striped--medium.jpg' | asset_url}}">
                 
                   <img src="{{'shopHeaders--striped--small.jpg' | asset_url}}"
-                       data-size="auto"
-                       class="pageHeader-bg-img lazyload"
-                       alt="" 
+                       data-sizes="auto" 
+                       data-header-bg
+                       class="pageHeader-bg-img "
+                       alt="Whiskers Striped Lace Hero Shot" 
                        >
                 </picture>    
               {% when 'ticked' %}
                 <picture>
                     
                   <source media="(min-width: 1024px)"
-                          data-srcset="{{'shopHeaders--ticked--large.jpg' | asset_url}}">
+                          srcset="{{'shopHeaders--ticked--large.jpg' | asset_url}}">
                 
                   <source media="(min-width: 640px)"
-                          data-srcset="{{'shopHeaders--ticked--medium.jpg' | asset_url}}">
+                          srcset="{{'shopHeaders--ticked--medium.jpg' | asset_url}}">
                 
                   <img src="{{'shopHeaders--ticked--small.jpg' | asset_url}}"
-                       data-size="auto"
-                       class="pageHeader-bg-img lazyload"
+                       data-sizes="auto" 
+                       data-header-bg
+                       class="pageHeader-bg-img "
                        alt="" 
                        >
                 </picture>    
@@ -92,14 +106,15 @@
                 <picture>
                     
                   <source media="(min-width: 1024px)"
-                          data-srcset="{{'shopHeaders--tailgate--large.jpg' | asset_url}}">
+                          srcset="{{'shopHeaders--tailgate--large.jpg' | asset_url}}">
                 
                   <source media="(min-width: 640px)"
-                          data-srcset="{{'shopHeaders--tailgate--medium.jpg' | asset_url}}">
+                          srcset="{{'shopHeaders--tailgate--medium.jpg' | asset_url}}">
                 
                   <img src="{{'shopHeaders--tailgate--small.jpg' | asset_url}}"
-                       data-size="auto"
-                       class="pageHeader-bg-img lazyload"
+                       data-sizes="auto" 
+                       data-header-bg
+                       class="pageHeader-bg-img "
                        alt="" 
                        >
                 </picture>    
@@ -107,14 +122,15 @@
                 <picture>
                     
                   <source media="(min-width: 1024px)"
-                          data-srcset="{{'shopHeaders--boxes--large.jpg' | asset_url}}">
+                          srcset="{{'shopHeaders--boxes--large.jpg' | asset_url}}">
                 
                   <source media="(min-width: 640px)"
-                          data-srcset="{{'shopHeaders--boxes--medium.jpg' | asset_url}}">
+                          srcset="{{'shopHeaders--boxes--medium.jpg' | asset_url}}">
                 
                   <img src="{{'shopHeaders--boxes--small.jpg' | asset_url}}"
-                       data-size="auto"
-                       class="pageHeader-bg-img lazyload"
+                       data-sizes="auto" 
+                       data-header-bg
+                       class="pageHeader-bg-img "
                        alt="" 
                        >
                 </picture> 
@@ -122,14 +138,15 @@
                 <picture>
                     
                   <source media="(min-width: 1024px)"
-                          data-srcset="{{'shopHeaders--all-laces--large.jpg' | asset_url}}">
+                          srcset="{{'shopHeaders--all-laces--large.jpg' | asset_url}}">
                 
                   <source media="(min-width: 640px)"
-                          data-srcset="{{'shopHeaders--all-laces--medium.jpg' | asset_url}}">
+                          srcset="{{'shopHeaders--all-laces--medium.jpg' | asset_url}}">
                 
                   <img src="{{'shopHeaders--all-laces--small.jpg' | asset_url}}"
-                       data-size="auto"
-                       class="pageHeader-bg-img lazyload"
+                       data-sizes="auto" 
+                       data-header-bg
+                       class="pageHeader-bg-img "
                        alt="" 
                        >
                 </picture>     
@@ -137,59 +154,63 @@
                 <picture>
                     
                   <source media="(min-width: 1024px)"
-                          data-srcset="{{'shopHeaders--all--large.jpg' | asset_url}}">
+                          srcset="{{'shopHeaders--all--large.jpg' | asset_url}}">
                 
                   <source media="(min-width: 640px)"
-                          data-srcset="{{'shopHeaders--all--medium.jpg' | asset_url}}">
+                          srcset="{{'shopHeaders--all--medium.jpg' | asset_url}}">
                 
                   <img src="{{'shopHeaders--all--small.jpg' | asset_url}}"
-                       data-size="auto"
-                       class="pageHeader-bg-img lazyload"
+                       data-sizes="auto" 
+                       data-header-bg
+                       class="pageHeader-bg-img "
                        alt="" 
                        >
                 </picture>
               {% endcase %}
 
           </div>
+      
+        </div>
 
     </div>
 
   </div>
+  <!-- END Page Header--> 
   
   <!-- Page Header social--> 
   <ul class="pageHeader-social [ grid  grid--center  grid--justifyCenter  med-grid--flexDirectionColumn ] show-for-medium-up">
 
-  <li class="pageHeader-social-item">
-    <span class="pageHeader-social-title">Share</span>
-  </li>
-  <li class="pageHeader-social-item  text-center">
-      <a target="_blank" href="//www.facebook.com/sharer.php?u={{ shop.url | append: share_permalink }}">
-        {% include 'icon-facebook' %}
-        <span  class="hide-elem" aria-hidden="true">{{ 'general.social.share_on_facebook' | t }}</span>
-        <span class="hide-elem">{{ 'general.social.alt_text.share_on_facebook' | t }}</span>
-      </a>
-   </li>
-  <li class="pageHeader-social-item  text-center">
-      <a target="_blank" href="//twitter.com/share?text={{ share_title | url_param_escape }}&amp;url={{ shop.url | append: share_permalink }}">
-        {% include 'icon-twitter' %}
-        <span  class="hide-elem" aria-hidden="true">{{ 'general.social.share_on_twitter' | t }}</span>
-        <span class="hide-elem">{{ 'general.social.alt_text.share_on_twitter' | t }}</span>
-      </a>
-   </li>
+    <li class="pageHeader-social-item">
+      <span class="pageHeader-social-title">Share</span>
+    </li>
+    <li class="pageHeader-social-item  text-center">
+        <a target="_blank" href="//www.facebook.com/sharer.php?u={{ shop.url | append: share_permalink }}">
+          {% include 'icon-facebook' %}
+          <span  class="hide-elem" aria-hidden="true">{{ 'general.social.share_on_facebook' | t }}</span>
+          <span class="hide-elem">{{ 'general.social.alt_text.share_on_facebook' | t }}</span>
+        </a>
+     </li>
+    <li class="pageHeader-social-item  text-center">
+        <a target="_blank" href="//twitter.com/share?text={{ share_title | url_param_escape }}&amp;url={{ shop.url | append: share_permalink }}">
+          {% include 'icon-twitter' %}
+          <span  class="hide-elem" aria-hidden="true">{{ 'general.social.share_on_twitter' | t }}</span>
+          <span class="hide-elem">{{ 'general.social.alt_text.share_on_twitter' | t }}</span>
+        </a>
+     </li>
 
-  <li class="pageHeader-social-item  text-center">
-      <a target="_blank" href="//pinterest.com/pin/create/button/?url={{ shop.url | append: share_permalink }}&amp;media={{ share_image | img_url: '1024x1024' }}&amp;description={{ share_title | url_param_escape }}">
-        {% include 'icon-pinterest' %}
-        <span  class="hide-elem" aria-hidden="true">{{ 'general.social.share_on_pinterest' | t }}</span>
-        <span class="hide-elem">{{ 'general.social.alt_text.share_on_pinterest' | t }}</span>
-      </a>
-   </li>
+    <li class="pageHeader-social-item  text-center">
+        <a target="_blank" href="//pinterest.com/pin/create/button/?url={{ shop.url | append: share_permalink }}&amp;media={{ share_image | img_url: '1024x1024' }}&amp;description={{ share_title | url_param_escape }}">
+          {% include 'icon-pinterest' %}
+          <span  class="hide-elem" aria-hidden="true">{{ 'general.social.share_on_pinterest' | t }}</span>
+          <span class="hide-elem">{{ 'general.social.alt_text.share_on_pinterest' | t }}</span>
+        </a>
+     </li>
 
-  <li class="pageHeader-social-item  show-for-medium-up">
-    <a href="https://www.instagram.com/whiskerslaces/"  target="_blank" class="pageHeader-social-tag">#whiskerslaces</a>
-  </li>
+    <li class="pageHeader-social-item  show-for-medium-up">
+      <a href="https://www.instagram.com/whiskerslaces/"  target="_blank" class="pageHeader-social-tag">#whiskerslaces</a>
+    </li>
 
   </ul>
 
 </div>
-<!--Page header Ends--> 
+<!--END Page Header  Social--> 

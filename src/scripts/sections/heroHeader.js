@@ -1,10 +1,10 @@
 
 /**
- * Collection Navigation Template Script
+ * Hero Header Template Script
  * ------------------------------------------------------------------------------
- * A file that contains scripts highly couple code to the Collection Navigation template.
+ * A file that contains scripts highly couple code to the Hero Header template.
  *
-   * @namespace header
+   * @namespace Hero Header
  */
 
 theme.heroHeader = (function() {

@@ -1,48 +1,35 @@
 
-  {% include 'page-header' %}
-  
-
-  <!--Collections Filter Begins--> 
-  <div class="row">
-    <div class="small-12  medium-11  large-10  medium-centered  columns">
-       {% section 'collection-nav' %}
-    </div>
-  </div>
-  <!--Collection Filter Ends--> 
-
-
   <!--Collection Begins--> 
   <div class="section">
     <div class="row small-collapse">
-      <div class="small-12  medium-11  large-10  medium-centered  columns  ">
+      <div class="small-12  medium-11  large-12  medium-centered  columns  ">
 
           <div class="grid  grid--justifyCenter">
             <div class="collectionContainer">
-              
               <div class="categoryHeader  show-for-medium-up"> 
                 
                 <h2 class="categoryHeader-title">{{ collection.title }}</h2>
                 
               </div>
-              
+                
               <div class="row">
                 <div class="small-12 columns">
                   <ul class="grid  
                              grid--flexDirectionRow
                              grid--1of2
+                             med-grid--1of3
                              grid--flexWrap
                              med-grid--flexDirectionRow
-                             large-grid--1of2
+                             large-grid--1of4
                              productThumbs">
               
                     {% for product in collection.products %}
                     <li class="grid-cell">
                       {% if product.featured_image != blank %}
-                      <div class="productThumb   productThumb--alt {% unless product.available %}productThumb--soldOut{% endunless %}">
-                        <a href="{{ product.url | within: collection }}"  data-product>
+                        <a class="productThumb  {% unless product.available %}productThumb--soldOut{% endunless %}" href="{{ product.url | within: collection }}" data-product>
                           <div class="productThumb-inner">
                             <div class="productThumb-bg">
-                                 <img data-srcset="{{ product.featured_image.src | img_url: '360x360'}}" alt="{{product.featured_image.alt}}" class="lazyload" data-sizes="auto"  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="  data-product-img>
+                              <img data-srcset="{{ product.featured_image.src | img_url: '360x360'}}" alt="{{product.featured_image.alt}}" class="lazyload" data-sizes="auto"  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="  data-product-img>
                             </div>
                             <div class="productThumb-description text-center grid grid--center grid--justifySpaceBetween">
                               <h3 class="productThumb-title">{{ product.title }}</h3>
@@ -77,7 +64,6 @@
                             </div>
                           </div>
                         </a>
-                      </div>
                       {% endif %}
                       {% else %}
                         {% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}

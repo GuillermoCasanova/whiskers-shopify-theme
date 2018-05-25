@@ -1,26 +1,29 @@
 
 
-<div data-section-id="{{ section.id }}" data-section-type="collection_nav">
-  <div class="collectionNav">
-    <ul>
-      {% for link in linklists[section.settings.collection_nav].links %}
-        {%- assign child_list_handle = link.title | handleize -%}
-          <li class="collectionNav-menu-item  {% if link.active %}site-nav--active{% endif %}">
-            <a href="{{ link.url }}" class="mainNav-menu-link">{{ link.title }}</a>
-          </li>
-      {% endfor %}
-    </ul>
-  </div>
 
-  <!-- /snippets/collection-sorting.liquid -->
-  <div class="hide-for-medium-up">
-    <select name="NavigateTo" data-collection-nav-select>
-      {% for link in linklists[section.settings.collection_nav].links %}
+<div class="collectionNav  grid  grid--justifyCenter" data-section-id="{{ section.id }}" data-section-type="collection_nav">
+  <div class="grid-cell">
+    <div class="show-for-medium-up ">
+      <ul class="collectionNav-menu  grid  grid--center  grid--flexDirectionRow  grid--justifyLeft">
+        <li class="collectionNav-menu-item">
+          <span class="collectionNav-menu-title">Filter:</span>
+        </li>
+        {% for link in linklists[section.settings.collection_nav].links %}
+          {%- assign child_list_handle = link.title | handleize -%}
+            <li class="collectionNav-menu-item  {% if link.active %}site-nav--active{% endif %}">
+              <a href="{{ link.url }}" data-url="{{link.url}}" data-collection-tag  class="collectionNav-menu-link">{{ link.title }}</a>
+            </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="hide-for-medium-up">
+      <select class="select--secondary  select--medium" name="NavigateTo" data-collection-nav-select>
+        {% for link in linklists[section.settings.collection_nav].links %}
           <option value="{{ link.url }}">{{ link.title}}</option>
-      {% endfor %}
-    </select>
+        {% endfor %}
+      </select>
+    </div>
   </div>
-
 </div>
 
 

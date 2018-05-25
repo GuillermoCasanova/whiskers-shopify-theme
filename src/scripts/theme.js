@@ -27,12 +27,14 @@ window.theme = window.theme || {};
 
 
 /*================ Templates ================*/
+// =require templates/collection.js
 // =require templates/customers-addresses.js
 // =require templates/customers-login.js
 
 
 
 $(document).ready(function() {
+
   var sections = new slate.Sections();
   sections.register('product', theme.Product);
   sections.register('header', theme.Header);

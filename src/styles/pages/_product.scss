@@ -40,7 +40,7 @@
     left: 0; 
     height: 100%;
     width: 100%;
-
+    
     @include media-query($medium-up) {
       margin-right: $column-gutter / 2;
     }
@@ -201,12 +201,29 @@
 
 
     .product-actions {
+      
+      .product-variants {
+        
+        label {
+          color: $quintenaryColor; 
+          font-weight: bold; 
+          display: block; 
+          text-transform: uppercase; 
+          margin-bottom: rem-calc($level2);
+          @include text-micro(); 
+        }
+
+        select {
+          max-width: rem-calc(270px); 
+        }
+      }
+
 
       .product-qty {
         position: relative;
         width: 100%; 
         max-width: rem-calc(90px); 
-        margin-bottom: rem-calc($level5); 
+        margin-bottom: rem-calc($level4); 
         
         label,
         input {

@@ -196,7 +196,7 @@ button,
 }
 
 
-.button--disabled {
+button:disabled {
   width: 100%; 
   pointer-events: none; 
   border: 3px solid $quintenaryColor; 
