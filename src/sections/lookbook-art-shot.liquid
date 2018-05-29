@@ -1,0 +1,79 @@
+
+<section  data-section-id="{{ section.id }}" data-section-type="lookbook_art_shot" data-lookbook-art-shot>
+  <div class="row">
+    <div class="small-12  medium-11  large-10 medium-centered  columns">
+      <div class="lookbookArt">
+        <h1 class="lookbookArt-headline  text-center" data-headline>Give yourself <br>a lacelift</h1>
+        <div class="lookbookArt-img">
+          <img src="{{'lookbook-artShot1.jpg' | asset_url }}" alt="Whiskers Laces Artshot With Pink Skull" data-image>
+        </div>
+        <p class="lookbookArt-paragraph text-center" data-body>
+          Colorful laces won’t change your life. But they will change your shoes. And let’s be honest, you gotta start somewhere.
+        </p>
+        <div class="lookbookArt-icon" data-icon>
+          <svg class="whiskerIcon  whiskerIcon--pink">
+            <use xlink:href="#icon--bolt"/>
+
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% javascript %}
+
+  $(window).on('load', function() {
+
+	  function lookbookArtShot(container) {
+	    
+	    var selectors = {
+	      headline: '[data-headline]', 
+	      image: '[data-image]',
+	      body: '[data-body]',
+	      icon: '[data-icon]'
+	    };
+			
+	    this.$container = $(container); 
+	    this.animCtrl = new ScrollMagic.Controller(); 
+	    var self = this; 
+			var animSpeed = .4; 
+
+	    //
+	    // Code to animate the lookbook art shot when it enters the page
+	    //
+	    this.sectionAnim  = new TimelineMax()
+	          .fromTo(self.$container.find(selectors.headline), animSpeed, {y: '20px', opacity: 0}, {y: '0', opacity: 1})
+	          .from(self.$container.find(selectors.image), animSpeed, {y: '100%'});
+
+	    this.sectionAnimSecondary = new TimelineMax() 
+	    			.from(self.$container.find(selectors.body), animSpeed, {y: '20px', opacity: 0}, '+=.2')
+	          .from(self.$container.find(selectors.icon), .1, {opacity: 0});
+
+			//
+			// Defining section scenes that will trigger animations
+			//
+	    this.sectionScene = new ScrollMagic.Scene({
+	        triggerElement: container, 
+	        triggerHook: 'onCenter',
+	        offset: 100
+	    })
+	    .setTween(this.sectionAnim)
+	    .addTo(this.animCtrl); 
+
+	    this.sectionSceneSecondary = new ScrollMagic.Scene({
+	        triggerElement: container + ' ' + selectors.body, 
+	        triggerHook: 'onEnter'
+	    })
+	    .setTween(this.sectionAnimSecondary)
+	    .addTo(this.animCtrl); 
+	  }
+	  
+	  setTimeout(function() {
+	    lookbookArtShot('[data-lookbook-art-shot]');
+	  }, 200);
+
+	}); 
+
+{% endjavascript %}

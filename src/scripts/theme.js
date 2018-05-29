@@ -18,7 +18,6 @@ window.theme = window.theme || {};
 // =require sections/collection-nav.js
 // =require sections/lookbookSlideshow.js
 // =require sections/lookbookSlideshow2.js
-// =require sections/lookbookCta.js
 // =require sections/product.js
 // =require sections/header.js
 // =require sections/heroHeader.js
@@ -44,12 +43,11 @@ $(document).ready(function() {
   sections.register('lacing_styles', theme.lacingGuide);
   sections.register('lookbook_slideshow', theme.lookbookSlideshow);
   sections.register('lookbook_slideshow2', theme.lookbookSlideshow2);
-  sections.register('lookbook_cta', theme.lookbookCta);
   sections.register('whiskers_intro', theme.whiskersIntro);
 
-
+  //Configuration for lazySizes plugin to lazyload images 
   window.lazySizesConfig = window.lazySizesConfig || {}; 
-  window.lazySizesConfig.throttleDelay = 2000; 
+  window.lazySizesConfig.throttleDelay = 1000; 
   window.lazySizesConfig.expand = 300; 
   window.lazySizesConfig.init = true;
 

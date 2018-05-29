@@ -1,18 +1,69 @@
 
-<section data-section-id="{{ section.id }}">
-  <div class="lookBookHeader  [ grid  grid--center  grid--justifyCenter ]">
-    <div class="lookBookHeader-bg">
+
+<section data-section-id="{{ section.id }}" data-section-type="lookbook_header"  data-lookbook-header-container>
+  <div class="lookBookHeader  [ grid  grid--center  grid--justifyCenter ]"  data-lookbook-header>
+    <div class="lookBookHeader-bg" data-bg>
       
     </div>
     <div class="lookBookHeader-content">
-      <h1 class="lookBookHeader-headline  text-center">
+      <h1 class="lookBookHeader-headline  text-center" data-headline>
         Laces You Can’t Not Notice.
       </h1>
       
-      <p class="lookBookHeader-descriptor  text-center">
+      <p class="lookBookHeader-descriptor  text-center"  data-body>
         Whiskers help animals see in the dark. Who knew? We’re here to help you see in the dark. Metaphorically, though. Not literally. These are shoelaces, not night vision goggles, my friend.
       </p>
     </div>  
   </div>
 </section>
+
+{%javascript %}
+  
+  $(window).on('load', function() {
+
+    function lookbookHeader(container) {
+
+      var selectors = {
+        header: '[data-lookbook-header]', 
+        headline: '[data-headline]', 
+        body: '[data-body]',
+        background: '[data-bg]'
+      };
+
+      this.$container = $(container); 
+
+      this.animCtrl = new ScrollMagic.Controller(); 
+
+      var self = this; 
+
+      //
+      // Make selectors inside container visibility normal to prepare for animation
+      //
+      for(var selector in selectors) {
+        TweenMax.set(self.$container.find(selectors[selector]), {autoAlpha: 1});
+      }
+    
+      //
+      // Code to animate the header when it enters the page
+      //
+      this.headerAnim  = new TimelineMax()
+            .from(self.$container.find(selectors.background), .4, {opacity: 0}, .1)
+            .from(self.$container.find(selectors.headline), .4, {opacity: 0, y: '20px'})
+            .from(self.$container.find(selectors.body), .4, {opacity: 0, y: '20px'});
+
+      this.headerScene = new ScrollMagic.Scene({
+          triggerElement: container, 
+          triggerHook: 'onEnter'
+      })
+      .setTween(this.headerAnim)
+      .addTo(this.animCtrl); 
+    }
+    
+    setTimeout(function() {
+      lookbookHeader('[data-lookbook-header]');
+    }, 200);
+
+  });
+
+{% endjavascript %}
 

@@ -170,7 +170,7 @@
                               class="button  button--medium  button--expanded  button--primary product-buyBtn"
                               data-add-to-cart
                               id="AddToCart--{{ section.id }}"
-                              data-text="{{ 'products.product.sold_out' | t }}"
+                              data-text="{{ 'products.product.add_to_cart' | t }}"
                               {% unless current_variant.available %}disabled="disabled"{% endunless %}>
                                 <span data-add-to-cart-text class="button-textState1">
                                     {{ 'products.product.add_to_cart' | t }}

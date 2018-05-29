@@ -29,6 +29,7 @@
     left: 0; 
     right: 0; 
     bottom: 0;
+    visibility: hidden; 
 
     @include media-query($medium-up) {
       background-image: url('lookbook-bg_medium3.svg');
@@ -54,6 +55,9 @@
     margin-right: auto;
     margin-left: auto;
     position: relative;
+    will-change: transform; 
+    z-index: 1; 
+    visibility: hidden; 
     @include text-kilo(); 
 
     &:after {
@@ -90,7 +94,10 @@
     margin-left: auto;
     max-width: rem-calc(290px);
     margin-bottom: 0; 
-  
+    visibility: hidden; 
+    will-change: transform; 
+    z-index: 1; 
+
     @include media-query($medium-up) {
       max-width: 74%; 
       bottom: -6.5rem;
@@ -113,7 +120,7 @@
     #Lookbook Intro
 \*------------------------------------*/
 
-.lookBookIntro {
+.lookbookIntro {
   position: relative;
   width: 100%; 
   padding-right: $column-gutter / 2; 
@@ -130,7 +137,7 @@
     margin-top: rem-calc(60px); 
   }
 
-  .lookBookIntro-inner {
+  .lookbookIntro-inner {
     position: relative;
     &:before {
       content: " ";
@@ -153,10 +160,23 @@
     }
   }
   
-  .lookBookIntro-image {
+  .lookbookIntro-image {
     position: relative;
     transform: scale(1.25); 
     margin-bottom: rem-calc($level7); 
+    padding-bottom: 66%; 
+    overflow: hidden;
+    background-color: $senaryColor;
+
+    img {
+      position: absolute;
+      top: 0; 
+      bottom: 0; 
+      right: 0; 
+      left: 0; 
+      visibility: hidden; 
+      will-change: transform; 
+    }
 
     @include media-query($medium-up) {
       top: rem-calc(-40px);
@@ -170,7 +190,7 @@
     }
   }
 
-  .lookBookIntro-copy {
+  .lookbookIntro-copy {
     position: relative;
     max-width: rem-calc(370px);
     padding-bottom: $column-gutter / 2; 
@@ -195,9 +215,10 @@
       padding-bottom: rem-calc($level7 + $level3); 
     }
 
-    .lookBookIntro-headline {
+    h1 {
       font-family: $tertiary-font-family; 
       margin-bottom: rem-calc($level2);
+      will-change: transform; 
 
       @include media-query($medium-up) {
         @include h2(); 
@@ -210,6 +231,8 @@
 
     p {
       margin-bottom: 0; 
+      will-change: transform; 
+
       @include media-query($medium-up) {
         @include text-micro(); 
       }
@@ -316,6 +339,19 @@
 
   .lookbookArt-img {
     margin-bottom: rem-calc($level4); 
+    background-color: $senaryColor;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 45.5%; 
+
+    img {
+      position: absolute;
+      top: 0; 
+      bottom: 0; 
+      left: 0; 
+      right: 0; 
+      width: 100%; 
+    }
 
     @include media-query($medium-up) {
       margin-bottom: rem-calc($level5); 
@@ -326,7 +362,7 @@
     }
   }
 
-  p {
+  .lookbookArt-paragraph  {
     width: 84%;
     margin-right: auto;
     margin-left: auto; 

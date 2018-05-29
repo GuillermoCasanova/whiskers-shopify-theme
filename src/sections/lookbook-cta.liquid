@@ -1,17 +1,24 @@
 
-<section class="copySection  copySection--left  copySection--alt" data-section-type="lookbook_cta">
+
+<section data-section-id="{{ section.id }}" data-section-type="lookbook_cta" class="copySection  copySection--left  aboutLaces" >
   <div class="row small-collapse">
     <div class="small-12 medium-11 large-9  medium-centered columns [ grid  grid--justifyCenter ]">
       <div class="copySection-inner">
 
-        <div class="copySection-accent">
-         
-            <img src="{{'whiskIcon--dolphin.svg' | asset_url}}" 
-                 alt=""
-                 role="presentation"
-                 width="350">    
+        <svg class="copySection-accent  whiskerIcon"  style="fill: #7e6dc2;"  data-accent  data-index="1">
+          <use xlink:href="#icon--ice_cream"/>
 
-        </div>  
+        </svg>
+
+        <svg class="copySection-accent  whiskerIcon"  style="fill: yellow;" data-accent  data-index="0">
+          <use xlink:href="#icon--dolphin"/>
+
+        </svg>
+
+        <svg class="copySection-accent  whiskerIcon"  style="fill: #7e6dc2;" data-accent  data-index="2">
+          <use xlink:href="#icon--pepper"/>
+
+        </svg>
 
         <div class="row  grid  grid--flexDirectionColumn  med-grid--flexDirectionRowReverse  grid--center">
         
@@ -26,11 +33,11 @@
                        data-stellar-vertical-offset="200"
                        data-stellar-ratio="1.2">
         
-                   <h1 class="headline  [ copySection-headline  copySection-headline--secondary ]">
+                   <h1 class="headline  copySection-headline"  data-headline>
                     {{section.settings.title}}
                    </h1>
                 
-                    <div class="copySection-body">
+                    <div class="copySection-body"  data-body>
                     {{section.settings.description}}
                     </div>
                             
@@ -38,8 +45,8 @@
                 
                       <div class="small-12 columns">
                 
-                        <a href="{{section.settings.cta}}" rel="internal" class="button--expanded  button button--primary button--small">
-                        {{section.settings.cta_label}}
+                        <a href="{{section.settings.cta}}" rel="internal" class="button--expanded  button button--primary button--small copySection-button" data-text="{{section.settings.cta_label}}"  data-cta>
+                          <span>{{section.settings.cta_label}}</span>
                         </a>
                       </div>
                 
@@ -51,13 +58,7 @@
             
                 <div class="small-12 columns medium-6  hide-for-medium-up">
                   <div class="copySection-imageContainer">
-                    <div class="aboutLaces-slideshow ">
-                    
-                      <div class="aboutLaces-slideshow-slide" >
-                        <img src="{{'aboutLaces-1_small.jpg' | asset_url}}" alt="Whiskers Laces" width="350" class="aboutLaces-slideshow-slide-img">
-                      </div>
-                
-                    </div>
+                      <img  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-size="auto" data-src="{{'aboutLaces-1_small.jpg' | asset_url}}" alt="Whiskers Laces" width="350" class="aboutLaces-slideshow-slide-img lazyload">
                   </div>
                 </div>
               </div>
@@ -68,19 +69,19 @@
                data-stellar-offset-parent="true"
                data-stellar-ratio="1.5">
         
-            <div class="row">
+            <div class="row  medium-collapse  large-uncollapse">
               <div class="small-12  large-12 large-centered  columns">
                 <div class="copySection-imageContainer  [ grid  grid--justifyCenter grid--center ]">
                 
-                  <div class="aboutLaces-slideshow" data-cta-slideshow>
+                  <div class="aboutLaces-slideshow" data-slideshow>
                     <div class="aboutLaces-slideshow-slide"  data-slide  data-slide-index="0">
-                        <img src="{{'aboutLaces-2_large.jpg' | asset_url}}" alt="Whiskers Laces" width="350" class="aboutLaces-slideshow-slide-img">     
+                        <img  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="  data-image  data-size="auto" data-src="{{'aboutLaces-2_large.jpg' | asset_url}}" alt="Whiskers Laces" width="350" class="aboutLaces-slideshow-slide-img lazyload">     
                     </div>
                     <div class="aboutLaces-slideshow-slide"  data-slide  data-slide-index="1">
-                        <img src="{{'aboutLaces-1_large.jpg' | asset_url}}" alt="Whiskers Laces" width="350" class="aboutLaces-slideshow-slide-img">     
+                      <img  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="  data-image  data-size="auto" data-src="{{'aboutLaces-1_large.jpg' | asset_url}}" alt="Whiskers Laces" width="350" class="aboutLaces-slideshow-slide-img lazyload">    
                     </div>  
                     <div class="aboutLaces-slideshow-slide"  data-slide  data-slide-index="2">
-                        <img src="{{'aboutLaces-3_large.jpg' | asset_url}}" alt="Whiskers Laces" width="350" class="aboutLaces-slideshow-slide-img">     
+                       <img  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="  data-image  data-size="auto" data-src="{{'aboutLaces-3_large.jpg' | asset_url}}" alt="Whiskers Laces" width="350" class="aboutLaces-slideshow-slide-img lazyload">    
                     </div> 
                   </div>
                 </div>
@@ -92,6 +93,133 @@
     </div>
   </div>
 </section>
+
+{% javascript %}
+//<script>
+  function lookbookCta(container) { 
+
+    var self = this; 
+    var selectors = {
+      accents: '[data-accent]',
+      paragraph: '[data-body]',
+      cta: '[data-cta]',
+      headline: '[data-headline]', 
+      image: '[data-image]',
+      slideshow: '[data-slideshow]',
+      slides: '[data-slide]'
+    };
+
+    this.$container = $(container); 
+
+    function initSlideshow() {
+      self.slides = self.$container.find(selectors.slides); 
+      self.accents = self.$container.find(selectors.accents); 
+      self.activeSlide = 0; 
+      self.slideTotal = self.slides.length;
+
+      var setActiveSlide = function(pId, pSlides, pAccents) {
+
+        pSlides.each(function() {
+          var slide = $(this); 
+          var index = slide.data('slide-index');
+
+          if(index == self.activeSlide) {
+            slide.addClass('is-active');
+            slide.removeClass('is-hidden');
+          } else if(index == 2) {
+            slide.removeClass('is-active');
+            setTimeout(function() {
+              slide.addClass('is-hidden'); 
+            }, 600); 
+          } else {
+            slide.removeClass('is-active');
+          }
+        }); 
+
+        pAccents.each(function() {
+          var elem = $(this); 
+          var index = elem.data('index');
+          console.log(index); 
+          console.log(elem); 
+
+          if(index == self.activeSlide) {
+            elem.addClass('is-active');
+            elem.removeClass('is-hidden');
+          } else {
+            elem.removeClass('is-active');
+            elem.addClass('is-hidden');
+          }
+        }); 
+
+      }; 
+      
+      setActiveSlide(self.activeSlide, self.slides, self.accents); 
+
+      setInterval(function() {
+        self.activeSlide = self.activeSlide + 1; 
+
+        if(self.activeSlide > self.slideTotal - 1) {
+          self.activeSlide = 0;
+        }
+        setActiveSlide(self.activeSlide, self.slides, self.accents); 
+
+      }, 4000); 
+    }
+
+    function initAnimations() {
+      
+      this.selectors = {
+        paragraph: '[data-body]',
+        cta: '[data-cta]',
+        headline: '[data-headline]', 
+        image: '[data-image]'
+      };
+
+      self.animCtrl = new ScrollMagic.Controller(); 
+
+      var animSpeed = .4; 
+
+      //
+      // Make selectors inside container visibility normal to prepare for animation
+      //
+      for(var selector in this.selectors) {
+        TweenMax.set(self.$container.find(this.selectors[selector]), {autoAlpha: 1});
+      }
+
+      //
+      // Code to animate the lookbook intro when it enters the page
+      //
+      self.sectionAnim  = new TimelineMax()
+            .from(self.$container.find(this.selectors.image), animSpeed, {y: '100%'}, '-=.4')
+            .from(self.$container.find(this.selectors.headline), .2, {y: '12px', opacity: 0}, .1)
+            .from(self.$container.find(this.selectors.paragraph), .2, {y: '12px', opacity: 0}, '-=.1')
+            .from(self.$container.find(this.selectors.cta), .2, {y: '12px', opacity: 0}, '-=.1')
+            .from(self.$container.find(selectors.accents), .1, {opacity: 0}, '-=.1');
+
+      self.sectionScene = new ScrollMagic.Scene({
+          triggerElement: container, 
+          triggerHook: 'onCenter'
+      })
+      .setTween(self.sectionAnim)
+      .addTo(self.animCtrl); 
+
+    }
+
+
+    //
+    // Initializes everything 
+    //
+    initSlideshow();
+    initAnimations();
+
+  };
+
+  setTimeout(function() {
+    lookbookCta('[data-section-id="lookbook-cta"]'); 
+  }, 200); 
+
+{% endjavascript %}
+
 
 
 {% schema %}

@@ -1,20 +1,21 @@
 
-<section  data-section-id="{{ section.id }}">
-  <div class="lookBookIntro">
+<section data-section-id="{{ section.id }}" data-section-type="lookbook_intro">
+  <div class="lookbookIntro"  data-lookbook-intro>
     <div class="row small-collapse">
       <div class="small-12  medium-11  large-10  medium-centered  columns">
-        <div class="lookBookIntro-inner  ">
+        <div class="lookbookIntro-inner">
           <div class="row  [  grid grid--flexDirectionColumn  med-grid--flexDirectionRow  grid--center ]">
             <div class="small-12 columns medium-7">
-              <div class="lookBookIntro-image">
-                <img src="{{ 'lookbook-intro_small.png' |  asset_url}}" alt="">
+              <div class="lookbookIntro-image">
+                <img src="{{ 'lookbook-intro_small.png' |  asset_url}}" alt="Whiskers Lookbook Art Shot" data-image>
               </div>
             </div>
             <div class="small-12  columns  medium-5">
-              <div class="lookBookIntro-copy">
-                <h1 class="lookBookIntro-headline">Your shoes, <br>less boring</h1>
-                <p>If shoes were animals, they would never reproduce and further their own species. They have no distinguishing marks to catch a suitor’s eye. Luckily for us all, Whiskers exist.</p>
+              <div class="lookbookIntro-copy">
+                <h1 class="headline" data-headline>Your shoes, <br>less boring</h1>
+                <p data-body>If shoes were animals, they would never reproduce and further their own species. They have no distinguishing marks to catch a suitor’s eye. Luckily for us all, Whiskers exist.</p>
               </div>
+
             </div>
           </div>
         </div>
@@ -22,3 +23,49 @@
     </div>
   </div>
 </section>
+
+
+{% javascript %}
+//<script>
+  function lookbookIntro(container) {
+    
+    var self = this; 
+    var animSpeed = .4;   
+    var selectors = {
+      headline: '[data-headline]', 
+      image: '[data-image]',
+      paragraph: '[data-body]'
+    };
+
+    this.$container = $(container); 
+    this.animCtrl = new ScrollMagic.Controller(); 
+
+    //
+    // Make selectors inside container visibility normal to prepare for animation
+    //
+    for(var selector in selectors) {
+      TweenMax.set(self.$container.find(selectors[selector]), {autoAlpha: 1});
+    }
+
+    //
+    // Code to animate the lookbook intro when it enters the page
+    //
+    this.sectionAnim  = new TimelineMax()
+          .from(self.$container.find(selectors.image), animSpeed, {y: '100%'}, '-=.4')
+          .from(self.$container.find(selectors.headline), .2, {y: '18px', opacity: 0}, .1)
+          .from(self.$container.find(selectors.paragraph), .2, {y: '18px', opacity: 0}, '-=.1');
+
+    this.sectionScene = new ScrollMagic.Scene({
+        triggerElement: container, 
+        triggerHook: 'onCenter'
+    })
+    .setTween(this.sectionAnim)
+    .addTo(this.animCtrl); 
+  }
+  
+  setTimeout(function() {
+    lookbookIntro('[data-lookbook-intro]');
+  }, 200);
+
+{% endjavascript %}
+

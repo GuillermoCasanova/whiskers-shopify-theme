@@ -1,0 +1,80 @@
+
+<section data-section-id="{{ section.id }}" data-section-type="lookbook_art_shot" >
+  <div class="row">
+    <div class="small-12  medium-11  large-10 medium-centered  columns">
+      <div class="lookbookArt" >
+        <h1 class="lookbookArt-headline  text-center" data-headline>Lace game so strong it <br class="show-for-large-up">might hurt your feet</h1>
+        <div class="lookbookArt-img">
+          <img src="{{'lookbook-artShot2.jpg' | asset_url }}" alt="Whiskers Lookbook Art Shot" data-image>
+        </div>
+        <p class="lookbookArt-paragraph text-center" data-body>
+          Consult your doctor before using. Because your doctor would probably really like these too. And then just imagine how much more pleasant a trip to the doctor would be.
+        </p>
+         <div class="lookbookArt-icon" data-icon>
+          <svg class="whiskerIcon  whiskerIcon--yellow  whiskerIcon--large">
+            <use xlink:href="#icon--pineapple"/>
+
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% javascript %}
+//<script>
+  $(window).on('load', function() {
+	
+	  function lookbookArtShot(container) {
+
+	 	  var self = this; 
+			var animSpeed = .4;    
+	    var selectors = {
+	      headline: '[data-headline]', 
+	      image: '[data-image]',
+	      body: '[data-body]',
+	      icon: '[data-icon]'
+	    };
+			
+	    this.$container = $(container); 
+	    this.animCtrl = new ScrollMagic.Controller(); 
+
+	    //
+	    // Code to animate the lookbook art shot when it enters the page
+	    //
+	    this.sectionAnim  = new TimelineMax()
+	          .fromTo(self.$container.find(selectors.headline), animSpeed, {y: '20px', opacity: 0}, {y: '0', opacity: 1})
+	          .from(self.$container.find(selectors.image), animSpeed, {y: '100%'});
+
+	    this.sectionAnimSecondary = new TimelineMax() 
+	    			.from(self.$container.find(selectors.body), animSpeed, {y: '20px', opacity: 0}, '+=.2')
+	          .from(self.$container.find(selectors.icon), .1, {opacity: 0});
+
+			//
+			// Defining section scenes that will trigger animations
+			//
+	    this.sectionScene = new ScrollMagic.Scene({
+	        triggerElement: container, 
+	        triggerHook: 'onCenter',
+	        offset: 100
+	    })
+	    .setTween(this.sectionAnim)
+	    .addTo(this.animCtrl); 
+
+	    this.sectionSceneSecondary = new ScrollMagic.Scene({
+	        triggerElement: container + ' ' + selectors.body, 
+	        triggerHook: 'onEnter'
+	    })
+	    .setTween(this.sectionAnimSecondary)
+	    .addTo(this.animCtrl); 
+	  }
+	  
+	  setTimeout(function() {
+	    lookbookArtShot("[data-section-id='lookbook-art-shot-2']");
+	  }, 200);
+
+	}); 
+
+//</script>
+{% endjavascript %}
