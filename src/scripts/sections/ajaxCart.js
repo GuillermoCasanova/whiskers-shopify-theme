@@ -281,7 +281,6 @@ var ajaxCart = (function(module, $) {
 
   itemAddedCallback = function() {
     $addToCart.removeClass('is-adding').addClass('is-added');
-
     ShopifyAPI.getCart(cartUpdateCallback);
   };
 
@@ -304,111 +303,124 @@ var ajaxCart = (function(module, $) {
     buildCart(cart);
   };
 
-  buildCart = function(cart) {
-    // Start with a fresh cart div
-    $cartContainer.empty();
+  buildCart = function(cart, animate) {
+	  var cartInner  = $('.offCanvasCart-inner');
 
-    // Show empty cart
-    if (cart.item_count === 0) {
-      var source = $('#EmptyCartTemplate').html();
-      var template = Handlebars.compile(source);
-      var data = {
-          emptyState: theme.strings.cartEmpty
-      };
-      console.log(data); 
-      $cartContainer.append(template(data));
-      cartCallback(cart);
-      return;
-    }
+	  // Check if the cart is in view, if it is, hide it via animation
+	  if(animate) {
+	    if($('#CartTemplate').length > 0) {
+		  	cartInner.addClass('is-hidden'); 
+	    }
+	  }
 
-    // Handlebars.js cart layout
-    var items = [],
-      item = {},
-      data = {},
-      source = $('#CartTemplate').html(),
-      template = Handlebars.compile(source);
+    // Set a timeout to wait for any animation to be over first 
+    setTimeout(function() {
+   	  // Start with a fresh cart div	
+	    $cartContainer.empty();
 
-    // Add each item to our handlebars.js data
-    $.each(cart.items, function(index, cartItem) {
-      /* Hack to get product image thumbnail
-       *   - If image is not null
-       *     - Remove file extension, add _small, and re-add extension
-       *     - Create server relative link
-       *   - A hard-coded url of no-image
-      */
-      var prodImg;
-      if (cartItem.image !== null) {
-        prodImg = cartItem.image
-          .replace(/(\.[^.]*)$/, '_small$1')
-          .replace('http:', '');
-      } else {
-        prodImg =
-          '//cdn.shopify.com/s/assets/admin/no-image-medium-cc9732cb976dd349a0df1d39816fbcc7.gif';
-      }
+	    // Show empty cart
+	    if (cart.item_count === 0) {
+		      var source = $('#EmptyCartTemplate').html();
+		      var template = Handlebars.compile(source);
+		      var data = {
+		          emptyState: theme.strings.cartEmpty
+		      };
+		      $cartContainer.append(template(data));
+	      cartCallback(cart);
+	      return;
+	    }
 
-      if (cartItem.properties !== null) {
-        $.each(cartItem.properties, function(key, value) {
-          if (key.charAt(0) === '_' || !value) {
-            delete cartItem.properties[key];
-          }
-        });
-      }
+	    // Handlebars.js cart layout
+	    var items = [],
+	      item = {},
+	      data = {},
+	      source = $('#CartTemplate').html(),
+	      template = Handlebars.compile(source);
 
-      // Create item's data object and add to 'items' array
-      item = {
-        key: cartItem.key,
-        line: index + 1, // Shopify uses a 1+ index in the API
-        url: cartItem.url,
-        img: prodImg,
-        name: cartItem.product_title,
-        variation: cartItem.variant_title,
-        properties: cartItem.properties,
-        itemAdd: cartItem.quantity + 1,
-        itemMinus: cartItem.quantity - 1,
-        itemQty: cartItem.quantity,
-        price: slate.Currency.formatMoney(cartItem.price, settings.moneyFormat),
-        discountedPrice: slate.Currency.formatMoney(
-          cartItem.price - cartItem.total_discount / cartItem.quantity,
-          settings.moneyFormat
-        ),
-        discounts: cartItem.discounts,
-        discountsApplied:
-          cartItem.price === cartItem.price - cartItem.total_discount
-            ? false
-            : true,
-        vendor: cartItem.vendor
-      };
+	    // Add each item to our handlebars.js data
+	    $.each(cart.items, function(index, cartItem) {
+	      /* Hack to get product image thumbnail
+	       *   - If image is not null
+	       *     - Remove file extension, add _small, and re-add extension
+	       *     - Create server relative link
+	       *   - A hard-coded url of no-image
+	      */
+	      var prodImg;
+	      if (cartItem.image !== null) {
+	        prodImg = cartItem.image
+	          .replace(/(\.[^.]*)$/, '_small$1')
+	          .replace('http:', '');
+	      } else {
+	        prodImg =
+	          '//cdn.shopify.com/s/assets/admin/no-image-medium-cc9732cb976dd349a0df1d39816fbcc7.gif';
+	      }
 
-      items.push(item);
-    });
+	      if (cartItem.properties !== null) {
+	        $.each(cartItem.properties, function(key, value) {
+	          if (key.charAt(0) === '_' || !value) {
+	            delete cartItem.properties[key];
+	          }
+	        });
+	      }
 
-    // Gather all cart data and add to DOM
-    data = {
-      items: items,
-      note: cart.note,
-      totalPrice: slate.Currency.formatMoney(
-        cart.total_price,
-        settings.moneyFormat
-      ),
-      totalCartDiscount:
-        cart.total_discount === 0
-          ? 0
-          : theme.strings.cartSavings.replace(
-              '[savings]',
-              slate.Currency.formatMoney(
-                cart.total_discount,
-                settings.moneyFormat
-              )
-            )
-    };
+	      // Create item's data object and add to 'items' array
+	      item = {
+	        key: cartItem.key,
+	        line: index + 1, // Shopify uses a 1+ index in the API
+	        url: cartItem.url,
+	        img: prodImg,
+	        name: cartItem.product_title,
+	        variation: cartItem.variant_title,
+	        properties: cartItem.properties,
+	        itemAdd: cartItem.quantity + 1,
+	        itemMinus: cartItem.quantity - 1,
+	        itemQty: cartItem.quantity,
+	        price: slate.Currency.formatMoney(cartItem.price, settings.moneyFormat),
+	        discountedPrice: slate.Currency.formatMoney(
+	          cartItem.price - cartItem.total_discount / cartItem.quantity,
+	          settings.moneyFormat
+	        ),
+	        discounts: cartItem.discounts,
+	        discountsApplied:
+	          cartItem.price === cartItem.price - cartItem.total_discount
+	            ? false
+	            : true,
+	        vendor: cartItem.vendor
+	      };
+		    
+	      items.push(item);
+	    });
 
-    $cartContainer.append(template(data));
+	    // Gather all cart data and add to DOM
+	    data = {
+	      items: items,
+	      note: cart.note,
+	      totalPrice: slate.Currency.formatMoney(
+	        cart.total_price,
+	        settings.moneyFormat
+	      ),
+	      totalCartDiscount:
+	        cart.total_discount === 0 ? 0
+	          : theme.strings.cartSavings.replace(
+	              '[savings]',
+	              slate.Currency.formatMoney(
+	                cart.total_discount,
+	                settings.moneyFormat
+	              )
+	            )
+	    };
 
-    cartCallback(cart);
+	    $cartContainer.append(template(data));
+		  cartInner.removeClass('is-hidden'); 
+	    cartCallback(cart);
+
+    }, 250); 
+
   };
 
   cartCallback = function(cart) {
     $body.removeClass('drawer--is-loading');
+    //Calls the event to open the offCanvasCart in the Header component via theme.js 
     $body.trigger('ajaxCart.afterCartLoad', cart);
 
     if (window.Shopify && Shopify.StorefrontExpressButtons) {
@@ -506,7 +518,14 @@ var ajaxCart = (function(module, $) {
         'is-loading'
       );
 
+      // Check to see if the qty is 0 in order to animate
       if (qty === 0) {
+      	// If there was only 1 item in the cart, we hide the cart by adding 'is-hidden'
+	      if($('.offCanvasCart-product').length === 1) {
+	      	$('.offCanvasCart-inner').addClass('is-hidden'); 
+        	ShopifyAPI.changeItem(line, qty, adjustCartCallback);
+        	return 
+	      }
         $row.addClass('is-removed');
       }
 

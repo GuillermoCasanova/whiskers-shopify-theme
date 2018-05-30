@@ -37,7 +37,7 @@
             </li>
 
             <li class="grid-cell  grid  grid--center  grid--justifySpaceBetween">
-              <div class="offCanvasCart-product-qty ">
+              <div class="offCanvasCart-product-qty">
                 <button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--minus icon-fallback-text" data-id="{{key}}" data-qty="{{itemMinus}}" data-line="{{line}}" aria-label="{% endraw %}{{ 'cart.general.reduce_quantity' | t }}{% raw %}">
                   <span class="icon icon-minus" aria-hidden="true"></span>
                   <span class="fallback-text" aria-hidden="true">&minus;</span>
@@ -91,7 +91,7 @@
         </div>
      
         <div class="offCanvasCart-actions">
-          <a href="/cart" class="button  button--small  button--expanded  button--primary" name="checkout">
+          <a href="/cart" class="button  button--small  button--expanded  button--primary" name="checkout" data-text="{% endraw %}{{ 'cart.general.checkout' | t }}{% raw %}">
             {% endraw %}{{ 'cart.general.checkout' | t }}{% raw %} <span class="icon icon-arrow-right" aria-hidden="true"></span>
           </a>
         </div>
@@ -115,6 +115,7 @@
     </div>
   {% endraw %}
   </script>
+  
   <script id="JsQty" type="text/template">
   {% raw %}
     <div class="js-qty">

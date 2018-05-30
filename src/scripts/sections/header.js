@@ -16,6 +16,13 @@ theme.Header = (function() {
     cartContainer: '[data-cart]'
   };
 
+   var offCanvasMenu = $(selectors.offCanvasMenu);
+  var menuToggle = $(selectors.menuToggle); 
+  var cartContainer = $(selectors.cartContainer);
+  var menuContainer = $(selectors.menuContainer);
+  var menuIsOpen = false; 
+  var openSection = false; 
+
 
   var Header = function(container) {
 
@@ -32,15 +39,8 @@ theme.Header = (function() {
         enableQtySelectors: true,
         moneyFormat: theme.strings.moneyFormat
       });
-    }
+    };
 
-
-    var offCanvasMenu = $(selectors.offCanvasMenu);
-    var menuToggle = $(selectors.menuToggle); 
-    var cartContainer = $(selectors.cartContainer);
-    var menuContainer = $(selectors.menuContainer);
-    var menuIsOpen = false; 
-    var openSection = false; 
 
     var toggleMenuContainerCSS = function() {
       if(offCanvasMenu.hasClass('is-open')) {
@@ -52,38 +52,38 @@ theme.Header = (function() {
       }
     };
 
-      var closeEverything = function() {
-        menuContainer.removeClass('is-showing');
-        cartContainer.removeClass('is-showing');          
-      };
+    var closeEverything = function() {
+      menuContainer.removeClass('is-showing');
+      cartContainer.removeClass('is-showing');   
+      menuIsOpen = false;    
+    };
 
-      var closeNavigation = function() {
-        offCanvasMenu.removeClass('is-open');
-        offCanvasMenu.addClass('is-closed');
-        menuIsOpen = false;    
-      }; 
+    var closeNavigation = function() {
+      offCanvasMenu.removeClass('is-open');
+      offCanvasMenu.addClass('is-closed');
+      menuIsOpen = false;    
+    }; 
 
-      var openNavigation = function() {
-        offCanvasMenu.addClass('is-open');
-        offCanvasMenu.removeClass('is-closed');
-        menuIsOpen = true;
-      }; 
+    var openNavigation = function() {
+      offCanvasMenu.addClass('is-open');
+      offCanvasMenu.removeClass('is-closed');
+      menuIsOpen = true;
+    }; 
 
-
-      var toggleMenuIcon = function() {
-        if(menuToggle.hasClass('is-menu-open')) {
-          menuToggle.removeClass('is-menu-open');
-          menuToggle.addClass('is-menu-closed');
-        } else {
-          menuToggle.removeClass('is-menu-closed');
-          menuToggle.addClass('is-menu-open');
-        }
-      }
-
-      var closeMenuIcon = function() {
+    var toggleMenuIcon = function() {
+      if(menuToggle.hasClass('is-menu-open')) {
         menuToggle.removeClass('is-menu-open');
         menuToggle.addClass('is-menu-closed');
-      };
+      } else {
+        menuToggle.removeClass('is-menu-closed');
+        menuToggle.addClass('is-menu-open');
+      }
+    }
+
+    var closeMenuIcon = function() {
+      menuToggle.removeClass('is-menu-open');
+      menuToggle.addClass('is-menu-closed');
+    };
 
     $(selectors.menuToggle).on('click', function(event) {
 
@@ -95,18 +95,22 @@ theme.Header = (function() {
           openSection = 'menu';
           toggleMenuIcon(); 
           closeEverything();
+          menuIsOpen = true;    
           menuContainer.addClass('is-showing'); 
         } else {
           openSection = 'cart';
           closeEverything();
           ajaxCart.load();
+          menuIsOpen = true;    
           cartContainer.addClass('is-showing');        
         }
       } else {
 
         if(currentTarget == openSection) {
+          closeEverything();
           closeNavigation();
           closeMenuIcon();
+          console.log('close everything'); 
           openSection = false;
         } else {
           openSection = false;
@@ -150,15 +154,17 @@ theme.Header = (function() {
 
     }); 
 
+
   };
 
+
+  // Open cart method 
   Header.openCart = function() {
-    $(selectors.offCanvasMenu).addClass('is-open');
-    $(selectors.cartContainer).addClass('is-showing');      
-    // offCanvasMenu.removeClass('is-closed');
-    // menuToggle.removeClass('is-menu-open');
-    // menuToggle.addClass('is-menu-closed');
-    // menuContainer.removeClass('is-showing'); 
+    offCanvasMenu.removeClass('is-closed');
+    offCanvasMenu.addClass('is-open');
+    cartContainer.addClass('is-showing');   
+    openSection = 'cart';
+    menuIsOpen = true;  
   }; 
 
   return Header;
