@@ -152,11 +152,11 @@
   @include text-micro(); 
   
   @include media-query($medium-up) {
-    margin-left: $column-gutter; 
     position: absolute;
     width: 8.3333%; 
     top: 8.5rem; 
     right: 0; 
+    margin-left: 0; 
     color: $secondaryColor;
 
      &:after {
@@ -174,7 +174,7 @@
   }
   
   .pageHeader-social-tag {
-    @include media-query($large-up) {
+    @include media-query($medium-up) {
       background-color: $primaryColor;
       position: relative;
       transform: rotate(90deg);
@@ -197,22 +197,12 @@
   .pageHeader-social-title {
    position: relative;
 
-    @include media-query($large-up) {
+    @include media-query($medium-up) {
       background-color: $primaryColor;
       position: relative;
       transform: rotate(90deg);
-      display: block; 
       top: rem-calc(-18px);
-    }
-
-    &:after {
-      content: " "; 
-      height: rem-calc(4px);
-      width: rem-alc(30px); 
-      background-color: red;
-      position: absolute;
-      right: 0; 
-      top: 0; 
+      display: block; 
     }
   }
 

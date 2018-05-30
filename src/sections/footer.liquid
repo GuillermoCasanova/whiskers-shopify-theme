@@ -1,9 +1,10 @@
 
 
+<div class="iconWallpaper">
+  <img  class="iconWallpaper-img" src="{{'icon_wallpaper.svg' | asset_url}}" alt="" role="presentation">
+</div>
+
 <footer>
-  <div class="iconWallpaper">
-    <img  class="iconWallpaper-img" src="{{'icon_wallpaper.svg' | asset_url}}" alt="" role="presentation">
-  </div>
 
   <div class="footer-inner">
     
@@ -13,13 +14,13 @@
 
         <div class="row">
 
-          <div class="small-12 columns medium-9 large-8">
+          <div class="small-12 columns">
 
-            <div class="row">
+            <div class="grid  grid--center   grid--flexDirectinColumn  med-grid--flexDirectinRow  med-grid--justifySpaceAround">
 
               {% for block in section.blocks %}
 
-                <div class="small-12  medium-4 columns  end">
+                <div class="">
                 {% case block.type %}
                   {% when 'menu' %}
                     <ul class="footer-menu">
@@ -32,6 +33,39 @@
                         </li>
                       {% endfor %}
                     </ul>
+
+                  {% when 'social' %}
+
+                    <ul class="footer-menu">
+
+                      <h1 class="footer-menu-title">
+                          {{ block.settings.menu_title | escape}}
+                      </h1>
+
+                        <ul class="footer-social [ grid  grid--center  grid--justifyStart large-grid--justifyCenter  ]">
+                        <li class="footer-social-item  text-center">
+                            <a target="_blank" href="https://www.facebook.com/whiskerslaces/">
+                              {% include 'icon-facebook' %}
+                              <span  class="hide-elem" aria-hidden="true">{{ 'general.social.share_on_facebook' | t }}</span>
+                              <span class="hide-elem">{{ 'general.social.alt_text.share_on_facebook' | t }}</span>
+                            </a>
+                         </li>
+
+                        <li class="footer-social-item  text-center">
+                            <a target="_blank" href="https://www.instagram.com/whiskerslaces/">
+                              {% include 'icon-instagram' %}
+                              <span  class="hide-elem" aria-hidden="true">{{ 'general.social.share_on_pinterest' | t }}</span>
+                              <span class="hide-elem">{{ 'general.social.alt_text.share_on_pinterest' | t }}</span>
+                            </a>
+                         </li>
+
+                        <li class="footer-social-item  show-for-medium-up">
+                          <a href="https://www.instagram.com/explore/tags/whiskerslaces/"  target="_blank" class="footer-social-tag">#whiskerslaces</a>
+                        </li>
+
+                      </ul>
+                    </ul>
+
                     {% else %}
                     
                   <div class="footer-menu">
@@ -58,12 +92,6 @@
 
           </div>
           
-          
-          <div class="small-12  medium-3 large-4 columns">
-                    
-
-          </div>
-
         </div>
 
       </div>
@@ -76,14 +104,14 @@
 
             <div class="footer-logo">
               <img src="{{'logo--whiskers--slogan.svg'  | asset_url}}" 
-                   alt="Whiskers Logo">
+                   alt="Whiskers Laces Logo">
             </div>
 
           </div>
 
         </div>
 
-      </div>
+      </div> 
 
     </div>
 
@@ -134,6 +162,22 @@
           "id": "menu",
           "type": "link_list",
           "label": "Footer Link List"
+        }]
+      },
+      {
+        "type": "social",
+        "name": "Footer Social Links",
+        "limit": 1,
+        "settings": [
+        {
+          "id" : "menu_title",
+          "type" : "text",
+          "label": "Menu Title",
+          "default": "Title"
+        },
+        {
+          "type" : "paragraph",
+          "content": "Edit your social settings and accounts in General settings"
         }]
       }
     ]

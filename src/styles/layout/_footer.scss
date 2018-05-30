@@ -5,90 +5,136 @@
 \*------------------------------------*/
 
 
-.iconWallpaper {
-  width: 100%; 
-  overflow: hidden; 
-  @extend %position-relative; 
-
-  .iconWallpaper-img {
-    height: rem-calc(260px); 
-    object-fit: cover; 
-  }
-}
-
 footer {
-
+  background-color: $secondaryColor;
+  
   .footer-logo {
     margin-top: rem-calc($level6); 
     margin-bottom: rem-calc($level6 + $level3); 
 
     @include media-query($medium-up) {
-
       margin-top: rem-calc($level7); 
       margin-bottom: rem-calc($level7  + $level3); 
     }
   }
-}
 
-
-.footer-inner {
-  background-color: $secondaryColor;
-  padding-top: rem-calc($level4); 
-  padding-bottom: rem-calc($level4);  
-    
-  @include media-query($large-up) {
-    padding-top: rem-calc($level5); 
-    padding-bottom: rem-calc($level3);  
-  }
-}
-
-
-.footer-menu {
-  margin-bottom: rem-calc($level5); 
-  color: $tertiaryColor; 
-  @include h6();  
-
-  @include media-query($large-up) {
-    margin-bottom: 0; 
+  .footer-inner {
+    background-color: $secondaryColor;
+    padding-top: rem-calc($level4); 
+    padding-bottom: rem-calc($level4);  
+      
+    @include media-query($large-up) {
+      padding-top: rem-calc($level5); 
+      padding-bottom: rem-calc($level3);  
+      max-width: 1280px;
+      margin-right: auto;
+      margin-left: auto;
+    }
   }
 
-  .footer-menu-title {
-    font-family: $secondary-font-family; 
-    margin-bottom: rem-calc($level2); 
-    @include h4();  
-    @extend %uc; 
-    @extend %fwb; 
+
+  .footer-menu {
+    margin-bottom: rem-calc($level5); 
+    color: $tertiaryColor; 
+    @include h6();  
 
     @include media-query($large-up) {
-      margin-bottom: rem-calc($level1); 
-      @include h6();  
+      margin-bottom: 0; 
     }
 
-  }
+    .footer-menu-title {
+      font-family: $secondary-font-family; 
+      margin-bottom: rem-calc($level2); 
+      text-transform: uppercase; 
+      font-weight: bold; 
+      @include h4();  
 
-  .footer-menu-item {
+      @include media-query($large-up) {
+        margin-bottom: rem-calc($level1); 
+        @include h6();  
+      }
 
-    margin-bottom: rem-calc($level2); 
-    @include media-query($medium-up) {
-      margin-bottom: rem-calc($level1); 
     }
-  }
-  
-  .footer-menu-link {
-    color: $tertiaryColor; 
+
+    .footer-menu-item {
+
+      margin-bottom: rem-calc($level2); 
+      @include media-query($medium-up) {
+        margin-bottom: rem-calc($level1); 
+      }
+    }
     
-    &:hover, 
-    &:focus {
-      border-bottom: 2px solid $accentColor; 
+    .footer-menu-link {
+      color: $tertiaryColor; 
+      
+      &:hover, 
+      &:focus {
+        border-bottom: 2px solid $accentColor; 
+      }
+    }
+  }
+
+  .footer-credit {
+    width: 100%; 
+    text-align: left; 
+    color: $quaternaryColor; 
+
+    a {
+      color: $quaternaryColor;
+      
+      &:hover, 
+      &:focus {
+        color: $accentColor; 
+      }
+
+    }
+  }
+
+  .footer-logo {
+    margin-top: rem-calc($level3); 
+
+    img {
+      max-width: 90%; 
+    }
+  }
+
+  .footer-social {
+    
+    .footer-social-item {
+      margin-right: rem-calc($level3); 
+      text-transform: uppercase; 
+      @include text-mini();
+    }
+
+    a {
+      color: $quaternaryColor; 
+      width: rem-calc(36px); 
+      transition: all .2s cubic-bezier(0.23, 1, 0.32, 1);
+
+      &:hover, 
+      &:focus {
+        fill: $accentColor; 
+        color: #fff; 
+      }
     }
   }
 }
 
-.footer-siteCredit {
-  width: 100%; 
-  text-align: left; 
-}
 
-.footer-logo {
-  margin-top: rem-calc($level3); 
+
+
+/*------------------------------------*\
+    #Footer Wallpaper
+\*------------------------------------*/
+
+
+.iconWallpaper {
+  width: 100%; 
+  position: relative;
+  overflow: hidden; 
+
+  .iconWallpaper-img {
+    height: rem-calc(260px); 
+    object-fit: cover; 
+  }
 }

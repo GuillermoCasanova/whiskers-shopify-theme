@@ -336,16 +336,6 @@
       top: rem-calc(-18px);
       display: block; 
     }
-
-    &:after {
-      content: " "; 
-      height: rem-calc(4px);
-      width: rem-alc(30px); 
-      background-color: red;
-      position: absolute;
-      right: 0; 
-      top: 0; 
-    }
   }
   
   a {
