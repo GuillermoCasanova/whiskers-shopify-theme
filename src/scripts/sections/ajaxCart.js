@@ -303,18 +303,8 @@ var ajaxCart = (function(module, $) {
     buildCart(cart);
   };
 
-  buildCart = function(cart, animate) {
-	  var cartInner  = $('.offCanvasCart-inner');
+  buildCart = function(cart) {
 
-	  // Check if the cart is in view, if it is, hide it via animation
-	  if(animate) {
-	    if($('#CartTemplate').length > 0) {
-		  	cartInner.addClass('is-hidden'); 
-	    }
-	  }
-
-    // Set a timeout to wait for any animation to be over first 
-    setTimeout(function() {
    	  // Start with a fresh cart div	
 	    $cartContainer.empty();
 
@@ -411,15 +401,25 @@ var ajaxCart = (function(module, $) {
 	    };
 
 	    $cartContainer.append(template(data));
-		  cartInner.removeClass('is-hidden'); 
 	    cartCallback(cart);
-
-    }, 250); 
-
   };
 
   cartCallback = function(cart) {
-    $body.removeClass('drawer--is-loading');
+     
+     $body.removeClass('drawer--is-loading');
+     var $offCanvasCart = $('.offCanvasCart');
+
+  	 // Removes 'is-loading' animation class if its there
+  	 if($offCanvasCart.hasClass('is-loading')) {
+	      $offCanvasCart.removeClass('is-loading'); 
+	      $offCanvasCart.addClass('is-loaded'); 
+
+	     // Removes is-loaded animations after a bit of time to make sure animation has fnished 
+	     setTimeout(function() {
+	     	 $offCanvasCart.removeClass('is-loaded'); 
+	     }, 450);
+  	 }
+
     //Calls the event to open the offCanvasCart in the Header component via theme.js 
     $body.trigger('ajaxCart.afterCartLoad', cart);
 
@@ -513,16 +513,17 @@ var ajaxCart = (function(module, $) {
     function updateQuantity(line, qty) {
       isUpdating = true;
 
-      // Add activity classes when changing cart quantities
+     // Add activity classes when changing cart quantities
       var $row = $('.offCanvasCart-product[data-line="' + line + '"]').addClass(
         'is-loading'
       );
+      
+      $('.offCanvasCart').addClass('is-loading'); 
 
       // Check to see if the qty is 0 in order to animate
       if (qty === 0) {
       	// If there was only 1 item in the cart, we hide the cart by adding 'is-hidden'
 	      if($('.offCanvasCart-product').length === 1) {
-	      	$('.offCanvasCart-inner').addClass('is-hidden'); 
         	ShopifyAPI.changeItem(line, qty, adjustCartCallback);
         	return 
 	      }
