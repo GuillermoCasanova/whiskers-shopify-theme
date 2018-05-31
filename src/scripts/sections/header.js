@@ -28,6 +28,7 @@ theme.Header = (function() {
 
     this.$container = $(container); 
     var $container = (this.$container = $(container));
+
     this.template = $container.attr('data-template');
 
     // ajaxCart.init will run from Product.prototype when on the product page
@@ -110,7 +111,6 @@ theme.Header = (function() {
           closeEverything();
           closeNavigation();
           closeMenuIcon();
-          console.log('close everything'); 
           openSection = false;
         } else {
           openSection = false;
@@ -119,9 +119,10 @@ theme.Header = (function() {
           offCanvasMenu.one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(event) {
             if(currentTarget == 'menu') {
               openSection = 'menu';
-              toggleMenuIcon(); 
               closeEverything();
               openNavigation();
+              menuToggle.removeClass('is-menu-closed');
+              menuToggle.addClass('is-menu-open');
               menuContainer.addClass('is-showing'); 
             } else {
               openSection = 'cart';
@@ -137,6 +138,9 @@ theme.Header = (function() {
     }); 
 
 
+    //
+    // Code the dropdown menu on small devices 
+    //
     $(selectors.dropDownToggle).on('click', function(event, target) {
       var id = $(event.target).data('toggle-id'); 
 
@@ -153,7 +157,6 @@ theme.Header = (function() {
       }
 
     }); 
-
 
   };
 
