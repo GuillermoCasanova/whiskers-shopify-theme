@@ -107,10 +107,6 @@
     right: 0; 
   }
 
-  .mainNav-cartToggle {
-    padding-right: rem-calc($level2); 
-    @extend %uc; 
-  }
 
   .mainNav-title {
     height: 100%; 
@@ -149,8 +145,13 @@
   .mainNav-menuToggle {
     background-color: transparent; 
     margin-bottom: 0; 
-    @extend %uc; 
+    text-transform: uppercase; 
+    transition: all .2s cubic-bezier(0.23, 1, 0.32, 1); 
 
+    &.is-opaqued {
+      opacity: .3; 
+    }
+    
     .menuToggle-label {
       margin-right: rem-calc($level1); 
       @include text-micro(); 
@@ -161,9 +162,9 @@
   .menuToggle-icon {
     height: $toggleHeight;
     width: $toggleWidth; 
-    @extend %display-block;
-    @extend %position-relative; 
-    @extend %text-center; 
+    position: relative;
+    display: block;
+    text-align: center; 
     transition: all .2s cubic-bezier(0.23, 1, 0.32, 1); 
 
     &:after,
@@ -174,7 +175,7 @@
       width: 100%;  
       left: 0; 
       right: 0; 
-      @extend %position-absolute; 
+      position: absolute;
       transition: all .2s cubic-bezier(0.23, 1, 0.32, 1); 
     }
 
@@ -282,18 +283,9 @@
 
     }
 
-
-    .mainNav-animElem {
-      opacity: 0; 
-      transform: translateY(-70px); 
-      transition: all .4s cubic-bezier(0.23, 1, 0.32, 1); 
-    }
-
-
-
     .mainNav-container {
       height: 100vh; 
-      @extend %position-relative; 
+      position: relative;
     }
 
     .mainNav-menu {
@@ -318,8 +310,6 @@
         font-family: $tertiary-font-family; 
         @include h1(); 
 
-        transition: all .200s cubic-bezier(0.23, 1, 0.32, 1); 
-
         @include media-query($medium-up) {
           margin-bottom: rem-calc($level1); 
           @include h2(); 
@@ -331,9 +321,6 @@
         }
 
       }
-      
-
-    
     }
 
 
@@ -441,48 +428,45 @@
 
 @include media-query($medium-up) {
 
-    .mainNav-menuContainer {
-      opacity: 0;  
-      position: absolute;
-      z-index: 0; 
-      transition: all .2s cubic-bezier(0.23, 1, 0.32, 1);
-      transform: translateZ(0);
-    
-      .animate-elem {
-        opacity: 0; 
-        transition: all  .2s ease-in-out; 
-      }
+  .mainNav-menuContainer {
+    opacity: 0;  
+    position: absolute;
+    z-index: 0; 
+    transition: all .4s cubic-bezier(0.23, 1, 0.32, 1);
+    transform: translateZ(0);
 
-      @for $i from 1 through 5 {
-         .animate-elem:only-of-type(#{$i}) { 
-            transition-delay: .06s * $i; 
-         }
-      }
-
-      &.is-showing {
-        z-index: 1; 
-        opacity: 1;  
-      
-        .animate-elem {
-          opacity: 1; 
-        }
-      }
-    }
-
-    .mainNav-cartContainer {
+    .mainNav-animElem {
       opacity: 0; 
-      z-index: 0; 
-      position: absolute;
-      transition: all .2s cubic-bezier(0.23, 1, 0.32, 1) .4s;
-      transform: translateZ(0);
-      width: 100%; 
-      height: 100%; 
+      transform: translateY(12px); 
+      transition: all .4s cubic-bezier(0.23, 1, 0.32, 1); 
+      will-change: transform; 
+    }
 
-      &.is-showing {
-        z-index: 1; 
+    &.is-showing {
+      z-index: 1; 
+      opacity: 1;  
+    
+      .mainNav-animElem {
         opacity: 1; 
+        transform: translateY(0); 
       }
     }
+  }
+
+  .mainNav-cartContainer {
+    opacity: 0; 
+    z-index: 0; 
+    position: absolute;
+    transition: all .4s cubic-bezier(0.23, 1, 0.32, 1);
+    transform: translateZ(0);
+    width: 100%; 
+    height: 100%; 
+
+    &.is-showing {
+      z-index: 1; 
+      opacity: 1; 
+    }
+  }
 
 }
 

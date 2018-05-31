@@ -63,9 +63,8 @@ theme.collection = (function() {
 
         var productScene = new ScrollMagic.Scene({
             triggerElement: product,
-            triggerHook: 'onCenter',
-            reverse: false,
-            offset: '-100'
+            triggerHook: 'onEnter',
+            reverse: false
           })
           .setTween(productEntry)
           .addTo(self.animCtrl); 

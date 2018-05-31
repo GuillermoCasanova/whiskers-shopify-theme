@@ -15,8 +15,16 @@
   margin-bottom: 0;  
   display: inline-block; 
   color: #fff; 
-  @extend %uc; 
-  @include type-setting(0); 
+  text-transform: uppercase; 
+  transition: all .2s cubic-bezier(0.23, 1, 0.32, 1); 
+  
+  .cartToggle-label {
+    @include text-micro();  
+  }
+  
+  &.is-opaqued {
+    opacity: .3; 
+  }
 
   .cartToggle-total  {
     color: $accentColor; 
@@ -24,6 +32,15 @@
     padding-left: rem-calc(3px); 
   }
 }
+
+
+
+
+
+
+/*------------------------------------*\
+    #Off Canvas Cart
+\*------------------------------------*/
 
 
 .offCanvasCart {
@@ -61,8 +78,8 @@
       position: absolute;
       top: 0; 
       right: 0; 
-      bottom: rem-calc(96px); 
       left: 0;
+      bottom: rem-calc(96px); 
       margin: auto;  
     }
   }

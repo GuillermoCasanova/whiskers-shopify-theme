@@ -31,7 +31,7 @@
       <div class="mainNav-menuToggleWrapper  grid  grid--center  grid--justifyCenter">
          
          <button  data-menu-toggle  data-target="cart"  class="cartToggle show-for-medium-up">
-              Cart <span class="cartToggle-total" id="cart-count">{{cart.item_count}}</span>
+              <span  class="cartToggle-label">Cart</span> <span class="cartToggle-total" id="cart-count">{{cart.item_count}}</span>
          </button>
 
         <button class="mainNav-menuToggle  grid grid--center"  data-menu-toggle data-target="menu">
@@ -48,82 +48,81 @@
 
       <!-- Off canvas navigation for small devices--> 
       <aside class="mainNav--offCanvas"  data-off-canvas-menu>
-
          <div class="mainNav-container    grid grid--flexDirectionColumn grid--justifySpaceBetween">
 
-            <nav role="navigation" data-menu class="mainNav-menuContainer">
+          <!-- Navigation/Menu items--> 
+          <nav role="navigation" data-menu class="mainNav-menuContainer">
 
-              <ul class="mainNav-menu ">
-                {% for link in linklists[section.settings.main_linklist].links %}
-                  {%- assign child_list_handle = link.title | handleize -%}
-                  {% if menus[child_list_handle].links != blank %}
-                    <li class="mainNav-menu-item ">
-                      <h1 class="site-nav__link  mainNav-menu-link  animate-elem"
-                          data-toggle-id="{{ forloop.index }}"
-                          data-drop-down-toggle>
-                        {{ link.title }}
-                      </h1>
-                      <ul class="mainNav-dropDown"
-                          data-dropdown-id="{{ forloop.index }}">
-                        {% for childlink in menus[child_list_handle].links %}
-                          <li class="mainNav-dropDown-item animate-elem {% if childlink.active %}site-nav--active{% endif %}" >
-                            <a href="{{ childlink.url }}" class="mainNav-dropDown-link">{{ childlink.title | escape }}</a>
-                          </li>
-                        {% endfor %}
-                      </ul>
-                    </li>
-                  {% else %}
-                    <li class="mainNav-menu-item  {% if link.active %}site-nav--active{% endif %}">
-                      <a href="{{ link.url }}" class="mainNav-menu-link">{{ link.title }}</a>
-                    </li>
-                  {% endif %}
-                {% endfor %}
-                <li class="hide-for-medium-up">
-                  <a href="/cart"  rel="internal" class="cartToggle hide-for-medium-up">
-                        Cart <span class="cartToggle-total">{{cart.item_count}}</span>
-                   </a>
-                </li>
-              </ul>
-      
-              <ul class="[ grid  grid--center  grid--justifyStart ]  [ mainNav-social mainNav-animElem ]">
-                 <li>
-                   <a href="https://www.instagram.com/humanaut.is/" target="_blank" class="mainNav-social-link   icon-instagram icon--medium  mr1">
-              
-                   </a> 
-                 </li>
-                            
-                 <li>
-                   <a href="https://twitter.com/humanaut?lang=en" target="_blank" class="mainNav-social-link   icon-twitter icon--medium  ml1">
-              
-                   </a>
-                
-              </ul>
+            <ul class="mainNav-menu ">
+              {% for link in linklists[section.settings.main_linklist].links %}
+                {%- assign child_list_handle = link.title | handleize -%}
+                {% if menus[child_list_handle].links != blank %}
+                  <li class="mainNav-menu-item ">
+                    <h1 class="mainNav-menu-link  mainNav-animElem"
+                        data-toggle-id="{{ forloop.index }}"
+                        data-drop-down-toggle>
+                      {{ link.title }}
+                    </h1>
+                    <ul class="mainNav-dropDown"
+                        data-dropdown-id="{{ forloop.index }}">
+                      {% for childlink in menus[child_list_handle].links %}
+                        <li class="mainNav-dropDown-item mainNav-animElem {% if childlink.active %}site-nav--active{% endif %}" >
+                          <a href="{{ childlink.url }}" class="mainNav-dropDown-link">{{ childlink.title | escape }}</a>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  </li>
+                {% else %}
+                  <li class="mainNav-menu-item  {% if link.active %}site-nav--active{% endif %}">
+                    <a href="{{ link.url }}" class="mainNav-menu-link">{{ link.title }}</a>
+                  </li>
+                {% endif %}
+              {% endfor %}
+              <li class="hide-for-medium-up">
+                <a href="/cart"  rel="internal" class="cartToggle hide-for-medium-up">
+                      Cart <span class="cartToggle-total">{{cart.item_count}}</span>
+                 </a>
+              </li>
+            </ul>
+    
+            <ul class="[ grid  grid--center  grid--justifyStart ]  [ mainNav-social mainNav-animElem ]">
+               <li>
+                 <a href="https://www.instagram.com/humanaut.is/" target="_blank" class="mainNav-social-link   icon-instagram icon--medium  mr1">
+            
+                 </a> 
+               </li>
+                          
+               <li>
+                 <a href="https://twitter.com/humanaut?lang=en" target="_blank" class="mainNav-social-link   icon-twitter icon--medium  ml1">
+            
+                 </a>
+            </ul>
 
-              <div class="mainNav-tagline">
-                
-                <div class="mainNav-tagline-icon">
-                  <svg class="whiskerIcon"  style="fill: red;">
-                    <use xlink:href="#icon--pepper"/>
-                  </svg>
-                </div>
-                Tastefully Wrong.
+            <div class="mainNav-tagline">
+              
+              <div class="mainNav-tagline-icon">
+                <svg class="whiskerIcon"  style="fill: red;">
+                  <use xlink:href="#icon--pepper"/>
+                </svg>
               </div>
+              Tastefully Wrong.
+            </div>
 
-            </nav>
+          </nav>
               
-             <!--Cart Container--> 
-             <div data-cart  class="mainNav-cartContainer  grid  show-for-medium-up  grid--flexDirectionColumn grid--justifySpaceBetween is-showing">
-                <div class="offCanvasCart">
-                  <div class="offCanvasCart-loader">
-                    <div class="loader"></div>
-                  </div>
-                  <div  id="CartContainer">
-                    
-                  </div>
-
+           <!--Cart Container--> 
+           <div data-cart  class="mainNav-cartContainer  grid  show-for-medium-up  grid--flexDirectionColumn grid--justifySpaceBetween">
+              <div class="offCanvasCart">
+                <div class="offCanvasCart-loader">
+                  <div class="loader"></div>
                 </div>
-             </div>
-             <!-- End Cart Container--> 
+                <div  id="CartContainer">
+                  
+                </div>
+
+              </div>
+           </div>
+           <!-- End Cart Container--> 
              
          </div>
 

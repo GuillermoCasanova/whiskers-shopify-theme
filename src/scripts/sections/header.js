@@ -30,6 +30,7 @@ theme.Header = (function() {
     var $container = (this.$container = $(container));
 
     this.template = $container.attr('data-template');
+    var loadingSection = false; 
 
     // ajaxCart.init will run from Product.prototype when on the product page
     if (this.template.indexOf('product') === -1) {
@@ -55,7 +56,8 @@ theme.Header = (function() {
 
     var closeEverything = function() {
       menuContainer.removeClass('is-showing');
-      cartContainer.removeClass('is-showing');   
+      cartContainer.removeClass('is-showing');  
+      menuToggle.removeClass('is-opaqued');
       menuIsOpen = false;    
     };
 
@@ -90,47 +92,75 @@ theme.Header = (function() {
 
       var currentTarget = $(event.currentTarget).data('target');
 
+      if(loadingSection) {
+        console.log("NONO"); 
+        return 
+      }
+
       if(!menuIsOpen) {
+        loadingSection = true; 
         openNavigation();
+
         if($(event.currentTarget).data('target') == 'menu') {
           openSection = 'menu';
           toggleMenuIcon(); 
           closeEverything();
           menuIsOpen = true;    
-          menuContainer.addClass('is-showing'); 
+          $('[data-target="cart"]').addClass('is-opaqued');
+          setTimeout(function() {
+            menuContainer.addClass('is-showing'); 
+            loadingSection = false; 
+          }, 400)
+
         } else {
           openSection = 'cart';
           closeEverything();
           ajaxCart.load();
           menuIsOpen = true;    
-          cartContainer.addClass('is-showing');        
+          $('[data-target="menu"]').addClass('is-opaqued');
+          setTimeout(function() {
+            cartContainer.addClass('is-showing'); 
+            loadingSection = false; 
+          }, 400)      
         }
       } else {
-
+        loadingSection = true; 
+        
         if(currentTarget == openSection) {
-          closeEverything();
           closeNavigation();
           closeMenuIcon();
+          closeEverything();
           openSection = false;
+          setTimeout(function() {
+            loadingSection = false; 
+          }, 400); 
+
         } else {
           openSection = false;
           offCanvasMenu.removeClass('is-open');
           offCanvasMenu.addClass('is-closed');
+          closeEverything();
           offCanvasMenu.one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function(event) {
             if(currentTarget == 'menu') {
               openSection = 'menu';
-              closeEverything();
+              $('[data-target="cart"]').addClass('is-opaqued');
               openNavigation();
               menuToggle.removeClass('is-menu-closed');
               menuToggle.addClass('is-menu-open');
-              menuContainer.addClass('is-showing'); 
+              setTimeout(function() {
+                menuContainer.addClass('is-showing'); 
+                loadingSection = false; 
+              }, 400)
             } else {
               openSection = 'cart';
+              $('[data-target="menu"]').addClass('is-opaqued');
               closeMenuIcon();
-              closeEverything();
               openNavigation();
               ajaxCart.load();
-              cartContainer.addClass('is-showing');      
+              setTimeout(function() {
+                cartContainer.addClass('is-showing'); 
+                loadingSection = false; 
+              }, 400)        
             }
           });
         }
@@ -158,10 +188,23 @@ theme.Header = (function() {
 
     }); 
 
+
+    //
+    // Sets up transtion-delay on all links for stagger animation effect
+    //
+    var menuItems = $('.mainNav-animElem');  
+
+    for(var i = 0; i < menuItems.length; i++) {
+      var item = menuItems[i]; 
+      $(item).css('transition-delay', (.02 * i) + 's');
+    }
+
   };
 
 
-  // Open cart method 
+  //
+  // Open cart global method  
+  //
   Header.openCart = function() {
     offCanvasMenu.removeClass('is-closed');
     offCanvasMenu.addClass('is-open');
