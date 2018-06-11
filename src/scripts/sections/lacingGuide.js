@@ -1,5 +1,9 @@
 
 /**
+ * Lacing Guide Script
+ * ------------------------------------------------------------------------------
+ * A file that contains scripts highly couple code to the Lacing Guide template.
+/**
    * @namespace Lacing Guide
  */
 
@@ -7,6 +11,7 @@ theme.lacingGuide = (function() {
 
   var selectors = {
     grid: '[data-grid]',
+    lacingStylesThumbs: '[data-lacing-thumb]',
     stepsSlideshow: '[data-steps-slideshow]',
     imagesSlideshow: '[data-images-slideshow]'
   };
@@ -172,14 +177,14 @@ theme.lacingGuide = (function() {
         settings = $.extend( true, {}, settings, config );
 
         $grid.imagesLoaded(function() {
-
           // save item´s size and offset
           saveItemInfo( true );
           // get window´s size
           getWinSize();
           // initialize some events
           initEvents();
-
+          // Setup entry animations with Sroll magic 
+          initAnimations(); 
         }); 
       }
 
@@ -191,7 +196,6 @@ theme.lacingGuide = (function() {
         $items.each( function() {
           var $item = $( this );
           $item.data( 'offsetTop', $item.offset().top );
-          console.log($item); 
           if( saveheight ) {
             $item.data( 'height', $item.height() );
           }
@@ -287,6 +291,38 @@ theme.lacingGuide = (function() {
         var preview = $.data( this, 'preview' );
         preview.close();
         $.removeData( this, 'preview' );
+      }
+
+
+      //
+      // Inits animations with Scroll Magic
+      // 
+      function initAnimations() {
+        
+        var animCtrl = new ScrollMagic.Controller(); 
+        
+        //
+        // Defines the entry animations for our lacing guide thumbnails
+        //
+        $(selectors.lacingStylesThumbs).each(function(index, element) {
+          
+          var lacingStyle = element;
+
+          TweenMax.set(lacingStyle, {autoAlpha: 1});
+
+          var lacingStyleEntry = new TimelineLite()
+                  .from(lacingStyle, .4, {opacity: 0, y: '20px'}, .1 * (index + 1));
+
+          var lacingStyleScene = new ScrollMagic.Scene({
+              triggerElement: lacingStyle,
+              triggerHook: 'onEnter',
+              offset: 100, 
+              reverse: false
+            })
+            .setTween(lacingStyleEntry)
+            .addTo(animCtrl); 
+
+        });   
       }
 
       // the preview obj / overlay

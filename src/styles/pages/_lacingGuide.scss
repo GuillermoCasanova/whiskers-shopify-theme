@@ -46,6 +46,8 @@
   max-width: rem-calc(324px); 
   margin-right: auto; 
   margin-left: auto;
+  visibility: hidden; 
+  will-change: transform; 
 
   @include media-query($large-up) {
     margin-bottom: rem-calc($level2); 

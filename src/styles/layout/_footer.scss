@@ -78,6 +78,8 @@ footer {
     width: 100%; 
     text-align: left; 
     color: $quaternaryColor; 
+    margin-bottom: 0; 
+    @include text-mini(); 
 
     a {
       color: $quaternaryColor;

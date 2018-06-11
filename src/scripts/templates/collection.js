@@ -37,8 +37,8 @@ theme.collection = (function() {
     TweenMax.set(selectors.collectionHeadline, {autoAlpha: 1});
 
     self.tweens.headerEntry = new TimelineMax()
-        .from(selectors.headerBackground, .3, {y: '100%'}, .4)
-        .from(selectors.collectionHeadline, .3, {y: '20px', opacity: 0}, '-=.4');
+        .from(selectors.headerBackground, .4, {y: '100%'})
+        .from(selectors.collectionHeadline, .4, {y: '20px', opacity: 0});
 
 
     self.pageScene = new ScrollMagic.Scene({
@@ -58,8 +58,10 @@ theme.collection = (function() {
 
         TweenMax.set($(product).find('[data-product-img]'), {autoAlpha: 1});
 
+        var delay = ((index + 1) === 4) ?  1 : (index + 1);
+
         var productEntry = new TimelineLite()
-                .from($(product).find('[data-product-img]'), .3, {y: "101%"});
+                .from($(product).find('[data-product-img]'), .3, {opacity: 0}, .02 * delay);
 
         var productScene = new ScrollMagic.Scene({
             triggerElement: product,

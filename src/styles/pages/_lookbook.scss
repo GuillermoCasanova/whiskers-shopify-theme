@@ -278,18 +278,20 @@
 
   .lookBookSlideshow-look {
     margin-bottom: rem-calc($level4); 
-    margin-right: rem-calc($level2);
-    margin-left: rem-calc($level2);
+    margin-right: auto;
+    margin-left: auto;
     color: #fff; 
-    max-width: rem-calc(420px); 
+    max-width: 22rem; 
 
     @include media-query($medium-up) {
+      margin-right: auto; 
+      margin-left: auto; 
       width: rem-calc(300px); 
       max-width: auto; 
       &:hover,
       &:focus {
-        img {
-          transform: scale(1.03);
+      .lookbookSlideshow-look-image {
+          transform: scale(1.02);
         }
       }
     }
@@ -298,12 +300,29 @@
       margin-bottom: rem-calc($level2); 
       max-width: rem-calc(320px);
     }
-
+  
+    .lookbookSlideshow-look-image {
+      background-color: $senaryColor;
+      margin-bottom: rem-calc($level1);
+      box-shadow: 0px 0px 14px rgba(0,0,0, .6);
+      transition: all .3s  cubic-bezier(0.23, 1, 0.32, 1); 
+      position: relative;
+      padding-bottom: 150%;
+      width: 100%;
+      margin-right: auto;
+      margin-left: auto;
+      overflow: hidden;
+    }
 
     img {
-      box-shadow: 0px 0px 14px rgba(0,0,0, .6);
-      margin-bottom: rem-calc($level1);
       transition: all .3s  cubic-bezier(0.23, 1, 0.32, 1); 
+      position: absolute;
+      top: 0; 
+      bottom: 0; 
+      right: 0; 
+      width: 100%; 
+      left: 0; 
+      visibility: hidden; 
     }
 
     .lookBookSlideshow-look-name {

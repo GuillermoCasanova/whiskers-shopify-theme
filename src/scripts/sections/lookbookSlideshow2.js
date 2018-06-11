@@ -10,7 +10,8 @@
 theme.lookbookSlideshow2 = (function() {
 
   var selectors = {
-    lookbookSlideshow: '[data-lookbook-slideshow-2]'
+    lookbookSlideshow: '[data-lookbook-slideshow-2]',
+    looks: '[data-look-2]'
   };
 
   var lookbookSlideshow = function(container) { 
@@ -71,16 +72,54 @@ theme.lookbookSlideshow2 = (function() {
           .setPin(container)
           .setTween(wipeAnimation)
           .addTo(this.animCtrl); 
+          setTimeout(function() {
+            $(window).data('plugin_stellar').destroy();
+            $(window).data('plugin_stellar').init();
+          }, 400); 
       }
+
+      self.setUpAnimations(); 
+
     }
+
+
+    //
+    // Sets up entry animations using the same animation controller 
+    //
+    this.setUpAnimations = function() {
+
+      //
+      // Defines the entry animations for our looks
+      //
+      $(selectors.looks).each(function(index, element) {
+        
+        var look = element;
+
+        TweenMax.set($(look).find('[data-look-img]'), {autoAlpha: 1});
+
+        var lookEntry = new TimelineLite()
+                .from($(look).find('[data-look-img]'), .3, {opacity: 0}, .04 * (index + 1));
+
+        var lookScene = new ScrollMagic.Scene({
+            triggerElement: look,
+            triggerHook: 'onCenter',
+            offset: 100, 
+            reverse: false
+          })
+          .setTween(lookEntry)
+          .addTo(self.animCtrl); 
+
+      });
+    }
+
 
     setTimeout(function() {
       self.initInteractivity(); 
     }, 200); 
 
     window.addEventListener('resize', function() {
-      clearTimeout(this.reInitTimeout); 
-      this.reInitTimeout = setTimeout(self.initInteractivity(), 1400); 
+      clearTimeout(self.reInitTimeout); 
+      self.reInitTimeout = setTimeout(self.initInteractivity(), 1400); 
     }); 
   };
 

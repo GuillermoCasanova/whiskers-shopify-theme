@@ -16,7 +16,7 @@
 
           <div class="small-12 columns">
 
-            <div class="grid  grid--center   grid--flexDirectinColumn  med-grid--flexDirectinRow  med-grid--justifySpaceAround">
+            <div class="grid  grid--flexDirectionColumn   med-grid--top   med-grid--flexDirectionRow  med-grid--justifySpaceAround">
 
               {% for block in section.blocks %}
 
@@ -120,11 +120,7 @@
       <div class="small-12  columns text-center  large-text-left">
 
         <div class="footer-credit">
-
-          <span class="txtc1  ff2 text-mini">
             Tastefully Wrong | {{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: '/' }}
-          </span>
-          
         </div>
 
       </div>

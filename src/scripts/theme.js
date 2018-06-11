@@ -40,16 +40,31 @@ $(document).ready(function() {
   sections.register('collection_nav', theme.collectionNav);
   sections.register('hero_header', theme.heroHeader);
   sections.register('about_laces', theme.aboutLaces);
-  sections.register('lacing_styles', theme.lacingGuide);
+  sections.register('lacing_guide', theme.lacingGuide);
   sections.register('lookbook_slideshow', theme.lookbookSlideshow);
   sections.register('lookbook_slideshow2', theme.lookbookSlideshow2);
   sections.register('whiskers_intro', theme.whiskersIntro);
 
   //Configuration for lazySizes plugin to lazyload images 
   window.lazySizesConfig = window.lazySizesConfig || {}; 
-  window.lazySizesConfig.throttleDelay = 1000; 
-  window.lazySizesConfig.expand = 300; 
+  window.lazySizesConfig.throttleDelay = 200; 
   window.lazySizesConfig.init = true;
+  window.lazySizesConfig.addClasses = true;
+  window.lazySizesConfig.loadMode = 1; 
+
+  //Configuration for Stellar Parallax plugin
+  setTimeout(function() {
+
+    if(window.innerWidth > 640) {
+        $.stellar({
+         horizontalScrolling: false,
+        verticalScrolling: true,
+        hideDistantElements: false,
+        responsive: true,
+        positionProperty: 'transform'
+        }); 
+    }
+  }, 400);  
 
 
   // Common a11y fixes
