@@ -55,3 +55,148 @@
     </div>
 </section>
 
+{% javascript %}
+//<script>
+
+  //
+  // Handles all the animation
+  //
+  // Handles all the animations and interactivity
+  // of the second slideshow in the lookbook 
+  //
+  function lookbookSlideshow2(container) { 
+
+    var selectors = {
+      lookbookSlideshow: '[data-lookbook-slideshow-2]',
+      looks: '[data-look]',
+      trigger: '[data-trigger-2]'
+    };
+
+    var slideshow = {
+    
+      animCtrl: null,
+      entryAnimCtrl: null, 
+      scrollScene: null,
+      reInitTimeout: null,
+      container: container,
+
+      //
+      // Sets up the necessary interactivity depending on the device width  
+      //
+      initInteractivity: function() {
+
+        var self = this; 
+
+        $carousel = $(selectors.lookbookSlideshow); 
+
+        if(this.animCtrl !== null) {
+          this.animCtrl.destroy(this.scrollScene); 
+          this.animCtrl.destroy();
+          this.animCtrl = null; 
+          this.scrollScene.destroy(); 
+          this.scrollScene = null; 
+          $carousel.removeAttr("style");
+        }
+
+        if(window.innerWidth < 641) {
+          $carousel.removeClass("grid  grid--center  med-grid--justifySpaceAround  med-grid--1of3");
+          $carousel.not('.slick-initialized').slick({
+            'arrows': false,
+            'slidesToShow': 1,
+            'mobileFirst': true,
+            'autoplaySpeed': 2500,
+            'infinite': false,
+            'centerPadding': '40px',
+            'responsive' : [
+                {
+                  breakpoint: 640, 
+                  settings: 'unslick'
+                }
+              ]
+            });
+            var nextBtn = $(container.container).find('.slick-next');
+            var prevBtn = $(container.container).find('.slick-prev');
+            nextBtn.text('');
+            prevBtn.text('');
+        } else {
+
+          $carousel.addClass("grid  grid--center  med-grid--justifySpaceAround  med-grid--1of3");
+          this.animCtrl = new ScrollMagic.Controller(); 
+
+          var containerWidth = $(this.container).find(selectors.lookbookSlideshow).innerWidth(); 
+          var wipeAnimation = new TimelineMax()
+            .fromTo(selectors.lookbookSlideshow, 20, { x: "-50%"}, { x: "30%"});
+
+          this.scrollScene = new ScrollMagic.Scene({
+              triggerElement: selectors.trigger,
+              triggerHook: 'onLeave', 
+              offset: -125,
+              duration:  (containerWidth) + 'px'
+            })
+            .setPin(self.container)
+            .setTween(wipeAnimation)
+            .addTo(self.animCtrl); 
+
+            setTimeout(function() {
+              $(window).data('plugin_stellar').destroy();
+              $(window).data('plugin_stellar').init();
+            }, 400); 
+        }
+
+        this.initAnimations(); 
+      },
+
+      //
+      // Sets up entry animations using the same animation controller 
+      //
+      initAnimations: function() {
+      
+        var self = this; 
+
+        if(this.entryAnimCtrl === null) {
+          this.entryAnimCtrl = new ScrollMagic.Controller(); 
+        }
+        
+        //
+        // Defines the entry animations for our looks
+        //
+        $(selectors.lookbookSlideshow).find(selectors.looks).each(function(index, element) {
+          
+          var look = element;
+
+          TweenMax.set($(look).find('[data-look-img]'), {autoAlpha: 1});
+
+          var lookEntry = new TimelineLite()
+                  .from($(look).find('[data-look-img]'), .3, {opacity: 0}, .04 * (index + 1));
+
+          var lookScene = new ScrollMagic.Scene({
+              triggerElement: look,
+              triggerHook: 'onCenter',
+              offset: 100, 
+              reverse: false
+            })
+            .setTween(lookEntry)
+            .addTo(self.entryAnimCtrl); 
+        });
+      }
+
+    }; 
+
+    setTimeout(function() {
+      slideshow.initInteractivity(); 
+    }, 200); 
+
+    window.addEventListener('resize', function() {
+      clearTimeout(slideshow.reInitTimeout); 
+      slideshow.reInitTimeout = setTimeout(slideshow.initInteractivity(), 1400); 
+    }); 
+
+  };
+
+  lookbookSlideshow2('[data-section-id="lookbook-slideshow2"]'); 
+
+//</script>
+{% endjavascript %}
+
+
+

@@ -16,8 +16,6 @@ window.theme = window.theme || {};
 // =require sections/aboutLaces.js
 // =require sections/ajaxCart.js
 // =require sections/collection-nav.js
-// =require sections/lookbookSlideshow.js
-// =require sections/lookbookSlideshow2.js
 // =require sections/product.js
 // =require sections/header.js
 // =require sections/heroHeader.js
@@ -41,8 +39,6 @@ $(document).ready(function() {
   sections.register('hero_header', theme.heroHeader);
   sections.register('about_laces', theme.aboutLaces);
   sections.register('lacing_guide', theme.lacingGuide);
-  sections.register('lookbook_slideshow', theme.lookbookSlideshow);
-  sections.register('lookbook_slideshow2', theme.lookbookSlideshow2);
   sections.register('whiskers_intro', theme.whiskersIntro);
 
   //Configuration for lazySizes plugin to lazyload images 
