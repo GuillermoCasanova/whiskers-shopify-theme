@@ -20,6 +20,10 @@
   max-width: 100%;
   width: 100vw;
   overflow-x: hidden;
+
+  [data-product-anim-elem] {
+    visbility: hidden; 
+  }
   
   @include media-query($medium-up) {
     max-width: 100%;
@@ -69,6 +73,17 @@
 
     .product-photoSlideshow {
       margin-bottom: rem-calc($level4);   
+      background-color: $secondaryColor;
+
+      img {
+        opacity: 0; 
+        background-color: #fff;
+        transition: all .4s cubic-bezier(0.23, 1, 0.32, 1); 
+
+        &.lazyloaded {
+          opacity: 1; 
+        }
+      }
 
       @include media-query($large-up) {
         margin-bottom: rem-calc($level2); 

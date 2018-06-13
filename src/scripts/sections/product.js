@@ -16,6 +16,7 @@ theme.Product = (function() {
     comparePriceText: '[data-compare-text]',
     originalSelectorId: '[data-product-select]',
     priceWrapper: '[data-price-wrapper]',
+    productAnimElem: '[data-product-anim-elem]', 
     productFeaturedImage: '[data-product-featured-image]',
     productJson: '[data-product-json]',
     productPrice: '[data-product-price]',
@@ -35,8 +36,31 @@ theme.Product = (function() {
 
     var $container = (this.$container = $(container));
     var sectionId = $container.attr('data-section-id');
-    var slideshow = $(container).find('[data-ui-component="product-photo-slideshow"]'); 
+    var slideshow = $container.find('[data-ui-component="product-photo-slideshow"]'); 
 
+
+    //
+    // Product page animations
+    //
+    TweenMax.set($container.find(selectors.productAnimElem), {autoAlpha: 1});
+
+    this.animCtrl = new ScrollMagic.Controller(); 
+
+    this.productAnim = new TimelineMax()
+                    .staggerFrom(selectors.productAnimElem, .4, {opacity: 0, y: '20px'}, .04); 
+
+    this.productAnimScene = new ScrollMagic.Scene({
+          triggerElement: container, 
+          triggerHook: 'onEnter'
+      })
+      .setTween(this.productAnim)
+      .addTo(this.animCtrl); 
+
+
+
+    //
+    // Product images slideshow 
+    //
     slideshow.slick({
       'centerMode': true,
       'centerPadding': '36px',
@@ -82,15 +106,13 @@ theme.Product = (function() {
       }
     }); 
 
-
     var focusProductImage = function(pIndex) {
       if(slideshow) {
         slideshow.slick('slickGoTo', pIndex); 
       } else{
-          return
+        return; 
       }
     }; 
-
 
     $(selectors.productThumbs).each(function() {
       $(this).on('click',function() {
@@ -99,8 +121,11 @@ theme.Product = (function() {
       }); 
     }); 
 
+
+    //
     // Stop parsing if we don't have the product json script tag when loading
     // section in the Theme Editor
+    //
     if (!$(selectors.productJson, this.$container).html()) {
       return;
     }

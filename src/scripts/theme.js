@@ -41,37 +41,6 @@ $(document).ready(function() {
   sections.register('lacing_guide', theme.lacingGuide);
   sections.register('whiskers_intro', theme.whiskersIntro);
 
-
-  theme.initPlugins = function() {
-
-    //Configuration for lazySizes plugin to lazyload images 
-    window.lazySizesConfig = window.lazySizesConfig || {}; 
-    window.lazySizesConfig.throttleDelay = 200; 
-    window.lazySizesConfig.init = true;
-    window.lazySizesConfig.addClasses = true;
-    window.lazySizesConfig.loadMode = 1; 
-
-    // If its not a small/mobile device, we turn on stellar paralalx effect
-    if(window.innerWidth > 640) {
-        $.stellar({
-         horizontalScrolling: false,
-         verticalScrolling: true,
-         hideDistantElements: false,
-         responsive: true,
-         positionProperty: 'transform'
-        }); 
-    }
-
-    // Refreshes stellar positioned elements when an image is lazyloaded 
-    $('.lazyload').on('lazyloaded', function() {
-      setTimeout(function() {
-        $.stellar('refresh'); 
-      }, 200); 
-    }); 
-
-  }; 
-
-
   // Common a11y fixes
   slate.a11y.pageLinkFocus($(window.location.hash));
 
@@ -125,6 +94,35 @@ $(document).ready(function() {
       theme.cache.$body.addClass('cart--no-cookies');
     }
   };
+
+  theme.initPlugins = function() {
+
+    //Configuration for lazySizes plugin to lazyload images 
+    window.lazySizesConfig = window.lazySizesConfig || {}; 
+    window.lazySizesConfig.throttleDelay = 200; 
+    window.lazySizesConfig.init = true;
+    window.lazySizesConfig.addClasses = true;
+    window.lazySizesConfig.loadMode = 1; 
+
+    // If its not a small/mobile device, we turn on stellar paralalx effect
+    if(window.innerWidth > 640) {
+        $.stellar({
+         horizontalScrolling: false,
+         verticalScrolling: true,
+         hideDistantElements: false,
+         responsive: true,
+         positionProperty: 'transform'
+        }); 
+    }
+
+    // Refreshes stellar positioned elements when an image is lazyloaded 
+    $('.lazyload').on('lazyloaded', function() {
+      setTimeout(function() {
+        $.stellar('refresh'); 
+      }, 200); 
+    }); 
+
+  }; 
 
 
   theme.init = function() {

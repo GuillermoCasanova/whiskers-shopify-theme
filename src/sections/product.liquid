@@ -36,7 +36,7 @@
                   {% for image in product.images %}
                     {% if forloop.first == false %}
                     <div class="product-photoSlideshow-slide">
-                        <img src="{{ image | img_url: '1200x1200' }}" alt="{{ image.alt | escape }}">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ image | img_url: '1200x1200' }}" alt="{{ image.alt | escape }}" class="lazyload"  data-sizes="auto">
                     </div>
                     {% endif %}
                   {% endfor %}
@@ -56,7 +56,7 @@
                       <li>
                         <a  data-product-single-thumbnail data-slide-index="{{forloop.index}}">
                           <div class="productPhotoThumbnails-thumb">
-                            <img src="{{ image.src | img_url: '1000x1000' }}" alt="{{ image.alt | escape }}">
+                            <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ image.src | img_url: '1000x1000' }}" alt="{{ image.alt | escape }}" class="lazyload" data-sizes="auto">
                           </div>
                         </a>
                       </li>
@@ -79,11 +79,11 @@
       
                   <div class="row  small-collapse">
                     <div class="small-12 columns">
-                        <h1 class="product-name">
+                        <h1 class="product-name" data-product-anim-elem>
                           {{ product.title }}
                         </h1>
                         
-                        <ul class="product-details  grid  grid--center">
+                        <ul class="product-details  grid  grid--center"  data-product-anim-elem>
                        
                           <li data-price-wrapper class="product-price">
                             <span data-product-price>
@@ -102,17 +102,19 @@
           
                         </ul>
                         
-                        <div class="product-description">
+                        <div class="product-description" data-product-anim-elem>
                           {{ product.description }}
                         </div>
                         
-                        {% unless product == empty %}
-                          <script type="application/json" data-product-json>
-                            {{ product | json }}
-                          </script>
-                        {% endunless %}
+                        <div data-product-anim-elem>
+                            {% unless product == empty %}
+                            <script type="application/json" data-product-json>
+                              {{ product | json }}
+                            </script>
+                          {% endunless %}
+                        </div>
                         
-                        <div itemprop="offers" itemscope itemtype="http://schema.org/Offer"  class="product-actions">
+                        <div itemprop="offers" itemscope itemtype="http://schema.org/Offer"  class="product-actions" data-product-anim-elem>
                           <meta itemprop="priceCurrency" content="{{ shop.currency }}">
                           <meta itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
                           <link itemprop="availability" href="http://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}">
