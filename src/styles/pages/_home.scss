@@ -291,6 +291,13 @@
     #Featured Styles
 \*------------------------------------*/
 
+.copySection--featuredLaces {
+  &:before {
+    @include media-query($large-up) {
+      height: 90%; 
+    }
+  }
+}
 
 .featuredLaces {
   padding-right: rem-calc($level4);

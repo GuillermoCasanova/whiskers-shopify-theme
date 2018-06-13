@@ -41,26 +41,35 @@ $(document).ready(function() {
   sections.register('lacing_guide', theme.lacingGuide);
   sections.register('whiskers_intro', theme.whiskersIntro);
 
-  //Configuration for lazySizes plugin to lazyload images 
-  window.lazySizesConfig = window.lazySizesConfig || {}; 
-  window.lazySizesConfig.throttleDelay = 200; 
-  window.lazySizesConfig.init = true;
-  window.lazySizesConfig.addClasses = true;
-  window.lazySizesConfig.loadMode = 1; 
 
-  //Configuration for Stellar Parallax plugin
-  setTimeout(function() {
+  theme.initPlugins = function() {
 
+    //Configuration for lazySizes plugin to lazyload images 
+    window.lazySizesConfig = window.lazySizesConfig || {}; 
+    window.lazySizesConfig.throttleDelay = 200; 
+    window.lazySizesConfig.init = true;
+    window.lazySizesConfig.addClasses = true;
+    window.lazySizesConfig.loadMode = 1; 
+
+    // If its not a small/mobile device, we turn on stellar paralalx effect
     if(window.innerWidth > 640) {
         $.stellar({
          horizontalScrolling: false,
-        verticalScrolling: true,
-        hideDistantElements: false,
-        responsive: true,
-        positionProperty: 'transform'
+         verticalScrolling: true,
+         hideDistantElements: false,
+         responsive: true,
+         positionProperty: 'transform'
         }); 
     }
-  }, 400);  
+
+    // Refreshes stellar positioned elements when an image is lazyloaded 
+    $('.lazyload').on('lazyloaded', function() {
+      setTimeout(function() {
+        $.stellar('refresh'); 
+      }, 200); 
+    }); 
+
+  }; 
 
 
   // Common a11y fixes
@@ -122,6 +131,7 @@ $(document).ready(function() {
     theme.initCache();
     theme.cartInit();
     theme.afterCartLoad(); 
+    theme.initPlugins(); 
   };
 
   theme.init(); 

@@ -1,19 +1,17 @@
 <section>
-  <div class="copySection  copySection--center  copySection--featuredLaces">
+  <div class="copySection  copySection--center  featuredLaces">
   
     <div class="row small-collapse">
     
       <div class="small-12 medium-11 large-9  medium-centered columns [ grid  grid--justifyCenter ]">
   
-        <div class="copySection-inner">
+        <div class="copySection-inner" data-stellar-offset-parent="true"  data-stellar-vertical-offset="25">
   
-          <div class="row">
+          <div class="row" data-stellar-ratio="1.2">
               
             <div class="small-12 columns">
                  
-            <div class="featuredLaces"  data-stellar-vertical-offset="200"  data-stellar-ratio="1.2">
-  
-              <div class="row small-collapse">
+              <div class="row small-collapse"  >
                   
                 <div class="small-12 columns medium-8   text-left">
                   
@@ -27,8 +25,7 @@
                     
                 <div class="small-12 columns">
                     
-                  <div class="featuredLaces-container  grid  grid--justifyCenter"
-                        >
+                  <div class="featuredLaces-container  grid  grid--justifyCenter" >
   
                     <ul class="featuredLaces-laces
                                [ grid
@@ -49,7 +46,7 @@
   
                               {% if collection.image != blank %}
                                 <div class="featuredProductThumb-bg">
-                                     <img data-src="{{ collection| img_url: '360x360'}}" alt="{{collection.title}}" class="lazyload">
+                                     <img data-sizes="auto" data-src="{{ collection| img_url: '360x360'}}" alt="{{collection.title}}" class="lazyload">
                                  </div>
                               {% elsif collection.products.first != blank %}
                                 <div class="featuredProductThumb-bg">
@@ -100,8 +97,6 @@
                   </div>
   
                 </div>
-  
-              </div>
   
               </div>
                          
