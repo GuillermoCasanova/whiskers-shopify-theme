@@ -2,7 +2,7 @@
 /**
  * Collection Template Script
  * ------------------------------------------------------------------------------
- * A file that contains scripts highly coupled code to the Collection template.
+ * A file that contains scripts highly coupled code to the Collection templates.
  *
    * @namespace collection
  */
@@ -10,15 +10,11 @@
 theme.collection = (function() {
 
   var selectors = {
-    collectionHeader: '[data-page-header]',
-    collectionHeadline: '[data-page-headline]',
-    headerBackground: '[data-header-bg]',
-    products: '[data-product]',
+    products: '[data-product]'
   };
 
   this.animCtrl = null;
   this.pageScene = null; 
-  this.tweens = {};
 
   var self = this; 
 
@@ -28,25 +24,6 @@ theme.collection = (function() {
     // Defining the animations with ScrollMagic
     //
     self.animCtrl = new ScrollMagic.Controller(); 
-
-
-    //
-    // Defines the entry animations for our page header 
-    //
-    TweenMax.set(selectors.headerBackground, {autoAlpha: 1});
-    TweenMax.set(selectors.collectionHeadline, {autoAlpha: 1});
-
-    self.tweens.headerEntry = new TimelineMax()
-        .from(selectors.headerBackground, .4, {y: '100%'})
-        .from(selectors.collectionHeadline, .4, {y: '20px', opacity: 0});
-
-
-    self.pageScene = new ScrollMagic.Scene({
-          triggerElement: selectors.collectionHeader,
-          triggerHook: 'onEnter'
-        })
-        .setTween(self.tweens.headerEntry)
-        .addTo(self.animCtrl); 
 
 
       //
@@ -72,18 +49,6 @@ theme.collection = (function() {
           .addTo(self.animCtrl); 
 
       });
-
-      // TweenMax.set('[data-product-img]', {autoAlpha: 1});
-
-      // var productEntry = new TimelineLite()
-      //         .from('[data-product-img]', .3, {opacity: 0});
-
-      // var productScene = new ScrollMagic.Scene({
-      //     triggerElement: ,
-      //     triggerHook: 'onEnter'
-      //   })
-      //   .setTween(productEntry)
-      //   .addTo(self.animCtrl); 
 
   }, 200); 
 

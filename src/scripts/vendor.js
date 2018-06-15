@@ -61,3 +61,10 @@
  * animation.gsap.min.js
  */
 // =require vendor/animation.gsap.min.js
+
+
+
+/*!
+ * imagesloaded.pkgd.min.js
+ */
+// =require vendor/imagesloaded.pkgd.min.js

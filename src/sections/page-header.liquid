@@ -1,32 +1,24 @@
 
-<div class="pageHeader  pageHeader--collection" data-page-header>
+<div class="pageHeader  pageHeader--collection" data-section-id="{{section.id}}" data-section-type="page_header"  data-page-header >
   
   <!--Page Header--> 
-  <div class="row   row--full  small-collapse">
+  <div class="row  row--full  small-collapse">
 
-    <div class="small-12  medium-11    large-11 columns">
+    <div class="small-12  medium-11  columns">
 
         <div class="pageHeader-inner">
           
-          <div class="pageHeader-content  grid  grid--bottom">
-            <div class="row">
-        
-              <div class="small-12 columns medium-push-1  medium-11 large-push-1 large-10">
-                  
-                  {%if collection %}
-                  <h1 class="pageHeader-headline"  data-page-headline>
-                    Shop <br> 
-                    {{ collection.title }}
-                  </h1>
-                  {%else%}
-                  <h1 class="pageHeader-headline"  data-page-headline>
-                    {{ section.settings.title }}
-                  </h1>
-                  {% endif%}
-              </div>
-
-            </div>
-
+          <div class="pageHeader-content  grid  grid--bottom  grid--justifyLeft">
+              {%if collection %}
+              <h1 class="pageHeader-headline"  data-page-headline>
+                Shop <br> 
+                {{ collection.title }}
+              </h1>
+              {%else%}
+              <h1 class="pageHeader-headline"  data-page-headline>
+                {{ page.title }}
+              </h1>
+              {% endif%}
           </div>
 
           <div class="pageHeader-bg">
@@ -51,7 +43,7 @@
                        data-sizes="auto" 
                        data-header-bg
                        class="pageHeader-bg-img "
-                       alt="Whiskers Diamond Weave Lace Hero Shot" 
+                       alt="{{ collection.title }}" 
                        >
                 </picture>        
               {% when 'solids' %}
@@ -67,7 +59,7 @@
                        data-sizes="auto" 
                        data-header-bg
                        class="pageHeader-bg-img "
-                       alt="Whiskers Solid Lace Hero Shot" 
+                       alt="{{ collection.title }}" 
                        >
                 </picture>      
               {% when 'striped' %}
@@ -83,7 +75,7 @@
                        data-sizes="auto" 
                        data-header-bg
                        class="pageHeader-bg-img "
-                       alt="Whiskers Striped Lace Hero Shot" 
+                       alt="{{ collection.title }}" 
                        >
                 </picture>    
               {% when 'ticked' %}
@@ -99,7 +91,7 @@
                        data-sizes="auto" 
                        data-header-bg
                        class="pageHeader-bg-img "
-                       alt="" 
+                       alt="{{ collection.title }}" 
                        >
                 </picture>    
               {% when 'tailgate-collection' %}
@@ -115,7 +107,7 @@
                        data-sizes="auto" 
                        data-header-bg
                        class="pageHeader-bg-img "
-                       alt="" 
+                       alt="Whiskers Laces Tailgate Collection" 
                        >
                 </picture>    
               {% when 'fiver-boxes' %}
@@ -131,7 +123,7 @@
                        data-sizes="auto" 
                        data-header-bg
                        class="pageHeader-bg-img "
-                       alt="" 
+                       alt="{{ collection.title }}" 
                        >
                 </picture> 
               {% when 'laces' %}
@@ -147,7 +139,7 @@
                        data-sizes="auto" 
                        data-header-bg
                        class="pageHeader-bg-img "
-                       alt="" 
+                       alt="{{ collection.title }}" 
                        >
                 </picture>     
               {% else %}
@@ -163,7 +155,7 @@
                        data-sizes="auto" 
                        data-header-bg
                        class="pageHeader-bg-img "
-                       alt="" 
+                       alt="{{ collection.title }}" 
                        >
                 </picture>
               {% endcase %}
@@ -215,3 +207,59 @@
   </div>
 </div>
 <!--END Page Header  Social--> 
+
+
+{% javascript %}
+//<script>
+
+  function pageHeader(pContainer) {
+
+    var selectors = {
+      collectionHeader: '[data-page-header]',
+      collectionHeadline: '[data-page-headline]',
+      headerBackground: '[data-header-bg]',
+      products: '[data-product]',
+    };
+
+    var self = this; 
+
+    this.animCtrl = null;
+    this.pageScene = null; 
+
+    //
+    // Waits for the header imge to load with imagesLoaded jquery plugin
+    //
+    $(pContainer).imagesLoaded().done(function(){
+
+      //
+      // Defining the animations with ScrollMagic
+      //
+      self.animCtrl = new ScrollMagic.Controller(); 
+
+
+      //
+      // Defines the entry animations for our page header 
+      //
+      TweenMax.set(selectors.headerBackground, {autoAlpha: 1});
+      TweenMax.set(selectors.collectionHeadline, {autoAlpha: 1});
+
+      self.headerEntryAnim = new TimelineMax()
+          .from(selectors.headerBackground, .4, {y: '100%'})
+          .from(selectors.collectionHeadline, .4, {y: '20px', opacity: 0}, '-=.2');
+
+
+      self.pageScene = new ScrollMagic.Scene({
+            triggerElement: pContainer,
+            triggerHook: 'onEnter'
+          })
+          .setTween(self.headerEntryAnim)
+          .addTo(self.animCtrl); 
+
+    }); 
+
+  };
+
+  pageHeader('[data-section-id="page-header"]');  
+
+//</script>
+{% endjavascript %}

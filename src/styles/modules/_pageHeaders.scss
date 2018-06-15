@@ -68,12 +68,13 @@
   .pageHeader-headline  {
     text-transform: capitalize;
     font-family: $tertiary-font-family; 
-    max-width: 60%; 
     visibility: hidden;  
+    max-width: rem-calc(300px); 
     will-change: transform; 
     @include text-kilo();
 
     @include media-query($medium-up) {
+      margin-left: 7%; 
       @include text-giga();
     }
   }

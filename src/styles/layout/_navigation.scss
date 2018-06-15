@@ -251,7 +251,7 @@
     color: #fff; 
     margin-top: rem-calc(60px); 
     transform: translateY(-100%); 
-    @extend %position-fixed; 
+    position: fixed;
 
     @include media-query($medium-up) {
       width: 15rem; 
@@ -292,7 +292,7 @@
       padding-top: rem-calc($level7 + $level2); 
       margin-left: 25%;
       margin-bottom: rem-calc($level4); 
-      text-aling: left; 
+      text-align: left; 
 
       @include media-query($medium-up) {
         margin-left: rem-calc($level5); 
@@ -337,7 +337,7 @@
 
       .mainNav-social-link {
         color: #fff; 
-        @extend %display-block; 
+        display: block;
 
         &:hover,
         &:active,
@@ -349,24 +349,19 @@
 
     .mainNav-tagline {
       color: $primaryColor; 
-      margin-left: 25%; 
       font-family: $secondary-font-family;
       margin-bottom: 30%;  
-      @extend %position-relative; 
+      position: relative;
+      width: 100%; 
+      margin-left: 25%; 
       
       @include media-query($medium-up) {
         margin-bottom: 20%; 
+        margin-left: rem-calc($level5); 
       }
     
       @include media-query($medium-up) {
         margin-bottom: 40%; 
-      }
-
-      .mainNav-tagline-icon {
-        width: 1.4rem;
-        left: -13px;
-        top: -35px;
-        @extend %position-absolute;
       }
     }
 
@@ -434,6 +429,7 @@
     z-index: 0; 
     transition: all .4s cubic-bezier(0.23, 1, 0.32, 1);
     transform: translateZ(0);
+    width: 100%; 
 
     .mainNav-animElem {
       opacity: 0; 
@@ -509,5 +505,5 @@
 
 .mainNav-message {
   z-index: 102; 
-  @extend %position-relative; 
+  position: relative;
 }
