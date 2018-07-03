@@ -1,0 +1,46 @@
+<article data-section-id="{{ section.id }}" data-section-type="info-page">
+
+  <div class="infoPage">
+    <div class="row">
+      <div class="small-12  medium-11  large-10  large-centered  columns">
+          <div class="row">
+            <div class="small-12 medium-7   columns">
+              {{section.settings.main_column}}
+            </div>
+   
+            <div class="small-12  medium-5  columns">
+              {{section.settings.side_column}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+{% schema %}
+  {
+    "name": "Reviews",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Customer Reviews"
+      },
+      {
+        "type": "html",
+        "id": "main_column",
+        "label": "Main Content",
+        "default": "<p></p>"
+      },
+      {
+        "type": "html",
+        "id": "side_column",
+        "label": "Side Content",
+        "default": "<p></p>"
+      }
+    ]
+  }
+
+{% endschema %}
