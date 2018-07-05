@@ -70,22 +70,44 @@
   {% include 'ajax-cart-template' %}
 
   {% if template.name == 'product' or template.name == 'index' %}
-      <script>
-        // Override default values of shop.strings for each template.
-        // Alternate product templates can change values of
-        // add to cart button, sold out, and unavailable states here.
-        theme.productStrings = {
-          addToCart: {{ 'products.product.add_to_cart' | t | json }},
-          soldOut: {{ 'products.product.sold_out' | t | json }},
-          unavailable: {{ 'products.product.unavailable' | t | json }}
-        }
-      </script>
-    {% endif %}
+    <script>
+      // Override default values of shop.strings for each template.
+      // Alternate product templates can change values of
+      // add to cart button, sold out, and unavailable states here.
+      theme.productStrings = {
+        addToCart: {{ 'products.product.add_to_cart' | t | json }},
+        soldOut: {{ 'products.product.sold_out' | t | json }},
+        unavailable: {{ 'products.product.unavailable' | t | json }}
+      }
+    </script>
+  {% endif %}
+  
+  <!-- Cart Back Button Code-->
+  <script>  
+    if(Storage !== undefined) {
+
+      {% if template contains 'collection' %}
+        sessionStorage.collection = "{{ collection.url }}";
+
+      {% elsif template contains 'product' %}
+        sessionStorage.collection = "/collections/laces";
+
+      {%else %}
+        sessionStorage.collection =  "/collections/laces";
+      {% endif %}
+
+      {% if template contains 'cart' %}
+        document.getElementById("continue-shopping").href = sessionStorage.collection;
+      {% endif %}
+
+    }
+  </script>
+  <!--END Cart Back Button Code--> 
+
 
   {% section 'footer' %}
 
 </body>
-
 
   {% if template.directory == 'customers' %}
     <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script><!--<![endif]-->
@@ -99,9 +121,12 @@
   <!--[if (gt IE 9)|!(IE)]><!--><script src="{{ 'theme.js' | asset_url }}"></script><!--<![endif]-->
   <!--[if lt IE 9]><script src="{{ 'theme.js' | asset_url }}"></script><![endif]-->
 
-<script type="text/javascript"> (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=!0, e.src="//staticw2.yotpo.com/KA9L8qtrNTE02X2bobNo14hLfstNanIPHoftWh8o/widget.js";var t=document.getElementsByTagName("script")[0]; t.parentNode.insertBefore(e,t)})(); </script>
+  <!--YOTPO Code--> 
+  <script type="text/javascript"> (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=!0, e.src="//staticw2.yotpo.com/KA9L8qtrNTE02X2bobNo14hLfstNanIPHoftWh8o/widget.js";var t=document.getElementsByTagName("script")[0]; t.parentNode.insertBefore(e,t)})(); </script>
+  <!-- END YOTPO Code--> 
 
 </html>
+
 <svg style="display: none">
     <symbol viewBox="0 0 30.6 31.7" id="icon--bolt">
         <title>icon--bolt</title>

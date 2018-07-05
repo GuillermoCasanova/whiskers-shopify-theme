@@ -21,4 +21,5 @@ slate.cart = {
     }
     return cookieEnabled;
   }
+
 };

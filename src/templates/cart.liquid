@@ -12,7 +12,7 @@
           <div class="small-12 columns">
               {% if cart.item_count > 0 %}
                 <form action="/cart" method="post" novalidate>
-                  <ul class="cart-contents  grid  grid--flexDirectionColumn  med-grid--flexDirectionRow  med-grid--flexWrap  med-grid--1of2">
+                  <ul class="cart-contents  grid  grid--flexDirectionColumn  med-grid--flexDirectionRow  med-grid--flexWrap  med-grid--1of2 large-grid--1of3 large--flexNoWrap">
                     {% for item in cart.items %}
                     <li class="grid-cell">
                       <div class="cart-product  grid--top  grid">
@@ -81,7 +81,9 @@
                   </div>
                   {% endif %}
         
-                  <div class="cart-actions  grid  grid--center grid--justifyRight  grid--gutters">
+                  <div class="cart-actions  grid  grid--center grid--justifyRight  grid--gutters  grid--flexWrap">
+                      <a href="" id="continue-shopping" name="checkout" class="button  button--tertiary  button--medium" data-text="Continue Shopping">Continue Shopping
+                      </a>
                       <button type="submit" name="update" class="button  button--tertiary  button--medium" data-text="{{ 'cart.general.update' | t }}">
                         <span>{{ 'cart.general.update' | t }}</span>
                       </button>
@@ -90,8 +92,10 @@
                       </button>
                   </div>
                   
-                  <p class="text-right">{{ 'cart.general.shipping_at_checkout' | t }}</p>
-        
+                  <p class="text-right">{{ 'cart.general.shipping_at_checkout' | t }}
+
+                  </p>
+
                 </form>
         
               {% else %}
@@ -129,4 +133,5 @@
                 <textarea name="note" id="CartSpecialInstructions">{{ cart.note }}</textarea>
               {% endif %}
             {% endcomment %}
+
               
