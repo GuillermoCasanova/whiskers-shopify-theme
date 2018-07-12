@@ -36,7 +36,7 @@
                   {% for image in product.images %}
                     {% if forloop.first == false %}
                     <div class="product-photoSlideshow-slide">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ image | img_url: '1200x1200' }}" alt="{{ image.alt | escape }}" class="lazyload"  data-sizes="auto">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ image | img_url: '1000x1000' }}" alt="{{ image.alt | escape }}" class="lazyload"  data-sizes="auto">
                     </div>
                     {% endif %}
                   {% endfor %}
