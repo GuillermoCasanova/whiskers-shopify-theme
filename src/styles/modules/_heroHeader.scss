@@ -58,14 +58,17 @@
 }
 
 .heroHeader-content {
-  padding-top: rem-calc($level6); 
-  padding-bottom: rem-calc($level5);
-  background-color: $secondaryColor;
+  padding-left: rem-calc($level4);
+  padding-right: rem-calc($level4);
   z-index: 31;  
+  position: relative;
+  margin-top: rem-calc(-1 * $level6); 
 
   @include media-query($medium-up) {
     max-width: rem-calc(330px); 
     width: 60%; 
+    padding: 0; 
+    margin-top: 0; 
   }
 
   @include media-query($large-up) {
@@ -74,17 +77,35 @@
   }
 
   .heroHeader-content-inner {
-    max-width: rem-calc(360px);
+    width: 100%;
+    position: relative;
+    padding-top: rem-calc($level6); 
+    padding-bottom: rem-calc($level5);
+
+    &:before {
+      content: " ";
+      background-color: $secondaryColor;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+    }
 
     @include media-query($medium-up) {
-      max-width: none; 
+      max-width: 100%; 
+      height: 100%; 
     } 
   }
 
   .heroHeader-headline {
     font-family: $tertiary-font-family; 
     margin-bottom: rem-calc($level4); 
-    @extend %fwb; 
+    max-width: rem-calc(360px); 
+    font-weight: bold; 
+    margin-right: auto;
+    margin-left: auto; 
     @include text-kilo(); 
 
     @include media-query($medium-up) {
@@ -99,6 +120,7 @@
   .heroHeader-accentContainer {
     position: relative;
     width: 3.125rem;
+    margin-bottom: rem-calc($level4); 
 
     .heroHeader-accent {
       position: absolute;
