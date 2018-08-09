@@ -10,6 +10,16 @@
   position: relative;
   display: block; 
   
+  .featuredProductThumb-bg {
+    overflow: hidden; 
+    background-color: $senaryColor;
+
+    img {
+      // transform: translateY(100%); 
+    }
+  }
+
+
   .featuredProductThumb-title {
     color: $quaternaryColor; 
     position: absolute;

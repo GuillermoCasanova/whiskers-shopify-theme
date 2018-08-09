@@ -1,4 +1,6 @@
-<section>
+
+<section data-section-id="{{section.id}}" data-section-type="collection_list" data-collection-list>
+
   <div class="copySection  copySection--center  featuredLaces">
   
     <div class="row small-collapse">
@@ -46,7 +48,7 @@
   
                               {% if collection.image != blank %}
                                 <div class="featuredProductThumb-bg">
-                                     <img data-sizes="auto" data-src="{{ collection| img_url: '360x360'}}" alt="{{collection.title}}" class="lazyload">
+                                     <img data-sizes="auto"  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ collection| img_url: '360x360'}}" alt="{{collection.title}}" class="lazyload" data-collection-thumbnail>
                                  </div>
                               {% elsif collection.products.first != blank %}
                                 <div class="featuredProductThumb-bg">
@@ -57,7 +59,7 @@
                                 {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
                                 {{ 'collection-' | append: current | placeholder_svg_tag: 'placeholder-svg placeholder-svg--small' }}
                               {% endif %}
-                                  <p class="featuredProductThumb-title">
+                                  <p class="featuredProductThumb-title" data-collection-title>
                                 {% if collection == empty %}
                                   {{ 'homepage.onboarding.collection_title' | t }}
                                 {% else %}
@@ -162,3 +164,59 @@
       ]
     }
   {% endschema %}
+
+
+
+  {% javascript %}
+//<script>
+
+  function collectionList(pContainer) {
+
+    var selectors = {
+      collectionHeader: '[data-page-header]',
+      collectionHeadline: '[data-page-headline]',
+      collectionThumbnails: '[data-collection-thumbnail]',
+      collectionTitles: '[data-collection-title]'
+    };
+
+    var self = this; 
+
+    this.animCtrl = null;
+    this.pageScene = null; 
+
+    //
+    // Waits for the header image to load with imagesLoaded jquery plugin
+    //
+    $(pContainer).imagesLoaded().done(function() {
+
+      //
+      // Defining the animations with ScrollMagic
+      //
+      self.animCtrl = new ScrollMagic.Controller(); 
+
+
+      //
+      // Defines the entry animations for our page header 
+      //
+      TweenMax.set(selectors.collectionThumbnails, {autoAlpha: 1});
+
+      self.featuredLacesAnim = new TimelineMax()
+          .from(selectors.collectionThumbnails, .4, {y: '100%'})
+          .from(selectors.collectionTitles, .2, {opacity: 0});
+
+      self.pageScene = new ScrollMagic.Scene({
+            triggerElement: pContainer,
+            triggerHook: 'onCenter'
+          })
+          .setTween(self.featuredLacesAnim)
+          .addTo(self.animCtrl);
+
+    });
+
+  }
+
+  collectionList('[data-section-id="collection-list"]');  
+
+
+//</script>
+{% endjavascript %}

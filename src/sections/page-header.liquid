@@ -250,7 +250,8 @@
 
       self.pageScene = new ScrollMagic.Scene({
             triggerElement: pContainer,
-            triggerHook: 'onEnter'
+            triggerHook: 'onEnter',
+            reverse: false
           })
           .setTween(self.headerEntryAnim)
           .addTo(self.animCtrl); 
