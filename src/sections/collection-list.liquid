@@ -185,31 +185,36 @@
     this.pageScene = null; 
 
     //
-    // Waits for the header image to load with imagesLoaded jquery plugin
+    // Waits for the collection list thumbnail to load with imagesLoaded jquery plugin
     //
     $(pContainer).imagesLoaded().done(function() {
 
-      //
-      // Defining the animations with ScrollMagic
-      //
-      self.animCtrl = new ScrollMagic.Controller(); 
+      setTimeout(function(){
+
+        //
+        // Defining the animations with ScrollMagic
+        //
+        self.animCtrl = new ScrollMagic.Controller(); 
 
 
-      //
-      // Defines the entry animations for our page header 
-      //
-      TweenMax.set(selectors.collectionThumbnails, {autoAlpha: 1});
+        //
+        // Defines the entry animation for the collection list  thumbanils 
+        //
+        TweenMax.set(selectors.collectionThumbnails, {autoAlpha: 1});
 
-      self.featuredLacesAnim = new TimelineMax()
-          .from(selectors.collectionThumbnails, .4, {y: '100%'})
-          .from(selectors.collectionTitles, .2, {opacity: 0});
+        self.featuredLacesAnim = new TimelineMax()
+            .from(selectors.collectionThumbnails, .4, {y: '100%'})
+            .from(selectors.collectionTitles, .2, {opacity: 0});
 
-      self.pageScene = new ScrollMagic.Scene({
-            triggerElement: pContainer,
-            triggerHook: 'onCenter'
-          })
-          .setTween(self.featuredLacesAnim)
-          .addTo(self.animCtrl);
+        self.pageScene = new ScrollMagic.Scene({
+              triggerElement: pContainer,
+              triggerHook: 'onCenter',
+              reverse: true
+            })
+            .setTween(self.featuredLacesAnim)
+            .addTo(self.animCtrl);
+
+        }, 200); 
 
     });
 

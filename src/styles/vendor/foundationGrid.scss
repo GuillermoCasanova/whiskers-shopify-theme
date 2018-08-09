@@ -103,6 +103,15 @@ $column-gutter: rem-calc(48px);
 }
 
 
+// This is a small hack used to get images to appear
+// in the about our lace section on the homepage. Not be used unless
+// needed to browser-specific bugs. 
+.row--100 {
+  width: 100% !important; 
+}
+// END//
+
+
 .column,
 .columns {
   padding-left: $column-gutter / 2;

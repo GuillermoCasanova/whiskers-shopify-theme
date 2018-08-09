@@ -66,9 +66,19 @@
 
   .copySection-imageContainer {
     width: 100%; 
-    img {
-      width: 100%; 
-    }
+    display: block;
+    position: relative; 
+
+     & > div {
+      width: 100%;
+      background-color: $senaryColor;
+      overflow: hidden; 
+
+        .copySection-imageContainer-image {
+          width: 100%;  
+          visibility: hidden; 
+        }
+     }
   }
 }
 
@@ -200,7 +210,6 @@
   position: relative; 
 
   @include media-query($medium-up) {
-    height: rem-calc(230px); 
     width: 100%; 
   }
 

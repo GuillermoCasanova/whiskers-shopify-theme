@@ -32,6 +32,19 @@
       }
     }
 
+    .copySection-imageContainer  {
+
+       & > div {
+        width: 100%;
+        background-color: transparent;
+        overflow: visible; 
+
+        img {
+          visibility: visible; 
+        }
+       }
+    }
+
     p {
       @include media-query($large-up) {
         margin-bottom: 0; 
@@ -180,8 +193,10 @@
     }
   
     @include media-query($large-up) {
-      padding-top: rem-calc($level7 + $level6);
-      padding-bottom: rem-calc($level7 + $level6);
+      margin-bottom: -7.5rem;
+      padding-bottom: 5.25rem;
+      padding-top: 5.75rem;
+      margin-top: -4.75rem;
     }
 
 
@@ -196,7 +211,7 @@
       margin: auto;
 
       @include media-query($medium-up) {
-        height: 68%; 
+        height: 58%; 
       }
 
     }
@@ -435,8 +450,10 @@
     }
   
     @include media-query($large-up) {
-      padding-top: rem-calc($level7 + $level6);
-      padding-bottom: rem-calc($level7 + $level6);
+      margin-bottom: -7.5rem;
+      padding-bottom: 5.25rem;
+      padding-top: 5.75rem;
+      margin-top: -4.75rem;
     }
 
 
@@ -451,7 +468,7 @@
       margin: auto;
 
       @include media-query($medium-up) {
-        height: 68%; 
+        height: 58%; 
       }
 
     }

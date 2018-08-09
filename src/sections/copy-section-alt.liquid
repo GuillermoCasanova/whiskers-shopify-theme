@@ -1,8 +1,8 @@
 
-<section class="copySection  copySection--left  aboutLaces" data-section-type="about_laces">
+<section class="copySection  copySection--left  aboutLaces" data-section-type="about_laces" data-copy-section> 
   <div class="row small-collapse">
     <div class="small-12 medium-11 large-9  medium-centered columns [ grid  grid--justifyCenter ]">
-      <div class="copySection-inner" data-stellar-offset-parent="true">
+      <div class="copySection-inner"  data-stellar-offset-parent="true"  data-stellar-vertical-offset="25">
 
         <svg class="copySection-accent  whiskerIcon"  style="fill: #7e6dc2;"  data-accent  data-index="1">
           <use xlink:href="#icon--ice_cream"/>
@@ -61,22 +61,24 @@
           </div>
           
               
-          <div class="medium-6  large-6  columns  show-for-medium-up" data-stellar-ratio="1.4" data-stellar-vertical-offset="-100"> 
+          <div class="medium-6  large-6  columns  show-for-medium-up" data-stellar-ratio="1.3" data-stellar-vertical-offset="-110"> 
         
-            <div class="row  medium-collapse  large-uncollapse">
+            <div class="row  medium-collapse  large-uncollapse  row--100">
               <div class="small-12  large-12 large-centered  columns">
                 <div class="copySection-imageContainer  [ grid  grid--justifyCenter grid--center ]">
                 
-                  <div class="aboutLaces-slideshow" data-about-lace-slideshow>
-                    <div class="aboutLaces-slideshow-slide"  data-slide  data-slide-index="0">
-                        <img  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="  data-size="auto" data-src="{{'aboutLaces-2_large.jpg' | asset_url}}" alt="Whiskers Laces" width="350" class="aboutLaces-slideshow-slide-img lazyload">     
+                  <div >
+                    <div class="aboutLaces-slideshow  copySection-imageContainer-image" data-about-lace-slideshow  data-copy-section-image>
+                      <div class="aboutLaces-slideshow-slide"  data-slide  data-slide-index="0">
+                          <img  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="  data-size="auto" data-src="{{'aboutLaces-2_large.jpg' | asset_url}}" alt="Whiskers Laces" width="350" class="aboutLaces-slideshow-slide-img lazyload"   data-expand="800">     
+                      </div>
+                      <div class="aboutLaces-slideshow-slide"  data-slide  data-slide-index="1">
+                        <img  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="  data-size="auto" data-src="{{'aboutLaces-1_large.jpg' | asset_url}}" alt="Whiskers Laces" width="350" class="aboutLaces-slideshow-slide-img lazyload"   data-expand="800">    
+                      </div>  
+                      <div class="aboutLaces-slideshow-slide"  data-slide  data-slide-index="2">
+                         <img  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="  data-size="auto" data-src="{{'aboutLaces-3_large.jpg' | asset_url}}" alt="Whiskers Laces" width="350" class="aboutLaces-slideshow-slide-img lazyload"   data-expand="800">    
+                      </div> 
                     </div>
-                    <div class="aboutLaces-slideshow-slide"  data-slide  data-slide-index="1">
-                      <img  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="  data-size="auto" data-src="{{'aboutLaces-1_large.jpg' | asset_url}}" alt="Whiskers Laces" width="350" class="aboutLaces-slideshow-slide-img lazyload">    
-                    </div>  
-                    <div class="aboutLaces-slideshow-slide"  data-slide  data-slide-index="2">
-                       <img  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="  data-size="auto" data-src="{{'aboutLaces-3_large.jpg' | asset_url}}" alt="Whiskers Laces" width="350" class="aboutLaces-slideshow-slide-img lazyload">    
-                    </div> 
                   </div>
                 </div>
               </div>
@@ -125,3 +127,120 @@
     ]
   }
 {% endschema %}
+
+
+
+
+{% javascript %}
+  //<script>
+  
+    function copySection(pContainer) {
+
+      var selectors = {
+        copySectionImage: '[data-copy-section-image]',
+        aboutSlideshow: '[data-about-lace-slideshow]',
+        aboutSlides: '[data-slide]',
+        accents: '[data-accent]'       
+      } 
+
+      var self = this; 
+
+      this.animCtrl = null;
+      this.sectionScene = null; 
+      this.$container = $(pContainer); 
+      this.slides = this.$container.find(selectors.aboutSlides); 
+      this.accents = this.$container.find(selectors.accents); 
+      this.activeSlide = 0; 
+      this.slideTotal = this.slides.length;
+
+
+      var setActiveSlide = function(pId, pSlides, pAccents) {
+
+        pSlides.each(function() {
+          var slide = $(this); 
+          var index = slide.data('slide-index');
+
+          if(index == self.activeSlide) {
+            slide.addClass('is-active');
+            slide.removeClass('is-hidden');
+          } else if(index == 2) {
+            slide.removeClass('is-active');
+            setTimeout(function() {
+              slide.addClass('is-hidden'); 
+            }, 600); 
+          } else {
+            slide.removeClass('is-active');
+          }
+        }); 
+
+        pAccents.each(function() {
+          var elem = $(this); 
+          var index = elem.data('index');
+
+          if(index == self.activeSlide) {
+            elem.addClass('is-active');
+            elem.removeClass('is-hidden');
+          } else {
+            elem.removeClass('is-active');
+            elem.addClass('is-hidden');
+          }
+        }); 
+
+      }; 
+    
+      var initSlideshow = function() {
+
+        setActiveSlide(self.activeSlide, self.slides, self.accents); 
+
+        setInterval(function() {
+          self.activeSlide = self.activeSlide + 1; 
+          if(self.activeSlide > self.slideTotal - 1) {
+            self.activeSlide = 0;
+          }
+          setActiveSlide(self.activeSlide, self.slides, self.accents); 
+        }, 4000); 
+    
+      }; 
+
+      //
+      // Waits for the section image to load with the imagesLoaded plugin 
+      //
+      $(pContainer).imagesLoaded().done(function() {
+
+        setTimeout(function() {
+          //
+          // Defining the animation controller with ScrollMagic 
+          //        
+          self.animCtrl = new ScrollMagic.Controller(); 
+
+          //
+          // Creating the animation tween with TweenMax
+          //
+          TweenMax.set(selectors.copySectionImage, {autoAlpha: 1});
+
+          self.copySectionAnim = new TimelineMax()
+              .from($(pContainer).find(selectors.copySectionImage), .4, {y: '100%'})
+
+          self.sectionScene = new ScrollMagic.Scene({
+            triggerElement: pContainer,
+            triggerHook: 'onCenter',
+            reverse: false
+          })
+          .setTween(self.copySectionAnim)
+          .addTo(self.animCtrl)
+          .on('start', function() {
+
+            initSlideshow(); 
+
+          });
+
+        }, 300); 
+
+      })
+
+    }
+
+    copySection('[data-copy-section]'); 
+
+  //</script>
+{% endjavascript %}
