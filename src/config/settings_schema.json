@@ -8,6 +8,22 @@
     "theme_support_url": "https://github.com/Shopify/slate"
   },
   {
+    "name": "Special Promotion Tab",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "special_promo_active",
+        "label": "Special Promotion Activation",
+        "info": "This turns on/off the promotion tab on the site"
+      },
+      {
+        "type": "text",
+        "id": "special_promo_text",
+        "label": "Promotion text that will go in the tab"
+      }
+    ]
+  },
+  {
     "name": "Typography",
     "settings": [
       {

@@ -1,0 +1,73 @@
+
+
+/*------------------------------------*\
+    #Special Promo Tab  
+\*------------------------------------*/
+
+
+.specialPromoTab {
+	position: fixed;
+	bottom: 0; 
+	left: 0; 
+	width: 100%; 
+	background-color: $accentColor;
+	position: fixed;
+	padding: rem-calc($level1); 
+  z-index: 600; 
+  font-family: $secondary-font-family;
+	transform: translateY(100%); 
+	animation: enter-promo-tab .3s cubic-bezier(0.23, 1, 0.32, 1) forwards 2s; 
+
+	.specialPromoTab-inner {
+		text-align: center; 
+		width: 100%; 
+		height: 100%; 
+		position: relative;
+		text-transform: uppercase; 
+ 	  font-weight: bold;
+
+	 	p {
+	 	 	margin-bottom: 0; 
+ 	  		color: $secondaryColor; 
+	 	 }
+	}
+
+	.specialPromoTab-close {
+    display: block;
+    text-align: center; 
+  	height: .6rem;
+  	width: 1rem;  
+  	position: absolue;
+  	right: 0; 
+  	top: 0; 
+
+    &:after,
+    &:before {
+      content: ""; 
+      height: 4px;
+      background-color: $secondaryColor; 
+      width: 100%;  
+      left: 0; 
+      right: 0; 
+      position: absolute;
+      transition: all .2s cubic-bezier(0.23, 1, 0.32, 1); 
+    }
+
+    &:after {
+      top: 70%;
+    }
+	}
+}
+
+@keyframes enter-promo-tab {
+
+	0%{
+		transform: translateY(100%); 
+	}
+
+	100% {
+		transform: translateY(0); 
+	}
+}
+
+

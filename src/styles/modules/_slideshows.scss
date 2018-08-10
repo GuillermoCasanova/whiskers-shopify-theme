@@ -7,12 +7,10 @@
 
 .slideshow {
     
-     @extend %position-relative; 
+    position: relative;
     
     .slick-list {
-
         width: 100%;     
-    
     }
 
     .slick-prev,
@@ -20,33 +18,27 @@
     
         background-color: transparent;
         z-index: 4; 
+        position: absolute;
 
         &:before {
-
             color: $accentColor; 
             text-decoration: none;
             @extend %iconStyles; 
         }
 
-        @extend %position-absolute; 
         @extend .icon--large; 
-
     }
     
     .slick-prev {
         right: 12%; 
         top: 0; 
         @extend .icon-left-open-big;
-
     }
 
     .slick-next {
-
         right: 12%;
         top: 20%; 
         @extend .icon-right-open-big;
-
     }
-
 }
 
