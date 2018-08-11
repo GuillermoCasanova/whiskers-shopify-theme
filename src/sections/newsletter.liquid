@@ -1,10 +1,10 @@
 
-<section class="newsletter  section--lead">
+<section class="newsletter  section--lead" data-newsletter>
   <div class="copySection  copySection--center">   
     <div class="row  small-collapse">
       <div class="small-12  medium-11  large-9 medium-centered  columns">
-        <div class="copySection-inner">  
-          <div class="row [ grid  grid--flexDirectionColumn  med-grid--flexDirectionRow grid--center ]">   
+        <div class="copySection-inner" >  
+          <div class="row [ grid  grid--flexDirectionColumn  med-grid--flexDirectionRow grid--center ]"  data-newsletter-inner>   
 
             <div class="small-12 columns  medium-6  large-5">  
               <div class="row small-collapse">
@@ -83,3 +83,45 @@
     "blocks" : []
   }
 {% endschema %}
+
+
+{% javascript %}
+//<script>
+
+  function newsletter(pContainer) {
+
+      var selectors = {
+        newsletter: '[data-newsletter]',
+        newsletterInner: '[data-newsletter-inner]'
+      };
+
+      var self = this; 
+
+      self.animCtrl = null; 
+      self.sectionScene = null; 
+      self.newsletterAnim = null; 
+
+      setTimeout(function() {
+
+        self.animCtrl = new ScrollMagic.Controller(); 
+
+        self.newsletterAnim = new TimelineMax()
+            .to(selectors.newsletter, .8, {clipPath: 'polygon(0 0, 100% 0%, 100% 100%, 0% 100%)'})
+            .from(selectors.newsletterInner, .3, {opacity: 0}); 
+
+        self.sectionScene = new ScrollMagic.Scene({
+            triggerElement: pContainer,
+            triggerHook: 'onCenter', 
+            reverse: false 
+        })
+        .setTween(self.newsletterAnim)
+        .addTo(self.animCtrl); 
+
+      }, 300); 
+  }
+
+
+  newsletter('[data-newsletter]')
+
+//</script> 
+{% endjavascript %}

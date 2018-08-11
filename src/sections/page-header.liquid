@@ -177,14 +177,14 @@
         <span class="pageHeader-social-title">Share</span>
       </li>
       <li class="pageHeader-social-item  text-center">
-          <a target="_blank" href="//www.facebook.com/sharer.php?u={{ shop.url | append: share_permalink }}">
+          <a target="_blank" href="//www.facebook.com/sharer.php?u={{canonical_url}}">
             {% include 'icon-facebook' %}
             <span  class="hide-elem" aria-hidden="true">{{ 'general.social.share_on_facebook' | t }}</span>
             <span class="hide-elem">{{ 'general.social.alt_text.share_on_facebook' | t }}</span>
           </a>
        </li>
       <li class="pageHeader-social-item  text-center">
-          <a target="_blank" href="//twitter.com/share?text={{ share_title | url_param_escape }}&amp;url={{ shop.url | append: share_permalink }}">
+          <a target="_blank" href="//twitter.com/share?text={{ page_description | escape | replace: '&', 'and' }}&amp;url={{canonical_url}}">
             {% include 'icon-twitter' %}
             <span  class="hide-elem" aria-hidden="true">{{ 'general.social.share_on_twitter' | t }}</span>
             <span class="hide-elem">{{ 'general.social.alt_text.share_on_twitter' | t }}</span>
@@ -192,7 +192,7 @@
        </li>
     
       <li class="pageHeader-social-item  text-center">
-          <a target="_blank" href="//pinterest.com/pin/create/button/?url={{ shop.url | append: share_permalink }}&amp;media={{ share_image | img_url: '1024x1024' }}&amp;description={{ share_title | url_param_escape }}">
+          <a target="_blank" href="//pinterest.com/pin/create/button/?url={{canonical_url}}amp;media={{ share_image | img_url: '1024x1024' }}&amp;description={{ page_description | escape | replace: '&', 'and' }}">
             {% include 'icon-pinterest' %}
             <span  class="hide-elem" aria-hidden="true">{{ 'general.social.share_on_pinterest' | t }}</span>
             <span class="hide-elem">{{ 'general.social.alt_text.share_on_pinterest' | t }}</span>

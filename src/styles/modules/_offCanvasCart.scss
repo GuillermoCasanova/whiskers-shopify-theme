@@ -18,10 +18,6 @@
   text-transform: uppercase; 
   transition: all .2s cubic-bezier(0.23, 1, 0.32, 1); 
   
-  .cartToggle-label {
-    @include text-micro();  
-  }
-  
   &.is-opaqued {
     opacity: .3; 
   }
@@ -30,6 +26,13 @@
     color: $accentColor; 
     display: inline-block; 
     padding-left: rem-calc(3px); 
+    top: -1px;
+    position: relative;
+  }
+
+  .cartToggle-label {
+    display: inline-block; 
+    @include text-micro();  
   }
 }
 
@@ -344,3 +347,4 @@
       transform: translateX(100%); 
     }
   }
+  

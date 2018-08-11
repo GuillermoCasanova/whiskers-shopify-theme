@@ -6,6 +6,10 @@
 .newsletter {
   padding-right: rem-calc($level4);
   padding-left: rem-calc($level4);
+  clip-path: polygon(0 0, 0% 0%, 0% 100%, 0% 100%);
+  will-change: clip-path; 
+  transform: translateZ(1px);
+  transform: translate3d(0, 0, 0);
 
   .copySection-inner {
 
