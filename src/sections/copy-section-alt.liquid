@@ -29,23 +29,25 @@
                   
                   <div class="copySection-copy" data-stellar-ratio="1.2">
         
-                   <h1 class="headline  copySection-headline">
-                    {{section.settings.title}}
-                   </h1>
-                
-                    <div class="copySection-body">
-                    {{section.settings.description}}
-                    </div>
-                            
-                    <div class="row small-collapse">
-                
-                      <div class="small-12 columns">
-                
-                        <a href="{{section.settings.cta}}" rel="internal" class="button--expanded  button button--primary button--small copySection-button" data-text="{{section.settings.cta_label}}">
-                        <span>{{section.settings.cta_label}}</span>
-                        </a>
-                      </div>
-                
+                    <div data-about-lace-headline>
+                      <h1 class="headline  copySection-headline">
+                       {{section.settings.title}}
+                      </h1>
+                                      
+                       <div class="copySection-body">
+                       {{section.settings.description}}
+                       </div>
+                               
+                       <div class="row small-collapse">
+                                      
+                         <div class="small-12 columns">
+                                      
+                           <a href="{{section.settings.cta}}" rel="internal" class="button--expanded  button button--primary button--small copySection-button" data-text="{{section.settings.cta_label}}">
+                           <span>{{section.settings.cta_label}}</span>
+                           </a>
+                         </div>
+                                      
+                       </div>
                     </div>
         
                   </div>
@@ -138,10 +140,11 @@
 
       var selectors = {
         copySectionImage: '[data-copy-section-image]',
+        sectionHeadline: '[data-about-lace-headline]',
         aboutSlideshow: '[data-about-lace-slideshow]',
         aboutSlides: '[data-slide]',
         accents: '[data-accent]'       
-      } 
+      };
 
       var self = this; 
 
@@ -207,7 +210,6 @@
       //
       $(pContainer).imagesLoaded().done(function() {
 
-        setTimeout(function() {
           //
           // Defining the animation controller with ScrollMagic 
           //        
@@ -220,6 +222,7 @@
 
           self.copySectionAnim = new TimelineMax()
               .from($(pContainer).find(selectors.copySectionImage), .4, {y: '100%'})
+              .from(selectors.sectionHeadline, .4, {opacity: 0, y: '20px'}, '-=0.3');
 
           self.sectionScene = new ScrollMagic.Scene({
             triggerElement: pContainer,
@@ -233,8 +236,6 @@
             initSlideshow(); 
 
           });
-
-        }, 300); 
 
       })
 

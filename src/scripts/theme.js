@@ -20,7 +20,6 @@ window.theme = window.theme || {};
 // =require sections/header.js
 // =require sections/heroHeader.js
 // =require sections/lacingGuide.js
-// =require sections/whiskersIntro.js
 
 
 /*================ Templates ================*/
@@ -39,7 +38,6 @@ $(document).ready(function() {
   sections.register('hero_header', theme.heroHeader);
   sections.register('about_laces', theme.aboutLaces);
   sections.register('lacing_guide', theme.lacingGuide);
-  sections.register('whiskers_intro', theme.whiskersIntro);
 
   // Common a11y fixes
   slate.a11y.pageLinkFocus($(window.location.hash));

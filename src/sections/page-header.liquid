@@ -110,16 +110,16 @@
                        alt="Whiskers Laces Tailgate Collection" 
                        >
                 </picture>    
-              {% when 'fiver-boxes' %}
+              {% when 'boxes' %}
                 <picture>
                     
                   <source media="(min-width: 1024px)"
-                          srcset="{{'shopHeaders--boxes--large.jpg' | asset_url}}">
+                          srcset="{{'shopHeaders--fiver-boxes--large.png' | asset_url}}">
                 
                   <source media="(min-width: 640px)"
-                          srcset="{{'shopHeaders--boxes--medium.jpg' | asset_url}}">
+                          srcset="{{'shopHeaders--fiver-boxes--medium.png' | asset_url}}">
                 
-                  <img src="{{'shopHeaders--boxes--small.jpg' | asset_url}}"
+                  <img src="{{'shopHeaders--fiver-boxes--small.png' | asset_url}}"
                        data-sizes="auto" 
                        data-header-bg
                        class="pageHeader-bg-img "
@@ -143,6 +143,43 @@
                        >
                 </picture>     
               {% else %}
+                
+                {% case  page.title %}
+
+                {% when 'Lacing Guide' %}
+                <picture>
+                    
+                  <source media="(min-width: 1024px)"
+                          srcset="{{'shopHeaders--lacing-guide--large.png' | asset_url}}">
+                
+                  <source media="(min-width: 640px)"
+                          srcset="{{'shopHeaders--lacing-guide--medium.png' | asset_url}}">
+                
+                  <img src="{{'shopHeaders--lacing-guide--small.png' | asset_url}}"
+                       data-sizes="auto" 
+                       data-header-bg
+                       class="pageHeader-bg-img "
+                       alt="Lacing Guide Hero Image" 
+                       >
+                </picture>    
+
+                {% when 'About Us' %}
+                <picture>
+                    
+                  <source media="(min-width: 1024px)"
+                          srcset="{{'shopHeaders--about-us--large.png' | asset_url}}">
+                
+                  <source media="(min-width: 640px)"
+                          srcset="{{'shopHeaders--about-us--medium.png' | asset_url}}">
+                
+                  <img src="{{'shopHeaders--about-us--small.png' | asset_url}}"
+                       data-sizes="auto" 
+                       data-header-bg
+                       class="pageHeader-bg-img "
+                       alt="Lacing Guide Hero Image" 
+                       >              
+
+                {% else %}
                 <picture>
                     
                   <source media="(min-width: 1024px)"
@@ -158,6 +195,9 @@
                        alt="{{ collection.title }}" 
                        >
                 </picture>
+
+                {% endcase %}
+
               {% endcase %}
 
           </div>

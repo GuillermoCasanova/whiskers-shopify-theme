@@ -13,7 +13,7 @@
 	background-color: $accentColor;
 	position: fixed;
 	padding: rem-calc($level1); 
-  z-index: 600; 
+  z-index: 35; 
   font-family: $secondary-font-family;
 	transform: translateY(100%); 
 	animation: enter-promo-tab .3s cubic-bezier(0.23, 1, 0.32, 1) forwards 2s; 

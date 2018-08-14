@@ -18,7 +18,7 @@
                 <div class="small-12 columns medium-8   text-left">
                   
                   <div class="copySection-copy">
-                    <h1 class="headline  copySection-headline  featuredLaces-headline">
+                    <h1 class="headline  copySection-headline  featuredLaces-headline" data-featured-collections-headline> 
                       {{ section.settings.title | escape }}
                     </h1>
                   </div>
@@ -174,7 +174,7 @@
 
     var selectors = {
       collectionHeader: '[data-page-header]',
-      collectionHeadline: '[data-page-headline]',
+      sectionHeadline: '[data-featured-collections-headline]',
       collectionThumbnails: '[data-collection-thumbnail]',
       collectionTitles: '[data-collection-title]'
     };
@@ -204,7 +204,8 @@
 
         self.featuredLacesAnim = new TimelineMax()
             .from(selectors.collectionThumbnails, .4, {y: '100%'})
-            .from(selectors.collectionTitles, .2, {opacity: 0});
+            .from(selectors.collectionTitles, .4, {opacity: 0})
+            .from(selectors.sectionHeadline, .4, {opacity: 0, y: '10px'}, '-=0.7');
 
         self.pageScene = new ScrollMagic.Scene({
               triggerElement: pContainer,

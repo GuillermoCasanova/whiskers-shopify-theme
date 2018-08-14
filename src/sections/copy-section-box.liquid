@@ -16,12 +16,13 @@
                   
                 <div class="small-12 columns medium-12  large-10 large-push-1  [ grid  grid--justifyCenter ]">
                   
-                  <div class="copySection-copy"  data-stellar-ratio="1.2">
+                  <div class="copySection-copy"  data-stellar-ratio="1.2" >
               
-                     <h1 class="headline  copySection-headline  copySection-headline--secondary">
+                    <div data-box-headline>
+                         <h1 class="headline  copySection-headline  copySection-headline--secondary">
                       {{section.settings.title}}
                      </h1>
-
+                     
                       <p class="copySection-body">
                         {{section.settings.description}}
                       </p>
@@ -33,6 +34,7 @@
                         </a>
                         </div>
                       </div>
+                    </div>
                   </div>
             
                 </div>
@@ -112,7 +114,8 @@
     function copySectionBox(pContainer) {
 
       var selectors = {
-        copySectionImage: '[data-copy-section-image]'        
+        copySectionImage: '[data-copy-section-image]',
+        sectionHeadline: '[data-box-headline]'
       } 
 
       var self = this; 
@@ -125,7 +128,6 @@
       //
       $(pContainer).imagesLoaded().done(function() {
 
-        setTimeout(function() {
           //
           // Defining the animation controller with ScrollMagic 
           //        
@@ -138,6 +140,8 @@
 
           self.copySectionAnim = new TimelineMax()
               .from($(pContainer).find(selectors.copySectionImage), .4, {y: '100%'})
+              .from(selectors.sectionHeadline, .4, {opacity: 0, y: '20px'}, '-=0.3');
+
 
           self.sectionScene = new ScrollMagic.Scene({
             triggerElement: pContainer,
@@ -146,8 +150,6 @@
           })
           .setTween(self.copySectionAnim)
           .addTo(self.animCtrl);
-
-        }, 300); 
 
       })
 

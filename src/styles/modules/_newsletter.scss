@@ -10,6 +10,7 @@
   will-change: clip-path; 
   transform: translateZ(1px);
   transform: translate3d(0, 0, 0);
+  z-index: 30; 
 
   .copySection-inner {
 

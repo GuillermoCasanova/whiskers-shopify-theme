@@ -1,16 +1,16 @@
 
-<section class="copySection  copySection--right  whiskersIntro  section--lead"  data-section-type="whiskers_intro">
+<section class="copySection  copySection--right  whiskersIntro  section--lead"  data-section-type="whiskers_intro" data-intro-section >
   <div class="row small-collapse">
     <div class="small-12 medium-11 large-10  medium-centered columns [ grid  grid--justifyCenter ]">
       <div class="copySection-inner"  data-stellar-offset-parent="true"  data-stellar-vertical-offset="25">
-    
-       <svg class="copySection-accent  whiskerIcon"  style="fill: #c11e37;"  data-accent  data-index="1">
-          <use xlink:href="#icon--ice_cream"/>
+        
+        <svg class="copySection-accent  whiskerIcon"  style="fill: pink;" data-accent  data-index="0">
+          <use xlink:href="#icon--dolphin"/>
 
         </svg>
 
-       <svg class="copySection-accent  whiskerIcon"  style="fill: pink;" data-accent  data-index="0">
-          <use xlink:href="#icon--dolphin"/>
+       <svg class="copySection-accent  whiskerIcon"  style="fill: #c11e37;"  data-accent  data-index="1">
+          <use xlink:href="#icon--ice_cream"/>
 
         </svg>
 
@@ -62,28 +62,32 @@
               
                  <div class="shoeShowcase-slides  [ grid  grid--justifyCenter grid--center ]" >
                    <a href="/collections/striped/products/crimson-white"  rel="internal"  title="View Pink, Blue & White Braided" class="shoeShowcase-slide" data-slide  data-index="0">
-                      <img data-src="{{'transparent_shoe1.png' | asset_url}}" 
-                     alt="Whiskers Crimson & White Lace on Brown Shoe"  
+                      <img data-src="{{'transparent_shoe3.png' | asset_url}}" 
+                       src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                     alt="Whiskers Crimson & White Shoe Lace on Brown Shoe"  
                      width="420" class="lazyload">
                      <span class="shoeShowcase-slide-name">
-                       Pink, Blue & White Braided
+                       Crimson Red & White
                      </span>
                    </a>
-                    <a href="/collections/striped/products/crimson-white" rel="internal" title="View Crimson & White" class="shoeShowcase-slide" data-slide  data-index="1">
-                        <img data-src="{{'transparent_shoe2.png' | asset_url}}" 
-                                           alt="Whiskers Crimson & White Lace on Brown Shoe" 
-                                           width="420" class="lazyload">
-                        <span class="shoeShowcase-slide-name">
-                       Crimson & White Striped
-                        </span>
+
+                    <a href="/collections/diamond-weave/products/pink-blue-white-braided" rel="internal" title="View Crimson & White" class="shoeShowcase-slide" data-slide  data-index="1">
+                      <img data-src="{{'transparent_shoe1.png' | asset_url}}" 
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                                         alt="Whiskers Pink, Blue & White Braided Shoe Lace on Brown Shoe" 
+                                         width="420" class="lazyload">
+                      <span class="shoeShowcase-slide-name">
+                      Pink, Blue & White Braided
+                      </span>
                     </a>
 
                     <a href="/collections/ticked/products/purple-white-ticked" rel="internal" title="View Purple Ticked" class="shoeShowcase-slide" data-slide  data-index="2">
-                      <img data-src="{{'transparent_shoe3.png' | asset_url}}" 
-                     alt="Whiskers Purple Ticked Lace on Brown Shoe" 
+                      <img data-src="{{'transparent_shoe2.png' | asset_url}}" 
+                      src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                     alt="Whiskers Purple Ticked Shoe Lace on Brown Shoe" 
                      width="420" class="lazyload">
                      <span class="shoeShowcase-slide-name">
-                       Purple Ticked
+                        Purple Ticked
                      </span>
                     </a>
                  </div>
@@ -122,3 +126,84 @@
     ]
   }
 {% endschema %}
+
+
+{% javascript %}
+//<script>
+  
+  function introSection(pContainer) {
+
+    var selectors = {
+      copySectionImage: '[data-copy-section-image]',
+      sectionHeadline: '[data-intro-headline]',
+      shoeSlideshow: '[data-shoe-slideshow]',
+      shoeSlideshowSlides: '[data-slide]',
+      accents: '[data-accent]'      
+    };
+
+    var initShoeSlideshow = function(pContainer) { 
+
+      this.$container = $(pContainer); 
+      var slides = this.$container.find(selectors.shoeSlideshowSlides); 
+      var accents = this.$container.find(selectors.accents); 
+      var activeSlide = 0; 
+      var slideTotal = slides.length;
+
+      var setActiveSlide = function(pId, pSlides, pAccents) {
+
+        pSlides.each(function() {
+          var slide = $(this); 
+          var index = slide.data('index');
+
+          if(index == activeSlide) {
+            slide.addClass('is-active');
+            slide.removeClass('is-hidden');
+          } else {
+            slide.removeClass('is-active');
+            slide.addClass('is-hidden');
+          }
+        });   
+
+
+        pAccents.each(function() {
+          var elem = $(this); 
+          var index = elem.data('index');
+
+          if(index == activeSlide) {
+            elem.addClass('is-active');
+            elem.removeClass('is-hidden');
+          } else {
+            elem.removeClass('is-active');
+            elem.addClass('is-hidden');
+          }
+        }); 
+
+      }; 
+      
+      setActiveSlide(0, slides, accents); 
+
+      setInterval(function() {
+        activeSlide = activeSlide + 1; 
+        if(activeSlide > slideTotal - 1) {
+          activeSlide = 0;
+        }
+        setActiveSlide(activeSlide, slides, accents); 
+      }, 3000); 
+
+    };
+
+
+
+    $(pContainer).imagesLoaded().done(function() {
+      initShoeSlideshow(pContainer); 
+    }); 
+    
+
+  };
+
+
+  introSection('[data-intro-section ]'); 
+
+
+//</script>   
+{% endjavascript %}

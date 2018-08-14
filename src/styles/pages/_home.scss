@@ -128,7 +128,8 @@
         &.is-hidden {
           pointer-events: none; 
           img {
-            display: none; 
+            visibility: hidden; 
+            position: absolute;
           }
           img,
           .shoeShowcase-slide-name {
@@ -139,7 +140,8 @@
         &.is-active {
           pointer-events: inherit; 
           img {
-            display: block; 
+            visibility: visible; 
+            position: relative;
           }
           img,
           .shoeShowcase-slide-name {
@@ -149,6 +151,18 @@
 
         img {
           transform: rotate(-8deg);
+          transition: all .6s cubic-bezier(0.23, 1, 0.32, 1); 
+          opacity: 0; 
+
+          &.lazyload,
+          &.lazyloading {
+            opacity: 0; 
+          }
+
+          &.lazyloaded {
+            opacity: 1; 
+          }
+
           @include media-query($medium-up) {
             transition: transform .3s cubic-bezier(0.23, 1, 0.32, 1); 
             transform: rotate(-8deg) scale(1.2) translateY(0);

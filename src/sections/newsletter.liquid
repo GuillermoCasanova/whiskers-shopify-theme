@@ -107,7 +107,7 @@
 
         self.newsletterAnim = new TimelineMax()
             .to(selectors.newsletter, .8, {clipPath: 'polygon(0 0, 100% 0%, 100% 100%, 0% 100%)'})
-            .from(selectors.newsletterInner, .3, {opacity: 0}); 
+            .from(selectors.newsletterInner, .3, {opacity: 0}, '+=0.2'); 
 
         self.sectionScene = new ScrollMagic.Scene({
             triggerElement: pContainer,

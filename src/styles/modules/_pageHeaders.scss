@@ -69,12 +69,16 @@
     text-transform: capitalize;
     font-family: $tertiary-font-family; 
     visibility: hidden;  
-    max-width: rem-calc(300px); 
+    max-width: 15.25rem; 
     will-change: transform; 
+    padding-left: rem-calc($level4); 
     @include text-kilo();
 
     @include media-query($medium-up) {
+      padding-left: 0; 
+      max-width: rem-calc(300px); 
       margin-left: 7%; 
+      margin-bottom: rem-calc($level3); 
       @include text-giga();
     }
   }
