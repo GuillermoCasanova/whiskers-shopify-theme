@@ -5,7 +5,26 @@
       <div class="lookbookArt">
         <h1 class="lookbookArt-headline  text-center" data-headline>Give yourself <br>a lacelift</h1>
         <div class="lookbookArt-img">
-          <img src="{{'lookbook-artShot1.jpg' | asset_url }}" alt="Whiskers Laces Artshot With Pink Skull" data-image>
+
+         <picture>
+            
+          <source media="(min-width: 1024px)"
+                  srcset="{{'lookbook-artShot1--large.png' | asset_url}}">
+        
+          <source media="(min-width: 640px)  and (max-width: 1023px)"
+                  srcset="{{'lookbook-artShot1--medium.png' | asset_url}}">
+
+
+          <source media="(min-width: 0) and (max-width: 639px)"
+                  srcset="{{'lookbook-artShot1--small.png' | asset_url}}">
+
+          <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+               data-sizes="auto" 
+               alt="Whiskers Laces Artshot With Pink Skull" 
+               data-image
+               >
+        </picture>       
+
         </div>
         <p class="lookbookArt-paragraph text-center" data-body>
           Colorful laces won’t change your life. But they will change your shoes. And let’s be honest, you gotta start somewhere.

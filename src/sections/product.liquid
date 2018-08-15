@@ -122,49 +122,51 @@
                           <form action="/cart/add" method="post" enctype="multipart/form-data"
                                 id="AddToCartForm--{{ section.id }}">
 
-                            <div class="product-variants">
-
-                              {% unless product.has_only_default_variant %}
-                                {% for option in product.options_with_values %}
-                                  <div class="selector-wrapper js">
-                                    <label for="SingleOptionSelector-{{ forloop.index0 }}" class="grid-cell  grid-cell--autoSize">
-                                      {{ option.name }}
-                                    </label>
+                            <div class="grid grid--center  grid--flexDirectionColumn  med-grid--flexDirectionRow">
+                              <div class="product-variants">
                               
-                                    <select
-                                      id="SingleOptionSelector-{{ forloop.index0 }}"
-                                      data-single-option-selector
-                                      data-index="option{{ option.position }}"
-                                      class="select--primary  select--medium">
-                                      {% for value in option.values %}
-                                        <option
-                                          value="{{ value | escape }}"
-                                          {% if option.selected_value == value %}selected="selected"{% endif %}>
-                                            {{ value }}
-                                        </option>
-                                      {% endfor %}
-                                    </select>
-                                  </div>
-                                {% endfor %}
-                              {% endunless %}
+                                {% unless product.has_only_default_variant %}
+                                  {% for option in product.options_with_values %}
+                                    <div class="selector-wrapper js">
+                                      <label for="SingleOptionSelector-{{ forloop.index0 }}" class="grid-cell  grid-cell--autoSize">
+                                        {{ option.name }}
+                                      </label>
+                                
+                                      <div class="select  select--primary  select--small">
+                                        <select
+                                          id="SingleOptionSelector-{{ forloop.index0 }}"
+                                          data-single-option-selector
+                                          data-index="option{{ option.position }}">
+                                          {% for value in option.values %}
+                                            <option
+                                              value="{{ value | escape }}"
+                                              {% if option.selected_value == value %}selected="selected"{% endif %}>
+                                                {{ value }}
+                                            </option>
+                                          {% endfor %}
+                                        </select>
+                                      </div>
+                                    </div>
+                                  {% endfor %}
+                                {% endunless %}
+                                <select name="id" class="no-js" data-product-select>
+                                  {% for variant in product.variants %}
+                                    <option
+                                      {% if variant == current_variant %}selected="selected"{% endif %}
+                                      {% unless variant.available %}disabled="disabled"{% endunless %}
+                                      value="{{ variant.id }}">
+                                        {{ variant.title }}
+                                    </option>
+                                  {% endfor %}
+                                </select>
+                              </div>
                               
-                              <select name="id" class="no-js" data-product-select>
-                                {% for variant in product.variants %}
-                                  <option
-                                    {% if variant == current_variant %}selected="selected"{% endif %}
-                                    {% unless variant.available %}disabled="disabled"{% endunless %}
-                                    value="{{ variant.id }}">
-                                      {{ variant.title }}
-                                  </option>
-                                {% endfor %}
-                              </select>
+                              <div class="product-qty  grid  grid--center  med-grid--flexDirectionColumn  med-grid--top">
+                                <label for="Quantity">QTY.</label>
+                                <!--<label for="Quantity">{{ 'products.product.quantity' | t }}</label> -->
+                                <input type="number" id="Quantity" name="quantity" value="1" min="1" class="input--small" >
+                              </div>
                             </div>
-
-                           <div class="product-qty  grid  grid--center">
-                            <label for="Quantity">QTY.</label>
-                            <!--<label for="Quantity">{{ 'products.product.quantity' | t }}</label> -->
-                            <input type="number" id="Quantity" name="quantity" value="1" min="1" class="input--small" >
-                          </div>
                         
                             <button
                               type="submit"

@@ -218,7 +218,8 @@
     .product-actions {
       
       .product-variants {
-        
+        width: 100%; 
+
         label {
           color: $quintenaryColor; 
           font-weight: bold; 
@@ -228,7 +229,7 @@
           @include text-micro(); 
         }
 
-        select {
+        .select {
           max-width: rem-calc(270px); 
         }
       }
@@ -237,7 +238,6 @@
       .product-qty {
         position: relative;
         width: 100%; 
-        max-width: rem-calc(90px); 
         margin-bottom: rem-calc($level4); 
         
         label,
@@ -249,6 +249,14 @@
           color: $quintenaryColor; 
           font-weight: bold; 
           @include text-micro(); 
+
+          @include media-query($medium-up) {
+            display: block;
+            text-align: left; 
+            width: 100%; 
+            margin-bottom: rem-calc($level2); 
+            margin-left: rem-calc($level2);
+          }
         }
         
         input {
@@ -263,6 +271,10 @@
           color: #fff; 
           transition: all .3s cubic-bezier(0.23, 1, 0.32, 1); 
           @include h4();
+
+          @include media-query($medium-up) {
+            margin-left: rem-calc($level2);
+          }
 
           &:active,
           &:focus {
