@@ -26,6 +26,7 @@ theme.Header = (function() {
 
   var Header = function(container) {
 
+    console.log(this); 
     this.$container = $(container); 
     var $container = (this.$container = $(container));
 

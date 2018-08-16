@@ -11,7 +11,7 @@
 
 
 .product {
-  margin-top: 4.5rem;
+  margin-top: 2.5rem;
   max-width: rem-calc(580px);
   margin-right: auto; 
   margin-left: auto; 
@@ -73,7 +73,6 @@
 
     .product-photoSlideshow {
       margin-bottom: rem-calc($level4);   
-      background-color: $secondaryColor;
 
       img {
         opacity: 0; 

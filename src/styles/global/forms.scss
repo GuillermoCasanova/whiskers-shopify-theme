@@ -96,7 +96,39 @@ select::-ms-expand {
 
 
 .select--secondary {
-  border: 3px solid $secondaryColor; 
+  position: relative;
+  margin-bottom: rem-calc($base-magic-number); 
+  
+  &:after {
+    content: " "; 
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    top: 0;
+    margin: auto;
+    right: rem-calc($level2);
+    bottom: 0;
+    border-top: 8px solid #fff;
+    border-right: 8px solid transparent;
+    border-left: 8px solid transparent;
+  }
+
+  select {
+    border: 3px solid $secondaryColor; 
+    position: relative;
+    margin-bottom: 0; 
+    
+    &:active, 
+    &:focus {
+     border: 3px solid #fff; 
+
+     &:after {
+      transform: scaleY(-1); 
+     }
+    }
+
+  }
+
 }
 
 
@@ -111,7 +143,6 @@ select::-ms-expand {
 
 
 .select--medium {
-
   select {
     padding: rem-calc($level2); 
   }

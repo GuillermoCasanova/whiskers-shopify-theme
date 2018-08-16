@@ -13,10 +13,17 @@
 	background-color: $accentColor;
 	position: fixed;
 	padding: rem-calc($level1); 
-  z-index: 35; 
+  z-index: 109; 
   font-family: $secondary-font-family;
 	transform: translateY(100%); 
-	animation: enter-promo-tab .3s cubic-bezier(0.23, 1, 0.32, 1) forwards 2s; 
+
+	&.is-showing {
+		animation: enter-promo-tab .3s cubic-bezier(0.23, 1, 0.32, 1) forwards; 
+	}
+
+	&.is-hidden {
+		animation: leave-promo-tab .2s cubic-bezier(0.23, 1, 0.32, 1) forwards; 
+	}
 
 	.specialPromoTab-inner {
 		text-align: center; 
@@ -28,8 +35,17 @@
 
 	 	p {
 	 	 	margin-bottom: 0; 
- 	  		color: $secondaryColor; 
-	 	 }
+	 	 	padding-right: rem-calc($level4); 
+	 	 	padding-left: rem-calc($level4); 
+ 	  	color: $secondaryColor; 
+ 	  	max-width: rem-calc(435px); 
+ 	  	margin-right: auto;
+    	margin-left: auto;
+			
+			@include media-query($medium-up) {
+				max-width: 100%;
+			}
+	 	}
 	}
 
 	.specialPromoTab-close {
@@ -37,9 +53,15 @@
     text-align: center; 
   	height: .6rem;
   	width: 1rem;  
-  	position: absolue;
-  	right: 0; 
-  	top: 0; 
+  	position: absolute;
+  	right: rem-calc($level2); 
+  	top: rem-calc(25px); 
+		transform: rotate(45deg); 
+    transition: all .2s cubic-bezier(0.23, 1, 0.32, 1); 
+
+    @include media-query($medium-up) {
+    	top: rem-calc(14px); 
+    }
 
     &:after,
     &:before {
@@ -54,7 +76,12 @@
     }
 
     &:after {
-      top: 70%;
+    	transform: rotate(90deg); 
+    }
+
+    &:hover, 
+    &:focus {
+    	transform: rotate(90deg); 
     }
 	}
 }
@@ -70,4 +97,15 @@
 	}
 }
 
+
+@keyframes leave-promo-tab {
+
+	0%{
+		transform: translateY(0); 
+	}
+
+	100% {
+		transform: translateY(100%); 
+	}
+}
 

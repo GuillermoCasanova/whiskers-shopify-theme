@@ -17,11 +17,13 @@
       </ul>
     </div>
     <div class="hide-for-medium-up">
-      <select class="select--secondary  select--medium" name="NavigateTo" data-collection-nav-select>
-        {% for link in linklists[section.settings.collection_nav].links %}
-          <option value="{{ link.url }}">{{ link.title}}</option>
-        {% endfor %}
-      </select>
+      <div class="select--secondary select--medium">
+        <select name="NavigateTo" data-collection-nav-select>
+          {% for link in linklists[section.settings.collection_nav].links %}
+            <option value="{{ link.url }}">{{ link.title}}</option>
+          {% endfor %}
+        </select>
+      </div>
     </div>
   </div>
 </div>

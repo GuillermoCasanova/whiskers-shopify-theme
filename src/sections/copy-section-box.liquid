@@ -1,12 +1,12 @@
 
-<section class="copySection  copySection--right  aboutBoxes" data-section-id="{{section.id}}" data-section-type="copy_section" data-copy-section-box> 
-  <div class="row small-collapse">
+<section class="copySection  copySection--right  aboutBoxes" data-section-id="{{section.id}}" data-section-type="copy_section"> 
+  <div class="row small-collapse" data-copy-section-box>
     <div class="small-12 medium-11 large-9  medium-centered columns [ grid  grid--justifyCenter ]">
 
-      <div class="copySection-inner"  data-stellar-offset-parent="true" data-stellar-vertical-offset="25">
-
-        <div class="copySection-accent"  data-stellar-ratio="1.5">
-        </div>  
+      <div class="copySection-inner"  data-stellar-offset-parent="true" data-stellar-vertical-offset="25"  >
+<!-- 
+        <div class="copySection-accent"  data-stellar-ratio="1.5" >
+        </div>   -->
 
         <div class="row [ grid  grid--flexDirectionColumn  med-grid--flexDirectionRow grid--center ]">
         
@@ -18,18 +18,19 @@
                   
                   <div class="copySection-copy"  data-stellar-ratio="1.2" >
               
-                    <div data-box-headline>
-                         <h1 class="headline  copySection-headline  copySection-headline--secondary">
+                    <div >
+                    
+                     <h1 class="headline  copySection-headline  copySection-headline--secondary" data-headline>
                       {{section.settings.title}}
                      </h1>
                      
-                      <p class="copySection-body">
+                      <div class="copySection-body" data-body>
                         {{section.settings.description}}
-                      </p>
+                      </div>
                               
-                      <div class="row small-collapse">
+                      <div class="row small-collapse" >
                         <div class="small-12 columns">
-                        <a href="{{section.settings.cta}}" rel="internal" class="button--expanded  button button--primary button--small copySection-button" data-text="{{section.settings.cta_label}}">
+                        <a href="{{section.settings.cta}}" rel="internal" class="button--expanded  button button--primary button--small copySection-button" data-text="{{section.settings.cta_label}}" data-cta>
                         <span>{{section.settings.cta_label}}</span>
                         </a>
                         </div>
@@ -110,23 +111,30 @@
 
 {% javascript %}
   //<script>
-  
-    function copySectionBox(pContainer) {
+    
+
+  var CopySectionBox = {}; 
+
+  CopySectionBox.init = function(pContainer) {
 
       var selectors = {
         copySectionImage: '[data-copy-section-image]',
-        sectionHeadline: '[data-box-headline]'
+        headline: '[data-headline]',
+        paragraph: '[data-body]',
+        cta: '[data-cta]',
+        accents: '[data-accents]'
       } 
 
       var self = this; 
 
       this.animCtrl = null;
       this.sectionScene = null; 
+      this.$container = $(pContainer); 
 
       //
       // Waits for the section image toload with the imagesLoaded plugin 
       //
-      $(pContainer).imagesLoaded().done(function() {
+      self.$container.imagesLoaded().done(function() {
 
           //
           // Defining the animation controller with ScrollMagic 
@@ -136,11 +144,13 @@
           //
           // Creating the animation tween with TweenMax
           //
-          TweenMax.set(selectors.copySectionImage, {autoAlpha: 1});
+          TweenMax.set(self.$container.find(selectors.copySectionImage), {autoAlpha: 1});
 
           self.copySectionAnim = new TimelineMax()
-              .from($(pContainer).find(selectors.copySectionImage), .4, {y: '100%'})
-              .from(selectors.sectionHeadline, .4, {opacity: 0, y: '20px'}, '-=0.3');
+            .from(self.$container.find(selectors.copySectionImage), .4, {y: '100%'})
+            .from(self.$container.find(selectors.headline), .2, {y: '12px', opacity: 0}, .1)
+            .from(self.$container.find(selectors.paragraph), .2, {y: '12px', opacity: 0}, '-=.1')
+            .from(self.$container.find(selectors.cta), .2, {y: '12px', opacity: 0}, '-=.1');
 
 
           self.sectionScene = new ScrollMagic.Scene({
@@ -153,9 +163,10 @@
 
       })
 
-    }
+  }
 
-    copySectionBox('[data-copy-section-box]'); 
+  CopySectionBox.init('[data-copy-section-box]'); 
+
 
   //</script>
 {% endjavascript %}

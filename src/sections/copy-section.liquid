@@ -4,7 +4,6 @@
     <div class="small-12 medium-11 large-10  medium-centered columns [ grid  grid--justifyCenter ]">
       <div class="copySection-inner"  data-stellar-offset-parent="true"  data-stellar-vertical-offset="25">
  
-
         <svg class="copySection-accent  whiskerIcon"  style="fill: #d80a2a;"  data-accent  data-index="0">
           <use xlink:href="#icon--pepper"/>
 
@@ -27,11 +26,11 @@
                   <div class="copySection-copy"
                        data-stellar-ratio="1.2">
               
-                    <h1 class="headline  copySection-headline ">
+                    <h1 class="headline  copySection-headline " data-headline>
                       {{ section.settings.title | escape }}
                     </h1>
                           
-                    <div class="copySection-body">
+                    <div class="copySection-body"  data-body>
                       {{ section.settings.column_richtext }}
                     </div>
         
@@ -41,15 +40,10 @@
             
                 <div class="small-12 columns medium-6  hide-for-medium-up">
                   <div class="copySection-imageContainer">
-                    <div class="shoeShowcase-slideshow grid  grid--justifyCenter"> 
-                    
-                       <div class="shoeShowcase-slides">
-                            <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{'transparent_shoe1.png'  | asset_url }}"  data-size="auto"
-                              alt="Shoe with Whiskers Lace" 
-                              class="shoeShowcase-slide" 
-                              width="420">
-                       </div>
-                    </div>
+                      <img data-src="{{'transparent_shoe3.png' | asset_url}}" 
+                       src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                     alt="Whiskers Crimson & White Shoe Lace on Brown Shoe"  
+                     width="420" class="lazyload">
                   </div>
                 </div>
               </div>
@@ -132,21 +126,28 @@
 {% javascript %}
 //<script>
   
-  function introSection(pContainer) {
+
+  var ShoeShowcase = {}; 
+
+  ShoeShowcase.init =  function(pContainer) {
 
     var selectors = {
       copySectionImage: '[data-copy-section-image]',
       sectionHeadline: '[data-intro-headline]',
       shoeSlideshow: '[data-shoe-slideshow]',
       shoeSlideshowSlides: '[data-slide]',
-      accents: '[data-accent]'      
+      accents: '[data-accent]',
+      headline: '[data-headline]',
+      paragraph: '[data-body]'
     };
+
+    this.$container = $(pContainer); 
+    var self = this; 
 
     var initShoeSlideshow = function(pContainer) { 
 
-      this.$container = $(pContainer); 
-      var slides = this.$container.find(selectors.shoeSlideshowSlides); 
-      var accents = this.$container.find(selectors.accents); 
+      var slides = self.$container.find(selectors.shoeSlideshowSlides); 
+      var accents = self.$container.find(selectors.accents); 
       var activeSlide = 0; 
       var slideTotal = slides.length;
 
@@ -194,17 +195,41 @@
     };
 
 
-
     $(pContainer).imagesLoaded().done(function() {
-      initShoeSlideshow(pContainer); 
+
+
+      //
+      // Defining the animation controller with ScrollMagic 
+      //        
+      self.animCtrl = new ScrollMagic.Controller(); 
+
+      //
+      // Creating the animation tween with TweenMax
+      //
+      TweenMax.set(self.$container.find(selectors.copySectionImage) , {autoAlpha: 1});
+
+      self.copySectionAnim = new TimelineMax()
+        .from(self.$container.find(selectors.copySectionImage), .4, {y: '100%'})
+        .from(self.$container.find(selectors.headline), .2, {y: '12px', opacity: 0}, .1)
+        .from(self.$container.find(selectors.paragraph), .2, {y: '12px', opacity: 0}, '-=.1');
+
+
+      self.sectionScene = new ScrollMagic.Scene({
+        triggerElement: pContainer,
+        triggerHook: 'onCenter',
+        reverse: false
+      })
+      .setTween(self.copySectionAnim)
+      .addTo(self.animCtrl)
+      .on('start', function() {
+        initShoeSlideshow(pContainer); 
+      });
+      
     }); 
-    
 
   };
 
-
-  introSection('[data-intro-section ]'); 
-
+  ShoeShowcase.init('[data-intro-section ]'); 
 
 //</script>   
 {% endjavascript %}

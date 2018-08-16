@@ -106,6 +106,7 @@
     font-weight: bold; 
     margin-right: auto;
     margin-left: auto; 
+    visibility: hidden; 
     @include text-kilo(); 
 
     @include media-query($medium-up) {
@@ -114,6 +115,10 @@
     
     @include media-query($large-up) {
       @include text-giga(); 
+    }
+
+    .button {
+      visibility: hidden; 
     }
   }
 

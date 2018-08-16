@@ -12,7 +12,10 @@ theme.heroHeader = (function() {
   var selectors = {
     slideshow: '[data-slideshow]',
     slides: '[data-slide]',
-    accents: '[data-accent]'
+    accents: '[data-accent]',
+    headline: '[data-headline]',
+    paragraph: '[data-body]',
+    cta: '[data-cta]'
   };
 
   var heroHeader = function(container) { 
@@ -29,6 +32,14 @@ theme.heroHeader = (function() {
 
       var self = this; 
 
+      TweenMax.set(self.$container.find(selectors.headline) , {autoAlpha: 1});
+      TweenMax.set(self.$container.find(selectors.cta) , {autoAlpha: 1});
+
+      var copySectionAnim = new TimelineMax()
+      .from(self.$container.find(selectors.headline), .2, {y: '20px', opacity: 0}, '+=.8')
+      .from(self.$container.find(selectors.cta), .2, {y: '20px', opacity: 0}, '-=.1');
+
+      copySectionAnim.play(); 
 
       var setActiveSlide = function(pId, pSlides, pAccents) {
       
@@ -105,6 +116,7 @@ theme.heroHeader = (function() {
     $(window).resize(function() {
       setTimeout(function() {
         this.loadSlideshow();
+
       }, 200); 
     }); 
 

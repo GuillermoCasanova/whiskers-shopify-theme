@@ -13,7 +13,6 @@ window.theme = window.theme || {};
 // =require slate/variants.js
 
 /*================ Sections ================*/
-// =require sections/aboutLaces.js
 // =require sections/ajaxCart.js
 // =require sections/collection-nav.js
 // =require sections/product.js
@@ -36,8 +35,11 @@ $(document).ready(function() {
   sections.register('header', theme.Header);
   sections.register('collection_nav', theme.collectionNav);
   sections.register('hero_header', theme.heroHeader);
-  sections.register('about_laces', theme.aboutLaces);
   sections.register('lacing_guide', theme.lacingGuide);
+  sections.register('about_laces', theme.CopySectionAlt);
+  sections.register('copy_section', theme.CopySectionBox);
+
+
 
   // Common a11y fixes
   slate.a11y.pageLinkFocus($(window.location.hash));

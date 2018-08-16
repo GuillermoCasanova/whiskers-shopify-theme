@@ -1,23 +1,25 @@
 
-<section class="copySection  copySection--left  aboutLaces" data-section-type="about_laces" data-copy-section> 
-  <div class="row small-collapse">
+<section class="copySection  copySection--left  aboutLaces" data-section-type="about_laces" data-section-id="{{section.id}}"> 
+  <div class="row small-collapse" data-copy-section>
     <div class="small-12 medium-11 large-9  medium-centered columns [ grid  grid--justifyCenter ]">
-      <div class="copySection-inner"  data-stellar-offset-parent="true"  data-stellar-vertical-offset="25">
+      <div class="copySection-inner"  data-stellar-offset-parent="true"  data-stellar-vertical-offset="25" >
 
+      <div  data-accent-container>
         <svg class="copySection-accent  whiskerIcon"  style="fill: yellow;"  data-accent  data-index="1">
           <use xlink:href="#icon--bolt"/>
-
+        
         </svg>
-
+        
         <svg class="copySection-accent  whiskerIcon"  style="fill: #946aea;" data-accent  data-index="0">
           <use xlink:href="#icon--bomb"/>
-
+        
         </svg>
-
+        
         <svg class="copySection-accent  whiskerIcon"  style="fill: #946aea;" data-accent  data-index="2">
           <use xlink:href="#icon--pineapple"/>
-
+        
         </svg>
+      </div>
 
         <div class="row  grid  grid--flexDirectionColumn  med-grid--flexDirectionRowReverse  grid--center">
         
@@ -29,27 +31,24 @@
                   
                   <div class="copySection-copy" data-stellar-ratio="1.2">
         
-                    <div data-about-lace-headline>
-                      <h1 class="headline  copySection-headline">
-                       {{section.settings.title}}
-                      </h1>
-                                      
-                       <div class="copySection-body">
-                       {{section.settings.description}}
+                    <h1 class="headline  copySection-headline" data-headline>
+                     {{section.settings.title}}
+                    </h1>
+                                    
+                     <div class="copySection-body" data-body>
+                     {{section.settings.description}}
+                     </div>
+                             
+                     <div class="row small-collapse">
+                                    
+                       <div class="small-12 columns">
+                                    
+                         <a href="{{section.settings.cta}}" rel="internal" class="button--expanded  button button--primary button--small copySection-button" data-text="{{section.settings.cta_label}}" data-cta>
+                         <span>{{section.settings.cta_label}}</span>
+                         </a>
                        </div>
-                               
-                       <div class="row small-collapse">
-                                      
-                         <div class="small-12 columns">
-                                      
-                           <a href="{{section.settings.cta}}" rel="internal" class="button--expanded  button button--primary button--small copySection-button" data-text="{{section.settings.cta_label}}">
-                           <span>{{section.settings.cta_label}}</span>
-                           </a>
-                         </div>
-                                      
-                       </div>
-                    </div>
-        
+                                    
+                     </div>
                   </div>
             
                 </div>
@@ -135,15 +134,23 @@
 
 {% javascript %}
   //<script>
+
+
+    var CopySectionAlt = {};
   
-    function copySection(pContainer) {
+    CopySectionAlt.init = function(pContainer) {
+
+      console.log(this); 
 
       var selectors = {
         copySectionImage: '[data-copy-section-image]',
-        sectionHeadline: '[data-about-lace-headline]',
         aboutSlideshow: '[data-about-lace-slideshow]',
         aboutSlides: '[data-slide]',
-        accents: '[data-accent]'       
+        accents: '[data-accent]',
+        accentsContainer: '[data-accents]',
+        headline: '[data-headline]',
+        paragraph: '[data-body]',
+        cta: '[data-cta]',
       };
 
       var self = this; 
@@ -208,7 +215,7 @@
       //
       // Waits for the section image to load with the imagesLoaded plugin 
       //
-      $(pContainer).imagesLoaded().done(function() {
+      self.$container.imagesLoaded().done(function() {
 
           //
           // Defining the animation controller with ScrollMagic 
@@ -218,11 +225,15 @@
           //
           // Creating the animation tween with TweenMax
           //
-          TweenMax.set(selectors.copySectionImage, {autoAlpha: 1});
+          TweenMax.set(self.$container.find(selectors.copySectionImage) , {autoAlpha: 1});
 
           self.copySectionAnim = new TimelineMax()
-              .from($(pContainer).find(selectors.copySectionImage), .4, {y: '100%'})
-              .from(selectors.sectionHeadline, .4, {opacity: 0, y: '20px'}, '-=0.3');
+            .from(self.$container.find(selectors.copySectionImage), .4, {y: '100%'})
+            .from(self.$container.find(selectors.headline), .2, {y: '12px', opacity: 0}, .1)
+            .from(self.$container.find(selectors.paragraph), .2, {y: '12px', opacity: 0}, '-=.1')
+            .from(self.$container.find(selectors.cta), .2, {y: '12px', opacity: 0}, '-=.1')
+            .from(self.$container.find(selectors.accentsContainer), .1, {opacity: 0}, '-=.1');
+
 
           self.sectionScene = new ScrollMagic.Scene({
             triggerElement: pContainer,
@@ -232,16 +243,14 @@
           .setTween(self.copySectionAnim)
           .addTo(self.animCtrl)
           .on('start', function() {
-
             initSlideshow(); 
-
           });
 
       })
 
     }
 
-    copySection('[data-copy-section]'); 
+    CopySectionAlt.init('[data-copy-section]'); 
 
   //</script>
 {% endjavascript %}

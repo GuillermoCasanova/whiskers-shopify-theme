@@ -71,7 +71,8 @@
     visibility: hidden;  
     max-width: 15.25rem; 
     will-change: transform; 
-    padding-left: rem-calc($level4); 
+    padding-left: rem-calc($level3); 
+    margin-bottom: rem-calc($level2);
     @include text-kilo();
 
     @include media-query($medium-up) {

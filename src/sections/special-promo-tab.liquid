@@ -1,0 +1,49 @@
+ <aside class="specialPromoTab" role="alert" data-section-id="{{ section.id }}" data-section-type="special_promo_tab" data-special-promo-tab>
+    <div class="specialPromoTab-inner">
+      <p>{{settings.special_promo_text}}</p>
+    </div>
+    <button class="specialPromoTab-close" data-promo-tab-close>
+    </button>
+  </aside>
+
+
+{% javascript %}
+//<script> 
+
+function specialPromoTab(pContainer) {
+
+	var selectors = {
+		tab: pContainer,
+		tabClose: '[data-promo-tab-close]',
+	};
+
+
+	$tab = $(selectors.tab);
+	var self = this; 
+	var isScrolling = false;
+	var scrollThrottle = setInterval(function() {
+			isScrolling = true; 
+	}, 400);
+
+	$(pContainer).find(selectors.tabClose).on('click', function(event) {
+		event.preventDefault(); 
+		$tab.addClass('is-hidden'); 
+	}); 	
+
+
+	$(document).on('scroll', function() {
+		if(isScrolling) {
+			if($tab.offset().top > 1600) {
+				$tab.addClass('is-showing');
+			}
+		}
+		isScrolling = false; 
+	});
+};
+
+
+specialPromoTab('[data-special-promo-tab]');
+
+
+//</script> 
+{% endjavascript %}

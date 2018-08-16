@@ -34,6 +34,8 @@ theme.Product = (function() {
   function Product(container) {
     this.$container = $(container);
 
+    console.log(this); 
+    
     var $container = (this.$container = $(container));
     var sectionId = $container.attr('data-section-id');
     var slideshow = $container.find('[data-ui-component="product-photo-slideshow"]'); 

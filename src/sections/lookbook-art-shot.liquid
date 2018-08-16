@@ -3,9 +3,16 @@
   <div class="row">
     <div class="small-12  medium-11  large-10 medium-centered  columns">
       <div class="lookbookArt">
-        <h1 class="lookbookArt-headline  text-center" data-headline>Give yourself <br>a lacelift</h1>
-        <div class="lookbookArt-img">
 
+        <h1 class="lookbookArt-headline  text-center" data-headline>Give yourself <br>a lacelift</h1>
+        <div class="lookbookArt-icon" data-icon>
+          <svg class="whiskerIcon  whiskerIcon--pink">
+            <use xlink:href="#icon--bolt"/>
+
+          </svg>
+        </div> 	
+
+        <div class="lookbookArt-img">
          <picture>
             
           <source media="(min-width: 1024px)"
@@ -29,12 +36,10 @@
         <p class="lookbookArt-paragraph text-center" data-body>
           Colorful laces won’t change your life. But they will change your shoes. And let’s be honest, you gotta start somewhere.
         </p>
-        <div class="lookbookArt-icon" data-icon>
-          <svg class="whiskerIcon  whiskerIcon--pink">
-            <use xlink:href="#icon--bolt"/>
 
-          </svg>
-        </div>
+
+ 
+        
       </div>
     </div>
   </div>
@@ -64,11 +69,11 @@
 	    //
 	    this.sectionAnim  = new TimelineMax()
 	          .fromTo(self.$container.find(selectors.headline), animSpeed, {y: '20px', opacity: 0}, {y: '0', opacity: 1})
-	          .from(self.$container.find(selectors.image), animSpeed, {y: '100%'});
+	          .from(self.$container.find(selectors.icon), .1, {opacity: 0});
 
 	    this.sectionAnimSecondary = new TimelineMax() 
-	    			.from(self.$container.find(selectors.body), animSpeed, {y: '20px', opacity: 0}, '+=.2')
-	          .from(self.$container.find(selectors.icon), .1, {opacity: 0});
+	          .from(self.$container.find(selectors.image), animSpeed, {y: '100%'})
+	    			.from(self.$container.find(selectors.body), animSpeed, {y: '20px', opacity: 0}, '+=.2');
 
 			//
 			// Defining section scenes that will trigger animations
