@@ -122,10 +122,9 @@
                           <form action="/cart/add" method="post" enctype="multipart/form-data"
                                 id="AddToCartForm--{{ section.id }}">
 
-                            <div class="grid grid--center  grid--flexDirectionColumn  med-grid--flexDirectionRow">
+                            <div class="grid grid--center  grid--flexDirectionColumn  med-grid--flexDirectionRow  grid--flex-wrap">
+                              {% unless product.has_only_default_variant %}
                               <div class="product-variants">
-                              
-                                {% unless product.has_only_default_variant %}
                                   {% for option in product.options_with_values %}
                                     <div class="selector-wrapper js">
                                       <label for="SingleOptionSelector-{{ forloop.index0 }}" class="grid-cell  grid-cell--autoSize">
@@ -148,19 +147,20 @@
                                       </div>
                                     </div>
                                   {% endfor %}
-                                {% endunless %}
-                                <select name="id" class="no-js" data-product-select>
-                                  {% for variant in product.variants %}
-                                    <option
-                                      {% if variant == current_variant %}selected="selected"{% endif %}
-                                      {% unless variant.available %}disabled="disabled"{% endunless %}
-                                      value="{{ variant.id }}">
-                                        {{ variant.title }}
-                                    </option>
-                                  {% endfor %}
-                                </select>
                               </div>
-                              
+                              {% endunless %}
+
+                              <select name="id" class="no-js" data-product-select>
+                                {% for variant in product.variants %}
+                                  <option
+                                    {% if variant == current_variant %}selected="selected"{% endif %}
+                                    {% unless variant.available %}disabled="disabled"{% endunless %}
+                                    value="{{ variant.id }}">
+                                      {{ variant.title }}
+                                  </option>
+                                {% endfor %}
+                              </select>
+
                               <div class="product-qty  grid  grid--center  med-grid--flexDirectionColumn  med-grid--top">
                                 <label for="Quantity">QTY.</label>
                                 <!--<label for="Quantity">{{ 'products.product.quantity' | t }}</label> -->
@@ -173,7 +173,7 @@
                               name="add"
                               class="button  button--medium  button--expanded  button--primary product-buyBtn"
                               data-add-to-cart
-                              id="AddToCart--{{ section.id }}"
+                              id="AddToCart--{{section.id}}"
                               data-text="{{ 'products.product.add_to_cart' | t }}"
                               {% unless current_variant.available %}disabled="disabled"{% endunless %}>
                                 <span data-add-to-cart-text class="button-textState1">

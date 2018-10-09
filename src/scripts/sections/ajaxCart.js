@@ -193,6 +193,8 @@ var ajaxCart = (function(module, $) {
     Initialise the plugin and define global options
   ==============================================================================*/
   init = function(options) {
+
+
     // Default settings
     settings = {
       formSelector: 'form[action^="/cart/add"]',
@@ -205,8 +207,10 @@ var ajaxCart = (function(module, $) {
       enableQtySelectors: true
     };
 
+
     // Override defaults with arguments
     $.extend(settings, options);
+
 
     // Select DOM elements
     $formContainer = $(settings.formSelector);
@@ -215,7 +219,6 @@ var ajaxCart = (function(module, $) {
     $cartCountSelector = $(settings.cartCountSelector);
     $cartCostSelector = $(settings.cartCostSelector);
 
-    
     // General Selectors
     $body = $('body');
 
@@ -259,8 +262,6 @@ var ajaxCart = (function(module, $) {
   formOverride = function() {
     $formContainer.on('submit', function(evt) {
 
-      if(window.innerWidth > 640) {
-
         evt.preventDefault();
 
         // Add class to be styled if desired
@@ -274,7 +275,6 @@ var ajaxCart = (function(module, $) {
           itemAddedCallback,
           itemErrorCallback
         );
-      }  
 
     });
   };

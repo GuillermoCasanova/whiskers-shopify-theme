@@ -34,6 +34,16 @@
                     <li class="grid-cell">
                       {% if product.featured_image != blank %}
                         <a class="productThumb  {% unless product.available %}productThumb--soldOut{% endunless %}" href="{{ product.url | within: collection }}" data-product>
+
+
+                            <div class="productThumb-addToCart">
+                                <form action="/cart/add" method="post" id="AddToCartForm" data-thumb-add-to-cart-form enctype="multipart/form-data">   
+                                <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+                                  <button type="submit" name="add" id="AddToCart" class="AddToCart"  data-thumb-add-to-cart-btn>
+                                  {% include 'icon-cart' %}</button>
+                              </form>
+                            </div>
+
                           <div class="productThumb-inner">
                             <div class="productThumb-bg">
                               <img data-srcset="{{ product.featured_image.src | img_url: '360x360'}}" alt="{{product.featured_image.alt}}" class="lazyload" data-sizes="auto"  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="  data-product-img>
@@ -112,6 +122,22 @@
 </section>
 
 
+{% javascript %}
+    //
+    // Initializes the AJAX cart properties 
+    // <script>
+     ajaxCart.init({
+        formSelector: '[data-thumb-add-to-cart-form]',
+        cartContainer: '#CartContainer',
+        addToCartSelector: '[data-thumb-add-to-cart-btn]',
+        enableQtySelectors: true,
+        moneyFormat: theme.strings.moneyFormat
+    });
+
+  //</script>
+{% endjavascript %}
+
+
 {% schema %}
   {
     "name": "Featured Lace Collections",
@@ -139,3 +165,4 @@
   }
 
 {% endschema %}
+

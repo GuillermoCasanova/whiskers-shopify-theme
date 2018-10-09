@@ -33,8 +33,6 @@ theme.Product = (function() {
    */
   function Product(container) {
     this.$container = $(container);
-
-    console.log(this); 
     
     var $container = (this.$container = $(container));
     var sectionId = $container.attr('data-section-id');
@@ -158,17 +156,7 @@ theme.Product = (function() {
       this.$container.on('variantImageChange' + this.namespace, this.updateProductImage.bind(this));
     }
 
-    
-    //
-    // Initializes the AJAX cart properties 
-    // 
-     ajaxCart.init({
-          formSelector: '#AddToCartForm--' + sectionId,
-          cartContainer: '#CartContainer',
-          addToCartSelector: '#AddToCart--' + sectionId,
-          enableQtySelectors: true,
-          moneyFormat: theme.strings.moneyFormat
-    });
+    this.initAjaxCart(); 
   }
 
   Product.prototype = $.extend({}, Product.prototype, {
@@ -240,6 +228,18 @@ theme.Product = (function() {
      */
     onUnload: function() {
       this.$container.off(this.namespace);
+    },
+    /**
+     * Initializes the AJAX cart with product template properties  
+     */
+    initAjaxCart: function() {
+       ajaxCart.init({
+            formSelector: '#AddToCartForm--' + this.$container.attr('data-section-id'),
+            cartContainer: '#CartContainer',
+            addToCartSelector: '#AddToCart--' + this.$container.attr('data-section-id'),
+            enableQtySelectors: true,
+            moneyFormat: theme.strings.moneyFormat
+      });
     }
   });
 

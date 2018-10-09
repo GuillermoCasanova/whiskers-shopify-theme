@@ -27,11 +27,22 @@
                     <li class="grid-cell">
                       {% if product.featured_image != blank %}
                         <a class="productThumb  {% unless product.available %}productThumb--soldOut{% endunless %}" href="{{ product.url | within: collection }}" data-product>
+
+                             <div class="productThumb-addToCart">
+                                <form action="/cart/add" method="post" id="AddToCartForm"  enctype="multipart/form-data" data-thumb-add-to-cart-form>   
+                                <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+                                  <button type="submit" name="add" id="AddToCart" data-thumb-add-to-cart-btn>
+                                  {% include 'icon-cart' %}
+                                  </button>
+                              </form>
+                            </div>
+
                           <div class="productThumb-inner">
                             <div class="productThumb-bg">
                               <img data-srcset="{{ product.featured_image.src | img_url: '360x360'}}" alt="{{product.featured_image.alt}}" class="lazyload" data-sizes="auto"  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="  data-product-img>
                             </div>
                             <div class="productThumb-description text-center grid grid--center grid--justifySpaceBetween">
+
                               <h3 class="productThumb-title">{{ product.title }}</h3>
                               <div>
                                 {% if product.compare_at_price > product.price %}
@@ -97,3 +108,18 @@
     </div>
   </div>
   <!--Collection Ends--> 
+
+{% javascript %}
+    //
+    // Initializes the AJAX cart properties 
+    // <script>
+     ajaxCart.init({
+        formSelector: '[data-thumb-add-to-cart-form]',
+        cartContainer: '#CartContainer',
+        addToCartSelector: '[data-thumb-add-to-cart-btn]',
+        enableQtySelectors: true,
+        moneyFormat: theme.strings.moneyFormat
+    });
+
+  //</script>
+{% endjavascript %}

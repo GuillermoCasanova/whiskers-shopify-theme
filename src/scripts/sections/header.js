@@ -26,24 +26,11 @@ theme.Header = (function() {
 
   var Header = function(container) {
 
-    console.log(this); 
     this.$container = $(container); 
     var $container = (this.$container = $(container));
 
     this.template = $container.attr('data-template');
     var loadingSection = false; 
-
-    // ajaxCart.init will run from Product.prototype when on the product page
-    if (this.template.indexOf('product') === -1) {
-      ajaxCart.init({
-        formSelector: '.add-to-cart__form',
-        cartContainer: '#CartContainer',
-        addToCartSelector: '.add-to-cart',
-        enableQtySelectors: true,
-        moneyFormat: theme.strings.moneyFormat
-      });
-    };
-
 
     var toggleMenuContainerCSS = function() {
       if(offCanvasMenu.hasClass('is-open')) {

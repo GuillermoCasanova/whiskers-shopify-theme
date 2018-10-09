@@ -37,18 +37,26 @@
 .productThumb {
   margin-right: rem-calc($level2); 
   margin-bottom: rem-calc($level2); 
-  overflow: hidden;
   position: relative;
   display: block; 
+  overflow: hidden; 
 
   &:hover, 
   &:focus {
+
+    .productThumb-addToCart {
+      transform: scale(1) translateX(0); 
+    }
+
     .productThumb-description {
       transform: translateY(0); 
     }
   }
 
   .productThumb-inner {
+    overflow: hidden;
+    position: relative;
+    height: 100%; 
     width: 100%; 
   }
 
@@ -67,6 +75,57 @@
       right: 0;
       will-change: transform;  
     }
+  }
+  
+  .productThumb-addToCart {
+    position: absolute;
+    top: rem-calc($level2); 
+    right: rem-calc($level2); 
+    z-index: 2; 
+    transform: scale(1) translateX(140%);
+    transition: all .2s cubic-bezier(0.23, 1, 0.32, 1);
+
+    button,
+    .button {
+      height: rem-calc(50px); 
+      width: rem-calc(50px); 
+      background-color: transparent;
+      display: block;
+      margin-bottom: 0; 
+      margin-right: 0; 
+      color: $secondaryColor;
+      background-color: $secondaryColor;
+      padding: rem-calc($level1); 
+      border-radius: 100%; 
+      border: 2px solid $accentColor; 
+      transition: all .2s cubic-bezier(0.23, 1, 0.32, 1);
+      @include text-micro(); 
+
+      .icon-cart {
+        height: rem-calc(24px);
+        width: rem-calc(24px); 
+        position: absolute;
+        top: 0;
+        bottom: 0; 
+        right: 0; 
+        left: 0; 
+        margin: auto; 
+        fill: $tertiaryColor; 
+      }
+
+      &:hover, 
+      &:focus {
+        opacity: 1; 
+        border: 2px solid $accentColor; 
+        background-color: $accentColor;
+        transform: scale(1); 
+
+        .icon-cart {
+          fill: $secondaryColor; 
+        }
+      }
+    }
+
   }
 
   .productThumb-description {
