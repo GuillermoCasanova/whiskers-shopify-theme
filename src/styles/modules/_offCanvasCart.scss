@@ -39,6 +39,80 @@
 
 
 
+/*------------------------------------*\
+    #Cart Success Modal (small devices only)
+\*------------------------------------*/
+
+
+.cartSuccessModal {
+  position: fixed;
+  top: 4.55rem; 
+  right: rem-calc($level2); 
+  z-index: 10; 
+  transform: translateX(140%);
+  transition: all .2s cubic-bezier(0.23, 1, 0.32, 1);
+
+  &.is-showing {
+    transform: translateX(0);
+  }
+
+  .cartSuccessModal-cartTotal {
+    position: absolute;
+    top: -5px;
+    right: 0;
+    background-color: $lace-yellow;
+    height: rem-calc(24px);
+    width: rem-calc(24px);
+    display: block; 
+    text-align: center; 
+    border-radius: 100%;
+    color: $secondaryColor;
+    z-index: 20;
+  }
+
+
+  .cartSuccessModal-button {
+    height: 3.75rem;
+    width: 3.75rem;
+    display: block;
+    margin-bottom: 0; 
+    margin-right: 0; 
+    color: $secondaryColor;
+    background-color: $secondaryColor !important;  //Needed because YOTPO widget interferes
+    padding: rem-calc($level1); 
+    border-radius: 100%; 
+    border: 2px solid $accentColor; 
+    transition: all .2s cubic-bezier(0.23, 1, 0.32, 1);
+    @include text-micro(); 
+
+    .icon-cart {
+      height: rem-calc(28px);
+      width: rem-calc(28px); 
+      position: absolute;
+      top: 0;
+      bottom: 0; 
+      right: 0; 
+      left: 0; 
+      margin: auto; 
+      fill: $tertiaryColor; 
+    }
+
+    &:hover, 
+    &:focus {
+      opacity: 1; 
+      border: 2px solid $accentColor; 
+      background-color: $accentColor;
+      transform: scale(1); 
+
+      .icon-cart {
+        fill: $secondaryColor; 
+      }
+    }
+  }
+}
+
+
+
 
 
 /*------------------------------------*\

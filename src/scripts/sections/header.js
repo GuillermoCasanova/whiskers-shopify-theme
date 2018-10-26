@@ -13,7 +13,8 @@ theme.Header = (function() {
     menuToggle: '[data-menu-toggle]',
     dropDownToggle: '[data-drop-down-toggle]',
     menuContainer: '[data-menu]',
-    cartContainer: '[data-cart]'
+    cartContainer: '[data-cart]',
+    cartItemAddedSuccessModal: '[data-cart-item-added-success-modal]'
   };
 
    var offCanvasMenu = $(selectors.offCanvasMenu);
@@ -81,7 +82,6 @@ theme.Header = (function() {
       var currentTarget = $(event.currentTarget).data('target');
 
       if(loadingSection) {
-        console.log("NONO"); 
         return 
       }
 
@@ -199,6 +199,15 @@ theme.Header = (function() {
     cartContainer.addClass('is-showing');   
     openSection = 'cart';
     menuIsOpen = true;  
+  }; 
+
+  //
+  //Show display success cart modal global method 
+  //
+  Header.displaySuccessCartModal = function(cart) {
+    var $successModal = $(selectors.cartItemAddedSuccessModal); 
+    $successModal.find('[data-cart-total]').text(cart.item_count); 
+    $successModal.addClass('is-showing'); 
   }; 
 
   return Header;

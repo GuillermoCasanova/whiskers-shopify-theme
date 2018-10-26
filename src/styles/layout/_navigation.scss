@@ -239,7 +239,7 @@
     #Main Nav Off Canvas 
 \*------------------------------------*/
 
-.mainNav--offCanvas {
+.mainNavoffCanvas {
     background-color: $secondaryColor;
     height: 100vh;
     width: 100vw; 
@@ -286,6 +286,20 @@
     .mainNav-container {
       height: 100vh; 
       position: relative;
+
+      .mainNav-animElem {
+        opacity: 0; 
+        transform: translateY(12px); 
+        transition: all .4s cubic-bezier(0.23, 1, 0.32, 1); 
+        will-change: transform; 
+      }
+      
+      .mainNav-menuContainer.is-showing {
+        .mainNav-animElem {
+          opacity: 1; 
+          transform: translateY(0); 
+        }
+      }
     }
 
     .mainNav-menu {
@@ -293,6 +307,7 @@
       margin-left: 25%;
       margin-bottom: rem-calc($level4); 
       text-align: left; 
+
 
       @include media-query($medium-up) {
         margin-left: rem-calc($level5); 
@@ -336,8 +351,15 @@
       } 
 
       .mainNav-social-link {
-        color: #fff; 
+        color: $quaternaryColor; 
         display: block;
+        margin-right: rem-calc($level2); 
+        
+        svg {
+          width: rem-calc($level3); 
+          fill: $quaternaryColor; 
+          height: rem-calc($level3);
+        }
 
         &:hover,
         &:active,
@@ -431,21 +453,9 @@
     transform: translateZ(0);
     width: 100%; 
 
-    .mainNav-animElem {
-      opacity: 0; 
-      transform: translateY(12px); 
-      transition: all .4s cubic-bezier(0.23, 1, 0.32, 1); 
-      will-change: transform; 
-    }
-
     &.is-showing {
       z-index: 1; 
       opacity: 1;  
-    
-      .mainNav-animElem {
-        opacity: 1; 
-        transform: translateY(0); 
-      }
     }
   }
 

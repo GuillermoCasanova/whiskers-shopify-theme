@@ -48,7 +48,7 @@
 
 
       <!-- Off canvas navigation for small devices--> 
-      <aside class="mainNav--offCanvas"  data-off-canvas-menu>
+      <aside class="mainNavoffCanvas"  data-off-canvas-menu>
          <div class="mainNav-container    grid grid--flexDirectionColumn grid--justifySpaceBetween">
 
           <!-- Navigation/Menu items--> 
@@ -79,7 +79,7 @@
                   </li>
                 {% endif %}
               {% endfor %}
-              <li class="hide-for-medium-up">
+              <li class="hide-for-medium-up mainNav-animElem">
                 <a href="/cart"  rel="internal" class="cartToggle hide-for-medium-up">
                       Cart <span class="cartToggle-total">{{cart.item_count}}</span>
                  </a>
@@ -88,15 +88,16 @@
     
             <ul class="[ grid  grid--center  grid--justifyStart ]  [ mainNav-social mainNav-animElem ]">
                <li>
-                 <a href="https://www.instagram.com/humanaut.is/" target="_blank" class="mainNav-social-link   icon-instagram icon--medium  mr1">
-            
+                 <a href="https://www.instagram.com/whiskerslaces/" target="_blank" class="mainNav-social-link   icon-instagram">
+                    {% include 'icon-instagram' %}
                  </a> 
                </li>
                           
                <li>
-                 <a href="https://twitter.com/humanaut?lang=en" target="_blank" class="mainNav-social-link   icon-twitter icon--medium  ml1">
-            
+                 <a href="https://facebook.com/whiskerslaces" target="_blank" class="mainNav-social-link   icon-facebook">
+                    {% include 'icon-facebook' %}
                  </a>
+               </li>
             </ul>
 
             <div class="mainNav-tagline">
@@ -105,7 +106,7 @@
           </nav>
               
            <!--Cart Container--> 
-           <div data-cart  class="mainNav-cartContainer  grid  show-for-medium-up  grid--flexDirectionColumn grid--justifySpaceBetween">
+           <div data-cart  class="mainNav-cartContainer  [ grid  show-for-medium-up  grid--flexDirectionColumn grid--justifySpaceBetween ]">
               <div class="offCanvasCart">
                 <div class="offCanvasCart-loader">
                   <div class="loader"></div>
@@ -116,17 +117,28 @@
 
               </div>
            </div>
-           <!-- End Cart Container--> 
+           <!-- END Cart Container--> 
              
          </div>
 
       </aside>
-      <!--End off canvas navigation--> 
+      <!--END off canvas navigation--> 
 
     </nav>
 
   </header>
-  <!--End small devices navigation--> 
+  <!--END small devices navigation--> 
+    
+
+  <!-- Cart success modal, used for small devices--> 
+  <div class="cartSuccessModal  hide-for-medium-up" data-cart-item-added-success-modal>
+    <span class="cartSuccessModal-cartTotal" data-cart-total>
+    </span>
+    <a class="cartSuccessModal-button" href="/cart"  rel="internal">
+      {% include 'icon-cart' %}
+    </a>
+  </div>
+  <!-- END Cart success modal--> 
 
 </div>
 

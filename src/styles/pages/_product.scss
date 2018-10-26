@@ -238,7 +238,7 @@
         position: relative;
         width: 100%; 
         margin-bottom: rem-calc($level4); 
-        
+
         label,
         input {
           margin-bottom: 0; 
@@ -247,6 +247,7 @@
         label {
           color: $quintenaryColor; 
           font-weight: bold; 
+          margin-right: 6px;
           @include text-micro(); 
 
           @include media-query($medium-up) {

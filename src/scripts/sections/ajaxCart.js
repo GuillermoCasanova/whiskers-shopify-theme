@@ -280,7 +280,7 @@ var ajaxCart = (function(module, $) {
   };
 
   itemAddedCallback = function() {
-    $addToCart.removeClass('is-adding').addClass('is-added');
+  	$addToCart.removeClass('is-adding').addClass('is-added');
     ShopifyAPI.getCart(cartUpdateCallback);
   };
 
@@ -300,7 +300,15 @@ var ajaxCart = (function(module, $) {
   cartUpdateCallback = function(cart) {
     // Update quantity and price
     updateCountPrice(cart);
-    buildCart(cart);
+
+    //
+    // Builds cart and triggers the opening method if the device is over 680px wide 
+    //
+    if(window.innerWidth > 680) {
+    	buildCart(cart);
+    } else {
+    	$body.trigger('ajaxCart.itemAddedOnSmallDevice', cart); 
+    }
   };
 
   buildCart = function(cart) {
@@ -420,9 +428,11 @@ var ajaxCart = (function(module, $) {
 	     }, 450);
   	 }
 
-    //Calls the event to open the offCanvasCart in the Header component via theme.js 
-    $body.trigger('ajaxCart.afterCartLoad', cart);
 
+  	//
+    //Calls the event to open the offCanvasCart in the Header component via theme.js
+    $body.trigger('ajaxCart.afterCartLoad', cart);
+  
     if (window.Shopify && Shopify.StorefrontExpressButtons) {
       Shopify.StorefrontExpressButtons.initialize();
     }

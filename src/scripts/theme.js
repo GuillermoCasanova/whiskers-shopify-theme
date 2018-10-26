@@ -87,6 +87,10 @@ $(document).ready(function() {
     theme.cache.$body.on('ajaxCart.afterCartLoad', function(evt, cart) {
       theme.Header.openCart(); 
     });
+
+    theme.cache.$body.on('ajaxCart.itemAddedOnSmallDevice', function(evt, cart) {
+      theme.Header.displaySuccessCartModal(cart); 
+    });
   };
 
   theme.cartInit = function() {
