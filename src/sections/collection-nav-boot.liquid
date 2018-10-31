@@ -1,0 +1,45 @@
+
+
+
+<div class="collectionNav  grid  grid--justifyCenter" data-section-id="{{ section.id }}" data-section-type="collection_nav">
+  <div class="grid-cell">
+    <div class="show-for-medium-up ">
+      <ul class="collectionNav-menu  grid  grid--center  grid--flexDirectionRow  grid--justifyLeft">
+        <li class="collectionNav-menu-item">
+          <span class="collectionNav-menu-title">Filter:</span>
+        </li>
+        {% for link in linklists[section.settings.collection_nav].links %}
+          {%- assign child_list_handle = link.title | handleize -%}
+            <li class="collectionNav-menu-item  {% if link.active %}site-nav--active{% endif %}">
+              <a href="{{ link.url }}" data-url="{{link.url}}" data-collection-tag  class="collectionNav-menu-link">{{ link.title }}</a>
+            </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="hide-for-medium-up">
+      <div class="select--secondary select--medium">
+        <select name="NavigateTo" data-collection-nav-select>
+          {% for link in linklists[section.settings.collection_nav].links %}
+            <option value="{{ link.url }}">{{ link.title}}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Collection Nav",
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "collection_nav",
+        "label": "Collection_Nav",
+        "default" : "main-menu"
+      }
+    ]
+  }
+{% endschema %}
+
