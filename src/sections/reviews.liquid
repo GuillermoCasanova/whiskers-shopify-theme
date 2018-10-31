@@ -18,6 +18,14 @@
   </div>
 </article>
 
+
+{%javascript %}
+    $(document).ready(function() {
+      (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=!0, e.src="//staticw2.yotpo.com/KA9L8qtrNTE02X2bobNo14hLfstNanIPHoftWh8o/widget.js";var t=document.getElementsByTagName("script")[0]; t.parentNode.insertBefore(e,t)})(); 
+    }); 
+{%endjavascript%}
+
+
 {% schema %}
   {
     "name": "Reviews",
@@ -46,10 +54,3 @@
 {% endschema %}
 
 
-{%javascript %}
-  <!--YOTPO Code--> 
-    $(document).on('load', function() {
-      (function e(){var e=document.createElement("script");e.type="text/javascript",e.async=!0, e.src="//staticw2.yotpo.com/KA9L8qtrNTE02X2bobNo14hLfstNanIPHoftWh8o/widget.js";var t=document.getElementsByTagName("script")[0]; t.parentNode.insertBefore(e,t)})(); 
-    }); 
-  <!-- END YOTPO Code--> 
-{%endjavascript%}

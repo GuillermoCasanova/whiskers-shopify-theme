@@ -7,11 +7,11 @@
   <!--Collection Navigation Begins--> 
   <div class="row">
     <div class="small-12  medium-11  large-10  medium-centered  columns">
-      {%if collection.title | downcase contains "boot" %}
+      {% if collection.handle contains "boot" %}
        {% section 'collection-nav-boot' %}
-      {%else%}
+      {% else %}
        {% section 'collection-nav' %}
-      {%endif%}      
+      {% endif %}      
     </div>
   </div>
   <!--Collection Navigation Ends--> 
