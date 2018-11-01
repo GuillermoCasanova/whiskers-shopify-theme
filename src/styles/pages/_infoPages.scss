@@ -33,4 +33,9 @@
     margin-bottom: rem-calc($level7); 
   }
 
+  .infoPage-sideContent {
+    p {
+      margin-bottom: rem-calc($level3); 
+    }
+  }
 }

@@ -1,0 +1,132 @@
+<div class="infoPage">
+  <div class="row">
+    <div class="small-12  medium-11  large-10  large-centered  columns">
+      <div class="row">
+        <div class="small-12 columns medium-7">
+          
+          <div>
+              {{section.settings.main_column}}
+          </div>
+
+          <div class="contactForm">
+            {% form 'contact' %}
+               
+            <div class="contactForm-alerts">
+              {% if form.posted_successfully? %}
+                <p class="form-success">
+                  {{ 'contact.form.post_success' | t }}
+                </p>
+              {% endif %}
+                
+              {{ form.errors | default_errors }}
+            </div>
+               
+              <div class="input--primary  input--medium"  data-input-wrapper>
+                <label for="ContactFormFirstName">{{ 'contact.form.name' | t }}</label>
+                <input type="text"
+                  name="contact[name]"
+                  id="ContactFormFirstName"
+                  required>
+              </div>
+          
+                
+              <div class="input--primary  input--medium" data-input-wrapper>
+                <label for="ContactFormEmail">{{ 'contact.form.email' | t }}</label>
+                <input type="email"
+                  name="contact[email]"
+                  id="ContactFormEmail"
+                  value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                  spellcheck="false"
+                  autocomplete="off"
+                  autocapitalize="off"
+                  required>
+              </div>
+             
+             <div class="select--secondary select--medium">
+               <select name="contact[inquiryType]" id="inquiryType">
+                 <option value="General Information">General Information</option>
+                 <option value="Press Inquiry">Press Inquiry</option>
+                 <option value="Order Status">Order Status</option>
+                 <option value="Potential Whiskers Vendor Inquiry">Potential Whiskers Vendor Inquiry</option>
+               </select>
+             </div>
+                 
+             <div class="textarea--primary" data-textarea-wrapper>
+               <label for="ContactFormMessage">{{ 'contact.form.message' | t }}</label>
+               <textarea rows="10"
+                 name="contact[body]"
+                 id="ContactFormMessage"
+                 required>
+               </textarea>
+             </div>
+               
+             <button type="submit" class="button  button--primary  button--medium  button--expanded  contactForm-button" data-text="{{ 'contact.form.send' | t }}"> 
+               <span class="button-textState1">{{ 'contact.form.send' | t }}</span>
+             </button>
+               {% endform %}
+            </div>
+          </div>
+  
+          <div class="small-12 columns medium-5">
+             <div class="infoPage-sideContent"> {{section.settings.side_column}}</div>
+          </div>
+       </div>
+    </div>
+  </div>
+</div>
+
+{%javascript%}
+//<script>
+  $(document).ready(function() {
+    $('[data-input-wrapper]').each(function(index) {
+      var that = this; 
+      $(this).find('input').on('focus', function() {
+          $(that).addClass('is-active'); 
+      }); 
+        $(this).find('input').on('blur', function() {
+          $(that).removeClass('is-active'); 
+
+          if($(this).val().length > 0) {
+            $(that).addClass('is-filled'); 
+          } else {
+            $(that).removeClass('is-filled'); 
+          }
+      }); 
+    }); 
+
+    $('[data-textarea-wrapper]').each(function(index) {
+      var that = this; 
+      $(this).find('textarea').on('focus', function() {
+          $(that).addClass('is-active'); 
+      }); 
+        $(this).find('textarea').on('blur', function() {
+          $(that).removeClass('is-active'); 
+      }); 
+    }); 
+
+  });
+//</script>
+{%endjavascript%}
+
+
+{% schema %}
+  {
+    "name": "Contact",
+    "settings": [
+      {
+        "type": "html",
+        "id": "main_column",
+        "label": "Main Content",
+        "default": "<p></p>"
+      },
+      {
+        "type": "html",
+        "id": "side_column",
+        "label": "Side Content",
+        "default": "<p></p>"
+      }
+    ]
+  }
+
+{% endschema %}
+

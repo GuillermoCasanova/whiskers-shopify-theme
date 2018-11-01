@@ -82,7 +82,9 @@ select::-ms-expand {
     border: 3px solid $primaryColor; 
     position: relative;
     margin-bottom: 0; 
-    
+    transition: all .2s cubic-bezier(0.23, 1, 0.32, 1);
+    outline: 0; 
+
     &:active, 
     &:focus {
      border: 3px solid #fff; 
@@ -132,7 +134,7 @@ select::-ms-expand {
 }
 
 
-/*================ Custom select style ================*/
+/*================ Custom Select style ================*/
 
 .select--small {
   select {
@@ -150,24 +152,147 @@ select::-ms-expand {
 
 
 
-/*================ Custom select style ================*/
+/*================ Custom Input style ================*/
+
 
 .input--primary {
-  background-color: transparent;
-  border: 2px solid $secondaryColor; 
-  color: #fff; 
-  font-weight: bold; 
+  position: relative;
+  margin-bottom: rem-calc($base-magic-number); 
+  
+  &:before {
+    content: " "; 
+    left: 0; 
+    top: 0; 
+    bottom: 0; 
+    background-color: $accentColor; 
+    height: 100%;
+    width: 0; 
+    transition: all .2s cubic-bezier(0.23, 1, 0.32, 1);
+    position: absolute;
+    z-index: 4; 
+  }
+
+  &:after {
+    content: " "; 
+    right: 0; 
+    top: 0; 
+    bottom: 0; 
+    width: 0; 
+    height: 100%; 
+    position: absolute;
+    background-color: $secondaryColor;
+    transition: all .2s cubic-bezier(0.23, 1, 0.32, 1);
+    z-index: 0; 
+  }
+
+  &.is-active {
+
+    &:before {
+      width: 3px;
+    }
+
+    &:after {
+      width: 100%;
+    }
+
+    input {
+      outline: 0;
+    }
+  }
+
+
+  &.is-filled {
+    label {
+      opacity: 0; 
+    }
+  }
+
+  label {
+    position: absolute;
+    color: #fff;
+    top: 0; 
+    margin: auto;
+    bottom: 0; 
+    font-weight: bold; 
+  }
+
+  input {
+    width: 100%;
+    margin-bottom: 0; 
+    z-index: 2; 
+    position: relative;
+    font-family: $primary-font-family;
+    font-weight: normal; 
+    background-color: transparent;
+    border: 3px solid $secondaryColor; 
+    color: #fff; 
+  }
 }
 
 
 .input--small {
-  padding: rem-calc($level1);
+  label,
+  input {
+    padding: rem-calc($level1);
+  }
 }
-
 
 .input--medium {
-  padding: rem-calc($level2);
+  input {
+    height: rem-calc(48px);
+    padding-left: rem-calc($level2); 
+  }
+
+  label {
+    padding: rem-calc($level2); 
+  }
 }
+
+
+
+
+
+/*================ Custom Text Area style ================*/
+
+.textarea--primary {
+  position: relative;
+
+  &.is-active {
+    label {
+      opacity: 0; 
+      z-index: 0; 
+    }
+  }
+
+  textarea {
+    background-color: transparent;
+    border: 3px solid $secondaryColor;
+    width: 100%; 
+    transition: all .2s cubic-bezier(0.23, 1, 0.32, 1);
+    color: #fff;
+    font-weight: normal; 
+    font-family: $primary-font-family; 
+    padding: rem-calc($level2); 
+
+    &:active, 
+    &:focus {
+      outline: 0; 
+      border-color: #fff; 
+    }
+  }
+
+  label {
+    position: absolute;
+    padding: rem-calc($level2); 
+    top: 0; 
+    left: 0; 
+    transition: all .2s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+}
+
+
+
+
 
 
 /*================ Error styles ================*/
@@ -180,3 +305,4 @@ textarea {
     color: $color-error;
   }
 }
+
