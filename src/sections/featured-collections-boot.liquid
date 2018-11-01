@@ -46,7 +46,12 @@
 
                           <div class="productThumb-inner">
                             <div class="productThumb-bg">
-                              <img data-srcset="{{ product.featured_image.src | img_url: '360x360'}}" alt="{{product.featured_image.alt}}" class="lazyload" data-sizes="auto"  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="  data-product-img>
+                              <img data-srcset="{{ product.featured_image.src | img_url: '600x600'}}" alt="{{product.featured_image.alt}}" class="lazyload" data-sizes="auto"  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="  data-product-img>
+                              {%if product.images[2]  %}
+                              <div class="productThumb-bg-secondaryImg">
+                                <img data-srcset="{{ product.images[2] | img_url: '900x900'}}" alt="{{product.featured_image.alt}}" class="lazyload" data-sizes="auto"  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="  data-product-img>
+                              </div>
+                              {%endif%}
                             </div>
                             <div class="productThumb-description text-center grid grid--center grid--justifySpaceBetween">
                               <h3 class="productThumb-title">{{ product.title }}</h3>
