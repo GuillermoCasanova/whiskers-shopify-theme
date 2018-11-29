@@ -217,6 +217,12 @@
 
 .product-photoSlideshow {
   margin-bottom: rem-calc($level4);   
+  position: relative;
+  
+  &:hover, 
+  &:focus {
+    cursor: none;
+  }
 
   img {
     opacity: 0; 
@@ -329,6 +335,16 @@
     #Product Photo Zoom Modal
 \*------------------------------------*/
 
+
+.productZoomCursor {
+  position: absolute;
+  height: rem-calc(34px);
+  width: rem-calc(34px);
+  padding: rem-calc($level1);
+  svg {
+    fill: $quintenaryColor;
+  }
+}
 
 .productZoomModal {
   position: fixed;
