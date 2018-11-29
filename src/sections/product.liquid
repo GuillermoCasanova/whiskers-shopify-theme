@@ -36,7 +36,27 @@
                   {% for image in product.images %}
                     {% if forloop.first == false %}
                     <div class="product-photoSlideshow-slide">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ image | img_url: '1000x1000' }}" alt="{{ image.alt | escape }}" class="lazyload"  data-sizes="auto">
+
+                        <button class="photoSlideshow-slide-zoom  hide-for-large-up" 
+                             data-zoom-btn
+                             data-high-res-image="{{ image | img_url: '1100x1100' }}"
+                             data-image-size>
+                          <span class="photoSlideshow-slide-zoom-icon">
+                              <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22.2 22.2">
+                                <style>
+                                  .st0{fill:none;stroke:#fff;stroke-linecap:round;stroke-miterlimit:10}
+                                </style>
+                                <circle class="st0" cx="14.1" cy="8" r="7.5"/>
+                                <path class="st0" d="M14.1 3.8v8.5M8.8 13.4L.5 21.7M9.8 8h8.6"/>
+                              </svg>
+                          </span>
+                        </button>
+
+   <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ image | img_url: '1500x1500' }}" alt="{{ image.alt | escape }}" class="lazyload"  data-sizes="auto" data-product-image>
+                     <!--    <picture>
+                            <source media="(min-width: 640px)" srcset="{{ image | img_url: '1100x1100' }}' | asset_url}}">
+                         
+                        </picture> -->
                     </div>
                     {% endif %}
                   {% endfor %}
@@ -196,9 +216,10 @@
 
   </div>
   
-  {% if section.settings.show_share_buttons %}
+   {% if section.settings.show_share_buttons %}
       {% include 'social-sharing-product', share_title: product.title, share_permalink: product.url, share_image: product %}
     {% endif %}
+
 </div>
 
 

@@ -71,86 +71,7 @@
       display: block; 
     }
 
-    .product-photoSlideshow {
-      margin-bottom: rem-calc($level4);   
 
-      img {
-        opacity: 0; 
-        background-color: #fff;
-        transition: all .4s cubic-bezier(0.23, 1, 0.32, 1); 
-
-        &.lazyloaded {
-          opacity: 1; 
-        }
-      }
-
-      @include media-query($large-up) {
-        margin-bottom: rem-calc($level2); 
-      }
-
-      .product-photoSlideshow-slide {
-        margin-right: rem-calc(12px);
-        margin-left: rem-calc(12px);
-
-        @include media-query($large-up) {
-          margin-right: 0;
-          margin-left: 0;
-        }
-      }
-
-      .slick-prev, 
-      .slick-next {
-        position: absolute;
-        z-index: 10; 
-        top: 45%; 
-        background-color: transparent;
-        color: black; 
-        width: rem-calc(76px); 
-        height: rem-calc(42px);
-        margin-bottom: 0; 
-        opacity: .6;
-        border: none;
-        outline: none; 
-        transition: all .2s cubic-bezier(0.23, 1, 0.32, 1); 
-
-        &:before {
-          content: "";
-          background-image: url('../assets/icon--arrow--secondary.svg'); 
-          background-size: contain;
-          background-repeat: no-repeat;
-          background-position: center; 
-          position: absolute;
-          width: 100%; 
-          height: rem-calc(36px); 
-          top:0; 
-        }
-
-        &.is-hidden {
-          opacity: 0; 
-        }
-      }
-
-      .slick-prev {
-        left: rem-calc(-24px);
-       transform: scaleX(-1);
-
-        &:hover, 
-        &:focus {
-          opacity: 1; 
-         transform: scaleX(-1) translateX(3px);
-        }
-      }
-
-      .slick-next {
-        right: rem-calc(-24px);
-
-        &:hover, 
-        &:focus {
-          opacity: 1; 
-         transform: translateX(3px);
-        }
-      }
-    }
 
     .product-information {
       padding: rem-calc($level7);
@@ -283,6 +204,176 @@
     }
   }
 }
+
+
+
+
+
+
+/*------------------------------------*\
+    #Product Photo Slideshow
+\*------------------------------------*/
+
+
+.product-photoSlideshow {
+  margin-bottom: rem-calc($level4);   
+
+  img {
+    opacity: 0; 
+    background-color: #fff;
+    transition: all .4s cubic-bezier(0.23, 1, 0.32, 1); 
+
+    &.lazyloaded {
+      opacity: 1; 
+    }
+  }
+
+  @include media-query($large-up) {
+    margin-bottom: rem-calc($level2); 
+  }
+
+  .product-photoSlideshow-slide {
+    margin-right: rem-calc(12px);
+    margin-left: rem-calc(12px);
+    position: relative;
+
+    @include media-query($large-up) {
+      margin-right: 0;
+      margin-left: 0;
+    }
+
+    .photoSlideshow-slide-zoom {
+      position: absolute;
+      background-color: $primaryColor;
+      height: rem-calc(50px);
+      width: rem-calc(50px);
+      bottom: rem-calc($level2);
+      border-radius: 100%; 
+      right: rem-calc($level2);
+      margin-bottom: 0;
+
+      .photoSlideshow-slide-zoom-icon {
+        fill: $primaryColor;
+        stroke: $primaryColor;
+        width: rem-calc(24px);
+        height: rem-calc(24px);
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+      }
+    }
+  }
+
+  .slick-prev, 
+  .slick-next {
+    position: absolute;
+    z-index: 10; 
+    top: 45%; 
+    background-color: transparent;
+    color: black; 
+    width: rem-calc(76px); 
+    height: rem-calc(42px);
+    margin-bottom: 0; 
+    opacity: .6;
+    border: none;
+    outline: none; 
+    transition: all .2s cubic-bezier(0.23, 1, 0.32, 1); 
+
+    &:before {
+      content: "";
+      background-image: url('../assets/icon--arrow--secondary.svg'); 
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center; 
+      position: absolute;
+      width: 100%; 
+      height: rem-calc(36px); 
+      top:0; 
+    }
+
+    &.is-hidden {
+      opacity: 0; 
+    }
+  }
+
+  .slick-prev {
+    left: rem-calc(-24px);
+   transform: scaleX(-1);
+
+    &:hover, 
+    &:focus {
+      opacity: 1; 
+     transform: scaleX(-1) translateX(3px);
+    }
+  }
+
+  .slick-next {
+    right: rem-calc(-24px);
+
+    &:hover, 
+    &:focus {
+      opacity: 1; 
+     transform: translateX(3px);
+    }
+  }
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Product Photo Zoom Modal
+\*------------------------------------*/
+
+
+.productZoomModal {
+  position: fixed;
+  background-color: $secondaryColor; 
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 100vh;
+  width: 100%;
+  z-index: 200;
+  padding: rem-calc($level1);
+
+  
+  .productZoomModal-inner {
+    display: block; 
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: #fff;
+    overflow: hidden;
+  }
+
+  .productZoomModal-image {
+    width: 1100px;
+    height: auto;
+    max-width: none; 
+  }
+
+  .productZoomModal-close {
+    position: absolute;
+    border-radius: 100%;
+    height: rem-calc(60px);
+    width: rem-calc(60px);
+    top: rem-calc($level2);
+    left: 0;
+    right: 0;
+    margin: auto;
+    border: 2px solid $accentColor;
+    background-color: $secondaryColor--translucent;
+    z-index: 201; 
+  }
+}
+
+
 
 
 

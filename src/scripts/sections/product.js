@@ -21,7 +21,9 @@ theme.Product = (function() {
     productJson: '[data-product-json]',
     productPrice: '[data-product-price]',
     productThumbs: '[data-product-single-thumbnail]',
-    singleOptionSelector: '[data-single-option-selector]'
+    singleOptionSelector: '[data-single-option-selector]',
+    zoomBtn: '[data-zoom-btn]',
+    zoomModal: '[data-zoom-modal]'
   };
   
 
@@ -157,6 +159,8 @@ theme.Product = (function() {
     }
 
     this.initAjaxCart(); 
+    this.initProductZoom();
+
   }
 
   Product.prototype = $.extend({}, Product.prototype, {
@@ -240,6 +244,154 @@ theme.Product = (function() {
             enableQtySelectors: true,
             moneyFormat: theme.strings.moneyFormat
       });
+    },
+    initProductZoom: function() {
+
+      var that = this; 
+
+
+
+      if($(window).innerWidth() > 960)  {
+         setTimeout(function() {
+
+          var isZoomed = false; 
+          $('[data-product-image]').panzoom({
+            increment: .6,
+            minScale: 1,
+            maxScale: 1.6,
+            contain: 'invert' 
+          }); 
+          
+          var zoomed = false; 
+
+          $('[data-product-image]').on('click', function() {
+
+
+            if(!zoomed) {
+
+              if( $('[data-product-image]').panzoom()) {
+                $('[data-product-image]').panzoom("reset"); 
+              }
+
+              $('[data-product-image]').panzoom("zoom");
+
+              $('[data-product-image]').on('mousemove', function(e) {
+       // var parentOffset = $('.product-photoSlideshow-slide').offset();
+       //  var relativeXPosition = (e.pageX - parentOffset.left); //offset -> method allows you to retrieve the current position of an element 'relative' to the document
+       //  var relativeYPosition = (e.pageY - parentOffset.top);
+       //    console.log(relativeXPosition)
+       //    console.log(relativeYPosition)
+       //           // console.log(e); 
+       //           var x = e.pageX - $('[data-product-image]').offset().left/$('[data-product-image]').width() * 100 + '%';
+       //           var y = e.pageY - $('[data-product-image]').offset().top/$('[data-product-image]').width() * 100 + '%';
+                
+       //            console.log(x); 
+       //            console.log(y); 
+       //           $('[data-product-image]').panzoom("pan", x * .100, y * .100); 
+
+                $('[data-product-image]').css({'transform-origin': ((e.pageX - $('.product-photoSlideshow-slide').offset().left) / $('.product-photoSlideshow-slide').width()) * 100 + '% ' + ((e.pageY - $('.product-photoSlideshow-slide').offset().top) / $('.product-photoSlideshow-slide').height()) * 100 +'%'});
+              }); 
+
+              // $('.product-photoSlideshow-slide').on('mouseout', function(e) {
+              //   $('[data-product-image]').panzoom("reset"); 
+              // }); 
+
+              zoomed = true; 
+            } else {
+              if( $('[data-product-image]').panzoom()) {
+                $('[data-product-image]').panzoom("reset"); 
+                zoomed = false; 
+              }
+              // $('[data-product-image]').panzoom("zoom");
+              // console.log($('[data-product-image]').panzoom("getTransform")); 
+            }
+          })
+        }, 1200); 
+      }
+
+
+
+      $(selectors.zoomBtn).on('click', function(event) {
+
+         that.$container.append(`
+            <div class="productZoomModal"  data-zoom-modal>
+                <a class="productZoomModal-close" data-zoom-modal-close>
+                  X
+                </a>
+              <div class="productZoomModal-inner  grid  grid--center  grid--justifyCenter">
+                  <img src="" alt="" class="productZoomModal-image" data-zoom-modal-image>
+              </div>
+            </div>`);
+
+
+        var selectors = {
+          zoomModal: '[data-zoom-modal]',
+          zoomModalClose: '[data-zoom-modal-close]',
+          zoomModalImage: '[data-zoom-modal-image]'
+        };
+
+        var highResImg = $(event.currentTarget).attr('data-high-res-image'); 
+
+
+        function ZoomModal(container) {
+          this.initEvents(); 
+        }; 
+
+        ZoomModal.prototype = $.extend({}, ZoomModal.prototype, {
+
+          iniZooming: function() {
+
+
+          }, 
+          closeModal: function() {
+            $(selectors.zoomModal).remove(); 
+            delete ZoomModal;
+          },
+          initEvents: function() {
+            $image = $(selectors.zoomModalImage); 
+
+            console.log($(window).innerWidth()); 
+
+            if($(window).innerWidth() > 960) {
+              return false 
+            } else {
+
+              console.log('small'); 
+
+              var that = this; 
+              $(selectors.zoomModalClose).on('click', function(){
+                that.closeModal(); 
+              });
+
+              $image.attr('width', 1100);
+              $image.attr('src', highResImg);
+
+              setTimeout(function() {
+                $image.panzoom({
+                  increment: 0.5,
+                  minScale: 1,
+                  maxScale: 2,
+                  contain: 'invert'
+                }); 
+              }, 1000); 
+
+
+                $image.panzoom("zoom", 1); 
+
+         
+            }
+          }
+        });
+
+        new ZoomModal(selectors.zoomModal); 
+
+      // var $modal = $(selectors.zoomModal);
+
+      //    $modal.show(); 
+      //    setTimeout(function() {
+      //     var $close = $('data-zoom-modal-close');
+
+      })
     }
   });
 

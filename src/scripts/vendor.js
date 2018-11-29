@@ -68,3 +68,10 @@
  * imagesloaded.pkgd.min.js
  */
 // =require vendor/imagesloaded.pkgd.min.js
+
+
+
+/*!
+ * elevateZoom-3.0.0.min.js
+ */
+// =require vendor/elevateZoom-3.0.0.min.js

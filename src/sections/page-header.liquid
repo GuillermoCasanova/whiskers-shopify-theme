@@ -25,6 +25,28 @@
 
             {% case collection.handle %}
 
+              {% when 'boot-laces' %}
+                <picture>
+                    
+                  <source media="(min-width: 1024px)"
+                          srcset="{{'shopHeaders--boots-all--large.png' | asset_url}}">
+                
+                  <source media="(min-width: 640px)  and (max-width: 1023px)"
+                          srcset="{{'shopHeaders--boots-all--medium.png' | asset_url}}">
+
+
+                  <source media="(min-width: 0) and (max-width: 639px)"
+                          srcset="{{'shopHeaders--boots-all--small.png' | asset_url}}">
+                                
+
+                  <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                       data-sizes="auto" 
+                       data-header-bg
+                       class="pageHeader-bg-img "
+                       alt="{{ collection.title }}" 
+                       >
+                </picture>        
+
               {% when 'diamond-weave' %}
                 <picture>
                     
