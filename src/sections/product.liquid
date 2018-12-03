@@ -37,7 +37,7 @@
                     {% if forloop.first == false %}
                     <div class="product-photoSlideshow-slide">
 
-                        <button class="photoSlideshow-slide-zoom  hide-for-large-up" 
+                       <button class="photoSlideshow-slide-zoom  hide-for-large-up" 
                              data-zoom-btn
                              data-high-res-image="{{ image | img_url: '1100x1100' }}"
                              data-image-size>
@@ -49,11 +49,10 @@
                           </span>
                         </button>
 
-   <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ image | img_url: '1500x1500' }}" alt="{{ image.alt | escape }}" class="lazyload"  data-sizes="auto" data-product-image>
-                     <!--    <picture>
-                            <source media="(min-width: 640px)" srcset="{{ image | img_url: '1100x1100' }}' | asset_url}}">
-                         
-                        </picture> -->
+                        <picture>
+                          <source media="(min-width: 640px)" srcset="{{ image | img_url: '1100x1100' }}">
+                          <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ image | img_url: '800x800' }}" alt="{{ image.alt | escape }}" class="lazyload"  data-sizes="auto"  data-product-image>
+                        </picture> 
                     </div>
                     {% endif %}
                   {% endfor %}
@@ -198,12 +197,10 @@
                                 </span>
                             </button>
                           </form>
-
                         </div>
                       </div>
                   </div>
                 </div>
-        
               </div>
             </div>
           </div>

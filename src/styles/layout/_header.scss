@@ -269,7 +269,7 @@
     .mainNav-navToggle {
       width: 100%; 
       padding-left: rem-calc(3px); 
-      @extend %text-right; 
+      text-align: right;
       
       .navToggle-icon {
         color: $tertiaryColor; 
@@ -329,12 +329,6 @@
           margin-bottom: rem-calc($level1); 
           @include h2(); 
         }
-
-        &:hover,
-        &:focus {
-          //color: $accentColor; 
-        }
-
       }
     }
 
@@ -395,7 +389,7 @@
     }
 
     .mainNav-address {
-      @extend %text-left; 
+      text-align: left; 
     }
 
 

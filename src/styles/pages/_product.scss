@@ -228,6 +228,8 @@
     opacity: 0; 
     background-color: #fff;
     transition: all .4s cubic-bezier(0.23, 1, 0.32, 1); 
+    width: 100%; 
+    height: 100%;
 
     &.lazyloaded {
       opacity: 1; 
@@ -257,6 +259,9 @@
       border-radius: 100%; 
       right: rem-calc($level2);
       margin-bottom: 0;
+      opacity: 0; 
+      pointer-events: none; 
+      transition: all .2s cubic-bezier(0.23, 1, 0.32, 1) .2s; 
 
       .photoSlideshow-slide-zoom-icon {
         fill: $primaryColor;
@@ -269,6 +274,13 @@
         bottom: 0;
         left: 0;
         margin: auto;
+      }
+    }
+
+    &.slick-active {
+      .photoSlideshow-slide-zoom {
+        opacity: 1; 
+        pointer-events: all;     
       }
     }
   }
@@ -336,6 +348,9 @@
 \*------------------------------------*/
 
 
+$closeStrokeWidth: 4px;
+$closeWidth: 2.1rem;  
+
 .productZoomCursor {
   position: absolute;
   height: rem-calc(34px);
@@ -359,8 +374,27 @@
   padding: rem-calc($level1);
 
   
+  .productZoomModal-gestureIndicator {
+    position: absolute;
+    z-index: 201;
+    width: 8rem;
+    height: 8rem;
+    top: 0; 
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+
+    .pinchOut {
+      animation: gesture-indicator 1s steps(1, end) infinite;
+    }
+
+    .pinchIn {
+      animation: gesture-indicator 1s steps(1, start) infinite;
+    }
+  }
+
   .productZoomModal-inner {
-    display: block; 
     width: 100%;
     height: 100%;
     position: relative;
@@ -369,9 +403,7 @@
   }
 
   .productZoomModal-image {
-    width: 1100px;
-    height: auto;
-    max-width: none; 
+    width: 100%;
   }
 
   .productZoomModal-close {
@@ -379,13 +411,50 @@
     border-radius: 100%;
     height: rem-calc(60px);
     width: rem-calc(60px);
-    top: rem-calc($level2);
+    bottom: rem-calc($level3);
     left: 0;
     right: 0;
     margin: auto;
     border: 2px solid $accentColor;
+    margin-bottom: 0; 
     background-color: $secondaryColor--translucent;
     z-index: 201; 
+
+    &:after,
+    &:before {
+      content: ""; 
+      height: 2px;
+      background-color: #fff; 
+      width: 60%;  
+      left: 0; 
+      right: 0; 
+      margin: auto;
+      top: 0;
+      bottom: 0;
+      position: absolute;
+      transition: all .2s cubic-bezier(0.23, 1, 0.32, 1); 
+    }
+
+    &:before {
+      transform: translateY(0) rotate(-45deg); 
+    }
+
+    &:after {
+      transform: translateY(0) rotate(45deg); 
+    }
+
+    &:hover,
+    &:focus {
+      transform: scale(1.1); 
+      background-color: $accentColor;
+    }
+  }
+}
+
+
+@keyframes gesture-indicator {
+  50% {
+    opacity: 0;
   }
 }
 
@@ -393,10 +462,8 @@
 
 
 
-
-
 /*------------------------------------*\
-    #Product Socoal Sharing
+    #Product Social Sharing
 \*------------------------------------*/
 
 
