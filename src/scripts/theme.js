@@ -97,6 +97,14 @@ $(document).ready(function() {
     if (!slate.cart.cookiesEnabled()) {
       theme.cache.$body.addClass('cart--no-cookies');
     }
+
+     ajaxCart.init({
+        cartContainer: '#CartContainer',
+        addToCartSelector: '[data-thumb-add-to-cart-btn]',
+        enableQtySelectors: true,
+        moneyFormat: theme.strings.moneyFormat
+    });
+
   };
 
   theme.initPlugins = function() {
