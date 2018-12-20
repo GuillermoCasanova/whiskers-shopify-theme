@@ -1,0 +1,215 @@
+
+
+/*------------------------------------*\
+    #Email Pop Up 
+\*------------------------------------*/
+
+
+@keyframes emailPopUpShow {
+	0% {
+	 transform: translateY(-120%);
+	}
+	1% {
+	 transform: translateY(0);
+	}
+	100% {
+	 transform: translateY(0);
+	}
+}
+
+@keyframes emailPopUpHide {
+	0% {
+	 transform: translateY(0);
+	}
+	99% {
+	 transform: translateY(0);
+	}
+	100% {
+	 transform: translateY(-120%);
+	}
+}
+
+
+.emailPopUp {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom:0;
+	left: 0;
+	width: 100%;
+	height: 100vh; 
+	z-index: 200; 
+	overflow: hidden;
+	transform: translateY(-120%);
+
+	&.is-visible {
+		animation: emailPopUpShow .8s linear forwards;
+
+		.emailPopUp-overlay {
+			opacity: 1; 
+		}
+
+		.emailPopUp-modal {
+	    transform: translateZ(0);
+	    opacity: 1;
+		}
+	}
+
+	&.is-closed {
+		animation: emailPopUpHide .8s linear forwards;
+
+		.emailPopUp-overlay {
+			opacity: 0; 
+		}
+
+		.emailPopUp-modal {
+	    transform: translateZ(-300px);
+	    opacity: 0;
+		}
+	}
+
+	.emailPopUp-overlay {
+		background-color: $translucentBlack;
+		height: 100%;
+		width: 100%;
+		position: relative;
+		overflow-y: scroll; 
+		perspective: 100vw; 
+    transition: all .8s cubic-bezier(0.23, 1, 0.32, 1) .4s;
+    opacity: 0; 
+	}
+
+
+
+	.emailPopUp-modal {
+    transition: all .8s cubic-bezier(0.23, 1, 0.32, 1) .2s;
+		position: absolute;
+		width: 90%;
+		margin: auto; 
+		background-color: $secondaryColor;
+	  transform: translateZ(-300px);
+	  opacity: 0;
+		max-width: rem-calc(330px); 
+
+		@include media-query($medium-up) {
+			max-width: 37.625rem;
+		}
+
+		@include media-query($large-up) {
+			max-width: 36rem;
+		}
+	}
+	
+	.emailPopUp-image {
+		width: 100%;
+		overflow: hidden;
+		padding-bottom: 56%;
+		position: relative;
+		background-color: $senaryColor;
+
+		@include media-query($medium-up) {
+			width: 50%;
+			padding-bottom: 73%;
+		}
+
+		img,
+		picture {
+			width: 100%;
+		}
+
+		img {
+			position: absolute;
+			visibility: hidden; 
+		}
+	}
+
+	.emailPopUp-copy {
+		padding: rem-calc($level3); 
+
+		@include media-query($medium-up) {
+			width: 50%;
+			padding: rem-calc($level4); 
+		}
+	}
+
+	.emailPopUp-inner {
+		position: relative;
+		width: 100%;
+		height: 100%;
+	}
+
+	.emailPopUp-close {
+		position: absolute;
+		top: rem-calc(12px);
+		right: rem-calc(-8px);
+		background-color: $secondaryColor;
+		width: rem-calc(50px);
+		height: rem-calc(50px);
+	
+		@include media-query($medium-up) {
+	    position: absolute;
+	    top: 8px;
+	    right: 8px;
+	    background-color: tranparent;
+	    width: 2rem;
+	    height: 2rem;
+		}
+		button {
+	    margin-bottom: 0;
+	    position: absolute;
+	    height: 70%;
+	    width: 70%;
+	    text-align: center;
+	    margin: auto;
+	    top: -2px;
+	    bottom: 0;
+	    right: -2px;
+	    left: 0;
+
+	    &:after,
+	    &:before {
+	      content: ""; 
+	      height: 2px;
+	      background-color: $accentColor; 
+	      width: 100%;  
+	      left: 0; 
+	      right: 0; 
+	      position: absolute;
+	      transition: all .2s cubic-bezier(0.23, 1, 0.32, 1); 
+	    }
+
+	    &:before {
+	      top: 50%; 
+	      transform: translateY(0) rotate(-45deg); 
+	    }
+
+	    &:after {
+	      top: 50%; 
+	      transform: translateY(0) rotate(45deg); 
+	    }
+
+	    &:hover,
+	    &:focus {
+	      transform: scale(1.1); 
+	    }
+
+		}
+	}
+
+	.emailPopUp-headline {
+		max-width: rem-calc(230px); 
+		margin-bottom: rem-calc($level2); 
+
+		@include media-query($medium-up) {
+			@include text-kilo();
+		}
+	}
+
+	.emailPopUp-footer {
+		text-align: center; 
+		p {
+			margin-bottom: rem-calc($level1); 
+			@include text-micro(); 
+		}
+	}
+}

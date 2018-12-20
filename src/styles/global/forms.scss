@@ -230,10 +230,91 @@ select::-ms-expand {
 }
 
 
+.input--secondary {
+  position: relative;
+  margin-bottom: rem-calc($base-magic-number); 
+  
+  &:before {
+    content: " "; 
+    left: 0; 
+    top: 0; 
+    bottom: 0; 
+    background-color: $accentColor; 
+    height: 100%;
+    width: 0; 
+    transition: all .2s cubic-bezier(0.23, 1, 0.32, 1);
+    position: absolute;
+    z-index: 4; 
+  }
+
+  &:after {
+    content: " "; 
+    right: 0; 
+    top: 0; 
+    bottom: 0; 
+    width: 0; 
+    height: 100%; 
+    position: absolute;
+    background-color: $primaryColor;
+    transition: all .2s cubic-bezier(0.23, 1, 0.32, 1);
+    z-index: 0; 
+  }
+
+  &.is-active {
+
+    &:before {
+      width: 3px;
+    }
+
+    &:after {
+      width: 100%;
+    }
+
+    input {
+      outline: 0;
+    }
+  }
+
+
+  &.is-filled {
+    label {
+      opacity: 0; 
+    }
+  }
+
+  label {
+    position: absolute;
+    color: #fff;
+    top: 0; 
+    margin: auto;
+    bottom: 0; 
+    font-weight: bold; 
+  }
+
+  input {
+    width: 100%;
+    margin-bottom: 0; 
+    z-index: 2; 
+    position: relative;
+    font-family: $primary-font-family;
+    font-weight: normal; 
+    background-color: transparent;
+    border: 3px solid $primaryColor; 
+    color: #fff; 
+  }
+}
+
+
 .input--small {
+
   label,
   input {
+    height: rem-calc(40px);
     padding: rem-calc($level1);
+  }
+  
+  input {
+    padding-left: rem-calc($level2); 
   }
 }
 

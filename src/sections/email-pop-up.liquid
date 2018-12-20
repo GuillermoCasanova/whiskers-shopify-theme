@@ -1,0 +1,141 @@
+
+
+<div class="emailPopUp" data-section-id="{{ section.id }}" data-section-type="email_popup" data-email-popup>
+	<div class="emailPopUp-overlay  grid  grid--center   grid--justifyCenter" data-close-modal>
+		<div class="emailPopUp-modal">
+
+			<div class="emailPopUp-close">
+				<button class="emailPopUp-close-icon" data-close-modal>
+				</button>	
+			</div>		
+
+			<div class="emailPopUp-modal-inner  grid  grid--stretch  grid--flexDirectionColumn  med-grid--flexDirectionRow">
+				<div class="emailPopUp-image">
+          <picture>
+              
+            <source media="(min-width: 640px)"
+                    srcset="{{'pop-up-email-image-medium.png' | asset_url}}">
+          
+            <source media="(min-width: 0)"
+                    srcset="{{'pop-up-email-image-small.png' | asset_url}}">
+          
+            <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                 data-sizes="auto" 
+                 data-email-popup-image
+                 class="pageHeader-bg-img "
+                 alt="Whiskers Laces Art Shot with Chatter Teeth" 
+                 >
+          </picture>
+				</div>
+				<div  class="emailPopUp-copy  grid  grid--justifyCenter grid--flexDirectionColumn">
+					<h1 class="headline  emailPopUp-headline">
+						{{settings.email_popup_headline}}
+					</h1>
+					<p>
+						{{settings.email_popup_body}}
+					</p>
+	        {% form 'customer' %}
+		        <div class="emailPopUp-form-errors"> {{ form.errors | default_errors }}</div>
+		        {% if form.posted_successfully? %}
+		          <div class="emailPopUp-form-success">
+		            <div class="note form-success">{{ 'general.newsletter_form.newsletter_confirmation' | t }}</div>
+		          </div>
+		        {% else %}
+		          <input type="hidden" name="contact[tags]" value="newsletter">
+		        
+		          <div class="grid  grid--center  grid--stretch grid--flexDirectionColumn">
+								<div class="input--secondary  input--small  input--expanded" data-input-wrapper >
+									<label for="Email" class="">Email</label>
+								  <input type="email" value=""  name="contact[email]" id="Email" class="{%if form.errors %}has-error{% endif %}" autocorrect="off" autocapitalize="off" >
+								</div>
+
+	              <button type="submit" class="button--small  button--primary  button--expanded" name="commit"  data-text="{{settings.email_popup_button_cta }}">
+	               <span> {{settings.email_popup_button_cta }}</span>
+	              </button>
+		          </div>
+		        {% endif %}
+	        {% endform %}
+					<div class="emailPopUp-footer">
+						<p>
+							{{settings.email_popup_secondary_body}}
+						</p>
+					</div>
+				</div>	
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+{%javascript%}
+//<script>
+	$(document).ready(function() {
+
+		var emailPopUp = {
+		
+			selectors:  {
+				modalClose: '[data-close-modal]', 
+				emailPopup: '[data-email-popup]',
+				emailPopUpImg: '[data-email-popup-image]'
+			},
+
+			showEmailPopup: function() {
+
+				var modalSessionCookie = 'saw-email-pop-up'; 
+
+				sessionStorage['saw-email-pop-up'] = modalSessionCookie; 
+
+		    this.animCtrl = null;
+		    this.imageEntryAnim = null; 
+		    var self = this; 
+
+		    $(this.selectors.emailPopup).addClass('is-visible'); 
+
+		    //
+		    // Waits for the pop up image to load with imagesLoaded jquery plugin
+		    //
+		    $(this.selectors.emailPopUp).imagesLoaded().done(function(){
+
+
+		      //
+		      // Defining the animations with ScrollMagic
+		      //
+		      self.animCtrl = new ScrollMagic.Controller(); 
+
+		      //
+		      // Defines the entry animations for our email popup image 
+		      //
+		      TweenMax.set(self.selectors.emailPopUpImg, {autoAlpha: 1});
+		      //TweenMax.set(self.selectors.collectionHeadline, {autoAlpha: 1});
+
+		      self.imageEntryAnim = new TimelineMax()
+		          .from(self.selectors.emailPopUpImg, .4, {y: '100%'}, '+=0.8');
+		          //.from(selectors.collectionHeadline, .4, {y: '20px', opacity: 0}, '-=.2');
+
+	      });
+
+
+				$(this.selectors.modalClose).on('click', function(event) {
+					if(event.target !== this) return;
+					self.hideEmailPopup();
+				}); 
+			},
+
+			hideEmailPopup: function() {
+				$(this.selectors.emailPopup).addClass('is-closed');
+			}
+		}; 
+
+		if(sessionStorage['saw-email-pop-up']) {
+			console.log('already seen');
+			return 
+		} else {
+			setTimeout(function() {
+			emailPopUp.showEmailPopup();
+			}, 3000); 
+		}
+
+	});
+//</script>
+{%endjavascript%}

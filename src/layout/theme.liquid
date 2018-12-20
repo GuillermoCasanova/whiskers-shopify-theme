@@ -130,7 +130,53 @@
   {% endif %}
   <!-- END Special Promo Tab-->
 
- 
+
+  <!--Mailchimp Pop-up--> 
+  {% if settings.email_pop_up_active %}
+   {% section 'email-pop-up' %}
+  {% endif %}
+  <!--End Mailchimp Pop-up--> 
+  
+
+  <!-- Code for animating input elements across the site that are wrappers--> 
+  <script>
+    $(document).ready(function() {
+      setTimeout(function(){ 
+      if( $('[data-input-wrapper]').length > 0) {
+        $('[data-input-wrapper]').each(function(index) {
+          var that = this; 
+            $(this).find('input').on('focus', function() {
+                $(that).addClass('is-active'); 
+                console.log('hello');
+            }); 
+            $(this).find('input').on('blur', function() {
+              $(that).removeClass('is-active'); 
+
+              if($(this).val().length > 0) {
+                $(that).addClass('is-filled'); 
+              } else {
+                $(that).removeClass('is-filled'); 
+              }
+          }); 
+        }); 
+
+        $('[data-textarea-wrapper]').each(function(index) {
+          var that = this; 
+          $(this).find('textarea').on('focus', function() {
+              $(that).addClass('is-active'); 
+          }); 
+            $(this).find('textarea').on('blur', function() {
+              $(that).removeClass('is-active'); 
+          }); 
+        }); 
+      }
+
+      }, 200); 
+     
+    });
+  </script>
+ <!--END--> 
+
 
 </html>
 
