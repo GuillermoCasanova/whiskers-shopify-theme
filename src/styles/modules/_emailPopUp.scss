@@ -145,6 +145,7 @@
 		background-color: $secondaryColor;
 		width: rem-calc(50px);
 		height: rem-calc(50px);
+		z-index: 200; 
 	
 		@include media-query($medium-up) {
 	    position: absolute;
@@ -154,6 +155,7 @@
 	    width: 2rem;
 	    height: 2rem;
 		}
+		
 		button {
 	    margin-bottom: 0;
 	    position: absolute;

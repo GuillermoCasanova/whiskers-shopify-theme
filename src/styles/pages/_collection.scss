@@ -70,21 +70,26 @@
 .collectionNav {
   margin-bottom: rem-calc($level5); 
   width: 100%; 
-  
-  .collectionNav-menu {
+
+ .collectionNav-title {
+    text-transform: uppercase; 
+    font-weight: bold; 
+    margin-right: rem-calc($level1); 
+    @include text-micro(); 
+  }
+
+  .collectionNav-menu:last-child {
     margin-bottom: 0; 
+  }
+
+  .collectionNav-menu {
+    margin-bottom: rem-calc($level1);
 
     .collectionNav-menu-item {
       margin-right: rem-calc($level2); 
       color: $quintenaryColor; 
     }
-    
-    .collectionNav-menu-title {
-      text-transform: uppercase; 
-      font-weight: bold; 
-      @include text-micro(); 
-    }
-
+ 
     .collectionNav-menu-link {
       color: $secondaryColor; 
       transition: all .3s cubic-bezier(0.23, 1, 0.32, 1); 

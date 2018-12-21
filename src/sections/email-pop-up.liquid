@@ -82,6 +82,8 @@
 
 			showEmailPopup: function() {
 
+				$('body').css('overflow', 'hidden');
+
 				var modalSessionCookie = 'saw-email-pop-up'; 
 
 				sessionStorage['saw-email-pop-up'] = modalSessionCookie; 
@@ -96,7 +98,6 @@
 		    // Waits for the pop up image to load with imagesLoaded jquery plugin
 		    //
 		    $(this.selectors.emailPopUp).imagesLoaded().done(function(){
-
 
 		      //
 		      // Defining the animations with ScrollMagic
@@ -124,15 +125,16 @@
 
 			hideEmailPopup: function() {
 				$(this.selectors.emailPopup).addClass('is-closed');
+				$('body').css('overflow', 'visible');
 			}
 		}; 
 
+
 		if(sessionStorage['saw-email-pop-up']) {
-			console.log('already seen');
 			return 
 		} else {
 			setTimeout(function() {
-			emailPopUp.showEmailPopup();
+				emailPopUp.showEmailPopup();
 			}, 3000); 
 		}
 
