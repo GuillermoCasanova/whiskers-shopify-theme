@@ -191,6 +191,11 @@
     margin-bottom: rem-calc($level2); 
     position: relative;
     max-height: 66%; 
+    height: 100vh;
+
+    @include media-query($large-up) {
+      max-height: 63vh; 
+    }
     
     &::-webkit-scrollbar {
       width: rem-calc(12px);
