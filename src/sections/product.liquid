@@ -99,9 +99,9 @@
                           {{ product.title }}
                         </h1>
                         
-                        <ul class="product-details  grid  grid--center"  data-product-anim-elem>
+                        <div class="product-details  grid  grid--flexDirectionColumn"  data-product-anim-elem>
                        
-                          <li data-price-wrapper class="product-price">
+                          <div data-price-wrapper class="product-details-price">
                             <span data-product-price>
                               {{ current_variant.price | money }}
                             </span>
@@ -114,9 +114,30 @@
                                 {% endif %}
                               </s>
                             {% endif %}
-                          </li>
-          
-                        </ul>
+                          </div>
+
+                          {%if product.metafields.custom_field%}
+                          <ul class="product-details-specs  grid  grid--center  grid--flexDirectionRow">
+                            {% assign aglet_information = product.metafields.custom_field %}
+                            {%if product.metafields.custom_field.lace_pattern%}
+                            <li class="grid  grid--center  grid--flexDirectionRow">
+                              <span class="product-details-label">
+                                Pattern:
+                              </span>
+                              <p class="product-details-spec">{{aglet_information.lace_pattern}}</p>
+                            </li>
+                            {%endif%}
+                            {%if product.metafields.custom_field.aglet_color%}
+                            <li class="grid  grid--center  grid--flexDirectionRow">
+                              <span  class="product-details-label">
+                                Aglet Color:
+                              </span>
+                              <p  class="product-details-spec">{{aglet_information.aglet_color}}</p>
+                            </li>
+                            {%endif%}
+                          </ul>
+                          {%endif%}
+                        </div>
                         
                         <div class="product-description" data-product-anim-elem>
                           {{ product.description }}

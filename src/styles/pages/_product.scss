@@ -94,7 +94,7 @@
     
     .product-name {
       font-family: $tertiary-font-family; 
-      margin-bottom: rem-calc($level1);
+      margin-bottom: 0;
       max-width: rem-calc(300px); 
       @include text-kilo(); 
 
@@ -106,22 +106,33 @@
     }
 
     .product-details {
-      color: $quaternaryColor; 
+      color: #fff; 
 
-      @include media-query($medium-up) {
+      .product-details-price {
         margin-bottom: rem-calc($level2);
+        @include h2();
+      }
+      
+      .product-details-specs  {
+        margin-bottom: rem-calc($level1);
+        width: 100%;
       }
 
-      @include media-query($large-up) {
-        margin-bottom: rem-calc($level3);
+      .product-details-label {
+        color: $quaternaryColor;
+        margin-right: rem-calc($level1); 
+        @include text-micro(); 
       }
 
-      .product-price {
-        margin-right: rem-calc($level2);
-        @include h3();
+      .product-details-spec {
+        color: #fff;
+        text-transform: uppercase;
+        margin-right: rem-calc($level3); 
+        margin-bottom: 0; 
+        font-weight: bold;
+        font-family: $secondary-font-family; 
       }
     }
-
 
     .product-description {
 
