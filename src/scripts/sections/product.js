@@ -275,6 +275,7 @@ theme.Product = (function() {
       
       var that = this; 
 
+
       function initNonTouchZoom(destroy) {
 
         var that = this; 
@@ -412,7 +413,7 @@ theme.Product = (function() {
         //
         this.$activeImageZoomBtn.on('click', function(event) {
 
-          var ZoomModal = function(container) {
+          var ZoomModal = function() {
             this.initEvents(); 
           };  
 
@@ -453,15 +454,27 @@ theme.Product = (function() {
               </div>
             </div>`);
 
+          that.$container.append(`
+              <div class="productZoomModalLoading  grid  grid--center  grid--justifyCenter"  data-zoom-modal-load-screen>
+                <div class="productZoomModalLoading-loader  loader">
+                </div>
+              <div>
+            `);
 
+ 
           var selectors = {
             zoomModal: '[data-zoom-modal]',
+            zoomModalLoadScreen: '[data-zoom-modal-load-screen]',
             zoomModalClose: '[data-zoom-modal-close]',
             zoomModalImage: '[data-zoom-modal-image]',
             zoomModalGesture: '[data-zoom-modal-gesture]'
           };
 
-          var highResImg = $(event.currentTarget).attr('data-high-res-image'); 
+          var highResImg = $(event.currentTarget).attr('data-high-res-image'),
+              $zoomModalGesture = $(selectors.zoomModalGesture),
+              $zoomModal = $(selectors.zoomModal), 
+              $zoomModalLoadScreen =  $(selectors.zoomModalLoadScreen),
+              $zoomModalClose = $(selectors.zoomModalClose); 
 
 
           ZoomModal.prototype = $.extend({}, ZoomModal.prototype, {
@@ -474,36 +487,59 @@ theme.Product = (function() {
                   minScale: 1.5,
                   maxScale: 2.6,
                   contain: 'invert'
-                }).panzoom("zoom", 2, {animate: true});
+                }).panzoom("zoom", 2, {animate: false});
               }
             }, 
             closeModal: function() {
               var that = this; 
-              $(selectors.zoomModal).remove();
+              $zoomModal.remove();
             },
             initEvents: function() {
               var that = this; 
+              var modalLoaderTimeout = null 
 
               this.$image = $(selectors.zoomModalImage); 
               this.$image.attr('src', highResImg);
+              this.initLoader = function() {
 
-              $(selectors.zoomModalGesture).css('opacity', 0); 
-              $(selectors.zoomModal).css('opacity', 0); 
+                $zoomModalLoadScreen.css('opacity', 0); 
+                $zoomModalLoadScreen.animate({opacity: 1}, 200, 'linear');
 
-              $(selectors.zoomModalClose).on('click', function(){
+                $zoomModalLoadScreen.on('click', function() {
+                  $zoomModal.hide();
+                  $zoomModalLoadScreen.animate({opacity: 0}, 200, 'linear', function() {
+                    $zoomModalLoadScreen.hide(); 
+                    $('body').css('overflow', 'visible'); 
+                  });
+                }); 
+              }
+
+
+              $zoomModalGesture.css('opacity', 0); 
+              $zoomModal.css('opacity', 0); 
+              $('body').css('overflow', 'hidden'); 
+
+
+              $zoomModalClose.on('click', function(){
                 that.closeModal(); 
+                $('body').css('overflow', 'visible'); 
               });
 
-              $(selectors.zoomModal).imagesLoaded().done(function() {
+
+              this.initLoader();
+  
+              $zoomModal.imagesLoaded().done(function() {
+                $zoomModalLoadScreen.animate({opacity: 0}, 200, 'linear', function() {
+                  $zoomModalLoadScreen.hide(); 
+                });
                 that.initZooming(); 
-                var zoomModalGesture = $(selectors.zoomModalGesture); 
-                $(selectors.zoomModal).animate({opacity: 1}, 200, 'linear', function() {
+                $zoomModal.animate({opacity: 1}, 200, 'linear', function() {
                   if(!sessionStorage.test) {
                     setTimeout(function() {
-                     zoomModalGesture.animate({opacity: 1}, 200, 'linear');
+                     $zoomModalGesture.animate({opacity: 1}, 200, 'linear');
                       setTimeout(function() {
-                        zoomModalGesture.animate({opacity: 0}, 200, 'linear', function() {
-                          zoomModalGesture.hide(); 
+                        $zoomModalGesture.animate({opacity: 0}, 200, 'linear', function() {
+                          $zoomModalGesture.hide(); 
                           sessionStorage.test = true
                         });
                       }, 1500);  
@@ -515,14 +551,12 @@ theme.Product = (function() {
             }
           });
 
-
           //
           // Creates the zoom modal object instance 
           //
           new ZoomModal(selectors.zoomModal); 
 
         });
-
       }
 
       //

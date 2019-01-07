@@ -305,6 +305,7 @@
       margin-right: 0;
       margin-left: 0;
     }
+    
 
     .photoSlideshow-slide-zoom {
       position: absolute;
@@ -317,6 +318,7 @@
       margin-bottom: 0;
       opacity: 0; 
       pointer-events: none; 
+      z-index: 1;
       transition: all .2s cubic-bezier(0.23, 1, 0.32, 1) .2s; 
 
       .photoSlideshow-slide-zoom-icon {
@@ -406,6 +408,28 @@
 
 $closeStrokeWidth: 4px;
 $closeWidth: 2.1rem;  
+
+.productZoomModalLoading {
+  position: fixed;
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  bottom: 0; 
+  width: 100%;
+  height: 100vh;
+  z-index: 202; 
+  background-color: $secondaryColor--translucent;
+
+  .productZoomModalLoading-loader {
+    position: absolute;
+    top: 0; 
+    right: 0; 
+    left: 0;
+    bottom: 0;
+    margin: auto;  
+  }
+}
+
 
 .productZoomCursor {
   position: absolute;
