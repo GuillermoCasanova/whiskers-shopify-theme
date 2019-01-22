@@ -41,6 +41,8 @@ Support website: http://help.csell.co
 
 <div>
   {{product.metafields.productDetails.crosssell | json}}
+  {{shop.metafields.shopCrosssell.default | json}}
+  {{product.metafields.productDetails.crosssell}}
 </div>
 
 
@@ -97,6 +99,7 @@ Support website: http://help.csell.co
 {% endif %}
 
 <script type="text/javascript" charset="utf-8">
+
 var xsproductsData = '';
 xsellSettings.xstitle = "";
   {% if cscurrentpage == 'product' %}
@@ -178,3 +181,23 @@ xsellSettings.xstitle = "";
 
 
 </script>
+
+{% javascript %}
+//<script>
+  
+  var defaultCrossSells = {{shop.metafields.shopCrosssell.default}}; 
+
+
+  console.log(defaultCrossSells); 
+
+  // $.get({
+  //     url: "https://whiskers-laces.myshopify.com/admin/products.json",
+  //     type: "GET", 
+  //     headers: {"Authorization" : 'Basic IGQzYmM4NjhmMmI0OWJhNzc3NTNjNWQxYTg4YmMwN2JkOjI0ODMxNjczZjMxMWU1MDkyODk4ZWIxMDRiMWQyZWExCg=='}
+  //   }).then(function(response) {
+  //       console.log(response); 
+  //   });
+
+    $('div').hide();
+//</script>
+{% endjavascript %}
