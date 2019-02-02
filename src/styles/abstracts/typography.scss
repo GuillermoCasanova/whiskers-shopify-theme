@@ -300,13 +300,13 @@ $type-settings: (
 
 @mixin h2() { 
   font-size: 1.5rem; //24px
-  line-height:  $base-magic-number / 24; //24px
+  line-height:  $base-magic-number / 20; //24px
 }; 
 
 
 @mixin h1() {
   font-size: 2rem; //32px
-  line-height:  $base-magic-number / 24;  //48px
+  line-height:  $base-magic-number / 20;  //48px
 }; 
 
 @mixin text-kilo() { // (5)

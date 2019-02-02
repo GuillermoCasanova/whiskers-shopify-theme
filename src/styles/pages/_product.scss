@@ -16,13 +16,12 @@
   margin-right: auto; 
   margin-left: auto; 
   position: relative;
-  margin-bottom: rem-calc($level7 + $level7);
   max-width: 100%;
   width: 100vw;
   overflow-x: hidden;
 
   [data-product-anim-elem] {
-    visbility: hidden; 
+    visibility: hidden; 
   }
   
   @include media-query($medium-up) {
@@ -32,7 +31,6 @@
 
   @include media-query($large-up) {
     margin-top: 0; 
-    margin-bottom: rem-calc($level7);
   }
   
   .product-bg {
@@ -699,26 +697,42 @@ $closeWidth: 2.1rem;
 .productExplanation {
   position: relative;
   width: 100%; 
-  padding-right: $column-gutter; 
-  padding-left: 0;
   margin-bottom: rem-calc($level7); 
 
   @include media-query($medium-up) {
-    margin-bottom: rem-calc($level7 + 72); 
-  }
-
-
-  @include media-query($large-up) {
-    margin-top: rem-calc($level7 + $level7); 
-    margin-bottom: rem-calc($level7); 
+    overflow: hidden;
+    margin-bottom: rem-calc($level7 + $level3); 
   }
 
   * {
     position: relative;
   }
 
+  .productExplanation-accent {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: -29%;
+
+    @include media-query($medium-up) {
+      bottom: -24%;
+    }
+
+    @include media-query($large-up) {
+      bottom: -27%;
+    }
+  }
+
   .productExplanation-inner {
     position: relative;
+    padding-bottom: rem-calc($level7 + $level2); 
+
+    @include media-query($large-up) {
+      padding-top: rem-calc($level7);
+      padding-bottom: rem-calc($level7 + $level5); 
+    }
+
     &:before {
       content: " ";
       background-color: $senaryColor;
@@ -732,11 +746,10 @@ $closeWidth: 2.1rem;
       @include media-query($medium-up) {
         left: 0; 
         width: 90%;
-        top: 4.875rem;
       }
 
       @include media-query($large-up) {
-        width: 80%; 
+        width: 81%; 
       }
     }
 
@@ -747,8 +760,14 @@ $closeWidth: 2.1rem;
   }
   
   .productExplanation-copy {
-    padding: $column-gutter /2; 
+    padding: $column-gutter / 2; 
     padding-bottom: rem-calc($level1); 
+    max-width: rem-calc(340px); 
+
+    @include media-query($large-up) {
+      max-width: 100%; 
+      min-width: rem-calc(370px); 
+    }
     
     h1 {
       @include media-query($large-up) {
@@ -766,9 +785,104 @@ $closeWidth: 2.1rem;
 }
 
 
+.productExplanation--weave {
+  .productExplanation-image {
+
+    @include media-query($medium-up) {
+      transform: scale(1.2) translateY(60px);
+    }
+
+    @include media-query($large-up) {
+      transform: scale(1.1) translateY(40px);
+    }
+
+  }
+}
+
+.productExplanation--spool {
+  .productExplanation-image {
+    @include media-query($medium-up) {
+      transform: translateX(50px) translateY(50px) scale(1.1);
+    }
+
+    @include media-query($large-up) {
+      transform: translateX(110px) translateY(15px)  scale(1.2);
+    }
+  }
+}
+
+
+.productExplanation--aglets {
+  .productExplanation-image {
+    @include media-query($medium-up) {
+      transform: translateX(50px) translateY(50px) scale(1.1);
+    }
+
+    @include media-query($large-up) {
+      transform: translateX(110px) scale(1.1);
+    }
+  }
+}
+
+
+
+.productExplanation--left {
+  padding-right: 3.5rem; 
+
+
+  @include media-query($medium-up) {
+    padding-right: 0;
+  }
+
+  .productExplanation-copy {
+   padding-right: 3.5rem;
+
+   @include media-query($medium-up) {
+     padding-left: $column-gutter;
+     padding-right: $column-gutter / 2;
+   }
+
+    h1, p { 
+      @include media-query($medium-up) {
+        right: -1.5rem;
+      }
+    }
+  }
+
+  .productExplanation-accent {
+
+    @include media-query($medium-up) {
+      left: auto;
+      margin: 0; 
+      right: 14.5%;
+    }
+
+    @include media-query($large-up) {
+      right: 30.5%
+    } 
+  }
+}
+
+
+
 .productExplanation--right {
-  padding-left: $column-gutter; 
-  padding-right: 0; 
+  padding-left: 3.5rem; 
+
+  @include media-query($medium-up) {
+    padding-left: 0; 
+  }
+  
+  .productExplanation-accent {
+    
+    @include media-query($medium-up) {
+      left: 5%;
+      right: auto;
+    }
+
+    @include media-query($large-up) {
+      left: 22.5%;
+    } 
+  }
 
   .productExplanation-inner { 
     &:before {
@@ -780,5 +894,227 @@ $closeWidth: 2.1rem;
       }
     }
   }
+
+  .productExplanation-copy {
+   padding-left: 3.5rem; 
+
+    @include media-query($medium-up) {
+      padding-right: $column-gutter / 2;
+      padding-left: $column-gutter;
+    }
+
+    @include media-query($large-up) {
+      padding-right: 0; 
+    }
+
+    h1, p { 
+      @include media-query($medium-up) {
+        left: $column-gutter * -1;
+      }
+    }
+  }
 }
+
+
+
+
+/*------------------------------------*\
+    #Shipping Announcement
+\*------------------------------------*/
+
+.shippingAnnouncement {
+  position: relative;
+  width: 100%; 
+  padding-right: $column-gutter / 2; 
+  padding-left: $column-gutter / 2; 
+  margin-top: rem-calc($level7 + $level1); 
+
+  @include media-query($medium-up) {
+    padding: 0; 
+    margin-bottom: rem-calc($level7); 
+    margin-top: rem-calc($level7); 
+  }
+
+  @include media-query($large-up) {
+    margin-top: rem-calc($level7 + $level7); 
+    margin-bottom: rem-calc($level7 + $level7); 
+  }
+
+  .shippingAnnouncement-inner {
+    position: relative;
+    &:before {
+      content: " ";
+      background-color: rgb(56, 54, 65);
+      width: 100%;
+      height: 100%; 
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+
+      @include media-query($medium-up) {
+        left: 0; 
+        width: 86%;
+        height: 94%;
+        margin-top: 3%;
+        margin-bottom: 3%;
+      }
+
+      @include media-query($large-up) {
+        width: 80%; 
+      }
+    }
+  }
+  
+  .shippingAnnouncement-image {
+    position: relative;
+    transform: scale(1.25); 
+    margin-bottom: rem-calc($level7); 
+    padding-bottom: 59.5%; 
+    overflow: hidden;
+    background-color: $senaryColor;
+
+    img {
+      position: absolute;
+      top: 0; 
+      bottom: 0; 
+      right: 0; 
+      left: 0; 
+      //visibility: hidden; 
+      will-change: transform; 
+    }
+
+    @include media-query($medium-up) {
+      //top: rem-calc(-40px);
+      margin-bottom: 0; 
+      transform: scale(1.2); 
+      padding-bottom: 66%;
+      //right: -.5rem;
+    }
+
+    @include media-query($large-up) {
+      //top: rem-calc(-60px); 
+    }
+  }
+
+  .shippingAnnouncement-copy {
+    position: relative;
+    max-width: rem-calc(370px);
+    padding-bottom: $column-gutter / 2; 
+    margin-bottom: 0; 
+
+    @include media-query($medium-up) {
+      margin-bottom: 0; 
+      max-width: 13rem;
+      margin-right: auto; 
+      margin-left: auto; 
+      display: block; 
+      padding: rem-calc($level7); 
+      padding-left: 0; 
+      padding-right: 0;
+    }
+  
+    @include media-query($large-up) {
+      max-width: 19rem; 
+      padding-left: rem-calc($level4);  
+      padding-right: rem-calc($level4); 
+      padding-top: rem-calc($level7 + $level3);
+      padding-bottom: rem-calc($level7 + $level3); 
+    }
+
+    h1 {
+      font-family: $tertiary-font-family; 
+      margin-bottom: rem-calc($level2);
+      will-change: transform; 
+
+      @include media-query($medium-up) {
+        @include h2(); 
+      }
+
+      @include media-query($large-up) {
+        @include h1(); 
+      }
+    }
+
+    p {
+      margin-bottom: 0; 
+      will-change: transform; 
+      @include h4(); 
+    }
+  }
+}
+
+
+
+/*------------------------------------*\
+    #Product Art 
+\*------------------------------------*/
+
+.productArt {
+  .productArt-headline {
+    font-family: $tertiary-font-family; 
+    @include text-kilo(); 
+
+    @include media-query($medium-up) {
+      @include text-mega(); 
+    }
+
+    @include media-query($large-up) {
+      @include text-giga(); 
+    }
+  }
+
+  .productArt-img {
+    margin-bottom: rem-calc($level4); 
+    background-color: $senaryColor;
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 59%; 
+
+    img {
+      position: absolute;
+      top: 0; 
+      bottom: 0; 
+      left: 0; 
+      right: 0; 
+      width: 100%; 
+    }
+
+    @include media-query($medium-up) {
+      padding-bottom: 53.5%; 
+      margin-bottom: rem-calc($level5); 
+    }
+
+    @include media-query($large-up) {
+      padding-bottom: 45.5%; 
+      margin-bottom: rem-calc($level6); 
+    }
+  }
+
+  .productArt-paragraph  {
+    width: 84%;
+    margin-right: auto;
+    margin-left: auto; 
+    margin-bottom: rem-calc($level4); 
+
+    @include media-query($medium-up) {
+      max-width: 80%; 
+      margin-bottom: rem-calc($level5); 
+    }
+
+    @include media-query($large-up) {
+      width: rem-calc(520px);
+      bottom: -7.875rem;
+      margin-bottom: rem-calc($level6); 
+      @include h4(); 
+    }
+  }
+
+  .productArt-icon {
+    text-align: center; 
+    display: block; 
+    width: 100%;
+  }
+}
+
 

@@ -76,10 +76,10 @@ Support website: http://help.csell.co
   
                             <div class="productThumb-inner">
                               <div class="productThumb-bg">
-                               <img src="{{ images.main.src}}" alt="{{title}}" data-sizes="auto" data-product-img>
+                               <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ images.main.src}}" alt="{{title}}" data-sizes="auto" data-product-img  class="lazyload">
                                 {{#if  images.secondary}}
                                 <div class="productThumb-bg-secondaryImg">
-                                  <img src="{{ images.secondary.src}}" alt="{{title}}" data-sizes="auto"   data-product-img>
+                                  <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ images.secondary.src}}" alt="{{title}}" data-sizes="auto"  class="lazyload" data-product-img>
                                 </div>
                                 {{/if}}
                               </div>
@@ -273,7 +273,7 @@ xsellSettings.xstitle = "";
         console.log(products); 
 
   
-        for(var i = 0; i < products.length - 1; i++) {
+        for(var i = 0; i < products.length; i++) {
           /* Hack to get product image thumbnail
            *   - If image is not null
            *     - Remove file extension, add _large, and re-add extension
@@ -335,6 +335,10 @@ xsellSettings.xstitle = "";
             // vendor: cartItem.vendor
           };
 
+         if(i == 4) {
+            break;
+            console.log('hit 5'); 
+          }
 
           items.push(item); 
         }
