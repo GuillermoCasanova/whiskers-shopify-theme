@@ -17,7 +17,7 @@
                 <source media="(min-width: 0) and (max-width: 639px)"
                         data-srcset="{{'aglets-small.png' | asset_url}}">
                               
-                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                <img src=" "
                      class="lazyload"
                      alt="Lion biting the aglets on a Whiskers lace." 
                      data-lion
@@ -67,7 +67,7 @@
                 <source media="(min-width: 0) and (max-width: 639px)"
                         data-srcset="{{'weave-small.png' | asset_url}}">
                      
-                  <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+                  <img src=""
                      alt="Chatter teeth pulling weave." 
                      class="lazyload"
                      data-chatter-teeth
@@ -176,7 +176,7 @@
               <div class="shippingAnnouncement-copy">
                 <h1 class="headline" data-headline>Why only get 1 pair of laces?</h1>
                 <p data-body>
-                  We know just 1 pair isn’t enough, so enjoy free shipping on orders over $25. 
+                 Since 1 pair simply isn’t enough, enjoy free shipping on orders over $25! 
                 </p>
               </div>
             </div>
@@ -209,7 +209,6 @@
                     data-srcset="{{'productArt-boot-small.png' | asset_url}}">
 
             <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                 data-sizes="auto" 
                  alt="Whiskers Laces Artshot of boot with blue laces" 
                  class="lazyload"
                  data-image
@@ -229,7 +228,6 @@
                     data-srcset="{{'productArt-shoe-small.png' | asset_url}}">
 
             <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                 data-sizes="auto" 
                  alt="Whiskers Laces Artshot of shoe with red laces" 
                  class="lazyload"
                  data-image
@@ -283,12 +281,11 @@ $(window).on('load', function() {
 
     var $container = $(container); 
     var $lion = $(selectors.lion); 
+    var animCtrl = new ScrollMagic.Controller(); 
+    var copyAnimCtrl = new ScrollMagic.Controller(); 
 
+    $container.find('.lazyload').on('lazyloaded', function() {
 
-    $container.imagesLoaded().done(function() {
-
-      var animCtrl = new ScrollMagic.Controller(); 
-      var copyAnimCtrl = new ScrollMagic.Controller(); 
 
       function activateAgletAnim(animCtrl) {
 
@@ -314,22 +311,6 @@ $(window).on('load', function() {
         activateAgletAnim(animCtrl);
       }
 
-
-      //
-      // Code to animate the section copy when it enters the page
-      //
-      var sectionAnim  = new TimelineMax()
-            .from($container.find(selectors.headline), .2, {y: '18px', opacity: 0}, .1)
-            .from($container.find(selectors.paragraph), .2, {y: '18px', opacity: 0}, '-=.1');
-
-      var sectionScene = new ScrollMagic.Scene({
-          triggerElement: container, 
-          triggerHook: 'onCenter'
-      })
-      .setTween(sectionAnim)
-      .addTo(copyAnimCtrl); 
-
-
      $(window).on('resize', function() {
         animCtrl.destroy(true); 
         animCtrl = new ScrollMagic.Controller(); 
@@ -342,23 +323,25 @@ $(window).on('load', function() {
 
     }); 
 
+    //
+    // Code to animate the section copy when it enters the page
+    //
+    var sectionAnim  = new TimelineMax()
+          .from($container.find(selectors.headline), .2, {y: '18px', opacity: 0}, .1)
+          .from($container.find(selectors.paragraph), .2, {y: '18px', opacity: 0}, '-=.1');
+
+    var sectionScene = new ScrollMagic.Scene({
+        triggerElement: container, 
+        triggerHook: 'onCenter'
+    })
+    .setTween(sectionAnim)
+    .addTo(copyAnimCtrl); 
+
 
   }
 
   function chatterTeethAnim(container) {
 
-    function generateFrames(framesArray) {
-      var array = JSON.parse(framesArray); 
-
-      var myImages = []; 
-
-      for(var i = 0; i  < array.length; i++){
-        myImages[i] = new Image(); 
-        myImages[i].src = array[i]; 
-      }
-
-      return array; 
-    }
 
     var selectors = {
       chatterTeeth: '[data-chatter-teeth]',
@@ -374,10 +357,24 @@ $(window).on('load', function() {
     //
     // Code to animate the chatter teeth
     //
-    $container.imagesLoaded().done(function() {
+    $container.find('.lazyload').on('lazyloaded', function() {
       function activateWeaveAnim(animCtrl) {
+        console.log('animate!!!!'); 
 
         $container.find('picture source').remove();
+
+        function generateFrames(framesArray) {
+          var array = JSON.parse(framesArray); 
+
+          var myImages = []; 
+
+          for(var i = 0; i  < array.length; i++){
+            myImages[i] = new Image(); 
+            myImages[i].src = array[i]; 
+          }
+
+          return array; 
+        }
 
         var frames = generateFrames($chatterTeethSequence.attr('data-image-steps')); 
 
@@ -409,6 +406,16 @@ $(window).on('load', function() {
       if(window.innerWidth > 640) {
         activateWeaveAnim(animCtrl);
       }
+
+      $(window).on('resize', function() {
+        animCtrl.destroy(true); 
+        animCtrl = new ScrollMagic.Controller(); 
+
+        if(window.innerWidth >= 640) {
+          activateWeaveAnim(animCtrl);
+        }
+
+      }); 
     }); 
 
     //
@@ -425,15 +432,7 @@ $(window).on('load', function() {
     .setTween(sectionAnim)
     .addTo(copyAnimCtrl); 
 
-   $(window).on('resize', function() {
-      animCtrl.destroy(true); 
-      animCtrl = new ScrollMagic.Controller(); 
 
-      if(window.innerWidth >= 640) {
-        activateWeaveAnim(animCtrl);
-      }
-
-    }); 
 
   }
 
@@ -464,7 +463,7 @@ $(window).on('load', function() {
     var animCtrl = new ScrollMagic.Controller(); 
     var copyAnimCtrl = new ScrollMagic.Controller(); 
 
-    $container.imagesLoaded().done(function() {
+    $container.find('.lazyload').on('lazyloaded', function() {
       //
       // Code to animate the spool spinning
       //
@@ -532,7 +531,6 @@ $(window).on('load', function() {
 
   function productArtShot(container) {
 
-    var self = this; 
     var animSpeed = .4;    
     var selectors = {
       headline: '[data-headline]', 
@@ -540,36 +538,40 @@ $(window).on('load', function() {
       icon: '[data-icon]'
     };
     
-    this.$container = $(container); 
-    this.animCtrl = new ScrollMagic.Controller(); 
+    var $container = $(container); 
+    var animCtrl = new ScrollMagic.Controller(); 
 
 
+    $container.find('.lazyload').on('lazyloaded', function() {
 
-    TweenMax.set(selectors.headline, {autoAlpha: 1});
-    TweenMax.set(selectors.image, {autoAlpha: 1});
-    TweenMax.set(selectors.icon, {autoAlpha: 1});
+      TweenMax.set(selectors.headline, {autoAlpha: 1});
+      TweenMax.set(selectors.image, {autoAlpha: 1});
+      TweenMax.set(selectors.icon, {autoAlpha: 1});
+
+      setTimeout(function() {
+
+        //
+        // Code to animate the lookbook art shot when it enters the page
+        //
+        var sectionAnim  = new TimelineMax()
+              .from($container.find(selectors.image), animSpeed, {y: '100%'})
+              .fromTo($container.find(selectors.headline), animSpeed, {y: '20px', opacity: 0}, {y: '0', opacity: 1}, '-=0.2')
+              .from($container.find(selectors.icon), .1, {opacity: 0});
 
 
-    //
-    // Code to animate the lookbook art shot when it enters the page
-    //
-    this.sectionAnim  = new TimelineMax()
-          .from(self.$container.find(selectors.image), animSpeed, {y: '100%'})
-          .fromTo(self.$container.find(selectors.headline), animSpeed, {y: '20px', opacity: 0}, {y: '0', opacity: 1}, '-=0.2')
-          .from(self.$container.find(selectors.icon), .1, {opacity: 0});
+        //
+        // Defining section scenes that will trigger animations
+        //
+        var sectionScene = new ScrollMagic.Scene({
+            triggerElement: container, 
+            triggerHook: 'onCenter',
+            offset: 100
+        })
+        .setTween(sectionAnim)
+        .addTo(animCtrl); 
 
-
-    //
-    // Defining section scenes that will trigger animations
-    //
-    this.sectionScene = new ScrollMagic.Scene({
-        triggerElement: container, 
-        triggerHook: 'onCenter',
-        offset: 100
-    })
-    .setTween(this.sectionAnim)
-    .addTo(this.animCtrl); 
-
+      }, 200); 
+    }); 
   }
     
 
@@ -585,14 +587,14 @@ $(window).on('load', function() {
     var $container = $(container); 
     var animCtrl = new ScrollMagic.Controller(); 
 
-    $container.imagesLoaded().done(function() {
+    //
+    // Make selectors inside container visibility normal to prepare for animation
+    //
+    for(var selector in selectors) {
+      TweenMax.set($container.find(selectors[selector]), {autoAlpha: 1});
+    }
 
-     //
-      // Make selectors inside container visibility normal to prepare for animation
-      //
-      for(var selector in selectors) {
-        TweenMax.set($container.find(selectors[selector]), {autoAlpha: 1});
-      }
+    $container.find('.lazyload').on('lazyloaded', function() {
 
       //
       // Code to animate the lookbook intro when it enters the page
@@ -613,13 +615,11 @@ $(window).on('load', function() {
   }
 
 
-  setTimeout(function() {
-      spoolStorageAnim('[data-spool-explanation]'); 
-      chatterTeethAnim('[data-weave-explanation]'); 
-      lionAnim('[data-aglet-explanation]')
+    spoolStorageAnim('[data-spool-explanation]'); 
+    chatterTeethAnim('[data-weave-explanation]'); 
+    lionAnim('[data-aglet-explanation]')
     productArtShot("[data-product-art-shot]");
     shippingAnnouncement('[data-shipping-announcement]');
-  }, 200);
 
 }); 
 //</script> 
