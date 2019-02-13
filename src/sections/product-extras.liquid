@@ -30,10 +30,10 @@
             <div class="row  small-collapse">
               <div class="small-12 columns large-9   large-centered">
                 <div class="productExplanation-copy">
-                  <h1 class="headline">
+                  <h1 class="headline" data-headline>
                     Practically Immortal Aglets
                   </h1>
-                  <p>
+                  <p data-paragraph>
                   Whiskers aglets (the ends of a shoelace that keep it together) are made of metal. Because metal is metal  \m/
                   </p>
 
@@ -56,12 +56,20 @@
   <div class="row small-collapse">
     <div class="small-12  large-11 columns medium-push-1">
       <div class="productExplanation-inner">
-
         <div class="row small-collapse">
           <div class="small-12 columns medium-6  medium-push-6">
             <div class="productExplanation-image">
-                <img src=""
+              <picture>
+
+                <source media="(min-width: 0) and (min-width: 640px)"
+                        data-srcset="{{'chatter-teeth-animation-1.png' | asset_url}}">
+
+                <source media="(min-width: 0) and (max-width: 639px)"
+                        data-srcset="{{'weave-small.png' | asset_url}}">
+                     
+                  <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
                      alt="Chatter teeth pulling weave." 
+                     class="lazyload"
                      data-chatter-teeth
                      data-image-steps = '[
                         "{{'chatter-teeth-animation-1.png' | asset_url}}",
@@ -69,16 +77,17 @@
                         "{{'chatter-teeth-animation-3.png' | asset_url}}"
                      ]'
                      >
+              </picture>     
             </div>
           </div>
           <div class="small-12 columns  medium-6  medium-pull-6">
             <div class="row  small-collapse">
               <div class="small-12 columns large-9  large-centered">
                 <div class="productExplanation-copy">
-                  <h1 class="headline">
+                  <h1 class="headline" data-headline>
                     A weave made <br>for tug-of-war
                   </h1>
-                  <p>
+                  <p data-paragraph>
                    Durable woven laces that won’t break when you need them to, you know… be functional laces and keep your shoes on your feet.
                   </p>
                   <svg class="productExplanation-accent  whiskerIcon"  style="fill: #ce1427;"  data-accent  data-index="0">
@@ -104,23 +113,16 @@
         <div class="row small-collapse">
           <div class="small-12 columns medium-6">
             <div class="productExplanation-image">
-<!--               <picture>
-                <source media="(min-width: 1024px)"
-                        data-srcset="{{'spool-large.png' | asset_url}}">
-              
-                <source media="(min-width: 640px)  and (max-width: 1023px)"
-                        data-srcset="{{'spool-medium.png' | asset_url}}">
+            <picture>
+
+                <source media="(min-width: 0) and (min-width: 640px)"
+                        data-srcset="{{'spool-frame-0.png' | asset_url}}">
 
                 <source media="(min-width: 0) and (max-width: 639px)"
                         data-srcset="{{'spool-small.png' | asset_url}}">
                               
                 <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                     data-sizes="auto" 
                      class="lazyload"
-                     alt="Spool animated pulling a lace around it.">
-              </picture>      -->  
-                <img src=""
-                     alt="Whiskers lace wrapped around a spool." 
                      data-spool
                      data-image-steps = '[
                         "{{'spool-frame-0.png' | asset_url}}",
@@ -130,17 +132,18 @@
                         "{{'spool-frame-4.png' | asset_url}}",
                         "{{'spool-frame-5.png' | asset_url}}"
                      ]'
-                     >
+                     alt="Spool animated pulling a lace around it.">
+              </picture>      
             </div>
           </div>
           <div class="small-12 columns  medium-6  ">
             <div class="row  small-collapse">
               <div class="small-12 columns large-9   large-centered">
                 <div class="productExplanation-copy">
-                  <h1 class="headline  productExplanate">
+                  <h1 class="headline" data-headline>
                   The Storage Spool
                   </h1>
-                  <p>
+                  <p data-paragraph>
                     We know you’ll be getting more than one pair, and keeping them tidy can get pretty intense. So our pairs of laces come wrapped around their own spool for maximum storage power. 
                   </p>
                   <svg class="productExplanation-accent  whiskerIcon"  style="fill: #a067e0;"  data-accent  data-index="0">
@@ -159,14 +162,14 @@
 
 
 <section>
-  <div class="shippingAnnouncement" >
+  <div class="shippingAnnouncement"  data-shipping-announcement>
     <div class="row small-collapse">
       <div class="small-12  medium-11  large-10  medium-centered  columns">
         <div class="shippingAnnouncement-inner">
           <div class="row  [  grid grid--flexDirectionColumn  med-grid--flexDirectionRow  grid--center ]">
             <div class="small-12 columns medium-7  medium-push-5"  >
               <div class="shippingAnnouncement-image">
-                <img data-src="{{ 'shipping_image.jpg' |  asset_url}}" alt="" class="lazyload">
+                <img data-src="{{ 'shipping_image.jpg' |  asset_url}}" alt="" class="lazyload" data-image>
               </div>
             </div>
             <div class="small-12  columns  medium-5  medium-pull-7">
@@ -273,7 +276,9 @@ $(window).on('load', function() {
     var self = this; 
 
     var selectors = {
-      lion: '[data-lion]'
+      lion: '[data-lion]',
+      headline: '[data-headline]',
+      paragraph: '[data-paragraph]'
     };
 
     var $container = $(container); 
@@ -281,29 +286,62 @@ $(window).on('load', function() {
 
 
     $container.imagesLoaded().done(function() {
-      //
-      // Defining the animations with ScrollMagic
-      //
-      self.animCtrl = new ScrollMagic.Controller(); 
+
+      var animCtrl = new ScrollMagic.Controller(); 
+      var copyAnimCtrl = new ScrollMagic.Controller(); 
+
+      function activateAgletAnim(animCtrl) {
+
+        //
+        // Defines the entry animations for lion
+        //
+        TweenMax.set(selectors.lion, {autoAlpha: 1});
+
+        var lionEntryAnim = new TimelineMax()
+            .from(selectors.lion, 2, {x: '-100%', ease: 'cubic-bezier(0.23, 1, 0.32, 1)'}); 
+
+
+        var pageScene = new ScrollMagic.Scene({
+              triggerElement: container,
+              triggerHook: 'onEnter',
+              duration: '90%'
+            })
+            .setTween(lionEntryAnim)
+            .addTo(animCtrl); 
+      }
+
+      if(window.innerWidth > 640) {
+        activateAgletAnim(animCtrl);
+      }
+
 
       //
-      // Defines the entry animations for lion
+      // Code to animate the section copy when it enters the page
       //
-      TweenMax.set(selectors.lion, {autoAlpha: 1});
+      var sectionAnim  = new TimelineMax()
+            .from($container.find(selectors.headline), .2, {y: '18px', opacity: 0}, .1)
+            .from($container.find(selectors.paragraph), .2, {y: '18px', opacity: 0}, '-=.1');
 
-      self.lionEntryAnim = new TimelineMax()
-          .from(selectors.lion, 2, {x: '-100%', ease: 'cubic-bezier(0.23, 1, 0.32, 1)'})
+      var sectionScene = new ScrollMagic.Scene({
+          triggerElement: container, 
+          triggerHook: 'onCenter'
+      })
+      .setTween(sectionAnim)
+      .addTo(copyAnimCtrl); 
 
 
-      self.pageScene = new ScrollMagic.Scene({
-            triggerElement: container,
-            triggerHook: 'onEnter',
-            duration: '90%'
-          })
-          .setTween(self.lionEntryAnim)
-          .addTo(self.animCtrl); 
+     $(window).on('resize', function() {
+        animCtrl.destroy(true); 
+        animCtrl = new ScrollMagic.Controller(); 
+
+        if(window.innerWidth >= 640) {
+          activateAgletAnim(animCtrl);
+        }
+
+      }); 
 
     }); 
+
 
   }
 
@@ -323,39 +361,79 @@ $(window).on('load', function() {
     }
 
     var selectors = {
-      chatterTeeth: '[data-chatter-teeth]'
+      chatterTeeth: '[data-chatter-teeth]',
+      headline: '[data-headline]',
+      paragraph: '[data-paragraph]'
     };
 
     var $container = $(container); 
     var $chatterTeethSequence = $(selectors.chatterTeeth);
+    var animCtrl = new ScrollMagic.Controller(); 
+    var copyAnimCtrl = new ScrollMagic.Controller(); 
 
-    var frames = generateFrames($chatterTeethSequence.attr('data-image-steps')); 
+    //
+    // Code to animate the chatter teeth
+    //
+    $container.imagesLoaded().done(function() {
+      function activateWeaveAnim(animCtrl) {
 
-    var frameTracker = {curImg: 0};
+        $container.find('picture source').remove();
 
-    var tween = TweenMax.to(frameTracker, .8,
-      {
-        curImg: frames.length - 1, 
-        roundProps: "curImg", 
-        repeat: 6, 
-        immediateRender: true, 
-        ease: Linear.easeNone, 
-        onUpdate: function() {
-          $chatterTeethSequence.attr('src', frames[frameTracker.curImg]);
-        }
+        var frames = generateFrames($chatterTeethSequence.attr('data-image-steps')); 
 
-      });
+        var frameTracker = {curImg: 0};
+
+        var tween = TweenMax.to(frameTracker, .8,
+          {
+            curImg: frames.length - 1, 
+            roundProps: "curImg", 
+            repeat: 6, 
+            immediateRender: true, 
+            ease: Linear.easeNone, 
+            onUpdate: function() {
+              $chatterTeethSequence.attr('src', frames[frameTracker.curImg]);
+            }
+
+          });
 
 
-    var controller = new ScrollMagic.Controller(); 
+        var scene = new ScrollMagic.Scene({
+          triggerElement: "[data-weave-explanation]", 
+          duration: "150%",
+          triggerHook: "onEnter"
+        })
+        .setTween(tween)
+        .addTo(animCtrl); 
+      }
 
-    var scene = new ScrollMagic.Scene({
-      triggerElement: "[data-weave-explanation]", 
-      duration: "150%",
-      triggerHook: "onEnter"
+      if(window.innerWidth > 640) {
+        activateWeaveAnim(animCtrl);
+      }
+    }); 
+
+    //
+    // Code to animate the section copy when it enters the page
+    //
+    var sectionAnim  = new TimelineMax()
+          .from($container.find(selectors.headline), .2, {y: '18px', opacity: 0}, .1)
+          .from($container.find(selectors.paragraph), .2, {y: '18px', opacity: 0}, '-=.1');
+
+    var sectionScene = new ScrollMagic.Scene({
+        triggerElement: container, 
+        triggerHook: 'onCenter'
     })
-    .setTween(tween)
-    .addTo(controller); 
+    .setTween(sectionAnim)
+    .addTo(copyAnimCtrl); 
+
+   $(window).on('resize', function() {
+      animCtrl.destroy(true); 
+      animCtrl = new ScrollMagic.Controller(); 
+
+      if(window.innerWidth >= 640) {
+        activateWeaveAnim(animCtrl);
+      }
+
+    }); 
 
   }
 
@@ -376,39 +454,79 @@ $(window).on('load', function() {
     }
 
     var selectors = {
-      spool: '[data-spool]'
+      spool: '[data-spool]',
+      headline: '[data-headline]',
+      paragraph: '[data-paragraph]'
     };
 
     var $container = $(container); 
     var $spoolSequence = $(selectors.spool);
+    var animCtrl = new ScrollMagic.Controller(); 
+    var copyAnimCtrl = new ScrollMagic.Controller(); 
 
-    var frames = generateFrames($spoolSequence.attr('data-image-steps')); 
+    $container.imagesLoaded().done(function() {
+      //
+      // Code to animate the spool spinning
+      //
+      function activateSpoolAnim(animCtrl) {
 
-    var frameTracker = {curImg: 0};
+        $container.find('picture source').remove();
 
-    var tween = TweenMax.to(frameTracker, .8,
-      {
-        curImg: frames.length - 1, 
-        roundProps: "curImg", 
-        immediateRender: true, 
-        ease: Linear.easeNone, 
-        onUpdate: function(event) {
-          $spoolSequence.attr('src', frames[frameTracker.curImg]);
+        var frames = generateFrames($spoolSequence.attr('data-image-steps')); 
+
+        var frameTracker = {curImg: 0};
+
+        var tween = TweenMax.to(frameTracker, .8,
+          {
+            curImg: frames.length - 1, 
+            roundProps: "curImg", 
+            immediateRender: true, 
+            ease: Linear.easeNone, 
+            onUpdate: function(event) {
+              $spoolSequence.attr('src', frames[frameTracker.curImg]);
+            }
+
+          });
+
+        var scene = new ScrollMagic.Scene({
+          triggerElement: "[data-spool-explanation]", 
+          duration: "50%",
+          triggerHook: "onCenter"
+        })
+        .setTween(tween)
+        .addTo(animCtrl); 
+      }
+
+      if(window.innerWidth > 640) {
+        activateSpoolAnim(animCtrl);
+      }
+
+      $(window).on('resize', function() {
+        animCtrl.destroy(true); 
+        animCtrl = new ScrollMagic.Controller(); 
+
+        if(window.innerWidth >= 640) {
+          activateSpoolAnim(animCtrl);
         }
 
-      });
+      });   
+    }); 
 
 
-    var controller = new ScrollMagic.Controller(); 
+    //
+    // Code to animate the section copy when it enters the page
+    //
+    var sectionAnim  = new TimelineMax()
+          .from($container.find(selectors.headline), .2, {y: '18px', opacity: 0}, .1)
+          .from($container.find(selectors.paragraph), .2, {y: '18px', opacity: 0}, '-=.1');
 
-    var scene = new ScrollMagic.Scene({
-      triggerElement: "[data-spool-explanation]", 
-      duration: "50%",
-      triggerHook: "onCenter"
+    var sectionScene = new ScrollMagic.Scene({
+        triggerElement: container, 
+        triggerHook: 'onCenter'
     })
-    .setTween(tween)
-    .addTo(controller); 
-
+    .setTween(sectionAnim)
+    .addTo(copyAnimCtrl); 
+    
   }
 
 
@@ -455,11 +573,52 @@ $(window).on('load', function() {
   }
     
 
+  function shippingAnnouncement(container) {
+    
+    var animSpeed = .4;   
+    var selectors = {
+      headline: '[data-headline]', 
+      image: '[data-image]',
+      paragraph: '[data-body]'
+    };
+
+    var $container = $(container); 
+    var animCtrl = new ScrollMagic.Controller(); 
+
+    $container.imagesLoaded().done(function() {
+
+     //
+      // Make selectors inside container visibility normal to prepare for animation
+      //
+      for(var selector in selectors) {
+        TweenMax.set($container.find(selectors[selector]), {autoAlpha: 1});
+      }
+
+      //
+      // Code to animate the lookbook intro when it enters the page
+      //
+      var sectionAnim  = new TimelineMax()
+            .from($container.find(selectors.image), animSpeed, {y: '100%'}, '-=.4')
+            .from($container.find(selectors.headline), .2, {y: '18px', opacity: 0}, .1)
+            .from($container.find(selectors.paragraph), .2, {y: '18px', opacity: 0}, '-=.1');
+
+      var sectionScene = new ScrollMagic.Scene({
+          triggerElement: container, 
+          triggerHook: 'onCenter'
+      })
+      .setTween(sectionAnim)
+      .addTo(animCtrl); 
+
+    }); 
+  }
+
+
   setTimeout(function() {
-    spoolStorageAnim('[data-spool-explanation]'); 
-    chatterTeethAnim('[data-weave-explanation]'); 
-    lionAnim('[data-aglet-explanation]')
+      spoolStorageAnim('[data-spool-explanation]'); 
+      chatterTeethAnim('[data-weave-explanation]'); 
+      lionAnim('[data-aglet-explanation]')
     productArtShot("[data-product-art-shot]");
+    shippingAnnouncement('[data-shipping-announcement]');
   }, 200);
 
 }); 
