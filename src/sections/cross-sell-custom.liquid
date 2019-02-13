@@ -39,7 +39,7 @@ Support website: http://help.csell.co
 
 
 <section class="section--lead">
-  <div data-ui-component="hello">
+  <div data-ui-component="cross-sell-container">
       <script id="xsTemplate" type="text/template">
       {% raw %}
         <div class="row small-collapse">
@@ -269,9 +269,6 @@ xsellSettings.xstitle = "";
         var selectors = {
           products: '[data-product]'
         };
-
-        console.log(products); 
-
   
         for(var i = 0; i < products.length; i++) {
           /* Hack to get product image thumbnail
@@ -347,7 +344,7 @@ xsellSettings.xstitle = "";
 
         data.items = items; 
 
-      $('[data-ui-component="hello"]').append(template(data.items))
+      $('[data-ui-component="cross-sell-container"]').append(template(data.items))
 
       setTimeout(function() {
 

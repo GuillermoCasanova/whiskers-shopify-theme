@@ -52,7 +52,7 @@
 </section>
 
 
-<section class="productExplanation  productExplanation--right  productExplanation--weave">
+<section class="productExplanation  productExplanation--right  productExplanation--weave" data-weave-explanation>
   <div class="row small-collapse">
     <div class="small-12  large-11 columns medium-push-1">
       <div class="productExplanation-inner">
@@ -60,22 +60,15 @@
         <div class="row small-collapse">
           <div class="small-12 columns medium-6  medium-push-6">
             <div class="productExplanation-image">
-              <picture>
-                <source media="(min-width: 1024px)"
-                        data-srcset="{{'weave-large.png' | asset_url}}">
-              
-                <source media="(min-width: 640px)  and (max-width: 1023px)"
-                        data-srcset="{{'weave-medium.png' | asset_url}}">
-
-                <source media="(min-width: 0) and (max-width: 639px)"
-                        data-srcset="{{'weave-small.png' | asset_url}}">
-                              
-                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                     data-sizes="auto" 
-                     class="lazyload"
+                <img src=""
                      alt="Chatter teeth pulling weave." 
+                     data-chatter-teeth
+                     data-image-steps = '[
+                        "{{'chatter-teeth-animation-1.png' | asset_url}}",
+                        "{{'chatter-teeth-animation-2.png' | asset_url}}",
+                        "{{'chatter-teeth-animation-3.png' | asset_url}}"
+                     ]'
                      >
-              </picture>   
             </div>
           </div>
           <div class="small-12 columns  medium-6  medium-pull-6">
@@ -256,3 +249,69 @@
     </div>
   </div>
 </section>
+
+
+{%javascript%}
+//<script>
+  console.log($('[data-chatter-teeth]').attr('data-image-steps')); 
+  
+  function chatterTeethAnim(container) {
+
+    function generateFrames(framesArray) {
+      var array = JSON.parse(framesArray); 
+
+      var myImages = []; 
+
+      for(var i = 0; i  < array.length; i++){
+        myImages[i] = new Image(); 
+        myImages[i].src = array[i]; 
+      }
+
+      return array; 
+    }
+
+    var selectors = {
+      chatterTeeth: '[data-chatter-teeth]'
+    };
+
+    var $container = $(container); 
+    var $chatterTeethSequence = $(selectors.chatterTeeth);
+
+    var frames = generateFrames($chatterTeethSequence.attr('data-image-steps')); 
+
+    var frameTracker = {curImg: 0};
+
+    var tween = TweenMax.to(frameTracker, .8,
+      {
+        curImg: frames.length - 1, 
+        roundProps: "curImg", 
+        repeat: 6, 
+        immediateRender: true, 
+        ease: Linear.easeNone, 
+        onUpdate: function() {
+          $chatterTeethSequence.attr('src', frames[frameTracker.curImg]);
+          console.log(frameTracker.curImg);  
+          console.log(frames[frameTracker.curImg]);
+        }
+
+      });
+
+
+    var controller = new ScrollMagic.Controller(); 
+
+    var scene = new ScrollMagic.Scene({
+      triggerElement: "[data-weave-explanation]", 
+      duration: "150%",
+      triggerHook: "onEnter"
+    })
+    .setTween(tween)
+    .addTo(controller); 
+
+  }
+
+  setTimeout(function() {
+    chatterTeethAnim('[data-weave-explanation]'); 
+  }, 2000);
+
+//</script> 
+{%endjavascript%}
