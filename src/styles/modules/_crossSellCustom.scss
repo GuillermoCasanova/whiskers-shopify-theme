@@ -1,0 +1,58 @@
+/*------------------------------------*\
+    #Collection Container
+\*------------------------------------*/
+
+.crossSellContainer {
+  max-width: rem-calc(1000px); 
+  min-height: rem-calc(380px);
+  width: 100%; 
+  margin-bottom: rem-calc(18px); 
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Collection Category Header
+\*------------------------------------*/
+
+.crossSellHeader {
+  margin-bottom: rem-calc(-18px); 
+  padding: rem-calc($level3); 
+  padding-bottom: rem-calc($level5); 
+  background-color: $secondaryColor; 
+  position: relative;
+  width: 90%;
+  margin-right: auto; 
+  margin-left: auto;  
+
+  @include media-query($large-up) {
+    padding-bottom: rem-calc($level6); 
+  }
+
+  .crossSellHeader-title {
+    padding-top: rem-calc($level1);
+    padding-bottom: rem-calc($level1);
+    padding-left: rem-calc($level1);  
+    margin-bottom: 0; 
+    text-transform: uppercase; 
+    font-family: $secondary-font-family; 
+    @include h4(); 
+
+    @include media-query($large-up) {
+      padding-left: rem-calc($level4); 
+    }
+  }
+
+  .crossSellHeader-icon {
+    right: 0; 
+    left: 0; 
+    margin: auto; 
+    top: -23px; 
+    width: rem-calc(32px);
+    position: absolute;
+  }
+}
+
+

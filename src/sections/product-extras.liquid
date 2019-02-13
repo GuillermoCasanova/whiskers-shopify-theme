@@ -188,7 +188,7 @@
 <section>
   <div class="row">
     <div class="small-12  medium-11  large-10 medium-centered  columns">
-      <div class="productArt" >
+      <div class="productArt" data-product-art-shot>
         <div class="productArt-img">
         {%for tag in product.tags%}
         
@@ -266,6 +266,7 @@
 {%javascript%}
 //<script>
 
+$(window).on('load', function() {
 
   function lionAnim(container) {
 
@@ -410,12 +411,57 @@
 
   }
 
+
+  function productArtShot(container) {
+
+    var self = this; 
+    var animSpeed = .4;    
+    var selectors = {
+      headline: '[data-headline]', 
+      image: '[data-image]',
+      icon: '[data-icon]'
+    };
+    
+    this.$container = $(container); 
+    this.animCtrl = new ScrollMagic.Controller(); 
+
+
+
+    TweenMax.set(selectors.headline, {autoAlpha: 1});
+    TweenMax.set(selectors.image, {autoAlpha: 1});
+    TweenMax.set(selectors.icon, {autoAlpha: 1});
+
+
+    //
+    // Code to animate the lookbook art shot when it enters the page
+    //
+    this.sectionAnim  = new TimelineMax()
+          .from(self.$container.find(selectors.image), animSpeed, {y: '100%'})
+          .fromTo(self.$container.find(selectors.headline), animSpeed, {y: '20px', opacity: 0}, {y: '0', opacity: 1}, '-=0.2')
+          .from(self.$container.find(selectors.icon), .1, {opacity: 0});
+
+
+    //
+    // Defining section scenes that will trigger animations
+    //
+    this.sectionScene = new ScrollMagic.Scene({
+        triggerElement: container, 
+        triggerHook: 'onCenter',
+        offset: 100
+    })
+    .setTween(this.sectionAnim)
+    .addTo(this.animCtrl); 
+
+  }
+    
+
   setTimeout(function() {
     spoolStorageAnim('[data-spool-explanation]'); 
     chatterTeethAnim('[data-weave-explanation]'); 
     lionAnim('[data-aglet-explanation]')
+    productArtShot("[data-product-art-shot]");
   }, 200);
 
-
+}); 
 //</script> 
 {%endjavascript%}

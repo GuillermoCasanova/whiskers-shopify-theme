@@ -1055,6 +1055,7 @@ $closeWidth: 2.1rem;
 .productArt {
   .productArt-headline {
     font-family: $tertiary-font-family; 
+    visibility: hidden; 
     @include text-kilo(); 
 
     @include media-query($medium-up) {
@@ -1075,6 +1076,7 @@ $closeWidth: 2.1rem;
 
     img {
       position: absolute;
+      visibility: hidden; 
       top: 0; 
       bottom: 0; 
       left: 0; 
@@ -1116,6 +1118,7 @@ $closeWidth: 2.1rem;
     text-align: center; 
     display: block; 
     width: 100%;
+    visibility: hidden; 
   }
 }
 
