@@ -1,6 +1,6 @@
 
 
-<section class="productExplanation  productExplanation--aglets  productExplanation--left">
+<section class="productExplanation  productExplanation--aglets  productExplanation--left" data-aglet-explanation>
   <div class="row small-collapse">
     <div class="small-12  large-11 columns medium-pull-1">
       <div class="productExplanation-inner">
@@ -18,9 +18,9 @@
                         data-srcset="{{'aglets-small.png' | asset_url}}">
                               
                 <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                     data-sizes="auto" 
                      class="lazyload"
                      alt="Lion biting the aglets on a Whiskers lace." 
+                     data-lion
                      data-image
                      >
               </picture>  
@@ -265,8 +265,47 @@
 
 {%javascript%}
 //<script>
-  console.log($('[data-chatter-teeth]').attr('data-image-steps')); 
-  
+
+
+  function lionAnim(container) {
+
+    var self = this; 
+
+    var selectors = {
+      lion: '[data-lion]'
+    };
+
+    var $container = $(container); 
+    var $lion = $(selectors.lion); 
+
+
+    $container.imagesLoaded().done(function() {
+      //
+      // Defining the animations with ScrollMagic
+      //
+      self.animCtrl = new ScrollMagic.Controller(); 
+
+      //
+      // Defines the entry animations for lion
+      //
+      TweenMax.set(selectors.lion, {autoAlpha: 1});
+
+      self.lionEntryAnim = new TimelineMax()
+          .from(selectors.lion, 2, {x: '-100%', ease: 'cubic-bezier(0.23, 1, 0.32, 1)'})
+
+
+      self.pageScene = new ScrollMagic.Scene({
+            triggerElement: container,
+            triggerHook: 'onEnter',
+            duration: '90%'
+          })
+          .setTween(self.lionEntryAnim)
+          .addTo(self.animCtrl); 
+
+    }); 
+
+  }
+
   function chatterTeethAnim(container) {
 
     function generateFrames(framesArray) {
@@ -302,8 +341,6 @@
         ease: Linear.easeNone, 
         onUpdate: function() {
           $chatterTeethSequence.attr('src', frames[frameTracker.curImg]);
-          console.log(frameTracker.curImg);  
-          console.log(frames[frameTracker.curImg]);
         }
 
       });
@@ -320,10 +357,6 @@
     .addTo(controller); 
 
   }
-
-  setTimeout(function() {
-    chatterTeethAnim('[data-weave-explanation]'); 
-  }, 200);
 
 
   function spoolStorageAnim(container) {
@@ -379,7 +412,9 @@
 
   setTimeout(function() {
     spoolStorageAnim('[data-spool-explanation]'); 
-  }, 2000);
+    chatterTeethAnim('[data-weave-explanation]'); 
+    lionAnim('[data-aglet-explanation]')
+  }, 200);
 
 
 //</script> 
