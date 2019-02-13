@@ -800,13 +800,15 @@ $closeWidth: 2.1rem;
 }
 
 .productExplanation--spool {
+  overflow: visible;
+  
   .productExplanation-image {
     @include media-query($medium-up) {
       transform: translateX(50px) translateY(50px) scale(1.1);
     }
 
     @include media-query($large-up) {
-      transform: translateX(110px) translateY(15px)  scale(1.2);
+      transform: translateX(110px) translateY(-45px) scale(1.3)
     }
   }
 }

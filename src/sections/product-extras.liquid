@@ -97,14 +97,14 @@
 </section>
 
 
-<section class="productExplanation  productExplanation--spool  productExplanation--left">
+<section class="productExplanation  productExplanation--spool  productExplanation--left" data-spool-explanation>
   <div class="row small-collapse">
     <div class="small-12  large-11 columns medium-pull-1">
       <div class="productExplanation-inner">
         <div class="row small-collapse">
           <div class="small-12 columns medium-6">
             <div class="productExplanation-image">
-              <picture>
+<!--               <picture>
                 <source media="(min-width: 1024px)"
                         data-srcset="{{'spool-large.png' | asset_url}}">
               
@@ -118,7 +118,19 @@
                      data-sizes="auto" 
                      class="lazyload"
                      alt="Spool animated pulling a lace around it.">
-              </picture>       
+              </picture>      -->  
+                <img src=""
+                     alt="Whiskers lace wrapped around a spool." 
+                     data-spool
+                     data-image-steps = '[
+                        "{{'spool-frame-0.png' | asset_url}}",
+                        "{{'spool-frame-1.png' | asset_url}}",
+                        "{{'spool-frame-2.png' | asset_url}}",
+                        "{{'spool-frame-3.png' | asset_url}}",
+                        "{{'spool-frame-4.png' | asset_url}}",
+                        "{{'spool-frame-5.png' | asset_url}}"
+                     ]'
+                     >
             </div>
           </div>
           <div class="small-12 columns  medium-6  ">
@@ -311,7 +323,64 @@
 
   setTimeout(function() {
     chatterTeethAnim('[data-weave-explanation]'); 
+  }, 200);
+
+
+  function spoolStorageAnim(container) {
+
+    function generateFrames(framesArray) {
+      var array = JSON.parse(framesArray); 
+
+      var myImages = []; 
+
+      for(var i = 0; i  < array.length; i++){
+        myImages[i] = new Image(); 
+        myImages[i].src = array[i]; 
+      }
+
+      return array; 
+    }
+
+    var selectors = {
+      spool: '[data-spool]'
+    };
+
+    var $container = $(container); 
+    var $spoolSequence = $(selectors.spool);
+
+    var frames = generateFrames($spoolSequence.attr('data-image-steps')); 
+
+    var frameTracker = {curImg: 0};
+
+    var tween = TweenMax.to(frameTracker, .8,
+      {
+        curImg: frames.length - 1, 
+        roundProps: "curImg", 
+        immediateRender: true, 
+        ease: Linear.easeNone, 
+        onUpdate: function(event) {
+          $spoolSequence.attr('src', frames[frameTracker.curImg]);
+        }
+
+      });
+
+
+    var controller = new ScrollMagic.Controller(); 
+
+    var scene = new ScrollMagic.Scene({
+      triggerElement: "[data-spool-explanation]", 
+      duration: "50%",
+      triggerHook: "onCenter"
+    })
+    .setTween(tween)
+    .addTo(controller); 
+
+  }
+
+  setTimeout(function() {
+    spoolStorageAnim('[data-spool-explanation]'); 
   }, 2000);
+
 
 //</script> 
 {%endjavascript%}
