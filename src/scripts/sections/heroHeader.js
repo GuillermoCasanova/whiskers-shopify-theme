@@ -13,10 +13,14 @@ theme.heroHeader = (function() {
     slideshow: '[data-slideshow]',
     slides: '[data-slide]',
     accents: '[data-accent]',
+    contentSlide: '[data-content-slide]',
     headline: '[data-headline]',
+    headlinesContainer: '[data-headlines]',
     paragraph: '[data-body]',
-    cta: '[data-cta]'
+    cta: '[data-cta]',
+    ctasContainer: '[data-ctas]'
   };
+
 
   var heroHeader = function(container) { 
 
@@ -24,63 +28,69 @@ theme.heroHeader = (function() {
     this.$slideshow = $(selectors.slideshow); 
     this.slides = this.$container.find(selectors.slides); 
     this.accents = this.$container.find(selectors.accents); 
+    this.contentSlides = this.$container.find(selectors.contentSlide); 
+    this.headlines = this.$container.find(selectors.headline);
+    this.headlinesContainer = this.$container.find(selectors.headlinesContainer);
+    this.ctas = this.$container.find(selectors.cta);
+    this.ctasContainer = this.$container.find(selectors.ctasContainer);
     this.activeSlide = 0; 
     this.slideTotal = this.slides.length;
     this.$slideshow.addClass('is-loading'); 
+    this.interval = null; 
+
+    var that = this; 
+
+
+    this.setActiveSlide = function(pId, pSlides, pContentSlides) {
+    
+      pSlides.each(function() {
+        var slide = $(this); 
+        var index = slide.data('index');
+
+        if(index == pId) {
+          slide.addClass('is-active');
+          slide.css('visibility', 'visible'); 
+          slide.removeClass('is-hidden');
+        } else if(index == 2) {
+          slide.removeClass('is-active');
+          setTimeout(function() {
+            slide.addClass('is-hidden'); 
+          }, 600); 
+        } else {
+          slide.removeClass('is-active');
+        }
+      }); 
+
+      pContentSlides.each(function() {
+        var slide = $(this); 
+        var index = slide.data('index');
+
+        setTimeout(function() {
+          if(index == pId) {
+            setTimeout(function() {
+              slide.addClass('is-active');
+              slide.removeClass('is-hidden');
+            }, 700);
+            slide.css('visibility', 'visible'); 
+          } else {
+            slide.addClass('is-hidden');
+            slide.removeClass('is-active');
+          }
+        }, 200); 
+      })
+    }; 
+
+    this.pauseSlideshow = function() {
+      clearInterval(self.interval); 
+    }; 
+
 
     this.loadSlideshow  = function() {
 
       var self = this; 
 
-      TweenMax.set(self.$container.find(selectors.headline) , {autoAlpha: 1});
-      TweenMax.set(self.$container.find(selectors.cta) , {autoAlpha: 1});
-
-      var copySectionAnim = new TimelineMax()
-      .from(self.$container.find(selectors.headline), .2, {y: '20px', opacity: 0}, '+=.8')
-      .from(self.$container.find(selectors.cta), .2, {y: '20px', opacity: 0}, '-=.1');
-
-      copySectionAnim.play(); 
-
-      var setActiveSlide = function(pId, pSlides, pAccents) {
-      
-        // var imgUrl =  $(pSlides[pId]).data('image-src'); 
-        // $(pSlides[pId]).find('[data-image]').css('background-image', 'url(' + imgUrl + ')'); 
-
-        pSlides.each(function() {
-          var slide = $(this); 
-          var index = slide.data('index');
-
-          if(index == self.activeSlide) {
-            slide.addClass('is-active');
-            slide.css('visibility', 'visible'); 
-            slide.removeClass('is-hidden');
-          } else if(index == 2) {
-            slide.removeClass('is-active');
-            setTimeout(function() {
-              slide.addClass('is-hidden'); 
-            }, 600); 
-          } else {
-            slide.removeClass('is-active');
-          }
-        }); 
-
-        pAccents.each(function() {
-          var accent = $(this); 
-          var index = accent.data('index');
-
-          setTimeout(function() {
-            if(index == self.activeSlide) {
-              accent.addClass('is-active');
-              accent.css('visibility', 'visible'); 
-              accent.removeClass('is-hidden');
-            } else {
-              accent.removeClass('is-active');
-              accent.addClass('is-hidden');
-            }
-          }, 200); 
-        }); 
-
-      }; 
+      TweenMax.set(self.$container.find(selectors.headlinesContainer) , {autoAlpha: 1});
+      TweenMax.set(self.$container.find(selectors.ctasContainer) , {autoAlpha: 1});
 
       var loadImages = function(pSlides) {
         pSlides.each(function() {
@@ -95,21 +105,21 @@ theme.heroHeader = (function() {
         loadImages(self.slides);
 
         setTimeout(function() {
-          setActiveSlide(self.activeSlide, self.slides, self.accents); 
+          self.setActiveSlide(self.activeSlide, self.slides, self.contentSlides); 
           if(self.$slideshow.hasClass('is-loading')) {
             self.$slideshow.removeClass('is-loading'); 
           }
 
-          setInterval(function() {
+          self.interval = setInterval(function() {
             self.activeSlide = self.activeSlide + 1; 
             if(self.activeSlide > self.slideTotal - 1) {
               self.activeSlide = 0;
             }
-            setActiveSlide(self.activeSlide, self.slides, self.accents); 
-          }, 4000); 
-        }, 500); 
+            self.setActiveSlide(self.activeSlide, self.slides, self.contentSlides); 
+          }, 4400); 
+        }, 200); 
       } else {
-        setActiveSlide(self.activeSlide, self.slides, self.accents); 
+        self.setActiveSlide(self.activeSlide, self.slides, self.contentSlides); 
       }
     }
 
@@ -121,9 +131,24 @@ theme.heroHeader = (function() {
     }); 
 
     this.loadSlideshow();
-
   };
+
+
+  //
+  // Events to listen to when using the theme editor 
+  //
+  heroHeader.prototype = $.extend({}, heroHeader.prototype, {
+
+    onBlockSelect: function(evt) {
+      var id = $('[data-block-id="' + evt.detail.blockId + '"]').data('index');
+      this.setActiveSlide(id, this.slides, this.accents, this.headlines, this.ctas); 
+      this.pauseSlideshow(); 
+    }
+
+  })
+
 
   return heroHeader;
 
 })();
+
