@@ -8,6 +8,7 @@
 
         <div class="pageHeader-inner">
           
+          
           <div class="pageHeader-content  grid  grid--bottom  grid--justifyLeft">
               {%if collection %}
               <h1 class="pageHeader-headline"  data-page-headline>
@@ -22,151 +23,22 @@
           </div>
 
           <div class="pageHeader-bg">
-
-            {% case collection.handle %}
-
-              {% when 'boot-laces' %}
-                <picture>
-                    
-                  <source media="(min-width: 1024px)"
-                          srcset="{{'shopHeaders--boots-all--large.png' | asset_url}}">
-                
-                  <source media="(min-width: 640px)  and (max-width: 1023px)"
-                          srcset="{{'shopHeaders--boots-all--medium.png' | asset_url}}">
-
-
-                  <source media="(min-width: 0) and (max-width: 639px)"
-                          srcset="{{'shopHeaders--boots-all--small.png' | asset_url}}">
-                                
-
-                  <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+          
+            {% if collection.image != undefined %}
+             <picture>
+                 <source media="(min-width: 1024px)"
+                         srcset="{{collection.image | img_url: '1600x'}}">
+                 <source media="(min-width: 640px)"
+                         srcset="{{collection.image | img_url: '1200x',  crop: 'left'}}">
+                <img src="{{collection.image | img_url: '800x', crop: 'left'}}"
                        data-sizes="auto" 
                        data-header-bg
-                       class="pageHeader-bg-img "
-                       alt="{{ collection.title }}" 
+                       alt="collection.image.alt" 
                        >
-                </picture>        
-
-              {% when 'diamond-weave' %}
-                <picture>
-                    
-                  <source media="(min-width: 1024px)"
-                          srcset="{{'shopHeaders--braided--large.jpg' | asset_url}}">
-                
-                  <source media="(min-width: 640px)  and (max-width: 1023px)"
-                          srcset="{{'shopHeaders--braided--medium.jpg' | asset_url}}">
-
-
-                  <source media="(min-width: 0) and (max-width: 639px)"
-                          srcset="{{'shopHeaders--braided--medium.jpg' | asset_url}}">
-                                
-
-                  <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                       data-sizes="auto" 
-                       data-header-bg
-                       class="pageHeader-bg-img "
-                       alt="{{ collection.title }}" 
-                       >
-                </picture>        
-              {% when 'solids' %}
-                <picture>
-                    
-                  <source media="(min-width: 1024px)"
-                          srcset="{{'shopHeaders--solids--large.jpg' | asset_url}}">
-                
-                  <source media="(min-width: 640px)"
-                          srcset="{{'shopHeaders--solids--medium.jpg' | asset_url}}">
-                
-                  <img src="{{'shopHeaders--solids--small.jpg' | asset_url}}"
-                       data-sizes="auto" 
-                       data-header-bg
-                       class="pageHeader-bg-img "
-                       alt="{{ collection.title }}" 
-                       >
-                </picture>      
-              {% when 'striped' %}
-                <picture>
-                    
-                  <source media="(min-width: 1024px)"
-                          srcset="{{'shopHeaders--striped--large.jpg' | asset_url}}">
-                
-                  <source media="(min-width: 640px)"
-                          srcset="{{'shopHeaders--striped--medium.jpg' | asset_url}}">
-                
-                  <img src="{{'shopHeaders--striped--small.jpg' | asset_url}}"
-                       data-sizes="auto" 
-                       data-header-bg
-                       class="pageHeader-bg-img "
-                       alt="{{ collection.title }}" 
-                       >
-                </picture>    
-              {% when 'ticked' %}
-                <picture>
-                    
-                  <source media="(min-width: 1024px)"
-                          srcset="{{'shopHeaders--ticked--large.jpg' | asset_url}}">
-                
-                  <source media="(min-width: 640px)"
-                          srcset="{{'shopHeaders--ticked--medium.jpg' | asset_url}}">
-                
-                  <img src="{{'shopHeaders--ticked--small.jpg' | asset_url}}"
-                       data-sizes="auto" 
-                       data-header-bg
-                       class="pageHeader-bg-img "
-                       alt="{{ collection.title }}" 
-                       >
-                </picture>    
-              {% when 'tailgate-collection' %}
-                <picture>
-                    
-                  <source media="(min-width: 1024px)"
-                          srcset="{{'shopHeaders--tailgate--large.jpg' | asset_url}}">
-                
-                  <source media="(min-width: 640px)"
-                          srcset="{{'shopHeaders--tailgate--medium.jpg' | asset_url}}">
-                
-                  <img src="{{'shopHeaders--tailgate--small.jpg' | asset_url}}"
-                       data-sizes="auto" 
-                       data-header-bg
-                       class="pageHeader-bg-img "
-                       alt="Whiskers Laces Tailgate Collection" 
-                       >
-                </picture>    
-              {% when 'boxes' %}
-                <picture>
-                    
-                  <source media="(min-width: 1024px)"
-                          srcset="{{'shopHeaders--fiver-boxes--large.png' | asset_url}}">
-                
-                  <source media="(min-width: 640px)"
-                          srcset="{{'shopHeaders--fiver-boxes--medium.png' | asset_url}}">
-                
-                  <img src="{{'shopHeaders--fiver-boxes--small.png' | asset_url}}"
-                       data-sizes="auto" 
-                       data-header-bg
-                       class="pageHeader-bg-img "
-                       alt="{{ collection.title }}" 
-                       >
-                </picture> 
-              {% when 'laces' %}
-                <picture>
-                    
-                  <source media="(min-width: 1024px)"
-                          srcset="{{'shopHeaders--all-laces--large.jpg' | asset_url}}">
-                
-                  <source media="(min-width: 640px)"
-                          srcset="{{'shopHeaders--all-laces--medium.jpg' | asset_url}}">
-                
-                  <img src="{{'shopHeaders--all-laces--small.jpg' | asset_url}}"
-                       data-sizes="auto" 
-                       data-header-bg
-                       class="pageHeader-bg-img "
-                       alt="{{ collection.title }}" 
-                       >
-                </picture>     
+              </picture>
               {% else %}
                 
-                {% case  page.title %}
+              {% case  page.title %}
 
                 {% when 'Lacing Guide' %}
                 <picture>
@@ -218,10 +90,9 @@
                        >
                 </picture>
 
-                {% endcase %}
-
               {% endcase %}
-
+              
+              {%endif%}
           </div>
       
         </div>

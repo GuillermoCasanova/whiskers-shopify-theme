@@ -29,6 +29,7 @@
 
 
 
+
 /*------------------------------------*\
     #Product Thumbnails 
 \*------------------------------------*/
@@ -39,7 +40,6 @@
   margin-bottom: rem-calc($level2); 
   position: relative;
   display: block; 
-  overflow: hidden; 
 
   &:hover, 
   &:focus {
@@ -107,6 +107,58 @@
     }
   }
   
+  .productThumb-tags {
+    position: absolute;
+    left: 0; 
+    top: rem-calc($level2);
+    z-index: 2; 
+
+    .productThumb-tag {
+      left: rem-calc(-6px); 
+      position: relative;
+      width: rem-calc(80px); 
+      background-color: red;
+      color: #fff;
+      font-family: $secondary-font-family; 
+      text-align: center; 
+      padding-top: rem-calc(2px); 
+      padding-bottom: rem-calc(2px); 
+      margin-bottom: rem-calc($level1);
+      text-transform: uppercase;
+      @include text-micro(); 
+
+      &:before {
+        content: " "; 
+        border-left: 8px solid transparent; 
+        border-right: 0 solid transparent; 
+        border-top: 8px solid blue; 
+        width: 0;
+        height: 0;
+        left: 0;
+        bottom: -8px; 
+        position: absolute;
+      }
+    }
+
+    .productThumb-tag--bestSeller {
+      background-color: $bestSeller; 
+      animation: tag-bg-animation-best 1.6s ease-in-out forwards infinite;
+
+      &:before {
+        border-top: 8px solid darken($bestSeller, 40%); 
+      }
+    }
+
+    .productThumb-tag--new {
+      background-color: $newPair;
+      animation: tag-bg-animation-new 1.6s ease-in-out forwards infinite;
+
+      &:before {
+        border-top: 8px solid darken($newPair, 40%); 
+      }
+    }
+  }
+
   .productThumb-addToCart {
     position: absolute;
     top: rem-calc($level2); 
@@ -129,7 +181,6 @@
       border-radius: 100%; 
       border: 2px solid $accentColor; 
       transition: all .2s cubic-bezier(0.23, 1, 0.32, 1);
-      @include text-micro(); 
 
       .icon-cart {
         height: rem-calc(24px);
@@ -191,6 +242,41 @@
 
   .productThumb-price {
     font-weight: bold; 
+  }
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Tag Animations
+\*------------------------------------*/
+
+
+@keyframes tag-bg-animation-best {
+  0% {
+    background-color: $bestSeller;
+  }
+  50% {
+    background-color: adjust-hue($bestSeller, 10deg);
+  }
+  100% {
+    background-color: $bestSeller;
+  }
+}
+
+
+
+@keyframes tag-bg-animation-new {
+  0% {
+    background-color: $newPair;
+  }
+  50% {
+    background-color: saturate($newPair, 17%);
+  }
+  100% {
+    background-color: $newPair;
   }
 }
 

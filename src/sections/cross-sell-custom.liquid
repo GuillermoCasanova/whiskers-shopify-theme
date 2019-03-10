@@ -64,8 +64,9 @@ Support website: http://help.csell.co
                         {{#each this}}
                         <li class="grid-cell">
                           <a class="productThumb  {% unless product.available %}productThumb--soldOut{% endunless %}" href="{{url}}" data-product>
-  
-                               <div class="productThumb-addToCart">
+    
+                            <div class="productThumb-inner">
+                              <div class="productThumb-addToCart">
                                   <form action="/cart/add" method="post" id="AddToCartForm"  enctype="multipart/form-data" data-thumb-add-to-cart-form>   
                                   <input type="hidden" name="id" value="{{ variants.[0].id }}">
                                     <button type="submit" name="add" id="AddToCart" data-thumb-add-to-cart-btn>
@@ -73,8 +74,7 @@ Support website: http://help.csell.co
                                     </button>
                                 </form>
                               </div>
-  
-                            <div class="productThumb-inner">
+
                               <div class="productThumb-bg">
                                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ images.main.src}}" alt="{{title}}" data-sizes="auto" data-product-img  class="lazyload">
                                 {{#if  images.secondary}}
