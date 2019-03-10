@@ -303,7 +303,7 @@
     }
 
     .mainNav-menu {
-      padding-top: rem-calc($level7 + $level2); 
+      padding-top: rem-calc($level7); 
       margin-left: 25%;
       margin-bottom: rem-calc($level4); 
       text-align: left; 
@@ -328,6 +328,10 @@
         @include media-query($medium-up) {
           margin-bottom: rem-calc($level1); 
           @include h2(); 
+        }
+
+        @include media-query($large-up) {
+          margin-bottom:0;
         }
       }
     }
@@ -417,6 +421,10 @@
         @include media-query($medium-up) {
           display: block !important; 
         }
+      }
+
+      .mainNav-dropDown-item:last-child {
+        margin-bottom: rem-calc(3px); 
       }
 
       .mainNav-dropDown-link {
