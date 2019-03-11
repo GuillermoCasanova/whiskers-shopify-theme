@@ -116,14 +116,15 @@
     .productThumb-tag {
       left: rem-calc(-6px); 
       position: relative;
-      width: rem-calc(80px); 
       background-color: red;
       color: #fff;
       font-family: $secondary-font-family; 
       text-align: center; 
       padding-top: rem-calc(2px); 
       padding-bottom: rem-calc(2px); 
-      margin-bottom: rem-calc($level1);
+      padding-left: rem-calc($level2); 
+      padding-right: rem-calc($level2); 
+      margin-bottom: rem-calc($level2);
       text-transform: uppercase;
       @include text-micro(); 
 

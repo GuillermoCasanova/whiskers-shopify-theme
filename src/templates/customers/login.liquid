@@ -3,7 +3,7 @@
 
     
     <div class="customerLoginForm" id="CustomerLoginForm">
-    <div class="customerLoginForm-inner">  
+      <div class="customerLoginForm-inner">  
             {% form 'customer_login' %}
               <h1>{{ 'customer.login.title' | t }}</h1>
           
@@ -45,7 +45,7 @@
                 <a href="#recover" id="RecoverPassword">{{ 'customer.login.forgot_password' | t }}</a>
               {% endif %}
             {% endform %}
-          </div>
+        </div>
     </div>
     
     <div class="customerLoginForm-success  form-success hide" id="ResetSuccess">
@@ -94,3 +94,16 @@
 
   </div>
 </div>
+
+
+{% if shop.customer_accounts_enabled %}
+  {% if customer  %}
+    <a href="/account">Your Account</a>
+  {% else %}
+    {{ 'Log in' | customer_login_link }}
+    {% if shop.customer_accounts_optional %}
+      <span>or</span>
+      {{ 'Create an account' | customer_register_link }}
+    {% endif %}
+  {% endif %}
+{% endif %}

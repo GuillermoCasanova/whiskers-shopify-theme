@@ -118,17 +118,7 @@
     <div class="row">
       
       <div class="small-12  columns text-center  large-text-left">
-{% if shop.customer_accounts_enabled %}
-  {% if customer  %}
-    <a href="/account">Your Account</a>
-  {% else %}
-    {{ 'Log in' | customer_login_link }}
-    {% if shop.customer_accounts_optional %}
-      <span>or</span>
-      {{ 'Create an account' | customer_register_link }}
-    {% endif %}
-  {% endif %}
-{% endif %}
+
         <div class="footer-credit">
             Tastefully Wrong | {{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }}, {{ shop.name | link_to: '/' }}
         </div>

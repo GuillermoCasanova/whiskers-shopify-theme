@@ -46,13 +46,13 @@
                             <a href="{% if collection == empty %}#{% else %}{{ collection.url }}{% endif %}" 
                                  rel="internal" class="featuredProductThumb  featuredProductThumb--{{collection.title}}">
   
-                              {% if collection.image != blank %}
+                              {% if block.settings.thumbnail != blank %}
                                 <div class="featuredProductThumb-bg">
-                                     <img data-sizes="auto"  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ collection| img_url: '360x360'}}" alt="{{collection.title}}" class="lazyload" data-collection-thumbnail>
+                                     <img data-sizes="auto"  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="{{ block.settings.thumbnail | img_url: '360x360'}}" alt="{{collection.title}}" class="lazyload" data-collection-thumbnail>
                                  </div>
                               {% elsif collection.products.first != blank %}
                                 <div class="featuredProductThumb-bg">
-                                  {{ collection.products.first | img_url: '480x480' | img_tag: collection.title }}
+                                  {{ block.settings.thumbnail | img_url: '480x480' | img_tag: collection.title }}
                                  </div>
   
                               {% elsif collection == empty %}
@@ -141,6 +141,11 @@
               "label": "Collection",
               "id": "collection",
               "type": "collection"
+            },
+            {
+              "label": "Thumbnail", 
+              "id": "thumbnail",
+              "type": "image_picker"
             }
           ]
         }
