@@ -3,8 +3,12 @@
 
 <section class="section--main  customerAccountHeader">
 
-  <div>
-    <img src="{{'icon-pattern-account-header.svg | asset_url'}}" alt="">
+  <div class="customerAccountHeader-bg">
+    <picture>
+      <source srcset="{{'icon-pattern-account-header--large.svg' | asset_url}}"
+          media="(min-width: 960px)">
+       <img src="{{'icon-pattern-account-header.svg' | asset_url}}" alt="">
+    </picture>
   </div>
 
   <div class="customerAccountHeader-inner">

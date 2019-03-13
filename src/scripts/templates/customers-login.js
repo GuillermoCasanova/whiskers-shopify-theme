@@ -96,7 +96,7 @@ theme.customerLogin = (function() {
    */
   $(selectors.showRegister).on('click', toggleRegisterView); 
   $(selectors.showLogin).on('click', toggleRegisterView);
-
+  $('body').css('overflow', 'hidden'); 
 
   /**
    *  Show/Hide Register form state  

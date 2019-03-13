@@ -5,18 +5,38 @@
 \*------------------------------------*/
 
 .customerAccountHeader {
-	padding-bottom: rem-calc($level2);
+	padding-bottom: rem-calc($level4);
 
 	@include media-query($medium-up) {
+
+	}
+	
+	.customerAccountHeader-bg {
+		position: absolute;
+		top: 0; 
+		right: 0;
+		height: rem-alc(200px);
+		width: 80vw;
+		overflow: hidden; 
+
+		img {
+			width: 100%;
+			height: 100%; 
+			object-fit: cover;
+
+			@include media-query($medium-up) {
+				transform: translateX(10vw) translateY(-10px);
+			}
+		}
+	}
+
+	.customerAccountHeader-inner {
+		padding-top: rem-calc($level7); 
 		max-width: rem-calc(870px); 
 		margin-right: auto; 
 		margin-left: auto; 
 		left: 0; 
 		right: 0; 
-	}
-
-	.customerAccountHeader-inner {
-		padding-top: rem-calc($level7); 
 
 		@include media-query($medium-up) {
 			padding-top: rem-calc($level7 + $level7); 

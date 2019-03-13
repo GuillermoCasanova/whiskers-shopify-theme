@@ -15,7 +15,10 @@
 	bottom: 0;
 	left: 0; 
 	right: 0;
-	overflow: auto;
+
+	@include media-query($large-up) {
+		overflow: hidden;
+	}	
 
 	.loginPage-logo {
 		position: absolute; 
@@ -101,9 +104,9 @@
 
 	.loginPage-primaryPanel {
 		background-color: $secondaryColor;
-		min-height: rem-calc(536px); 
-		padding-top: rem-calc($level7 + $level7);
-		padding-bottom: rem-calc($level7 + $level7);
+		min-height: rem-calc(660px); 
+		padding-top: rem-calc($level7 + $level7 + $level7);
+		padding-bottom: rem-calc($level7 + $level7 + $level7);
 		transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1);
 		position: relative;
 		z-index: 2; 
@@ -125,26 +128,23 @@
 			margin-left: auto;
 			left: 0; 
 			right: 0; 
+			opacity: 0; 
+			transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+			position: absolute;
+			left: 0;
+			right: 0;
+			margin-right: auto; 
+			margin-left: auto; 
 
-			@include media-query($medium-up) {
-				opacity: 0; 
-				transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1);
-				position: absolute;
-				left: 0;
-				right: 0;
-				margin-right: auto; 
-				margin-left: auto; 
+			&.is-showing {
+				opacity: 1;
+				z-index: 2; 
+				transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1) .4s;
+			}
 
-				&.is-showing {
-					opacity: 1;
-					z-index: 2; 
-					transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1) .4s;
-				}
-
-				&.is-hidden {
-					opacity: 0;
-					z-index: 0; 
-				}
+			&.is-hidden {
+				opacity: 0;
+				z-index: 0; 
 			}
 		}
 
@@ -294,28 +294,25 @@
 			margin-right: auto; 
 			margin-left: auto; 
 			max-width: rem-calc(340px); 
+			opacity: 0; 
+			transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+			position: absolute;
+			left: 0;
+			right: 0;
+			margin-right: auto; 
+			margin-left: auto; 
+			max-width: rem-calc(320px); 
+			
+			&.is-showing {
+				opacity: 1;
+				z-index: 1; 
+				transition: all .6s cubic-bezier(0.23, 1, 0.32, 1) .2s;
+			}
 
-			@include media-query($medium-up) {
-				opacity: 0; 
-				transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1);
-				position: absolute;
-				left: 0;
-				right: 0;
-				margin-right: auto; 
-				margin-left: auto; 
-				max-width: rem-calc(320px); 
-				
-				&.is-showing {
-					opacity: 1;
-					z-index: 1; 
-					transition: all .6s cubic-bezier(0.23, 1, 0.32, 1) .2s;
-				}
-
-				&.is-hidden {
-					opacity: 0;
-					z-index: 0; 
-					transition: all .4s cubic-bezier(0.23, 1, 0.32, 1) ;
-				}
+			&.is-hidden {
+				opacity: 0;
+				z-index: 0; 
+				transition: all .4s cubic-bezier(0.23, 1, 0.32, 1) ;
 			}
 
 			.loginOption-headline {
