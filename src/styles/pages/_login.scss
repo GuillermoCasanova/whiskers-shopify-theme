@@ -15,6 +15,7 @@
 	bottom: 0;
 	left: 0; 
 	right: 0;
+	overflow: auto;
 
 	@include media-query($large-up) {
 		overflow: hidden;
@@ -104,12 +105,16 @@
 
 	.loginPage-primaryPanel {
 		background-color: $secondaryColor;
-		min-height: rem-calc(660px); 
-		padding-top: rem-calc($level7 + $level7 + $level7);
-		padding-bottom: rem-calc($level7 + $level7 + $level7);
+		min-height: rem-calc(620px); 
+		padding-top: rem-calc($level7 + $level7 + $level7 + $level7);
+		padding-bottom: rem-calc($level7 + $level7 + $level7 + $level7);
 		transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1);
 		position: relative;
 		z-index: 2; 
+
+		&.is-showing-register {
+			min-height: 47rem;
+		}
 
 		@include media-query($medium-up) {
 			width: 55vw;

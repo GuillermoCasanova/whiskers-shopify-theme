@@ -115,25 +115,6 @@ $(document).ready(function() {
     window.lazySizesConfig.init = true;
     window.lazySizesConfig.addClasses = true;
     window.lazySizesConfig.loadMode = 1; 
-
-    // // If its not a small/mobile device, we turn on stellar paralalx effect
-    // if(window.innerWidth > 640) {
-    //     $.stellar({
-    //      horizontalScrolling: false,
-    //      verticalScrolling: true,
-    //      hideDistantElements: false,
-    //      responsive: true,
-    //      positionProperty: 'transform'
-    //     }); 
-    // }
-
-    // // Refreshes stellar positioned elements when an image is lazyloaded 
-    // $('.lazyload').on('lazyloaded', function() {
-    //   setTimeout(function() {
-    //     $.stellar('refresh'); 
-    //   }, 200); 
-    // }); 
-
   }; 
 
 

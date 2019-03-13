@@ -14,6 +14,8 @@ theme.customerAddresses = (function() {
     return;
   }
 
+
+
   // Initialize observers on address selectors, defined in shopify_common.js
   if (Shopify) {
     new Shopify.CountryProvinceSelector('AddressCountryNew', 'AddressProvinceNew', {
@@ -34,13 +36,33 @@ theme.customerAddresses = (function() {
   });
 
   // Toggle new/edit address forms
-  $('.address-new-toggle').on('click', function() {
+  $('[data-address-new-toggle]').on('click', function() {
     $newAddressForm.toggleClass('hide');
+    $('[data-address-new-toggle]').addClass('hide');
+    setTimeout(function() {
+      if(!$newAddressForm.hasClass('hide')) {
+        $('html, body').animate({
+            scrollTop: $('#AddressNewForm').offset().top - 80
+        }, 300);
+      } else {
+        window.location.hash = '';
+      }
+    }, 20);
+
   });
 
-  $('.address-edit-toggle').on('click', function() {
+  $('[data-address-new-close]').on('click', function() {
+    $newAddressForm.addClass('hide');
+    $('[data-address-new-toggle]').removeClass('hide');
+    $('html, body').animate({
+        scrollTop: $('body').offset().top
+    }, 300);
+  }); 
+
+  $('[data-address-edit-toggle]').on('click', function() {
     var formId = $(this).data('form-id');
     $('#EditAddress_' + formId).toggleClass('hide');
+    $('[data-address="' + formId + '"]').toggleClass('hide');
   });
 
   $('.address-delete').on('click', function() {

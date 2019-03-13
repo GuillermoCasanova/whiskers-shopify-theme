@@ -16,12 +16,6 @@
 
 
 /*!
- * stellar.js
- */
-// =require vendor/stellar.js
-
-
-/*!
  * lazysizes.js
  */
 // =require vendor/lazysizes.js

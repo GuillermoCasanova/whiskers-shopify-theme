@@ -109,19 +109,19 @@ $column-gutter: rem-calc(48px);
 //
 .row {
 
-  &.small--smallGutter {
-    .column,
-    .columns {
-      @include media-query($small-only) {
+  &.medium--smallGutter {
+    & > .column,
+    & >.columns {
+      @include media-query($medium-up) {
         padding-left: rem-calc(12px);
-        padding-right: rem-calc(12px);   
-      } 
+        padding-right: rem-calc(12px);      
+      }
     }
   }
 
   &.large--smallGutter {
-    .column,
-    .columns {
+    & > .column,
+    & > .columns {
       @include media-query($large-up) {
         padding-left: rem-calc(12px);
         padding-right: rem-calc(12px);   

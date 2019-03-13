@@ -5,54 +5,146 @@
 \*------------------------------------*/
 
 .customerAccountHeader {
-	padding-bottom: rem-calc($level4);
-
-	@include media-query($medium-up) {
-
-	}
+	padding-bottom: rem-calc($level2);
+	position: relative;
 	
+	@include media-query($medium-up) {
+		padding-top: rem-calc($level7  + $level5); 
+	}
+
+	@include media-query($large-up) {
+		padding-top: 0;
+	}
+
+
 	.customerAccountHeader-bg {
 		position: absolute;
 		top: 0; 
 		right: 0;
-		height: rem-alc(200px);
+		height: rem-calc(200px);
 		width: 80vw;
 		overflow: hidden; 
+		padding-bottom: rem-calc($level2); 
+		
+
+		@include media-query($medium-up) {
+			height: rem-calc(300px);
+			width: 90vw;
+		}
+
+		@include media-query($large-up) {
+			height: rem-calc(200px);
+		}
 
 		img {
 			width: 100%;
 			height: 100%; 
 			object-fit: cover;
+			transform: translateX(4vw);
 
 			@include media-query($medium-up) {
-				transform: translateX(10vw) translateY(-10px);
+				transform: translateX(14vw) translateY(-20px);
+			}
+		}
+	}
+	
+
+	.customerAccountHeader-back {
+		position: absolute;
+		top: rem-calc($level4); 
+		left: rem-calc($level4); 
+
+		@include media-query($medium-up) {
+			top: rem-calc($level5);
+		}
+
+		@include media-query($large-up) {
+			top: rem-calc($level5);
+		}
+
+		a {
+			text-transform: uppercase;
+			font-family: $secondary-font-family; 
+			color: $quintenaryColor;
+			@include text-micro(); 
+
+			&:hover, 
+			&:focus {
+				color: #fff;
 			}
 		}
 	}
 
 	.customerAccountHeader-inner {
-		padding-top: rem-calc($level7); 
-		max-width: rem-calc(870px); 
+		padding-top: rem-calc($level7 + $level5); 
+		max-width: rem-calc(600px); 
 		margin-right: auto; 
 		margin-left: auto; 
 		left: 0; 
 		right: 0; 
+		position: relative;
 
 		@include media-query($medium-up) {
+			max-width: rem-calc(720px); 
 			padding-top: rem-calc($level7 + $level7); 
 		}
+
+
+		@include media-query($large-up) {
+			max-width: rem-calc(820px); 
+		}
+
 	}
 
 	h1 {
+		margin-bottom: rem-calc($level2); 
 		@include text-kilo(); 
 	}
 }
 
 .customerInfoPanel {
 	background-color: $secondaryColor;
-	padding: rem-calc($level2);
+	padding: rem-calc($level3);
 	margin-bottom: rem-calc($level4); 
-	min-height: rem-calc(270px);
+
+	.customerInfoPanel-emptyState {
+		text-align: center; 
+		min-height: rem-calc(180px); 
+
+		p {
+			@include h6(); 
+		}
+
+		.customerInfoPanel-emptyState-cta {
+			max-width: 70%;
+			margin-right: auto; 
+			margin-left: auto; 
+			left: 0; 
+			right: 0;  
+		}
+	}
+	
+
+	.customerInfoPanel-action {
+		color: $quaternaryColor;
+		text-transform: uppercase; 
+		font-weight: bold; 
+		font-family: $secondary-font-family; 
+		padding: 0; 
+		margin-bottom: rem-calc($level2);
+		width: 100%;
+		text-align: left; 
+		@include h4(); 
+
+		&:hover, 
+		&:focus {
+			color: $accentColor;
+		}
+	}
+
+	.customerInfoPanel-action--centered {
+		text-align: center; 
+	}
 
 	@include media-query($medium-up) {
 		padding: rem-calc($level4);
@@ -61,7 +153,8 @@
 	.customerInfoPanel-title {
 		text-transform: uppercase;
 		font-weight: bold; 
-		font-family: $secondary-font-family; 
+		font-family: $secondary-font-family;
+		margin-bottom: rem-calc($level4);
 		@include h4(); 
 	}
 
@@ -70,16 +163,25 @@
 			@include h4(); 
 		}
 	}
+
+	addr {
+		@include h4(); 
+	}
 }
 
 .customerAccountMain {
 	padding-bottom: rem-calc($level7+ $level7); 
-
+	max-width: rem-calc(600px); 
+	margin-right: auto; 
+	margin-left: auto; 
+	left: 0; 
+	right: 0; 
+	
 	@include media-query($medium-up) {
-		max-width: rem-calc(870px); 
-		margin-right: auto; 
-		margin-left: auto; 
-		left: 0; 
-		right: 0; 
+		max-width: rem-calc(720px); 
+	}
+
+	@include media-query($large-up) {
+		max-width: rem-calc(820px); 
 	}
 }
