@@ -1,0 +1,358 @@
+
+
+/*------------------------------------*\
+    #Login Page
+\*------------------------------------*/
+
+
+
+.loginPage {
+	position: fixed;
+	width: 100%;
+	height: 100vh;
+	z-index: 200; 
+	top: 0; 
+	bottom: 0;
+	left: 0; 
+	right: 0;
+	overflow: auto;
+
+	.loginPage-logo {
+		position: absolute; 
+	  z-index: 200; 
+	  height: rem-calc(60px);
+	  width: 25%;
+	  top: rem-calc($level2);
+	  left: rem-calc($level2); 
+
+	  @include media-query($medium-up) {
+	   	top: rem-calc($level2);
+	  	left: rem-calc($level4); 
+	    width: 6.5rem;  
+	    height: rem-calc(80px);
+	  }
+
+	  .headerLogo-inner {
+	    width: rem-calc(60px); 
+	  }		
+	}
+
+	.loginPage-inner {
+		position: relative;
+		min-height: 100%;
+		background-color: $primaryColor;
+	}
+
+	.loginPage-close {
+		position: absolute;
+		top: rem-calc($level1);
+		right: rem-calc($level2);
+		width: rem-calc(36px);
+		height: rem-calc(36px);
+		z-index: 200; 
+	
+		@include media-query($medium-up) {
+	    background-color: tranparent;
+	    width: 4rem;
+	    height: 4rem;
+		}
+		
+		a {
+	    margin-bottom: 0;
+	    position: absolute;
+	    height: 80%;
+	    width: 80%;
+	    text-align: center;
+	    margin: auto;
+	    top: 0;
+	    bottom: 0;
+	    right: 0;
+	    left: 0;
+
+	    &:after,
+	    &:before {
+	      content: ""; 
+	      height: 2px;
+	      background-color: $accentColor; 
+	      width: 100%;  
+	      left: 0; 
+	      right: 0; 
+	      position: absolute;
+	      transition: all .2s cubic-bezier(0.23, 1, 0.32, 1); 
+	    }
+
+	    &:before {
+	      top: 50%; 
+	      transform: translateY(0) rotate(-45deg); 
+	    }
+
+	    &:after {
+	      top: 50%; 
+	      transform: translateY(0) rotate(45deg); 
+	    }
+
+	    &:hover,
+	    &:focus {
+	      transform: scale(1.1); 
+	    }
+
+		}
+	}
+
+	.loginPage-primaryPanel {
+		background-color: $secondaryColor;
+		min-height: rem-calc(536px); 
+		padding-top: rem-calc($level7 + $level7);
+		padding-bottom: rem-calc($level7 + $level7);
+		transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+		position: relative;
+		z-index: 2; 
+
+		@include media-query($medium-up) {
+			width: 55vw;
+			height: 100vh;
+		}
+
+		@include media-query($large-up) {
+			width: 68vw;
+			&.is-showing-register {
+				transform: translateX(32vw);
+			}
+		}
+		
+		.customerLogin {
+			margin-right: auto;
+			margin-left: auto;
+			left: 0; 
+			right: 0; 
+
+			@include media-query($medium-up) {
+				opacity: 0; 
+				transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+				position: absolute;
+				left: 0;
+				right: 0;
+				margin-right: auto; 
+				margin-left: auto; 
+
+				&.is-showing {
+					opacity: 1;
+					z-index: 2; 
+					transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1) .4s;
+				}
+
+				&.is-hidden {
+					opacity: 0;
+					z-index: 0; 
+				}
+			}
+		}
+
+		.customerLoginHeader {
+			text-align: center; 
+			max-width: rem-calc(520px);
+			margin-right: auto; 
+			margin-left: auto; 
+			left: 0; 
+			right: 0; 
+
+			.customerLoginHeader-headline {
+				margin-bottom: rem-calc($level1); 
+
+				@include media-query($large-up) {
+					margin-bottom: rem-calc($level4); 
+					@include text-kilo(); 
+				}
+			}
+
+			p {
+				@include media-query($large-up) {
+					margin-bottom: rem-calc($level5); 
+					@include h4(); 
+				}
+			}
+		}
+
+		.customerLoginForm {
+			max-width: rem-calc(420px);
+			margin-right: auto; 
+			margin-left: auto; 
+			left: 0; 
+			right: 0;
+
+			.customerLoginForm-headline {
+				text-transform: uppercase; 
+				font-weight: bold; 
+				margin-bottom: rem-calc($level2); 
+				@include h5(); 
+			}
+
+			.input--login {
+				
+				input,
+				label {
+					padding-left: rem-calc($level6); 
+				}
+
+				.input-icon {
+					position: absolute;
+					left: rem-calc($level2);
+					top: 15px;
+					color: $quintenaryColor; 
+					fill: $quintenaryColor;
+					display: block;
+					z-index: 4; 
+					width: rem-calc(18px);
+					height: rem-calc(18px);
+
+
+					svg {
+						width: 100%; 
+						height: 100%; 
+					}
+				}
+
+			  &.is-active {
+					
+					.input-icon {
+						color: #fff;
+						fill: #fff;
+
+					}
+
+			    &:before {
+			      width: 3px;
+			    }
+
+			    &:after {
+			      width: 100%;
+			    }
+
+			    input {
+			      outline: 2px solid transparent;
+			    }
+			  }
+
+
+			  &.is-filled {
+			    label {
+			      opacity: 0; 
+			    }
+
+			    .input-icon {
+			    	fill: $accentColor;
+			    }
+			  }
+			}
+
+			button {
+				margin-bottom: 0; 
+			}
+		}
+
+		.customerLoginForm--register {
+
+			@include media-query($medium-up) {
+				max-width: rem-calc(480px	); 
+			}
+
+			@include media-query($large-up) {
+				input {
+					margin-right: rem-calc($level2); 
+				}
+			}
+		}
+	}
+
+	.loginPage-secondaryPanel {
+		min-height: rem-calc(360px); 
+		padding-top: rem-calc($level7);
+		padding-bottom: rem-calc($level7);
+		transition: all 1s cubic-bezier(0.23, 1, 0.32, 1);
+		position: relative;
+		background-color: $primaryColor;
+		z-index: 1; 
+
+	 	@include media-query($medium-up) {
+			width: 45vw;
+			&.is-showing-register {
+				transform: translateX(-65vw);
+			}
+		}
+
+		@include media-query($large-up) {
+			width: 32vw;
+			&.is-showing-register {
+				transform: translateX(-68vw);
+			}
+		}
+
+		.loginOption {
+			text-align: center; 
+			left: 0;
+			right: 0;
+			margin-right: auto; 
+			margin-left: auto; 
+			max-width: rem-calc(340px); 
+
+			@include media-query($medium-up) {
+				opacity: 0; 
+				transition: all 1.2s cubic-bezier(0.23, 1, 0.32, 1);
+				position: absolute;
+				left: 0;
+				right: 0;
+				margin-right: auto; 
+				margin-left: auto; 
+				max-width: rem-calc(320px); 
+				
+				&.is-showing {
+					opacity: 1;
+					z-index: 1; 
+					transition: all .6s cubic-bezier(0.23, 1, 0.32, 1) .2s;
+				}
+
+				&.is-hidden {
+					opacity: 0;
+					z-index: 0; 
+					transition: all .4s cubic-bezier(0.23, 1, 0.32, 1) ;
+				}
+			}
+
+			.loginOption-headline {
+				margin-bottom: rem-calc($level1); 
+				max-width: rem-calc(280px);
+				left: 0;
+				right: 0;
+				margin-right: auto; 
+				margin-left: auto;  
+			}
+
+			button {
+				margin-bottom: 0; 
+				left: 0;
+				right: 0;
+				margin-right: auto; 
+				margin-left: auto; 
+				@include media-query($large-up) {
+					max-width: rem-calc(200px); 
+				}
+			}
+		}
+	}
+
+	.panelBg {
+		position: absolute;
+		height: 100%;
+		width: 100%;
+		top: 0;
+		left: 0; 
+		z-index: 0; 
+		overflow: hiden; 
+
+		img {
+			height: 100%;
+			width: 100%;
+			object-fit: cover; 
+		}
+	}
+}

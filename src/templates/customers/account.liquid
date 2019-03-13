@@ -1,43 +1,122 @@
-<h1>{{ 'customer.account.title' | t }}</h1>
 
-<h2>{{ 'customer.orders.title' | t }}</h2>
 
-{% paginate customer.orders by 20 %}
-  {% if customer.orders.size != 0 %}
-    <table class="responsive-table">
-      <thead>
-        <tr>
-          <th>{{ 'customer.orders.order_number' | t }}</th>
-          <th>{{ 'customer.orders.date' | t }}</th>
-          <th>{{ 'customer.orders.payment_status' | t }}</th>
-          <th>{{ 'customer.orders.fulfillment_status' | t }}</th>
-          <th>{{ 'customer.orders.total' | t }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for order in customer.orders %}
-          <tr class="responsive-table-row">
-            <td data-label="{{ 'customer.orders.order_number' | t }}">{{ order.name | link_to: order.customer_url }}</td>
-            <td data-label="{{ 'customer.orders.date' | t }}">{{ order.created_at | date: format: 'month_day_year' }}</td>
-            <td data-label="{{ 'customer.orders.payment_status' | t }}">{{ order.financial_status_label }}</td>
-            <td data-label="{{ 'customer.orders.fulfillment_status' | t }}">{{ order.fulfillment_status_label }}</td>
-            <td data-label="{{ 'customer.orders.total' | t }}">{{ order.total_price | money }}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  {% else %}
-    <p>{{ 'customer.orders.none' | t }}</p>
-  {% endif %}
 
-  {% if paginate.pages > 1 %}
-    {% include 'pagination' %}
-  {% endif %}
+<section class="section--main  customerAccountHeader">
 
-{% endpaginate %}
+  <div>
+    <img src="{{'icon-pattern-account-header.svg | asset_url'}}" alt="">
+  </div>
 
-<h2>{{ 'customer.account.details' | t }}</h2>
+  <div class="customerAccountHeader-inner">
+    <div class="row  small--smallGutter ">
+      <div class="small-12 columns">
+        <h1 class="headline">
+          Hey there,<br> {{customer.first_name}}
+        </h1>
+        <h2 class="hide-elem">{{ 'customer.account.title' | t }}</h2>
+      </div>
+    </div>
+  </div>
+</section>
 
-{{ customer.default_address | format_address }}
-
-<a href="/account/addresses">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a>
+<main class="customerAccountMain">
+  <div class="row  small--smallGutter">
+    <div class="small-12 columns">
+      <div class="row">
+  <div class="small-12 columns medium-6  end">
+    <section class="customerInfoPanel">
+      <h1 class="customerInfoPanel-title">{{ 'customer.orders.title' | t }}</h1>
+      {% paginate customer.orders by 20 %}
+      {% if customer.orders.size != 0 %}
+        <table class="responsive-table">
+          <thead>
+            <tr>
+              <th>{{ 'customer.orders.order_number' | t }}</th>
+              <th>{{ 'customer.orders.date' | t }}</th>
+              <th>{{ 'customer.orders.payment_status' | t }}</th>
+              <th>{{ 'customer.orders.fulfillment_status' | t }}</th>
+              <th>{{ 'customer.orders.total' | t }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for order in customer.orders %}
+              <tr class="responsive-table-row">
+                <td data-label="{{ 'customer.orders.order_number' | t }}">{{ order.name | link_to: order.customer_url }}</td>
+                <td data-label="{{ 'customer.orders.date' | t }}">{{ order.created_at | date: format: 'month_day_year' }}</td>
+                <td data-label="{{ 'customer.orders.payment_status' | t }}">{{ order.financial_status_label }}</td>
+                <td data-label="{{ 'customer.orders.fulfillment_status' | t }}">{{ order.fulfillment_status_label }}</td>
+                <td data-label="{{ 'customer.orders.total' | t }}">{{ order.total_price | money }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      {% else %}
+        <p>{{ 'customer.orders.none' | t }}</p>
+      {% endif %}
+    
+      {% if paginate.pages > 1 %}
+        {% include 'pagination' %}
+      {% endif %}
+    
+    {% endpaginate %}
+    
+    </section>
+  </div>
+       
+  <div class="small-12 columns medium-6  end">
+    <section class="customerInfoPanel">
+      <h1 class="customerInfoPanel-title">
+        Your Shpping Address
+      </h1>
+      {{ customer.default_address | format_address }}
+   <!--    <a href="/account/addresses">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a> -->
+    </section>
+  </div>
+  
+  <div class="small-12 columns medium-6  end">
+    <section class="customerInfoPanel">
+      <h1 class="customerInfoPanel-title">{{ 'customer.reset_password.title' | t }}</h1>
+      <div class="form-reset-password">
+  
+        {% form 'reset_customer_password' %}
+          {{ form.errors | default_errors }}
+  
+        <div class="input--secondary  input--medium"  data-input-wrapper>
+          <span class="input-icon">
+            
+          </span>
+          <label for="ResetPassword" class="hide-elem">
+            {{ 'customer.reset_password.password' | t }}
+          </label>
+          <input type="password"
+            name="customer[password]"
+            id="ResetPassword"
+            class="{% if form.errors contains 'password' %}input-error{% endif %}"
+            placeholder="{{ 'customer.reset_password.password' | t }}">
+        </div>
+        <div class="input--secondary  input--medium"  data-input-wrapper>
+  
+        <label for="PasswordConfirmation" class="label-hidden">
+          {{ 'customer.reset_password.password_confirm' | t }}
+        </label>
+        <input type="password"
+          name="customer[password_confirmation]"
+          id="PasswordConfirmation"
+          class="{% if form.errors contains 'password_confirmation' %}input-error{% endif %}"
+          placeholder="{{ 'customer.reset_password.password_confirm' | t }}">
+        </div>
+  
+          <button type="submit" class="button--primary  button--expanded  button--medium"  data-text=" {{ 'customer.reset_password.submit' | t }}">
+            {{ 'customer.reset_password.submit' | t }}
+          </button>
+        {% endform %}
+      </div>
+    </section>
+  </div>
+        
+   <!--      
+          <p>{{ 'customer.reset_password.subtext' | t: email: email }}</p>
+   --></div>
+    </div>
+  </div>
+</main>

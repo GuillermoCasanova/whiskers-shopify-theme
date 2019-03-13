@@ -284,11 +284,10 @@ select::-ms-expand {
 
   label {
     position: absolute;
-    color: #fff;
+    color: $quaternaryColor;
     top: 0; 
     margin: auto;
     bottom: 0; 
-    font-weight: bold; 
   }
 
   input {
@@ -301,6 +300,10 @@ select::-ms-expand {
     background-color: transparent;
     border: 3px solid $primaryColor; 
     color: #fff; 
+
+    &::placeholder {
+      color: $quintenaryColor;
+    }
   }
 }
 
@@ -319,6 +322,8 @@ select::-ms-expand {
 }
 
 .input--medium {
+
+  
   input {
     height: rem-calc(48px);
     padding-left: rem-calc($level2); 

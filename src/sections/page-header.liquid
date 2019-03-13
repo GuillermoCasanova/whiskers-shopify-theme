@@ -61,12 +61,12 @@
                 <picture>
                     
                   <source media="(min-width: 1024px)"
-                          srcset="{{'shopHeaders--about-us--large.png' | asset_url}}">
+                          srcset="{{'shopHeaders--about-us--large.png' | asset_img_url}}">
                 
                   <source media="(min-width: 640px)"
-                          srcset="{{'shopHeaders--about-us--medium.png' | asset_url}}">
+                          srcset="{{'shopHeaders--about-us--medium.png' | asset_img_url: '1200x',  crop: 'left'}}">
                 
-                  <img src="{{'shopHeaders--about-us--small.png' | asset_url}}"
+                  <img src="{{'shopHeaders--about-us--small.png' | asset_img_url: '800x', crop: 'left'}}"
                        data-sizes="auto" 
                        data-header-bg
                        class="pageHeader-bg-img "
@@ -77,12 +77,12 @@
                 <picture>
                     
                   <source media="(min-width: 1024px)"
-                          srcset="{{'shopHeaders--all--large.jpg' | asset_url}}">
+                          srcset="{{'shopHeaders-all.png' | asset_url}}">
                 
                   <source media="(min-width: 640px)"
-                          srcset="{{'shopHeaders--all--medium.jpg' | asset_url}}">
+                          srcset="{{'shopHeaders-all.png' | asset_url}}">
                 
-                  <img src="{{'shopHeaders--all--small.jpg' | asset_url}}"
+                  <img src="{{'shopHeaders-all.png' | asset_url}}"
                        data-sizes="auto" 
                        data-header-bg
                        class="pageHeader-bg-img "

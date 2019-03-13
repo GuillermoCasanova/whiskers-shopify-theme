@@ -1,61 +1,122 @@
 /**
  * Password Template Script
  * ------------------------------------------------------------------------------
- * A file that contains scripts highly couple code to the Password template.
+ * A file that contains scripts highly couple code to the Login template
  *
  * @namespace password
  */
 
 theme.customerLogin = (function() {
+
+  var selectors = {
+    registerForm: '[data-register-form]',
+    loginForm: '[data-login-form]',
+    signUpCta: '[data-sign-up-cta]',
+    loginCta: '[data-login-cta]',
+    showLogin: '[data-show-login]',
+    showRegister: '[data-show-register]',
+    loginPage: '[data-login]',
+    panels: '[data-panel'
+  };
+
+
   var config = {
     recoverPasswordForm: '#RecoverPassword',
     hideRecoverPasswordLink: '#HideRecoverPasswordLink'
   };
 
-  if (!$(config.recoverPasswordForm).length) {
-    return;
-  }
 
-  checkUrlHash();
-  resetPasswordSuccess();
 
-  $(config.recoverPasswordForm).on('click', onShowHidePasswordForm);
-  $(config.hideRecoverPasswordLink).on('click', onShowHidePasswordForm);
 
-  function onShowHidePasswordForm(evt) {
-    evt.preventDefault();
-    toggleRecoverPasswordForm();
-  }
+  /**
+  ** If the page has a recover password form, we activate the recover password code
+  */
+  if ($(config.recoverPasswordForm).length) {
 
-  function checkUrlHash() {
-    var hash = window.location.hash;
+    checkUrlHash();
+    resetPasswordSuccess();
 
-    // Allow deep linking to recover password form
-    if (hash === '#recover') {
+    $(config.recoverPasswordForm).on('click', onShowHidePasswordForm);
+    $(config.hideRecoverPasswordLink).on('click', onShowHidePasswordForm);
+
+
+    function onShowHidePasswordForm(evt) {
+      evt.preventDefault();
       toggleRecoverPasswordForm();
     }
-  }
 
-  /**
-   *  Show/Hide recover password form
-   */
-  function toggleRecoverPasswordForm() {
-    $('#RecoverPasswordForm').toggleClass('hide');
-    $('#CustomerLoginForm').toggleClass('hide');
-  }
+    function checkUrlHash() {
+      var hash = window.location.hash;
 
-  /**
-   *  Show reset password success message
-   */
-  function resetPasswordSuccess() {
-    var $formState = $('.reset-password-success');
+      // Allow deep linking to recover password form
+      if (hash === '#recover') {
+        toggleRecoverPasswordForm();
+      }
 
-    // check if reset password form was successfully submited.
-    if (!$formState.length) {
-      return;
+      // if(hash ==='#register') {
+      //   toggleRegisterView(); 
+      // }
     }
 
-    // show success message
-    $('#ResetSuccess').removeClass('hide');
+    /**
+     *  Show/Hide recover password form
+     */
+    function toggleRecoverPasswordForm() {
+      $('#RecoverPasswordForm').toggleClass('hide');
+      $('#CustomerLoginForm').toggleClass('hide');
+    }
+
+    /**
+     *  Show reset password success message
+     */
+    function resetPasswordSuccess() {
+      var $formState = $('.reset-password-success');
+
+      // check if reset password form was successfully submited.
+      if (!$formState.length) {
+        return;
+      }
+
+      // show success message
+      $('#ResetSuccess').removeClass('hide');
+    }
   }
+
+
+  /**
+  ** If this isn't the login page, we do nothing  beyond this point 
+  */
+  if (!$(selectors.loginPage).length) {
+    return
+  }
+
+
+  /**
+   * Buttons to show/hide register and log in forms
+   */
+  $(selectors.showRegister).on('click', toggleRegisterView); 
+  $(selectors.showLogin).on('click', toggleRegisterView);
+
+
+  /**
+   *  Show/Hide Register form state  
+   */
+   function toggleRegisterView() {
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+    $('.loginPage-inner').scrollTop(0);
+    $('.loginPage').scrollTop(0);
+
+    $(selectors.registerForm).toggleClass('is-showing'); 
+    $(selectors.loginForm).toggleClass('is-showing'); 
+    $(selectors.signUpCta).toggleClass('is-showing'); 
+    $(selectors.loginCta).toggleClass('is-showing'); 
+    $(selectors.registerForm).toggleClass('is-hidden'); 
+    $(selectors.loginForm).toggleClass('is-hidden'); 
+    $(selectors.signUpCta).toggleClass('is-hidden'); 
+    $(selectors.loginCta).toggleClass('is-hidden'); 
+
+    
+    $(selectors.panels).toggleClass('is-showing-register'); 
+   }
+
 })();

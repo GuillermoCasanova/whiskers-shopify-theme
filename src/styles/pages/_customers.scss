@@ -1,0 +1,65 @@
+
+
+/*------------------------------------*\
+    #Customer Account Pages
+\*------------------------------------*/
+
+.customerAccountHeader {
+	padding-bottom: rem-calc($level2);
+
+	@include media-query($medium-up) {
+		max-width: rem-calc(870px); 
+		margin-right: auto; 
+		margin-left: auto; 
+		left: 0; 
+		right: 0; 
+	}
+
+	.customerAccountHeader-inner {
+		padding-top: rem-calc($level7); 
+
+		@include media-query($medium-up) {
+			padding-top: rem-calc($level7 + $level7); 
+		}
+	}
+
+	h1 {
+		@include text-kilo(); 
+	}
+}
+
+.customerInfoPanel {
+	background-color: $secondaryColor;
+	padding: rem-calc($level2);
+	margin-bottom: rem-calc($level4); 
+	min-height: rem-calc(270px);
+
+	@include media-query($medium-up) {
+		padding: rem-calc($level4);
+	}
+
+	.customerInfoPanel-title {
+		text-transform: uppercase;
+		font-weight: bold; 
+		font-family: $secondary-font-family; 
+		@include h4(); 
+	}
+
+	p {
+		@include media-query($large-up) {
+			@include h4(); 
+		}
+	}
+}
+
+.customerAccountMain {
+	padding-bottom: rem-calc($level7+ $level7); 
+
+	@include media-query($medium-up) {
+		max-width: rem-calc(870px); 
+		margin-right: auto; 
+		margin-left: auto; 
+		left: 0; 
+		right: 0; 
+	}
+}

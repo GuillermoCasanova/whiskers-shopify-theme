@@ -103,6 +103,34 @@ $column-gutter: rem-calc(48px);
 }
 
 
+
+//
+// Slimmer Gutters
+//
+.row {
+
+  &.small--smallGutter {
+    .column,
+    .columns {
+      @include media-query($small-only) {
+        padding-left: rem-calc(12px);
+        padding-right: rem-calc(12px);   
+      } 
+    }
+  }
+
+  &.large--smallGutter {
+    .column,
+    .columns {
+      @include media-query($large-up) {
+        padding-left: rem-calc(12px);
+        padding-right: rem-calc(12px);   
+      }
+    }
+  }
+}
+
+
 // This is a small hack used to get images to appear
 // in the about our lace section on the homepage. Not be used unless
 // needed to browser-specific bugs. 
