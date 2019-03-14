@@ -1,6 +1,6 @@
 
 
-<div class="emailPopUp" data-section-id="{{ section.id }}" data-section-type="email_popup" data-email-popup>
+<div class="emailPopUp" data-section-id="{{ section.id }}" data-section-type="email_popup" data-email-popup data-frequency="{{settings.pop_up_frequency }}">
 	<div class="emailPopUp-overlay  grid  grid--center   grid--justifyCenter" data-close-modal>
 		<div class="emailPopUp-modal">
 
@@ -72,6 +72,10 @@
 //<script>
 	$(document).ready(function() {
 
+
+		var popUpFrequency = $('.emailPopUp').data('frequency');
+		var modalSessionCookie = 'first-time-visitor-saw-pop-up'; 
+
 		var emailPopUp = {
 		
 			selectors:  {
@@ -84,9 +88,13 @@
 
 				$('body').css('overflow', 'hidden');
 
-				var modalSessionCookie = 'saw-email-pop-up'; 
-
-				sessionStorage['saw-email-pop-up'] = modalSessionCookie; 
+				if(popUpFrequency === 'first-timers-only') {
+					sessionStorage.removeItem('saw-pop-up', modalSessionCookie); 
+					localStorage.setItem('saw-pop-up', modalSessionCookie); 
+				} else {
+					sessionStorage.setItem('saw-pop-up', modalSessionCookie); 
+					localStorage.removeItem('saw-pop-up', modalSessionCookie); 		
+				}
 
 		    this.animCtrl = null;
 		    this.imageEntryAnim = null; 
@@ -127,10 +135,18 @@
 				$(this.selectors.emailPopup).addClass('is-closed');
 				$('body').css('overflow', 'visible');
 			}
-		}; 
+		}; 	
 
 
-		if(sessionStorage['saw-email-pop-up']) {
+		function setCheck() {
+			if(popUpFrequency === 'first-timers-only') {
+				return localStorage.getItem('saw-pop-up')
+			} else {
+				return sessionStorage.getItem('saw-pop-up')
+			}
+		}
+
+		if(setCheck()) {
 			return 
 		} else {
 			setTimeout(function() {

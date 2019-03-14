@@ -142,7 +142,8 @@
     }
 
     .productThumb-tag--bestSeller {
-      background-color: $bestSeller; 
+      color: $bestSeller; 
+      background-color: $senaryColor;
       animation: tag-bg-animation-best 1.6s ease-in-out forwards infinite;
 
       &:before {
@@ -151,7 +152,8 @@
     }
 
     .productThumb-tag--new {
-      background-color: $newPair;
+      color: $newPair;
+      background-color: $senaryColor;
       animation: tag-bg-animation-new 1.6s ease-in-out forwards infinite;
 
       &:before {
@@ -257,13 +259,13 @@
 
 @keyframes tag-bg-animation-best {
   0% {
-    background-color: $bestSeller;
+    color: $bestSeller;
   }
   50% {
-    background-color: adjust-hue($bestSeller, 10deg);
+    color: adjust-hue($bestSeller, 10deg);
   }
   100% {
-    background-color: $bestSeller;
+    color: $bestSeller;
   }
 }
 
@@ -271,13 +273,13 @@
 
 @keyframes tag-bg-animation-new {
   0% {
-    background-color: $newPair;
+    color: $newPair;
   }
   50% {
-    background-color: saturate($newPair, 17%);
+    color: saturate($newPair, 17%);
   }
   100% {
-    background-color: $newPair;
+    color: $newPair;
   }
 }
 
