@@ -18,7 +18,6 @@
 
     <header role="banner" class="newsArticle-header">
       <div class="newsArticle-header-inner">
-        <h1 class="headline  newsArticle-header-headline">{{ article.title }}</h1>
       </div>
       {% if article.image %}
        <div class="newsArticle-header-featuredImg"> {{ article | img_url: '1024x1024' | img_tag: article.title }}</div>
@@ -27,18 +26,31 @@
 
     <div class="newsArticle-content">
       <div class="row">
-        <div class="small-12 large-11  large-centered columns">
-            
-            <div class="newsArticle-details">
-              {% capture date %}{{ article.published_at | time_tag: format: 'month_day_year' }}{% endcapture %}
-              <p >{{ 'blogs.article.author_on_date_html' | t: author: article.author, date: date }}</p>
+        <div class="small-12 columns">
+            <div class="row">
+              <div class="small-12 large-9  large-push-3 columns">
+               <h1 class="headline  newsArticle-header-headline">{{ article.title }}</h1>
+              </div>
             </div>
-          
-            
-            <div class="rte" itemprop="articleBody">
-              {{ article.content }}
+            <div class="row">
+              <div class="small-12 columns">  
+                <div class="row">
+                  <div class="smal-12 columns large-2">
+
+                    <div class="newsArticle-details">
+                      {% capture date %}{{ article.published_at | time_tag: format: 'month_day_year' }}{% endcapture %}
+                      <p >{{ 'blogs.article.author_on_date_html' | t: author: article.author, date: date }}</p>
+                    </div>
+                  </div>
+
+                  <div class="small-12 columns large-9">
+                    <div class="rte" itemprop="articleBody">
+                      {{ article.content }}
+                    </div>
+                  </div>
+                </div>
             </div>
-          
+            </div>
             {% if article.tags.size > 0 %}
               <ul>
                 {% for tag in article.tags %}
@@ -50,7 +62,7 @@
             {% endif %}
           
             {% if settings.social_sharing_blog %}
-              {% include 'social-sharing', share_title: article.title, share_permalink: article.url, share_image: article.image %}
+              {% include 'social-sharing-product', share_title: article.title, share_permalink: article.url, share_image: article.image %}
             {% endif %}
           
             {% if blog.comments_enabled? %}

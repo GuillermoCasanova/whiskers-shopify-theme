@@ -113,7 +113,7 @@
 		z-index: 2; 
 
 		&.is-showing-register {
-			min-height: 47rem;
+			//min-height: 47rem;
 		}
 
 		@include media-query($medium-up) {

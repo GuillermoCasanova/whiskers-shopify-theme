@@ -11,6 +11,8 @@
 	padding-top: rem-calc($level7 + $level7 + $level7); 
 	padding-bottom: rem-calc($level7); 
 
+
+
 	@include media-query($large-up) {
 		padding-top: rem-calc($level7 + $level7); 
 	}
@@ -136,17 +138,20 @@
 
 .newsArticle {
 
-	.newsArticle-inenr {
-
-	}
 
 	.newsArticle-header {
 		position: relative;
-		padding-bottom: 56.8%;
+		padding-bottom: 60.8%;
+		min-height: rem-calc(320px); 
 
 		@include media-query($medium-up) {
 			padding-bottom: 0;
 			height: 60vh;
+
+		}
+		
+		@include media-query($large-up) {
+			height: 50vh;
 		}
 
 		.newsArticle-header-inner {
@@ -154,6 +159,8 @@
 			position: absolute;
 			width: 100%;
 			height: 100%;
+			padding-right: rem-calc($level4); 
+			padding-left: rem-calc($level4); 
 
 			@include media-query($large-up) {
 				max-width: 48rem;
@@ -164,15 +171,7 @@
 			}
 		}
 
-		.newsArticle-header-headline {
-			position: absolute;
-			bottom: rem-calc($level2);
-			left: rem-calc($level2);
 
-			@include media-query($large-up) {
-				@include text-giga();
-			}
-		}
 
 		.newsArticle-header-featuredImg {
 			position: absolute;
@@ -195,9 +194,39 @@
 	.newsArticle-content {
 		background-color: $senaryColor;
 		margin-bottom: rem-calc($level7 + $level7); 
+		padding-right: rem-calc($level4); 
+		padding-left: rem-calc($level4); 
+		padding-top: rem-calc($level4); 
+		margin-top: rem-calc(-120px); 
+		z-index: 3; 
+		position: relative;
+		padding-bottom: rem-calc($level7 + $level7); 
 
-		
+
 		@include media-query($medium-up) {
+		
+
+		.newsArticle-header-headline {
+			font-family: $tertiary-font-family; 
+			text-transform: none; 
+			margin-bottom: rem-calc($level2); 
+			@include text-kilo();
+
+			@include media-query($medium-up) {
+				margin-bottom: rem-calc($level4); 
+				@include text-giga();
+			}
+		}
+
+		.newsArticle-details {
+			color: $quintenaryColor;
+			margin-bottom: rem-calc($level7); 
+			@include text-micro();
+			p {
+				@include text-micro();
+			}
+		}
+
 
 			p {
 				@include h4();
@@ -212,7 +241,8 @@
 		}
 
 		@include media-query($large-up) {
-			max-width: 48rem;
+			max-width: 56rem;
+			padding-top: rem-calc($level7 + $level3); 
 			margin-right: auto;
 			margin-left: auto; 
 		}
