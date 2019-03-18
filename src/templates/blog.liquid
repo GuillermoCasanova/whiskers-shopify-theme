@@ -6,22 +6,41 @@
     {% capture blog_title %}{{ blog.title | link_to: blog.url }} &mdash; {{ current_tags.first }}{% endcapture %}
   {% endif %}
 
-  <h1>{{ blog_title }}</h1>
+<div class="newsHeader">
+  <div class="newsHeader-bg">
+    <picture>
+      <img src="{{'newsHeader-bg.svg' | asset_url}}" alt="">
+    </picture>
+  </div>
+  <div class="newsHeader-inner">
+    <div class="row">
+      <div class="small-12 columns">
+        <h1 class="headline  newsHeader-headline">{{ blog_title }}</h1>
+      </div>
+    </div>
+  </div>
+</div>
 
   {% if blog.all_tags.size > 0 %}
-    <h2>{{ 'blogs.general.categories' | t }}</h2>
-
-    <ul>
-      {% for tag in blog.all_tags %}
-
-        {% if current_tags contains tag %}
-          <li>{{ tag }}</li>
-        {% else %}
-          <li>{{ tag | link_to_tag: tag }}</li>
-        {% endif %}
-
-      {% endfor %}
-    </ul>
+<div>
+  <div class="row">
+    <div class="small-12 columns">
+      <h2>{{ 'blogs.general.categories' | t }}</h2>
+      
+      <ul>
+        {% for tag in blog.all_tags %}
+      
+          {% if current_tags contains tag %}
+            <li>{{ tag }}</li>
+          {% else %}
+            <li>{{ tag | link_to_tag: tag }}</li>
+          {% endif %}
+      
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
   {% endif %}
 
 
@@ -30,60 +49,75 @@
   Article Previews
   ====================
   {% endcomment %}
+<main class="newsContainer">
+  <ul class="newsContainer-inner  row">
+    {% for article in blog.articles %}
+    <li class="small-12 columns">
+      <article class="newsPostThumb">
+        <div class="newsPostThumb-inner  [ grid  grid--flexDirectionColumn  med-grid--flexDirectionRowReverse ]">
 
-  {% for article in blog.articles %}
-    <h3>
-      <a href="{{ article.url }}">{{ article.title }}</a>
-    </h3>
-
-    {% capture date %}{{ article.published_at | time_tag: format: 'month_day_year' }}{% endcapture %}
-
-    <p>
-      {{ 'blogs.article.author_on_date_html' | t: author: article.author, date: date }}
-    </p>
-
-    {% if article.image %}
-      <a href="{{ article.url }}">
-        {{ article | img_url: '1024x1024' | img_tag: article.title }}
-      </a>
-    {% endif %}
-
-    <div class="rte">
-      {% if article.excerpt.size > 0 %}
-        {{ article.excerpt }}
-      {% else %}
-        <p>
-          {{ article.content | strip_html | truncatewords: 100 }}
-        </p>
-      {% endif %}
-    </div>
-
-    {% if blog.comments_enabled? or article.tags.size > 0 %}
-      <ul>
-        {% if blog.comments_enabled? %}
-          <li>
-            <a href="{{ article.url }}#comments">
-              {{ 'blogs.comments.with_count' | t: count: article.comments_count }}
+          {% if article.image %}
+            <a href="{{ article.url }}" class="newsPostThumb-featuredImg">
+              {{ article | img_url: '1024x1024' | img_tag: article.title }}
             </a>
-          </li>
-        {% endif %}
+          {% endif %}
 
-        {% if article.tags.size > 0 %}
-          {% for tag in article.tags %}
-            <li>
-              <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>
-              {% unless forloop.last %}, {% endunless %}
-            </li>
-          {% endfor %}
-        {% endif %}
-      </ul>
-    {% endif %}
 
-    <p>
-      <a href="{{ article.url }}">{{ 'blogs.article.read_more' | t }} &rarr;</a>
-    </p>
+          <div class="newsPostThumb-preview  grid  grid--center">
+            <div>
+             {% capture date %}{{ article.published_at | time_tag: format: 'month_day_year' }}{% endcapture %}
+             <p class="newsPostThumb-dateAuthor">
+              {{ 'blogs.article.author_on_date_html' | t: author: article.author, date: date }}
+             </p>
 
-  {% endfor %}
+              <h1 class="headline  newsPostThumb-headline">
+                <a href="{{ article.url }}">{{ article.title }}</a>
+              </h1>
+
+
+              <div class="rte">
+                {% if article.excerpt.size > 0 %}
+                  {{ article.excerpt }}
+                {% else %}
+                  <p>
+                    {{ article.content | strip_html | truncatewords: 25 }}
+                  </p>
+                {% endif %}
+              </div>
+                  
+              {% if blog.comments_enabled? or article.tags.size > 0 %}
+                <ul>
+                  {% if blog.comments_enabled? %}
+                    <li>
+                      <a href="{{ article.url }}#comments">
+                        {{ 'blogs.comments.with_count' | t: count: article.comments_count }}
+                      </a>
+                    </li>
+                  {% endif %}
+                  
+                  {% if article.tags.size > 0 %}
+                    {% for tag in article.tags %}
+                      <li>
+                        <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>
+                        {% unless forloop.last %}, {% endunless %}
+                      </li>
+                    {% endfor %}
+                  {% endif %}
+                </ul>
+              {% endif %}
+                  
+              <p>
+                <a href="{{ article.url }}">{{ 'blogs.article.read_more' | t }} &rarr;</a>
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </article>
+    </li>
+    {% endfor %}
+  </ul>
+</main>
 
   {% if paginate.pages > 1 %}
     {% include 'pagination' %}
