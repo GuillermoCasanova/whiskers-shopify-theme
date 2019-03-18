@@ -9,7 +9,9 @@
 <div class="newsHeader">
   <div class="newsHeader-bg">
     <picture>
-      <img src="{{'newsHeader-bg.svg' | asset_url}}" alt="">
+      <source srcset="{{'blog-header-bg-large.svg' | asset_url}}" media="(min-width: 961px)">
+      <source srcset="{{'blog-header-bg-medium.svg' | asset_url}}" media="(min-width: 641px)">
+      <img src="{{'blog-header-bg-small.svg' | asset_url}}" alt="Whiskers Icon Pattern" role="presentation">
     </picture>
   </div>
   <div class="newsHeader-inner">
