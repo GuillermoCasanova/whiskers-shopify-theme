@@ -248,6 +248,10 @@
 				text-transform: uppercase;
 				color: #fff;
 			}
+
+			img {
+				width: 100%;
+			}
 		}
 
 
@@ -264,6 +268,10 @@
 
 			@include media-query($medium-up) {
 				margin-bottom: rem-calc($level7); 
+			}
+
+			@include media-query($large-up) {
+				color: $quintenaryColor;
 			}
 
 			p {
@@ -319,7 +327,7 @@
   
 
   @include media-query($large-up) {
-  	top: rem-calc(-120px);
+  	top: rem-calc(-142px);
   }
   
   .newsArticle-social-item {

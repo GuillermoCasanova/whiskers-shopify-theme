@@ -49,7 +49,7 @@
   top: 4.55rem; 
   right: rem-calc($level2); 
   z-index: 10; 
-  transform: translateX(140%);
+  transform: translateX(160%);
   transition: all .2s cubic-bezier(0.23, 1, 0.32, 1);
 
   &.is-showing {

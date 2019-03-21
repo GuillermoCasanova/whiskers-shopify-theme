@@ -1,0 +1,269 @@
+<div class="loginPage-wrapper" data-login>
+  <div class="loginPage">
+    <div class="loginPage-inner  grid  grid--flexDirectionColumn  med-grid--flexDirectionRow">
+     <div class="loginPage-logo">
+        <a href="/" itemprop="url" >
+        <img src="{{'logo--whiskers--badge.svg' | asset_url}}"
+         alt="{{ section.settings.logo.alt | default: shop.name }}"
+         itemprop="logo"
+         class="headerLogo-inner">
+        </a>
+      </div>
+      <div class="loginPage-close">
+        <a href="https://www.whiskerslaces.com">
+          
+        </a>
+      </div>
+    
+      <div class="loginPage-primaryPanel   [ grid  grid--center  grid--justifyCenter ]"  data-panel>
+        <div class="customerLogin is-showing" data-login-form>
+          <div class="row">
+            <div class="small-12 columns">
+              <div class="customerLoginHeader">
+                <h1 class="headline  customerLoginHeader-headline">{{ 'customer.login.title' | t }}</h1>
+                <p>Sign in to your Whiskers account to check on your orders, manage your information and possibly get special goodies.</p>
+              </div>
+              <div class="customerLoginForm" id="CustomerLoginForm">
+                <div class="customerLoginForm-inner">  
+                  <h2 class="customerLoginForm-headline">
+                    Log In
+                  </h2>
+                      {% form 'customer_login' %}
+                        
+                        {% if form.errors %}
+                          <div class="customerLoginForm-errors  grid  grid--top  grid--flexDirectionRow">
+                            
+                            <div class="customerLoginForm-errors-icon">
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 486.463 486.463"><path d="M243.225 333.382c-13.6 0-25 11.4-25 25s11.4 25 25 25c13.1 0 25-11.4 24.4-24.4.6-14.3-10.7-25.6-24.4-25.6z"/><path d="M474.625 421.982c15.7-27.1 15.8-59.4.2-86.4l-156.6-271.2c-15.5-27.3-43.5-43.5-74.9-43.5s-59.4 16.3-74.9 43.4l-156.8 271.5c-15.6 27.3-15.5 59.8.3 86.9 15.6 26.8 43.5 42.9 74.7 42.9h312.8c31.3 0 59.4-16.3 75.2-43.6zm-34-19.6c-8.7 15-24.1 23.9-41.3 23.9h-312.8c-17 0-32.3-8.7-40.8-23.4-8.6-14.9-8.7-32.7-.1-47.7l156.8-271.4c8.5-14.9 23.7-23.7 40.9-23.7 17.1 0 32.4 8.9 40.9 23.8l156.7 271.4c8.4 14.6 8.3 32.2-.3 47.1z"/><path d="M237.025 157.882c-11.9 3.4-19.3 14.2-19.3 27.3.6 7.9 1.1 15.9 1.7 23.8 1.7 30.1 3.4 59.6 5.1 89.7.6 10.2 8.5 17.6 18.7 17.6s18.2-7.9 18.7-18.2c0-6.2 0-11.9.6-18.2 1.1-19.3 2.3-38.6 3.4-57.9.6-12.5 1.7-25 2.3-37.5 0-4.5-.6-8.5-2.3-12.5-5.1-11.2-17-16.9-28.9-14.1z"/></svg>
+                            </div>
+                             <div class="customerLoginForm-errors-description">
+                               {{ form.errors | default_errors }}
+                               <a href="#recover" id="RecoverPassword">
+                               {{ 'customer.login.forgot_password' | t }}
+                               </a>
+                             </div>
+                          </div>
+                        {% endif %}
+                      
+                        <div class="input--secondary  input--medium  input--login" data-input-wrapper>
+                          <span class="input-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 123 123"><title>
+                              @
+                            </title><path d="M18.25 106.7c5.6 5.399 12.3 9.8 20.1 12.8 7.8 3 16.5 4.6 25.9 4.6 10.5 0 20.2-1.6 28.9-4.899 7.9-2.9 1.1-17.601-4.7-15.2-6.399 2.7-14.2 4.1-23.101 4.1-7 0-13.399-1.1-19-3.199-5.6-2.101-10.5-5.101-14.5-9-4-3.9-7.2-8.7-9.4-14.2-2.3-5.601-3.4-12-3.4-19 0-6.6 1.1-12.9 3.3-18.5 2.2-5.6 5.2-10.6 9.2-14.6 3.9-4.1 8.7-7.4 14.2-9.7 5.5-2.3 11.7-3.5 18.5-3.5 6.301 0 12.1.9 17.301 2.5 5.1 1.6 9.5 4.1 13.199 7.4 3.7 3.3 6.6 7.3 8.7 12.1 2.101 4.8 3.101 10.4 3.101 16.8 0 3.7-.4 7.2-1.201 10.5-.799 3.1-1.799 5.899-3.199 8.1-1.301 2.101-2.801 3.8-4.6 5-2.101 1.4-5.201 2.2-7.601 1.4-3-1-2.399-5.2-2.2-7.7.301-3.4 1.2-6.6 1.9-9.9 1.1-5.4 2.3-10.7 3.4-16 .6-2.9 1.299-5.9 1.899-8.8.8-3.7-2-7.3-5.899-7.3h-4.4c-2.7 0-5.1 1.8-5.801 4.4-.299 1.2-.6 2.2-.6 2.2-2.199-6.8-10.3-8.7-16.7-8.6-8.4.1-16.1 4.4-21.7 10.5-.5.6-1.1 1.2-1.6 1.8-2.9 3.5-5.1 7.6-6.6 11.9-1.6 4.6-2.4 9.3-2.4 14.1 0 4.101.6 8 1.7 11.5 1.2 3.601 2.9 6.7 5.1 9.3 2.2 2.601 5 4.7 8.3 6.2 3.3 1.5 7 2.3 11 2.3 3 0 5.8-.5 8.3-1.399 2.4-.9 4.6-2 6.5-3.3 1.5-1 2.9-2.2 4-3.301.699 1.301 1.5 2.4 2.6 3.5 2.801 3 7.1 4.5 12.801 4.5 4.5 0 8.899-.899 13-2.699 4.1-1.801 7.799-4.601 10.899-8.2 3-3.601 5.5-8 7.3-13.2 1.801-5.2 2.7-11.2 2.7-17.8 0-9-1.7-17-5-23.7s-7.8-12.4-13.399-16.9c-5.5-4.5-11.9-7.8-19-10.1C79.05 1.1 71.75 0 64.25 0c-8.7 0-17 1.6-24.7 4.7-7.7 3.2-14.5 7.6-20.2 13.1-5.8 5.5-10.4 12.2-13.7 19.7-3.3 7.5-5 15.9-5 24.7 0 8.899 1.5 17.3 4.6 24.8 3 7.6 7.4 14.2 13 19.7zm54.099-42c-.699 2.7-1.699 5.3-3.1 7.7-1.4 2.3-3.1 4.199-5.3 5.699-2 1.4-4.4 2.101-7.4 2.101-1.9 0-3.4-.4-4.5-1.101-1.2-.8-2.2-1.8-2.9-3.1-.8-1.4-1.3-2.9-1.6-4.4-.3-1.6-.5-3.1-.5-4.399 0-2.8.4-5.6 1.2-8.5.8-2.8 1.9-5.4 3.4-7.6 1.5-2.2 3.2-4 5.3-5.4 1.9-1.3 4-1.9 6.5-1.9 2 0 3.601.3 4.8 1 1.2.7 2.2 1.6 2.9 2.7.8 1.2 1.3 2.6 1.699 4.1.4 1.7.601 3.5.601 5.2-.1 2.5-.399 5.1-1.1 7.9z"/></svg>
+                          </span>
+                          <label for="CustomerEmail" class="hide-elem">
+                            {{ 'customer.login.email' | t }}
+                          </label>
+                          <input type="email"
+                                 name="customer[email]"
+                                 id="CustomerEmail"
+                                 class="{% if form.errors contains 'email' %}input-error{% endif %}"
+                                 spellcheck="false"
+                                 autocomplete="off"
+                                 autocapitalize="off"
+                                 autofocus
+                                 placeholder="{{ 'customer.register.email' | t }}">
+                        </div>
+                    
+                        {% if form.password_needed %}
+                        <div class="input--secondary  input--medium  input--login" data-input-wrapper>
+                          <span class="input-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><title>Lock</title><path d="M437.333 192h-32v-42.667C405.333 66.99 338.344 0 256 0S106.667 66.99 106.667 149.333V192h-32C68.771 192 64 196.771 64 202.667v266.667C64 492.865 83.135 512 106.667 512h298.667C428.865 512 448 492.865 448 469.333V202.667c0-5.896-4.771-10.667-10.667-10.667zM287.938 414.823c.333 3.01-.635 6.031-2.656 8.292-2.021 2.26-4.917 3.552-7.948 3.552h-42.667c-3.031 0-5.927-1.292-7.948-3.552-2.021-2.26-2.99-5.281-2.656-8.292l6.729-60.51c-10.927-7.948-17.458-20.521-17.458-34.313 0-23.531 19.135-42.667 42.667-42.667s42.667 19.135 42.667 42.667c0 13.792-6.531 26.365-17.458 34.313l6.728 60.51zM341.333 192H170.667v-42.667C170.667 102.281 208.948 64 256 64s85.333 38.281 85.333 85.333V192z"/></svg>
+                          </span>
+                          <label for="CustomerPassword" class="hide-elem">
+                            {{ 'customer.login.password' | t }}
+                          </label>
+                          <input type="password"
+                                 name="customer[password]"
+                                 id="CustomerPassword"
+                                 placeholder="{{ 'customer.login.password' | t }}"
+                                 class="{% if form.errors contains 'password' %}input-error{% endif %}">
+                        </div>
+                        {% endif %}
+                    
+                        <button type="submit" class="button--primary  button--medium  button--expanded" data-text="{{ 'customer.login.sign_in' | t }}">
+                          {{ 'customer.login.sign_in' | t }}
+                        </button>
+                    <!-- 
+                        <a href="/">{{ 'customer.login.cancel' | t }}</a>
+                    
+                        <a href="/account/register">
+                          {{ 'layout.customer.create_account' | t }}
+                        </a>
+                     -->
+                      {% endform %}
+                  </div>
+              </div>
+              
+              <div class="customerLoginForm-success  form-success hide" id="ResetSuccess">
+                {{ 'customer.recover_password.success' | t }}
+              </div>
+                      
+                      
+              <div id="RecoverPasswordForm" class="hide">
+                <h2>{{ 'customer.recover_password.title' | t }}</h2>
+                <p>{{ 'customer.recover_password.subtext' | t }}</p>
+              
+                {% form 'recover_customer_password' %}
+                  {{ form.errors | default_errors }}
+              
+                  {% if form.posted_successfully? %}
+                    <span class="hide reset-password-success"></span>
+                  {% endif %}
+              
+                  <label for="RecoverEmail" class="label-hidden">
+                    {{ 'customer.recover_password.email' | t }}
+                  </label>
+                  <input type="email"
+                         name="email"
+                         id="RecoverEmail"
+                         placeholder="{{ 'customer.recover_password.email' | t }}"
+                         spellcheck="false"
+                         autocomplete="off"
+                         autocapitalize="off"
+                         placeholder="{{ 'customer.register.email' | t }}">
+              
+                  <input type="submit" class="btn" value="{{ 'customer.recover_password.submit' | t }}">
+              
+                  <button type="button" id="HideRecoverPasswordLink">
+                    {{ 'customer.recover_password.cancel' | t }}
+                  </button>
+                {% endform %}
+              
+              </div>
+              
+              {% if shop.checkout.guest_login %}
+                <h2>{{ 'customer.login.guest_title' | t }}</h2>
+              
+                {% form 'guest_login' %}
+                  <input type="submit" class="btn" value="{{ 'customer.login.guest_continue' | t }}">
+                {% endform %}
+              {% endif %}
+            </div>
+          </div>
+                  
+        </div>
+
+        <div class="customerLogin  is-hidden" data-register-form>
+          <div class="row">
+            <div class="small-12 columns">
+              <div class="customerLoginHeader">
+                <h1 class="headline   customerLoginHeader-headline">{{ 'customer.register.title' | t }}</h1>
+                <p>By having a Whiskers account you’ll be able to check on your orders, manage your account and get special goodies.</p>
+              </div>
+              <div class="customerLoginForm  customerLoginForm--register">
+                <h2 class="customerLoginForm-headline">Create Account</h2>
+
+                {% form 'create_customer' %}
+                
+                <!-- {{ form.errors | default_errors }} -->
+                              
+                <div class="row large--smallGutter">
+                   <div class="small-12 large-6 columns">
+                     <div class="input--secondary  input--medium" data-input-wrapper>
+                       <label for="FirstName">
+                          {{ 'customer.register.first_name' | t }}
+                       </label>
+                       <input type="text"
+                          name="customer[first_name]"
+                          id="FirstName"
+                          autofocus
+                          {% if form.first_name %}value="{{ form.first_name }}"{% endif %}>
+                     </div>
+                  </div>
+                  <div class="small-12 large-6 columns">
+                     <div class="input--secondary  input--medium" data-input-wrapper>
+                        <label for="LastName">
+                          {{ 'customer.register.last_name' | t }}
+                        </label>
+                        <input type="text"
+                          name="customer[last_name]"
+                          id="LastName"
+                          {% if form.last_name %}value="{{ form.last_name }}"{% endif %}>
+                     </div>
+                  </div>
+                </div>
+        
+                 <div class="row large--smallGutter">
+                  <div class="small-12 large-6 columns">
+                    <div class="input--secondary  input--medium  input--login" data-input-wrapper>
+                      <span class="input-icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 123 123"><title>
+                      @
+                      </title><path d="M18.25 106.7c5.6 5.399 12.3 9.8 20.1 12.8 7.8 3 16.5 4.6 25.9 4.6 10.5 0 20.2-1.6 28.9-4.899 7.9-2.9 1.1-17.601-4.7-15.2-6.399 2.7-14.2 4.1-23.101 4.1-7 0-13.399-1.1-19-3.199-5.6-2.101-10.5-5.101-14.5-9-4-3.9-7.2-8.7-9.4-14.2-2.3-5.601-3.4-12-3.4-19 0-6.6 1.1-12.9 3.3-18.5 2.2-5.6 5.2-10.6 9.2-14.6 3.9-4.1 8.7-7.4 14.2-9.7 5.5-2.3 11.7-3.5 18.5-3.5 6.301 0 12.1.9 17.301 2.5 5.1 1.6 9.5 4.1 13.199 7.4 3.7 3.3 6.6 7.3 8.7 12.1 2.101 4.8 3.101 10.4 3.101 16.8 0 3.7-.4 7.2-1.201 10.5-.799 3.1-1.799 5.899-3.199 8.1-1.301 2.101-2.801 3.8-4.6 5-2.101 1.4-5.201 2.2-7.601 1.4-3-1-2.399-5.2-2.2-7.7.301-3.4 1.2-6.6 1.9-9.9 1.1-5.4 2.3-10.7 3.4-16 .6-2.9 1.299-5.9 1.899-8.8.8-3.7-2-7.3-5.899-7.3h-4.4c-2.7 0-5.1 1.8-5.801 4.4-.299 1.2-.6 2.2-.6 2.2-2.199-6.8-10.3-8.7-16.7-8.6-8.4.1-16.1 4.4-21.7 10.5-.5.6-1.1 1.2-1.6 1.8-2.9 3.5-5.1 7.6-6.6 11.9-1.6 4.6-2.4 9.3-2.4 14.1 0 4.101.6 8 1.7 11.5 1.2 3.601 2.9 6.7 5.1 9.3 2.2 2.601 5 4.7 8.3 6.2 3.3 1.5 7 2.3 11 2.3 3 0 5.8-.5 8.3-1.399 2.4-.9 4.6-2 6.5-3.3 1.5-1 2.9-2.2 4-3.301.699 1.301 1.5 2.4 2.6 3.5 2.801 3 7.1 4.5 12.801 4.5 4.5 0 8.899-.899 13-2.699 4.1-1.801 7.799-4.601 10.899-8.2 3-3.601 5.5-8 7.3-13.2 1.801-5.2 2.7-11.2 2.7-17.8 0-9-1.7-17-5-23.7s-7.8-12.4-13.399-16.9c-5.5-4.5-11.9-7.8-19-10.1C79.05 1.1 71.75 0 64.25 0c-8.7 0-17 1.6-24.7 4.7-7.7 3.2-14.5 7.6-20.2 13.1-5.8 5.5-10.4 12.2-13.7 19.7-3.3 7.5-5 15.9-5 24.7 0 8.899 1.5 17.3 4.6 24.8 3 7.6 7.4 14.2 13 19.7zm54.099-42c-.699 2.7-1.699 5.3-3.1 7.7-1.4 2.3-3.1 4.199-5.3 5.699-2 1.4-4.4 2.101-7.4 2.101-1.9 0-3.4-.4-4.5-1.101-1.2-.8-2.2-1.8-2.9-3.1-.8-1.4-1.3-2.9-1.6-4.4-.3-1.6-.5-3.1-.5-4.399 0-2.8.4-5.6 1.2-8.5.8-2.8 1.9-5.4 3.4-7.6 1.5-2.2 3.2-4 5.3-5.4 1.9-1.3 4-1.9 6.5-1.9 2 0 3.601.3 4.8 1 1.2.7 2.2 1.6 2.9 2.7.8 1.2 1.3 2.6 1.699 4.1.4 1.7.601 3.5.601 5.2-.1 2.5-.399 5.1-1.1 7.9z"/></svg>
+                      </span>
+                     <label for="Email" class="hide-elem">
+                       {{ 'customer.register.email' | t }}
+                     </label>
+                     <input type="email"
+                       name="customer[email]"
+                       id="Email"
+                       class="{% if form.errors contains 'email' %}input-error{% endif %}"
+                       value="{% if form.email %}{{ form.email }}{% endif %}"
+                       spellcheck="false"
+                       autocomplete="off"
+                       autocapitalize="off"
+                       placeholder="{{ 'customer.register.email' | t }}">
+                    </div>
+                  </div>
+                  <div class="small-12 large-6 columns">
+                    <div class="input--secondary  input--medium  input--login" data-input-wrapper>
+                      <span class="input-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><title>Lock</title><path d="M437.333 192h-32v-42.667C405.333 66.99 338.344 0 256 0S106.667 66.99 106.667 149.333V192h-32C68.771 192 64 196.771 64 202.667v266.667C64 492.865 83.135 512 106.667 512h298.667C428.865 512 448 492.865 448 469.333V202.667c0-5.896-4.771-10.667-10.667-10.667zM287.938 414.823c.333 3.01-.635 6.031-2.656 8.292-2.021 2.26-4.917 3.552-7.948 3.552h-42.667c-3.031 0-5.927-1.292-7.948-3.552-2.021-2.26-2.99-5.281-2.656-8.292l6.729-60.51c-10.927-7.948-17.458-20.521-17.458-34.313 0-23.531 19.135-42.667 42.667-42.667s42.667 19.135 42.667 42.667c0 13.792-6.531 26.365-17.458 34.313l6.728 60.51zM341.333 192H170.667v-42.667C170.667 102.281 208.948 64 256 64s85.333 38.281 85.333 85.333V192z"/></svg>
+                      </span>
+                     <label for="CreatePassword" class="label-hidden">
+                       {{ 'customer.register.password' | t }}
+                     </label>
+                     <input type="password"
+                       name="customer[password]"
+                       id="CreatePassword"
+                       class="{% if form.errors contains 'password' %}input-error{% endif %}"
+                       placeholder="{{ 'customer.register.password' | t }}">
+                    </div>
+                  </div>
+                </div>
+                <div class="row large--smallGutter">
+                  <div class="small-12 columns">
+                   <button type="submit" data-text="{{ 'customer.register.submit' | t }}" class="button--primary  button--medium  button--expanded">
+                    {{ 'customer.register.submit' | t }}
+                   </button>
+                  </div>
+                </div>
+                {% endform %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+    
+      <div class="loginPage-secondaryPanel  [ grid  grid--center grid--justifyCenter ]" data-panel>
+        <div class="panelBg">
+          <img src="{{'icon_wallpaper_login_screen.svg' | asset_url}}" alt="">
+        </div>
+         <div class="loginOption  loginOption--noAccount  is-showing" data-sign-up-cta>
+            <h1 class="headline   loginOption-headline">Don't have an account?</h1>
+            <p>
+              Having an accout allows for faster checkout, easier order tracking and earning points for our loyalty program.
+            </p>
+            <button class="button--primary  button--expanded  button--medium" data-text="Create an Account"  data-show-register>
+              CREATE AN ACCOUNT
+            </button>
+         </div>
+         <div class="loginOption  loginOption--haveAccount  is-hidden" data-login-cta>
+            <h1 class="headline   loginOption-headline">Already have  an account?</h1>
+            <p>
+            We're glad to have you back, come on in. 
+            </p>
+            <button class="button--primary  button--expanded  button--medium" data-text="Log In" data-show-login>
+              Log In
+            </button>
+         </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+

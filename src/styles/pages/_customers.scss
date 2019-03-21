@@ -102,6 +102,43 @@
 	}
 }
 
+
+
+
+
+
+
+/*------------------------------------*\
+    #Customer Account Main Content Container 
+\*------------------------------------*/
+
+
+.customerAccountMain {
+	padding-bottom: rem-calc($level7+ $level7); 
+	max-width: rem-calc(600px); 
+	margin-right: auto; 
+	margin-left: auto; 
+	left: 0; 
+	right: 0; 
+	
+	@include media-query($medium-up) {
+		max-width: rem-calc(720px); 
+	}
+
+	@include media-query($large-up) {
+		max-width: rem-calc(820px); 
+	}
+}
+
+
+
+
+
+/*------------------------------------*\
+    #Customer Information Panels
+\*------------------------------------*/
+
+
 .customerInfoPanel {
 	background-color: $secondaryColor;
 	padding: rem-calc($level3);
@@ -169,19 +206,154 @@
 	}
 }
 
-.customerAccountMain {
-	padding-bottom: rem-calc($level7+ $level7); 
-	max-width: rem-calc(600px); 
-	margin-right: auto; 
-	margin-left: auto; 
-	left: 0; 
-	right: 0; 
-	
-	@include media-query($medium-up) {
-		max-width: rem-calc(720px); 
+
+.customerInfoTable {
+
+	@include text-micro(); 
+
+	thead {
+		font-family: $secondary-font-family; 
+		text-transform: uppercase;
+		@include text-mini();
 	}
 
-	@include media-query($large-up) {
-		max-width: rem-calc(820px); 
+	tr {
+		border-bottom: 1px solid $primaryColor; 
+		padding: rem-calc(3px);
 	}
 }
+
+
+
+
+
+
+/*------------------------------------*\
+    #Customer Orders 
+\*------------------------------------*/
+
+
+.customerOrder {
+	background-color: $secondaryColor;
+	padding: rem-calc($level4); 
+	padding-bottom: 0; 
+	width: 100%;
+	position: relative;
+	margin-bottom: rem-calc($level2);
+	border-bottom: 4px solid $quintenaryColor;
+
+	a {
+		color: $accentColor;
+	}
+
+	&.is-active {
+		.customerOrder-toggle {
+			button {
+				&:after {
+		    transform: translateY(0) rotate(0); 
+				}
+			}
+		}
+	}
+
+	&:hover, 
+	&:focus {
+		background-color: $senaryColor;
+		cursor: pointer;
+	}
+
+	.customerOrder-toggle {
+		position: absolute;
+		top: rem-calc($level2);
+		right: rem-calc($level2);
+		width: rem-calc(16px);
+		height: rem-calc(16px);
+		z-index: 1; 
+
+		@include media-query($medium-up){
+			top: rem-calc(70px);
+			right: rem-calc($level4);
+			width: rem-calc(20px);
+			height: rem-calc(20px);
+		}
+		
+		button {
+	    margin-bottom: 0;
+	    position: absolute;
+	    height: 100%;
+	    width: 100%;
+	    text-align: center;
+	    margin: auto;
+	    top: 0;
+	    bottom: 0;
+	    right: 0;
+	    left: 0;
+
+	    &:after,
+	    &:before {
+	      content: ""; 
+	      height: 2px;
+	      background-color: $accentColor; 
+	      width: 100%;  
+	      left: 0; 
+	      right: 0; 
+	      position: absolute;
+	      transition: all .2s cubic-bezier(0.23, 1, 0.32, 1); 
+	    }
+
+	    &:before {
+	      top: 50%; 
+	    }
+
+	    &:after {
+	      top: 50%; 
+	      transform: translateY(0) rotate(90deg); 
+	    }
+
+	    &:hover,
+	    &:focus {
+	      transform: scale(1.1); 
+	    }
+		}
+	}
+	
+	.customerOrder-primary {
+		margin-bottom: 0; 
+	}
+
+	.customerOrder-secondary {
+		padding-bottom: rem-calc($level4); 
+	}
+
+	.customerOrder-property {
+		margin-bottom: rem-calc($level4); 
+	}
+	
+	.customerOrder-property-label {
+		font-weight: bold; 
+		font-family: $secondary-font-family; 
+		color: $quintenaryColor;
+	}
+	
+	.customerOrder-shippingMethod {
+		@include text-micro(); 
+	}
+
+	.customerOrder-lineItem {
+		margin-bottom: rem-calc($level1); 
+		img {
+			width: rem-calc(100px);
+			margin-right: rem-calc($level1); 
+		}
+		p {
+			margin-bottom: 0; 
+			font-weight: bold; 
+		}
+	}
+}
+
+.fulfilled {
+	color: #59d859;
+}
+
+

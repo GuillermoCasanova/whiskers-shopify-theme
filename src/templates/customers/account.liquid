@@ -29,31 +29,35 @@
       <div class="row   medium--smallGutter  grid  grid--flexDirectionColumn  large-grid--flexDirectionRow  large-grid--flexWrap  grid--stretch">
        <div class="small-12 columns large-6  end">
           <section class="customerInfoPanel">
-            <h1 class="customerInfoPanel-title">{{ 'customer.orders.title' | t }}</h1>
+            <h1 class="customerInfoPanel-title">Latest Order</h1>
             {% paginate customer.orders by 20 %}
             {% if customer.orders.size != 0 %}
-              <table class="responsive-table">
-                <thead>
-                  <tr>
-                    <th>{{ 'customer.orders.order_number' | t }}</th>
-                    <th>{{ 'customer.orders.date' | t }}</th>
-                    <th>{{ 'customer.orders.payment_status' | t }}</th>
-                    <th>{{ 'customer.orders.fulfillment_status' | t }}</th>
-                    <th>{{ 'customer.orders.total' | t }}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {% for order in customer.orders %}
-                    <tr class="responsive-table-row">
-                      <td data-label="{{ 'customer.orders.order_number' | t }}">{{ order.name | link_to: order.customer_url }}</td>
-                      <td data-label="{{ 'customer.orders.date' | t }}">{{ order.created_at | date: format: 'month_day_year' }}</td>
-                      <td data-label="{{ 'customer.orders.payment_status' | t }}">{{ order.financial_status_label }}</td>
-                      <td data-label="{{ 'customer.orders.fulfillment_status' | t }}">{{ order.fulfillment_status_label }}</td>
-                      <td data-label="{{ 'customer.orders.total' | t }}">{{ order.total_price | money }}</td>
-                    </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
+              <div>
+                {%- assign order = customer.last_order -%}
+                <div>
+                  <img src="{{order.line_items[0].image | image_url: '100x'}}" alt="">
+                </div>
+                <div>
+                  <span>
+                    Created 
+                  </span>
+                  {{order.created_at | date: format: 'month_day_year' }}
+                  <span>
+                    Items 
+                  </span>
+                  <ul>
+                  {%for item in order.line_items%}
+                    <li>
+                      {{item.name}}
+                    </li>
+                  {%endfor%}     
+                  </ul>
+                </div>
+              </div>
+
+              <a class="customerInfoPanel-action  customerInfoPanel-action--centered" href="/pages/orders" rel="internal">
+                View {{ 'customer.orders.title' | t }}
+              </a>
             {% else %}
               <div class="customerInfoPanel-emptyState  [ grid  grid--justifyCenter  grid--center  ]">
                 <div>
