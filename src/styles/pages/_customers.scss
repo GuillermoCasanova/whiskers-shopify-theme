@@ -45,6 +45,11 @@
 			@include media-query($medium-up) {
 				transform: translateX(14vw) translateY(-20px);
 			}
+
+			@include media-query($medium-up) {
+				width: 104%;
+				height: 138%;
+			}
 		}
 	}
 	
@@ -52,7 +57,7 @@
 	.customerAccountHeader-back {
 		position: absolute;
 		top: rem-calc($level4); 
-		left: rem-calc($level4); 
+		left: rem-calc($level2); 
 
 		@include media-query($medium-up) {
 			top: rem-calc($level5);
@@ -70,7 +75,7 @@
 
 			&:hover, 
 			&:focus {
-				color: #fff;
+				color: $accentColor;
 			}
 		}
 	}
@@ -144,11 +149,34 @@
 	padding: rem-calc($level3);
 	margin-bottom: rem-calc($level4); 
 
+	@include media-query($medium-up) {
+		padding: rem-calc($level7); 
+	}
+
+
+	@include media-query($large-up) {
+		padding: rem-calc($level4); 
+	}
+
+	a {
+		color: $accentColor;
+
+		&.customerInfoPanel-altLink {
+			border-bottom: 2px solid transparent;  
+
+			&:hover, 
+			&:focus {
+				opacity: .8;
+			}
+		}
+	}
+
 	.customerInfoPanel-emptyState {
 		text-align: center; 
 		min-height: rem-calc(180px); 
 
 		p {
+			margin-bottom: rem-calc($level2); 
 			@include h6(); 
 		}
 
@@ -160,7 +188,6 @@
 			right: 0;  
 		}
 	}
-	
 
 	.customerInfoPanel-action {
 		color: $quaternaryColor;
@@ -179,7 +206,7 @@
 		}
 	}
 
-	.customerInfoPanel-action--centered {
+		.customerInfoPanel-action--centered {
 		text-align: center; 
 	}
 
@@ -194,6 +221,12 @@
 		margin-bottom: rem-calc($level4);
 		@include h4(); 
 	}
+
+	.customerInfoPanel-subTitle {
+		font-weight: bold; 
+		color: $quintenaryColor; 
+	}
+	
 
 	p {
 		@include media-query($large-up) {
@@ -224,6 +257,14 @@
 }
 
 
+.customerInfoPanel--latestOrder {
+
+	img {
+		max-width: rem-calc(120px); 
+		margin-right: rem-calc($level2); 
+		margin-top: rem-calc($level1); 
+	}
+}
 
 
 
@@ -327,33 +368,69 @@
 
 	.customerOrder-property {
 		margin-bottom: rem-calc($level4); 
+		@include h4(); 
 	}
 	
 	.customerOrder-property-label {
 		font-weight: bold; 
 		font-family: $secondary-font-family; 
 		color: $quintenaryColor;
+		margin-bottom: rem-calc($level1); 
 	}
 	
 	.customerOrder-shippingMethod {
-		@include text-micro(); 
+		@include h6();  
+	}
+	
+	.customerOrder-lineItems {
+
+		li {
+			padding-right: rem-calc($level2);
+		}
+
+		li:first-child {
+			padding-left: 0; 
+		}
 	}
 
 	.customerOrder-lineItem {
 		margin-bottom: rem-calc($level1); 
+
 		img {
-			width: rem-calc(100px);
+			width: 100%;
 			margin-right: rem-calc($level1); 
+			margin-bottom: rem-calc($level2); 
+
+			&:hover, 
+			&:focus {
+				opacity: .8;
+			}
+
+			@include media-query($medium-up) {
+				max-width: rem-calc(220px); 
+			}
+
 		}
+
 		p {
 			margin-bottom: 0; 
-			font-weight: bold; 
+			@include text-micro(); 
+
+			@include media-query($medium-up) {
+				@include h6(); 
+			}
 		}
 	}
 }
 
+.customerOrder-status {
+	font-weight: bold; 
+	text-transform: uppercase; 
+	color: #fff;
+}
+
 .fulfilled {
-	color: #59d859;
+	color: #9bd84f;
 }
 
 

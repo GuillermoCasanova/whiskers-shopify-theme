@@ -28,31 +28,49 @@
     <div class="small-12 columns">
       <div class="row   medium--smallGutter  grid  grid--flexDirectionColumn  large-grid--flexDirectionRow  large-grid--flexWrap  grid--stretch">
        <div class="small-12 columns large-6  end">
-          <section class="customerInfoPanel">
+          <section class="customerInfoPanel  customerInfoPanel--latestOrder">
             <h1 class="customerInfoPanel-title">Latest Order</h1>
             {% paginate customer.orders by 20 %}
             {% if customer.orders.size != 0 %}
               <div>
                 {%- assign order = customer.last_order -%}
-                <div>
-                  <img src="{{order.line_items[0].image | image_url: '100x'}}" alt="">
+                <div class="grid grid--flexDirectionRow  grid--justifySpaceBetween">
+                  <div>
+                    <div class="customerInfoPanel-subTitle">
+                      Order Date:  
+                    </div>
+                    <p>{{order.created_at | date: format: 'month_day_year' }}</p>
+                  </div>
+                  
+                  <div>
+                    <div class="customerInfoPanel-subTitle">You got:</div>
+                    <ul class="grid  large-grid--flexDirectionColumn">
+                    {%for item in order.line_items %}
+                      <li>
+                   <!--    <a href="{{item.url}}" title="Shop {{item.title}}" target="_blank"> <picture>
+                           <source media="(min-width: 641px)" srcset="{{item.image | img_url: '800x'}}">
+                            <img src="{{item.image | img_url: '660x'}}" alt="{{item.title}}">
+                         </picture></a> -->
+                        {{item.title}}
+                      </li>
+                    {%endfor%}     
+                    </ul>
+                  </div>
                 </div>
-                <div>
-                  <span>
-                    Created 
-                  </span>
-                  {{order.created_at | date: format: 'month_day_year' }}
-                  <span>
-                    Items 
-                  </span>
-                  <ul>
-                  {%for item in order.line_items%}
-                    <li>
-                      {{item.name}}
-                    </li>
-                  {%endfor%}     
-                  </ul>
-                </div>
+
+                {%- assign trackedOrder = order.line_items[0] -%}
+                  {%if trackedOrder.fulfillment %}
+                  <div>
+                    <div class="customerInfoPanel-subTitle">Track Order</div> 
+                    <p class="customerOrder-shippingMethod">
+                      <span>{{ trackedOrder.fulfillment.tracking_company }}</span>
+                      <a  class="customerInfoPanel-altLink" href="{{ trackedOrder.fulfillment.tracking_url }}" target="_blank" rel="external" title="Track your order via {{ trackedOrder.fulfillment.tracking_company }}">
+                        {{trackedOrder.fulfillment.tracking_number}}
+                      </a>
+                    </p>
+                  </div>
+                  {%endif%}
+
               </div>
 
               <a class="customerInfoPanel-action  customerInfoPanel-action--centered" href="/pages/orders" rel="internal">

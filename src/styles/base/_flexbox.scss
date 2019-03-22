@@ -835,6 +835,14 @@ $column-gutter-flex: $column-gutter/2;
   padding: 0 $column-gutter-flex 0 $column-gutter-flex;
 }
 
+.grid--noGutters > .grid-cell {
+  padding: 0 0 0 0;
+}
+
+.grid--gutters--small > .grid-cell {
+  padding: 0 $column-gutter-flex/3 0 $column-gutter-flex/3;
+}
+
 // .grid--guttersLg {
 //   margin: -1.5rem 0 1.5rem -1.5rem;
 // }

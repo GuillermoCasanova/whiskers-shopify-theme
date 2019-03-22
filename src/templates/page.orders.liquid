@@ -30,7 +30,7 @@
 
 
 <main class="customerAccountMain">
-  <div class="row row--smallGutter">
+  <div class="row medium--smallGutter">
     <div class="small-12 columns">
       <div class="customerOrders">{% if customer.orders.size != 0 %}
         <ul class="customerOrders-inner">
@@ -52,14 +52,21 @@
                 </li>
 
                 <li class="customerOrder-property grid-cell">
-                  <div class="customerOrder-property-label">Shipping Method</div> 
-                  <span class="customerOrder-shippingMethod">{{order.shipping_method.title}}</span>
+                  <div class="customerOrder-property-label">Tracking No.</div> 
+                  {%- assign trackedOrder = order.line_items[0] -%}
+                  {%if trackedOrder.fulfillment %}
+                  <span class="customerOrder-shippingMethod">
+                    <span>{{ trackedOrder.fulfillment.tracking_company }}</span>
+                    <a href="{{ trackedOrder.fulfillment.tracking_url }}" target="_blank" rel="external" >
+                      {{trackedOrder.fulfillment.tracking_number}}
+                    </a>
+                  </span>
+                  {%endif%}
                 </li>
 
                 <li class="customerOrder-property grid-cell">
                   <div class="customerOrder-property-label">Status</div> 
-                  <span 
-                    class="{%if order.fulfillment_status_label == 'Fulfilled'%} fulfilled{%endif%}"> {{ order.fulfillment_status_label }}
+                  <span class="customerOrder-status{%if order.fulfillment_status_label == 'Fulfilled'%} fulfilled{%endif%}"> {{ order.fulfillment_status_label }}
                   </span>
                 </li>
               </ul>
@@ -76,37 +83,18 @@
 
                {% if order.cancelled  == false%}
                 <li  class="customerOrder-property">
-                  <div class="customerOrder-property-label">Items</div>
-                  <ul class="grid grid--1of2 grid--flexWrap">
+                  <div class="customerOrder-property-label">What You Got</div>
+                  <ul class="grid grid--1of2 med-grid--1of3   large-grid--1of4 grid--flexWrap   customerOrder-lineItems grid--noGutters">
                     {%for item in order.line_items%}
                     <li class="grid-cell">
-                     <div class="customerOrder-lineItem  grid  grid--justifyStart  grid--flexDirectionColumn">
-                       <img src="{{item.image | img_url: '120x'}}" alt="{{item.title}}">
+                     <div class="customerOrder-lineItem  grid grid--flexDirectionColumn">
+                      <a href="{{item.url}}" title="Shop {{item.title}}" rel="internal"> <picture>
+                         <source media="(min-width: 641px)" srcset="{{item.image | img_url: '800x'}}">
+                          <img src="{{item.image | img_url: '660x'}}" alt="{{item.title}}">
+                       </picture></a>
                        <p>{{item.title}}</p>
-                        {%if item.fulfillment %}
-                          <div>{{ 'customer.order.fulfilled_at' | t }}</div>
-                          <span>{{ item.fulfillment.created_at | date: format: 'month_day_year' }}</span>
-
-                          {% if item.fulfillment.tracking_url %}
-                            <div>{{ 'customer.order.tracking_url' | t }}</div>
-                            <span>
-                              <a href="{{ item.fulfillment.tracking_url }}">
-                                {{ 'customer.order.track_shipment' | t }}
-                              </a>
-                            </span>
-                          {% endif %}
-
-                          <div>{{ 'customer.order.tracking_company' | t }}</div>
-                          <span>{{ item.fulfillment.tracking_company }}</span>
-
-                          {% if item.fulfillment.tracking_number %}
-                            <div>{{ 'customer.order.tracking_number' | t }}</div>
-                            <span>{{ item.fulfillment.tracking_number }}</dd>
-                          {% endif %}
-                        {%endif%}
-                       <p></p>
                       </div>
-                    </li class="grid-cell">
+                    </li>
                     {%endfor%}
                   </ul>
                 </li>
@@ -121,9 +109,9 @@
                 </li>
                 <li>
                   <div class="customerOrder-property-label">Total</div>
-                  <div>
+                  <p>
                     {{order.total_price | money}}
-                  </div>
+                  </p>
                 </li>
 
                 <li  class="customerOrder-property">
@@ -133,7 +121,6 @@
                   </addr>
                 </li>
                 {%endif%}
-
               </ul>
             </div>
           </li>
