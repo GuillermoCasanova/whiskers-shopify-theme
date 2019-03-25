@@ -8,7 +8,6 @@
 
         <div class="pageHeader-inner">
           
-          
           <div class="pageHeader-content  grid  grid--bottom  grid--justifyLeft">
               {%if collection %}
               <h1 class="pageHeader-headline"  data-page-headline>
@@ -61,7 +60,7 @@
                 <picture>
                     
                   <source media="(min-width: 1024px)"
-                          srcset="{{'shopHeaders--about-us--large.png' | asset_img_url}}">
+                          srcset="{{'shopHeaders--about-us--large.png' | asset_url}}">
                 
                   <source media="(min-width: 640px)"
                           srcset="{{'shopHeaders--about-us--medium.png' | asset_img_url: '1200x',  crop: 'left'}}">

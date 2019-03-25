@@ -67,13 +67,25 @@
                     <ul class="mainNav-dropDown"
                         data-dropdown-id="{{ forloop.index }}">
                       {% for childlink in menus[child_list_handle].links %}
+                         {%if childlink.url == '/account'%}
+                          {%if customer%}
+                           <li class="mainNav-dropDown-item mainNav-animElem">
+                            <a href="{{ childlink.url }}" class="mainNav-dropDown-link">View Account</a>
+                          </li>
+                          {%else%}
+                          <li class="mainNav-dropDown-item mainNav-animElem">
+                            <a href="{{ childlink.url }}" class="mainNav-dropDown-link">{{ childlink.title }}</a>
+                          </li>   
+                          {%endif%}
+                        {%else%}
                         <li class="mainNav-dropDown-item mainNav-animElem {% if childlink.active %}site-nav--active{% endif %}" >
                           <a href="{{ childlink.url }}" class="mainNav-dropDown-link">{{ childlink.title | escape }}</a>
                         </li>
+                        {%endif%}
                       {% endfor %}
                     </ul>
                   </li>
-                {% else %}
+                {% else %}  
                   <li class="mainNav-menu-item  {% if link.active %}site-nav--active{% endif %}">
                     <a href="{{ link.url }}" class="mainNav-menu-link">{{ link.title }}</a>
                   </li>

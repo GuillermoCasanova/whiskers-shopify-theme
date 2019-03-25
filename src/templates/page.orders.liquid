@@ -114,6 +114,31 @@
                   </p>
                 </li>
 
+                {%if order.discounts %}
+                  <div class="customerOrder-property-label">
+                    Discounts
+                  </div>
+                  {% for discount in order.discounts %}
+                    <li>
+                      <p>
+                      {{ discount.code }} {{ 'customer.order.discount' | t }} {{ discount.savings | money }}
+                      </p>
+                    </li>
+                  {% endfor %}
+                {%endif%}
+
+                {%if order.tax_lines.length > 0 %}
+                  <div class="customerOrder-property-label">
+                    Taxes
+                  </div>
+                  {% for tax_line in order.tax_lines %}
+                    <li>
+                      <div>{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)</div>
+                      <p>{{ tax_line.price | money }}</p>
+                    </li>
+                  {% endfor %}
+                {%endif%}
+
                 <li  class="customerOrder-property">
                   <div class="customerOrder-property-label">Shipped To</div> 
                   <addr>

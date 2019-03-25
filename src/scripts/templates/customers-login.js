@@ -62,8 +62,9 @@ theme.customerLogin = (function() {
      *  Show/Hide recover password form
      */
     function toggleRecoverPasswordForm() {
-      $('#RecoverPasswordForm').toggleClass('hide');
-      $('#CustomerLoginForm').toggleClass('hide');
+      $('#RecoverPasswordForm').toggleClass('is-hidden');
+      $('#RecoverPasswordForm').toggleClass('is-showing');
+      $(selectors.loginForm).toggleClass('is-hidden');
     }
 
     /**
@@ -78,7 +79,9 @@ theme.customerLogin = (function() {
       }
 
       // show success message
-      $('#ResetSuccess').removeClass('hide');
+      $('#RecoverPasswordForm').toggleClass('is-hidden');
+      $('#RecoverPasswordForm').toggleClass('is-showing');
+      $(selectors.loginForm).toggleClass('is-hidden');
     }
   }
 
@@ -110,6 +113,7 @@ theme.customerLogin = (function() {
     $(selectors.loginForm).toggleClass('is-showing'); 
     $(selectors.signUpCta).toggleClass('is-showing'); 
     $(selectors.loginCta).toggleClass('is-showing'); 
+
     $(selectors.registerForm).toggleClass('is-hidden'); 
     $(selectors.loginForm).toggleClass('is-hidden'); 
     $(selectors.signUpCta).toggleClass('is-hidden'); 
