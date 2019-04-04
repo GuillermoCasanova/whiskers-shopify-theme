@@ -1,0 +1,50 @@
+
+<div>
+	<span>
+		{{section.settings.title}}
+	</span>
+	
+	<ul class="grid  grid--flexWrap">
+		{%for block in section.blocks%}
+			<li>
+				<div>
+					<label for="{{block.settings.tag}}">{{block.settings.title}}</label>
+					<input type="checkbox" value="{{block.settings.tag}}" name="{{block.settings.tag}}">
+				</div>
+			</li>
+		{%endfor%}
+	</ul>
+</div>
+
+{% schema %}
+  {
+    "name": "Pattern Filter",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "pattern",
+        "name": "Patterns",
+        "settings": [
+           {
+            "label": "Pattern Name",
+            "id": "title",
+            "type": "text"
+          },
+          {
+            "label": "Pattern Tag",
+            "id": "tag",
+            "type": "text"
+          }
+        ]
+      }
+    ]
+  }
+
+{% endschema %}
+

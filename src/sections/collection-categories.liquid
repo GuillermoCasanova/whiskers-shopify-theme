@@ -1,0 +1,65 @@
+
+<div>
+ 		
+	<span>
+		{{section.settings.title}}
+	</span>
+
+	<ul class="collection-menu-categories">
+   {% for link in linklists[section.settings.menu].links %}
+      {%- assign child_list_handle = link.title | handleize -%}
+      {% if menus[child_list_handle].links != blank %}
+        <li class="menu-item ">
+          <a href="{{ link.url }}" class="menu-link">{{ link.title }}</a>
+          <ul class="dropDown {%if link.active %} is-showing {%endif%}">
+            {% for childlink in menus[child_list_handle].links %}
+               {%if childlink.url == '/account'%}
+                {%if customer%}
+                 <li class="dropDown-item animElem">
+                  <a href="{{ childlink.url }}" class="dropDown-link">View Account</a>
+                </li>
+                {%else%}
+                <li class="dropDown-item animElem">
+                  <a href="{{ childlink.url }}" class="dropDown-link">{{ childlink.title }}</a>
+                </li>   
+                {%endif%}
+              {%else%}
+              <li class="dropDown-item animElem {% if childlink.active %}site-nav--active{% endif %}" >
+                <a href="{{ childlink.url }}" class="dropDown-link">{{ childlink.title | escape }}</a>
+              </li>
+              {%endif%}
+            {% endfor %}
+          </ul>
+        </li>
+      {% else %}  
+        <li class="menu-item  {% if link.active %}site-nav--active{% endif %}">
+          <a href="{{ link.url }}" class="menu-link">{{ link.title }}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+	</ul>
+
+</div>
+
+
+
+
+{% schema %}
+  {
+    "name": "Collection Menu",
+    "settings": [
+      {
+        "label": "Title",
+        "id": "title",
+        "type": "text"
+      },
+      {
+        "label": "Menu",
+        "id": "menu",
+        "type": "link_list"
+      }
+    ]
+  }
+
+{% endschema %}
+

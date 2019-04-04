@@ -1,0 +1,51 @@
+
+<div class="collection-color-filter">
+	<span>
+	{{section.settings.title}}
+	</span>
+		<ul class="grid">
+			{%for block in section.blocks %}
+			<li>
+				<div class="colorSwatch" style="background-color: {{block.settings.color-hex}};">
+					<label for="{{block.settings.color-hex}}">{{block.settings.title}}</label>
+					<input type="checkbox" value="{{block.settings.title}}" name="{{block.settings.color-hex}}"><div class="colorSwatch-check">
+						
+					</div>
+				</div>
+			</li>
+			{%endfor%}
+		</ul>
+</div>
+
+{% schema %}
+  {
+    "name": "Color Swatches Filter",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Filter Title"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "color-swatch",
+        "name": "Color Swatches",
+        "settings": [
+           {
+            "label": "Color Name",
+            "id": "title",
+            "type": "text"
+          },
+          {
+            "label": "Color",
+            "id": "color-hex",
+            "type": "color"
+          }
+        ]
+      }
+    ]
+  }
+
+{% endschema %}
