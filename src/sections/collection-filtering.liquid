@@ -1,0 +1,113 @@
+
+
+
+{%- assign tags = collection.all_tags -%}
+
+
+<div>
+	{%for block in section.blocks%}
+ 		
+	 	{% case block.type %}
+			{% when 'color-filter'%}
+			<span>
+				{{block.settings.title}}
+			</span>
+			<select class="js-collection-filter" data-collection="{{collection.id}}">
+	    <option disabled="" selected="" value="">select a tag</option>
+	        {% for tag in tags %}
+	            {% if tag != ''%}
+	                <option value="{{ tag | url_encode }}">{{ tag }}</option>
+	            {% endif %}
+	        {% endfor %}
+	    </select>
+
+			{% when 'categories'%}
+			<span>
+				{{block.settings.title}}
+			</span>
+
+			<ul class="collection-menu-categories">
+	     {% for link in linklists[block.settings.menu].links %}
+	        {%- assign child_list_handle = link.title | handleize -%}
+	        {% if menus[child_list_handle].links != blank %}
+	          <li class="menu-item ">
+	            <a href="{{ link.url }}" class="menu-link">{{ link.title }}</a>
+	            <ul class="dropDown {%if link.active %} is-showing {%endif%}">
+	              {% for childlink in menus[child_list_handle].links %}
+	                 {%if childlink.url == '/account'%}
+	                  {%if customer%}
+	                   <li class="dropDown-item animElem">
+	                    <a href="{{ childlink.url }}" class="dropDown-link">View Account</a>
+	                  </li>
+	                  {%else%}
+	                  <li class="dropDown-item animElem">
+	                    <a href="{{ childlink.url }}" class="dropDown-link">{{ childlink.title }}</a>
+	                  </li>   
+	                  {%endif%}
+	                {%else%}
+	                <li class="dropDown-item animElem {% if childlink.active %}site-nav--active{% endif %}" >
+	                  <a href="{{ childlink.url }}" class="dropDown-link">{{ childlink.title | escape }}</a>
+	                </li>
+	                {%endif%}
+	              {% endfor %}
+	            </ul>
+	          </li>
+	        {% else %}  
+	          <li class="menu-item  {% if link.active %}site-nav--active{% endif %}">
+	            <a href="{{ link.url }}" class="menu-link">{{ link.title }}</a>
+	          </li>
+	        {% endif %}
+	      {% endfor %}
+			</ul>
+    {% endcase %}
+
+	{%endfor%}
+</div>
+
+
+
+
+{% schema %}
+  {
+    "name": "Collection Menu",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Filter Title"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "categories",
+        "name": "Categories",
+        "settings": [
+           {
+            "label": "Title",
+            "id": "title",
+            "type": "text"
+          },
+          {
+            "label": "Menu",
+            "id": "menu",
+            "type": "link_list"
+          }
+        ]
+      },
+      {
+        "type": "color-filter",
+        "name": "Color Filter",
+        "settings": [
+           {
+            "label": "Title",
+            "id": "title",
+            "type": "text"
+          }
+        ]
+      }
+    ]
+  }
+
+{% endschema %}
+

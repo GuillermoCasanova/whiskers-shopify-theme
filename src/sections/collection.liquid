@@ -1,43 +1,50 @@
 
-  <!--Collection Begins--> 
-  <div class="section" data-section-id="{{section.id}}" data-section-type="collection">
-    <div class="row small-collapse">
-      <div class="small-12  medium-centered  columns  ">
+<section class="section" data-section-id="{{ section.id }}" data-section-type="collection">
+  <div class="row small-collapse">
+    <div class="small-12  medium-11  large-12  medium-centered  columns  ">
+      <!--Collection Begins--> 
+      <div class="section">
+        <div class="row row--full small-collapse">
+          <div class="small-12  medium-11  large-12  medium-centered  columns  ">
 
-          <div class="grid  grid--justifyCenter">
-            <div class="collectionContainer">
-              <div class="categoryHeader"> 
-                
-                <h2 class="categoryHeader-title">{{ collection.title }}</h2>
-                
-              </div>
-                
-              <div class="row">
-                <div class="small-12 columns">
-                  <ul class="grid  
-                             grid--flexDirectionRow
-                             grid--1of2
-                             med-grid--1of3
-                             grid--flexWrap
-                             med-grid--flexDirectionRow
-                             large-grid--1of4
-                             productThumbs">
-              
-                    {% for product in collection.products %}
-                    <li class="grid-cell">
-                      {%include 'product-thumb'%}
-                    </li>
-                    {% endfor %}
-              
-                  </ul>
+              <div class="grid  grid--justifyCenter">
+                <div class="collectionContainer">
+                  <div class="categoryHeader"> 
+                    
+                    <h2 class="categoryHeader-title">{{ collection.title }}</h2>
+                    
+                  </div>
+                    
+                  <div class="row">
+                    <div class="small-12 columns">
+                      <ul class="grid  
+                                 grid--flexDirectionRow
+                                 grid--1of2
+                                 med-grid--1of3
+                                 grid--flexWrap
+                                 med-grid--flexDirectionRow
+                                 large-grid--1of4
+                                 productThumbs">
+                  
+                        {% for product in collection.products %}
+                        <li class="grid-cell">
+                          {%include 'product-thumb'%}
+                        </li>
+                        {% endfor %}
+                  
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
           </div>
+        </div>
       </div>
+      <!--Collection Ends--> 
     </div>
   </div>
-  <!--Collection Ends--> 
+</section>
+
 
 {% javascript %}
     //
@@ -53,3 +60,33 @@
 
   //</script>
 {% endjavascript %}
+
+
+{% schema %}
+  {
+    "name": "Featured Lace Collections",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Featured Lace Collections"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "Collection",
+        "settings": [
+          {
+            "label": "Collection",
+            "id": "collection",
+            "type": "collection"
+          }
+        ]
+      }
+    ]
+  }
+
+{% endschema %}
+

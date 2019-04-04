@@ -17,6 +17,79 @@
 
 
 
+.collectionDescription {
+  margin-top: -30px; 
+  position: relative;
+  @include text-micro(); 
+
+  .collectionDescription-inner {
+    padding: rem-calc($level2); 
+
+    @include media-query($medium-up) {
+      padding: rem-calc($level2); 
+      padding-top: rem-calc($level5); 
+      padding-bottom: rem-calc($level5); 
+    }
+
+    p {
+      margin-bottom: 0; 
+    }
+  }
+
+  @include media-query($large-up) {
+    padding-left: 28%; 
+    width: 100%;
+  }
+}
+
+
+.collection {
+  width: 100%;
+  position: relative;
+
+  .collection-menu {
+    @include media-query($large-up) {
+      min-width: rem-calc(260px); 
+      position: absolute;
+      top: 0; 
+      left: 0; 
+      padding-left: rem-calc($level2);
+    }
+  }
+
+  .collection-products {
+    @include media-query($large-up) {
+      padding-left: 28%; 
+      width: 100%;
+    }
+  }
+}
+
+
+.collection-menu-categories {
+  @include media-query($large-up) {
+    color: #fff;
+  }
+
+  .menu-item {
+    margin-bottom: rem-calc($level1); 
+
+    .dropDown {
+      display: none; 
+
+      &.is-showing {
+        display: block;
+      }
+    }
+
+    .menu-link {
+      color: #fff;
+    }
+  }
+
+}
+
+
 
 /*------------------------------------*\
     #Collection Category Header
