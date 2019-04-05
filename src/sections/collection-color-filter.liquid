@@ -3,9 +3,9 @@
 	<span>
 	{{section.settings.title}}
 	</span>
-		<ul class="grid  grid--flexWrap grid--flexDirectionRow">
+		<ul class="grid  grid--flexWrap grid--flexDirectionRow    grid--justifyLeft ">
 			{%for block in section.blocks %}
-			<li>
+			<li class="grid-cell">
 				<div class="colorSwatch" style="background-color: {{block.settings.color-hex}};">
 					<label for="{{block.settings.color-hex}}">{{block.settings.title}}</label>
 					<input type="checkbox" value="{{block.settings.title}}" name="{{block.settings.color-hex}}" data-ui-component="filter-option"><div class="colorSwatch-check">

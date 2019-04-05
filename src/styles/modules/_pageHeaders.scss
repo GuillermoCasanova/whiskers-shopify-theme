@@ -11,7 +11,7 @@
 
   @include media-query($medium-up) {
     margin-bottom: rem-calc($level5);
-    min-height: rem-calc(290px); 
+    min-height: rem-calc(250px); 
     margin-top: 0; 
   }
 
@@ -27,7 +27,7 @@
     top: 0;
     margin: auto;
     width: 100%; 
-    padding-bottom: 60%; 
+    padding-bottom: 45%; 
     position: relative;
     background-color: $senaryColor;
     overflow: hidden;
@@ -99,9 +99,8 @@
 
 
 .pageHeader--collection {
-  margin-bottom: rem-calc($level6); 
-
-  @include media-query($medium-up) {
+  margin-bottom: 0; 
+  @include media-query($large-up) {
     margin-bottom: rem-calc($level4); 
   }
 } 

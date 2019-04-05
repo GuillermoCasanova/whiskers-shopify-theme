@@ -10,7 +10,8 @@
 theme.collection = (function() {
 
   var selectors = {
-    products: '[data-product]'
+    products: '[data-product]',
+    collectionFiltersToggle: '[data-filter-toggle]'
   };
 
   this.animCtrl = null;
@@ -56,6 +57,8 @@ theme.collection = (function() {
   }
 
 
+
+
   setUpThumbAnimations(); 
 
 
@@ -69,6 +72,17 @@ theme.collection = (function() {
         moneyFormat: theme.strings.moneyFormat
     });
   });
+
+  if($(selectors.collectionFiltersToggle).length > 0 ) {
+
+    var $filterToggle = $(selectors.collectionFiltersToggle); 
+
+    function toggleFiltersMenu() {
+      $('[data-filters-off-canvas]').toggleClass('is-hidden'); 
+    }
+
+    $filterToggle.on('click', toggleFiltersMenu); 
+  }
 
 
 })();

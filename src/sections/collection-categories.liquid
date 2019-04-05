@@ -1,11 +1,11 @@
 
 <div>
-	<ul class="collection-menu-categories">
+	<ul class="collectionCategories  grid  grid--center  flex--noWrap  large-grid--flexDirectionColumn  grid--1of3  large-grid--top">
    {% for link in linklists[section.settings.menu].links %}
       {%- assign child_list_handle = link.title | handleize -%}
       {% if menus[child_list_handle].links != blank %}
-        <li class="menu-item ">
-          <a href="{{ link.url }}" class="menu-link {% if link.active %}is-active{%endif%}">{{ link.title }}</a>
+        <li class="menu-item grid-cell {% if link.active %}is-active{%endif%}" >
+          <a href="{{ link.url }}" class="menu-link ">{{ link.title }}</a>
           <ul class="dropDown {%if link.active %} is-showing {%endif%}">
             {% for childlink in menus[child_list_handle].links %}
               <li class="dropDown-item animElem {% if childlink.active %}is-active{% endif %}" >
@@ -15,7 +15,7 @@
           </ul>
         </li>
       {% else %}  
-        <li class="menu-item  {% if link.active %}site-nav--active{% endif %}">
+        <li class="menu-item  grid-cell  {% if link.active %}is-active{% endif %} ">
           <a href="{{ link.url }}" class="menu-link">{{ link.title }}</a>
         </li>
       {% endif %}

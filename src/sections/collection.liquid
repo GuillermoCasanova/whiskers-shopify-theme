@@ -72,7 +72,6 @@
                                  med-grid--flexDirectionRow
                                  large-grid--1of4
                                  productThumbs">
-                  
                         {{#product}}
                         <li class="grid-cell">
                           <a class="productThumb"  href="{{url}}" data-product>
@@ -104,10 +103,9 @@
                                 {{title}}
                                 </h3>
                                 <div>
-                                  <span class="visually-hidden">
+                                  <span>
                                   {{price}}
                                   </span>
-                                  <s>{{price}}</s>
                                 </div>
                               </div>
                           </a>
@@ -125,6 +123,12 @@
       </div>
 {%endraw%}
 
+</script>
+
+<script  id="collection-template-empty" type="text/template">
+  <p>
+    It appears there are no products that match your query. Try something else! 
+  </p>
 </script>
 
 

@@ -1,0 +1,29 @@
+ <div class="collectionMenu" data-ui-component="collection-menu">
+  <div class="collectionMenu-inner">
+      {% section 'collection-categories' %}
+      <div class="collectionFilters is-hidden" data-filters-off-canvas>
+        <div class="collectionFilters-header  hide-for-large-up  ">
+         <div class="grid  grid--middle  grid--justifySpaceBetween">
+          <span class="collectionFilters-title">Filters</span>
+           <button>
+             Clear 
+           </button>
+         </div>
+        </div>
+        <div class="collectionFilters-inner">
+          <span class="collectionFilters-title show-for-large-up">Filters</span>
+          <div class="collectionFilters-filter">{% section 'collection-color-filter' %}</div>
+          <div class="collectionFilters-filter">{% section 'collection-length-filter' %}</div>
+          <div class="collectionFilters-filter">{% section 'collection-pattern-filter' %}</div>
+        </div>
+        <div class="collectionFilters-footer  hide-for-large-up">
+          <button class="button  button--medium  button--expanded   button--primary"  data-filter-toggle data-text="View Results">
+            View Results
+          </button>
+        </div>
+      </div>
+      <button  class="collectionFilterToggle  hide-for-large-up" data-filter-toggle>
+        Filter
+      </button>
+    </div>
+</div>

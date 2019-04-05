@@ -42,6 +42,8 @@
 .collection {
   width: 100%;
   position: relative;
+  min-height: 100vh;
+  
 
   .collection-products {
     @include media-query($large-up) {
@@ -61,38 +63,36 @@
 \*------------------------------------*/
 
 
-.collection-menu {
-  z-index: 2; 
+.collectionMenu {
+
   @include media-query($large-up) {
+    z-index: 2; 
     max-width: rem-calc(180px); 
     position: absolute;
     top: 0; 
     left: 0; 
     width: 100%;
-    margin-top: rem-calc(-36px); 
+    margin-top: rem-calc(-42px); 
     margin-left: 7%;
   }
 }
 
 
-.collection-menu-categories {
+.collectionCategories {
+  overflow-x: scroll; 
+  max-width: 100%;
+  min-width: 100vw;
+  position: relative;
+  padding: rem-calc(3px); 
+  border-bottom: 1px solid #3c3737;
 
   @include media-query($medium-up) {
     padding-bottom: rem-calc($level4); 
-    border-bottom: 2px solid $quintenaryColor;
+    border-bottom: 1px solid $quintenaryColor;
     margin-bottom: rem-calc($level4);  
-  }
-
-  a {
-    color: #fff;
-    &:hover, 
-    &:focus {
-      font-weight: bold; 
-    }
-
-    &.is-active {
-      font-weight: bold; 
-    }
+    max-width: auto; 
+    min-width: auto;
+    overflow: visible;
   }
 
   @include media-query($large-up) {
@@ -100,7 +100,75 @@
   }
 
   .menu-item {
-    margin-bottom: rem-calc(3px); 
+    margin-bottom: rem-calc($level1); 
+    background-color: transparent;
+    border-right: 1px solid #3c3737;
+    margin-right: rem-calc($level2); 
+    text-align: center; 
+    padding-left: rem-calc($level1);
+    padding-right: rem-calc($level1);
+    min-width: rem-calc(140px); 
+    @include text-micro();
+
+    @include media-query($medium-up) {
+      text-align: left; 
+      border-right: 0; 
+      padding-left: 0;
+      padding-right: 0;
+      min-width: auto;
+      @include h4(); 
+    }
+  
+    &.is-active {
+      a.menu-link {
+        font-weight: bold; 
+
+        @include media-query($large-up) {
+          border-bottom: 2px solid $accentColor;
+        }
+        
+        &:after {
+          opacity: 1;
+
+          @include media-query($medium-up) {
+            opacity: 0; 
+          }
+        }
+      }
+    }
+    
+    a {
+      padding: rem-calc($level3); 
+      color: #fff;
+      display: block; 
+      position: relative;
+      width: 100%;
+
+      @include media-query($medium-up) {
+        padding: 0;
+        text-align: left; 
+      }
+
+      &:hover, 
+      &:focus {
+        font-weight: bold; 
+        @include media-query($large-up) {
+          border-bottom: 2px solid $accentColor;
+        }
+      }
+
+      &:after {
+        content: " ";
+        left: 0; 
+        right: 0;
+        bottom: -6px;
+        position: absolute;
+        background-color: $accentColor;
+        height: 2px;
+        width: 100%;
+        opacity: 0;
+      }
+    }
 
     .dropDown {
       margin-top: rem-calc(3px);
@@ -122,22 +190,28 @@
 
 
 .collection-color-filter {
+  max-width: rem-calc(290px); 
 
-  @include media-query($medium-up) {
-    padding-bottom: rem-calc($level4); 
-    border-bottom: 2px solid $quintenaryColor;
-    margin-bottom: rem-calc($level4);  
+  ul {
+    margin-bottom: 0; 
   }
 
-
   .colorSwatch {
-    height: rem-calc(24px);
-    width: rem-calc(24px);
+    height: rem-calc(36px);
+    width: rem-calc(36px);
     display: inline-block; 
     position: relative;
-    margin-right: rem-calc($level1);
+    margin-right: rem-calc($level3);
+    margin-bottom: rem-calc($level3);
     border-radius: 100%; 
     border: .25px solid $quintenaryColor;
+
+    @include media-query($large-up) {
+      height: rem-calc(24px);
+      width: rem-calc(24px);
+      margin-right: rem-calc($level1);
+      margin-bottom: rem-calc($level1);
+    }
 
     input {
       position: absolute;
@@ -177,6 +251,94 @@
 }
 
 
+.collectionFilters{
+  position: fixed;
+  top: 0;
+  background-color: rgba(56,54,66, 0.98);
+  left: 0; 
+  width: 100%;
+  z-index: 99999;
+  height: 100vh;
+  min-height: 100%;
+  transition: all .3s cubic-bezier(0.23, 1, 0.32, 1);
+  max-width: rem-calc(420px); 
+
+  @include media-query($large-up) {
+    position: relative;
+    background-color: transparent;
+    height: auto;
+    min-height: 1px; 
+    z-index: 1; 
+    left: 0; 
+    width: auto;
+    max-width: 100%; 
+  }
+
+  &.is-hidden {
+    transform: translateX(-100%);
+
+    @include media-query($large-up) {
+      transform: translateX(0); 
+    }
+  }
+
+  .collectionFilters-title {
+    text-transform: uppercase;
+    font-weight: bold; 
+    display: block;
+    margin-bottom: rem-calc($level2); 
+    font-family: $secondary-font-family; 
+  }
+
+  .collectionFilters-footer {
+    padding: rem-calc($level2);
+    width: 100%;
+    background-color: $secondaryColor;
+    position: absolute;
+    left: 0; 
+    bottom: 0; 
+    right: 0; 
+  }
+
+  .collectionFilters-header {
+    padding: rem-calc($level2);
+    width: 100%;
+    background-color: $secondaryColor;
+    position: absolute;
+    left: 0; 
+    top: 0; 
+    right: 0;    
+  }
+
+  .collectionFilters-inner {
+    padding: rem-calc($level2);
+    padding-top: rem-calc($level7 + $level2); 
+
+    @include media-query($large-up) {
+      padding: 0;
+    }
+  }
+
+  .collectionFilters-filter {
+    padding: rem-calc($level3);
+    @include media-query($large-up) {
+      padding: 0;
+      margin-bottom: rem-calc($level4);  
+    }
+  
+  }
+}
+
+.collectionFilterToggle {
+  margin-left: auto;
+  position: relative;
+  margin-right: auto;
+  left: 0; 
+  right: 0;
+  padding: rem-calc($level2);
+  @include h4(); 
+}
+
 
 
 
@@ -188,11 +350,10 @@
   margin-bottom: rem-calc(-18px); 
   padding: rem-calc($level3); 
   padding-bottom: rem-calc($level5); 
-  background-color: transparent; 
-  position: absolute;
-  width: 100%;
-  height: rem-calc(250px);
-  top: rem-calc(-300px); 
+  padding-left: rem-calc($level2);
+  background-color: $secondaryColor; 
+  width: 90%;
+  height: rem-calc(84px);
   left: 0; 
   right: 0; 
   bottom: 0; 
@@ -206,9 +367,7 @@
   }
 
   .categoryHeader-title {
-    padding-top: rem-calc($level1);
     padding-bottom: rem-calc($level1);
-    padding-left: rem-calc($level1);  
     margin-bottom: 0; 
     text-transform: uppercase; 
     font-family: $secondary-font-family; 

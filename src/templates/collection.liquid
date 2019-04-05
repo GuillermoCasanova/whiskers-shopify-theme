@@ -6,7 +6,7 @@
   
   
   <!--Collection Description--> 
-  <div class="row  row--full">
+  <div class="row  row--full  show-for-medium-up">
     <div class="small-12  large-11  columns">
       <div class="collectionDescription">
         <div class="collectionDescription-inner">
@@ -24,16 +24,7 @@
   <div class="row small-collapse ">
     <div class="small-12  large-11  columns">
       <div class="collection  grid  grid--flexDirectionColumn  large-grid--flexDirectionRow">
-        <div class="collection-menu" data-ui-component="collection-menu">
-          <div class="collection-menu-inner">
-            {% section 'collection-categories' %}
-              
-            Filters
-            {% section 'collection-color-filter' %}
-            {% section 'collection-length-filter' %}
-            {% section 'collection-pattern-filter' %}
-          </div>
-        </div>
+        {%include 'collection-menu'%}
         <div class="collection-products">
         {% section 'collection' %}
         </div>

@@ -66,27 +66,27 @@ theme.collectionFilter = (function() {
   function buildFilteredProducts(filteredProds) {
           
     var $productContainer = $('[data-section-type="collection"]');
-        
-        $productContainer.empty();
-        var products = [],
-        product = {}, 
-        data = {}, 
-        source = $("#collection-template").html(),
-        template = Handlebars.compile(source);
-        products = filteredProds.map(function(productItem) {
-        
-        console.log(productItem); 
+      
+    if(filteredProds.length > 0) {
 
-         var product = {
-            id: productItem.id, 
-            description: productItem.body_html.replace(/<\/?[^>]+(>|$)/g, "").split(' ').join(' '), 
-            title: productItem.title, 
-            price: slate.Currency.formatMoney(productItem.variants[0].price, '${{amount}}'),
-            featuredImg: productItem.images[0].src,
-            url: productItem.url,
-            handle: productItem.handle,
-            variant: productItem.variants[0].id
-        }
+     $productContainer.empty();
+      var products = [],
+      product = {}, 
+      data = {}, 
+      source = $("#collection-template").html(),
+      template = Handlebars.compile(source);
+      products = filteredProds.map(function(productItem) {
+      
+       var product = {
+          id: productItem.id, 
+          description: productItem.body_html.replace(/<\/?[^>]+(>|$)/g, "").split(' ').join(' '), 
+          title: productItem.title, 
+          price: slate.Currency.formatMoney(productItem.variants[0].price, '${{amount}}'),
+          featuredImg: productItem.images[0].src,
+          url: productItem.url,
+          handle: productItem.handle,
+          variant: productItem.variants[0].id
+      }
 
         return product; 
     });
@@ -96,8 +96,13 @@ theme.collectionFilter = (function() {
     } 
 
     $productContainer.append(template(data)); 
-
     $(document).trigger('reset-thumbnails'); 
+    } else {
+      $productContainer.empty();
+      var source = $("#collection-template-empty").html(),
+      template = Handlebars.compile(source);
+      $productContainer.append(template()); 
+    } 
   }
 
   $(function(){
