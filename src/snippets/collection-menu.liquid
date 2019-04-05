@@ -3,11 +3,15 @@
       {% section 'collection-categories' %}
       <div class="collectionFilters is-hidden" data-filters-off-canvas>
         <div class="collectionFilters-header  hide-for-large-up  ">
-         <div class="grid  grid--middle  grid--justifySpaceBetween">
-          <button class="collectionFilters-title" data-filter-toggle>Close</button>
-           <button data-clear-filters>
+         <div class="grid  grid--center  grid--justifySpaceBetween">
+          <div class="collectionFilters-close">
+            <button data-filter-toggle></button>
+          </div>
+          <div class="collectionFilters-clear">
+            <button data-clear-filters>
              Clear 
            </button>
+         </div>
          </div>
         </div>
         <div class="collectionFilters-inner">
@@ -17,8 +21,8 @@
           <div class="collectionFilters-filter">{% section 'collection-pattern-filter' %}</div>
         </div>
         <div class="collectionFilters-footer  hide-for-large-up">
-          <button class="button  button--medium  button--expanded   button--primary"  data-filter-toggle data-text="View Results">
-            View Results
+          <button class="button  button--medium  button--expanded   button--primary collectionFilters-viewResults"  data-filter-toggle data-text="View Results">
+            View Results <span class="collectionFilters-viewResults-results ">(<span data-results-total>0</span>)</span>
           </button>
         </div>
       </div>

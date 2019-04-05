@@ -11,7 +11,8 @@ theme.collectionFilter = (function() {
 
 
   var selectors = {
-      collectionMenu: '[data-ui-component="collection-menu"]'
+    collectionMenu: '[data-ui-component="collection-menu"]',
+    collectionFiltersToggle: '[data-filter-toggle]'
   };
 
 
@@ -48,11 +49,11 @@ theme.collectionFilter = (function() {
     console.log(tags); 
     if(tags.length === 0 ) {
       buildFilteredProducts(products); 
+      $('[data-results-total]').text(products.length); 
       return products
     }
 
     var filteredProducts = products.filter(function(product){
-      console.log(product); 
       for(var i = 0; i < tags.length; i++) {
         if(product.tags.indexOf(tags[i]) > -1) {
           return true
@@ -60,8 +61,9 @@ theme.collectionFilter = (function() {
       }
       return false 
     });
+
     buildFilteredProducts(filteredProducts); 
-    console.log(filteredProducts); 
+    $('[data-results-total]').text(filteredProducts.length); 
     return filteredProducts;
   }
 
@@ -109,19 +111,39 @@ theme.collectionFilter = (function() {
     } 
   }
 
-  $(function(){
-      $('[data-ui-component="filter-option"]').on('change', function(){
-          var tag = $(this).val()
-          if(tags.indexOf(tag) != -1) {
-            _.pull(tags, tag); 
-            console.log('tag already here');
-          } else {
-            tags.push(tag); 
-            console.log('new');
-          }
-          getFilterProducts(tags, collectionId);
-      });
+
+  function clearAllFilters() {
+    tags = []; 
+    $('[data-ui-component="filter-option"]').removeAttr('checked');
+    getFilterProducts(tags, collectionId);
+  }
+
+  $('[data-ui-component="filter-option"]').on('change', function(){
+      var tag = $(this).val()
+      if(tags.indexOf(tag) != -1) {
+        _.pull(tags, tag); 
+      } else {
+        tags.push(tag); 
+      }
+      getFilterProducts(tags, collectionId);
   });
+
+
+   $('[data-clear-filters]').on('click', function() {
+      clearAllFilters(); 
+   });
+
+  if($(selectors.collectionFiltersToggle).length > 0 ) {
+
+  var $filterToggle = $(selectors.collectionFiltersToggle); 
+
+  function toggleFiltersMenu() {
+    $('[data-filters-off-canvas]').toggleClass('is-hidden'); 
+  }
+
+  $filterToggle.on('click', toggleFiltersMenu); 
+  }
+
 
 })();
 

@@ -16,6 +16,7 @@
   margin-top: -30px; 
   position: relative;
   z-index: 1; 
+  padding-bottom: 0; 
   @include text-micro(); 
 
   .collectionDescription-inner {
@@ -282,10 +283,10 @@
   }
 
   &.is-hidden {
-    transform: translateX(-100%);
+    transform: translateY(100%);
 
     @include media-query($large-up) {
-      transform: translateX(0); 
+      transform: translateY(0); 
     }
   }
 
@@ -296,7 +297,60 @@
     margin-bottom: rem-calc($level2); 
     font-family: $secondary-font-family; 
   }
+  
+  .collectionFilters-close {
+    position: relative;
+    width: rem-calc(24px);
+    height: rem-calc(24px);
 
+    button {
+      margin-bottom: 0;
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      text-align: center;
+      margin: auto;
+      top: -2px;
+      bottom: 0;
+      right: -2px;
+      left: 0;
+
+      &:after,
+      &:before {
+        content: ""; 
+        height: 2px;
+        background-color: $accentColor; 
+        width: 100%;  
+        left: 0; 
+        right: 0; 
+        position: absolute;
+        transition: all .2s cubic-bezier(0.23, 1, 0.32, 1); 
+      }
+
+      &:before {
+        top: 50%; 
+        transform: translateY(0) rotate(-45deg); 
+      }
+
+      &:after {
+        top: 50%; 
+        transform: translateY(0) rotate(45deg); 
+      }
+
+      &:hover,
+      &:focus {
+        transform: scale(1.1); 
+      }
+
+    }
+  }
+  
+  .collectionFilters-clear {
+
+    button {
+      margin-bottom: 0; 
+    }
+  }
   .collectionFilters-footer {
     padding: rem-calc($level2);
     width: 100%;
@@ -305,16 +359,20 @@
     left: 0; 
     bottom: 0; 
     right: 0; 
+    border-top: 1px solid $senaryColor; 
   }
 
   .collectionFilters-header {
     padding: rem-calc($level2);
+    padding-top: rem-calc($level3);
+    padding-bottom: rem-calc($level3);
     width: 100%;
     background-color: $secondaryColor;
     position: absolute;
     left: 0; 
     top: 0; 
     right: 0;    
+    border-bottom: 1px solid $senaryColor; 
   }
 
   .collectionFilters-inner {
@@ -328,11 +386,34 @@
 
   .collectionFilters-filter {
     padding: rem-calc($level3);
+    padding-left: 0; 
+    padding-right: 0; 
+    margin-right: rem-calc($level3);
+    margin-left: rem-calc($level3);
+    border-bottom: 1px solid $senaryColor; 
+
     @include media-query($large-up) {
       padding: 0;
       margin-bottom: rem-calc($level4);  
+      margin-right: rem-calc(0);
+      margin-left: rem-calc(0);
     }
-  
+
+    .collectionFilters-filter-title {
+      font-weight: bold; 
+      margin-bottom: rem-calc($level2); 
+      display: block;
+    }
+  }
+
+  .collectionFilters-viewResults {
+    .collectionFilters-viewResults-results {
+      display: inline;
+      width: rem-calc(30px);
+      span {
+        display: inline;
+      }
+    }
   }
 }
 

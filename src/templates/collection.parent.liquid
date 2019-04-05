@@ -4,92 +4,94 @@
   {% section 'page-header' %}
   <!--Page Header Ends--> 
   
-  
+<main>  
+
   <!--Collection Description--> 
   <div class="row  row--full  show-for-medium-up">
     <div class="small-12  large-11  columns">
-      <div class="collectionDescription">
+      <section class="collectionDescription">
         <div class="collectionDescription-inner">
           <p>
             {{collection.description}}
           </p>
         </div>
-      </div>
+      </section>
     </div>
   </div>
   <!--END Collection Description--> 
   
+    
+    <!--Collection Begins--> 
+    <div class="row small-collapse ">
+      <div class="small-12  large-11  columns">
+        <div class="collection  grid  grid--flexDirectionColumn  large-grid--flexDirectionRow">
+          {%include 'collection-menu'%}
+          <div class="collection-products">
+              {%- assign linkHandle = collection.handle | handleize -%}
+              {% for link in linklists %}
+                {%- assign linkTitle = link.title | handleize -%}
+                {% if linkTitle == linkHandle %} 
+                   {%- assign child_list_handle = link.title | handleize -%}
+                   {% for childlink in link.links %}
   
-  <!--Collection Begins--> 
-  <div class="row small-collapse ">
-    <div class="small-12  large-11  columns">
-      <div class="collection  grid  grid--flexDirectionColumn  large-grid--flexDirectionRow">
-        {%include 'collection-menu'%}
-        <div class="collection-products">
-            {%- assign linkHandle = collection.handle | handleize -%}
-            {% for link in linklists %}
-              {%- assign linkTitle = link.title | handleize -%}
-              {% if linkTitle == linkHandle %} 
-                 {%- assign child_list_handle = link.title | handleize -%}
-                 {% for childlink in link.links %}
-
-                  {% comment %}
-                  If we have a collection link.
-                  {% endcomment %}   
-                  {% assign collection = childlink.object %}
-                  {% assign number_of_links = number_of_links | plus: 1 %}
-
-                  <div class="row small-collapse">
-                    <div class="small-12  medium-11  large-12  medium-centered  columns  ">
-                      <!--Collection Begins--> 
-                      <div class="section">
-                        <div class="row row--full small-collapse">
-                          <div class="small-12  medium-11  large-12  medium-centered  columns  ">
-
-                              <div class="grid  grid--justifyCenter  grid--stretch">
-                                <div class="collectionContainer">
-                                   <div class="categoryHeader"> 
-                                    <h2 class="categoryHeader-title">{{ collection.title }}</h2>
-                                  
-                                  </div> 
+                    {% comment %}
+                    If we have a collection link.
+                    {% endcomment %}   
+                    {% assign collection = childlink.object %}
+                    {% assign number_of_links = number_of_links | plus: 1 %}
+  
+                    <div class="row small-collapse">
+                      <div class="small-12  medium-11  large-12  medium-centered  columns  ">
+                        <!--Collection Begins--> 
+                        <section class="section">
+                          <div class="row row--full small-collapse">
+                            <div class="small-12  medium-11  large-12  medium-centered  columns  ">
+  
+                                <div class="grid  grid--justifyCenter  grid--stretch">
+                                  <div class="collectionContainer">
+                                     <div class="categoryHeader"> 
+                                      <h2 class="categoryHeader-title">{{ collection.title }}</h2>
                                     
-                                  <div class="row">
-                                    <div class="small-12 columns">
-                                      <ul class="grid  
-                                                 grid--flexDirectionRow
-                                                 grid--1of2
-                                                 med-grid--1of3
-                                                 grid--flexWrap
-                                                 med-grid--flexDirectionRow
-                                                 large-grid--1of4
-                                                 productThumbs">
-                                  
-                                        {% for product in collection.products | limit:7 %}
-                                        <li class="grid-cell">
-                                          {%include 'product-thumb'%}
-                                        </li>
-                                        {% endfor %}
-                                        <li class="grid-cell">
-                                          {%include 'collection-more-thumb'%}
-                                        </li>
-                                      </ul>
+                                    </div> 
+                                      
+                                    <div class="row">
+                                      <div class="small-12 columns">
+                                        <ul class="grid  
+                                                   grid--flexDirectionRow
+                                                   grid--1of2
+                                                   med-grid--1of3
+                                                   grid--flexWrap
+                                                   med-grid--flexDirectionRow
+                                                   large-grid--1of4
+                                                   productThumbs">
+                                    
+                                          {% for product in collection.products | limit:7 %}
+                                          <li class="grid-cell">
+                                            {%include 'product-thumb'%}
+                                          </li>
+                                          {% endfor %}
+                                          <li class="grid-cell">
+                                            {%include 'collection-more-thumb'%}
+                                          </li>
+                                        </ul>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
+                            </div>
                           </div>
-                        </div>
+                        </section>
+                        <!--Collection Ends--> 
                       </div>
-                      <!--Collection Ends--> 
                     </div>
-                  </div>
-                {%endfor%}
-              {%endif%}
-            {%endfor%}
+                  {%endfor%}
+                {%endif%}
+              {%endfor%}
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <!--Collection Ends--> </div>
+    <!--Collection Ends--> </main>
+</div>
 
 
