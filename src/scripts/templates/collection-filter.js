@@ -43,6 +43,7 @@ theme.collectionFilter = (function() {
   }
 
   function filterProducts(products, tags) {
+    console.log(tags); 
     if(tags.length === 0 ) {
       buildFilteredProducts(products); 
       return products

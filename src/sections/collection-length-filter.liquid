@@ -1,0 +1,56 @@
+
+<div>
+	<span>
+		{{section.settings.title}}
+	</span>
+	
+	<ul class="grid  grid--flexWrap">
+		{%for block in section.blocks%}
+			<li>
+				<div>
+					<label for="{{block.settings.tag}}">{{block.settings.title}} ({{block.settings.length}})</label>
+
+					<input type="checkbox" value="{{block.settings.tag}}" name="{{block.settings.tag}}" data-ui-component="filter-option">
+				</div>
+			</li>
+		{%endfor%}
+	</ul>
+</div>
+
+{% schema %}
+  {
+    "name": "Length Filter",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "length",
+        "name": "Lengths",
+        "settings": [
+           {
+            "label": "Eyelet Pairs",
+            "id": "title",
+            "type": "text"
+          },
+          {
+            "label": "Length of Lace",
+            "id": "length",
+            "type": "text"
+          },
+          {
+            "label": "Length Tag",
+            "id": "tag",
+            "type": "text"
+          }
+        ]
+      }
+    ]
+  }
+
+{% endschema %}
+

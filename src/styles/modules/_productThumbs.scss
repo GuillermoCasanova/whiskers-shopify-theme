@@ -234,12 +234,12 @@
 
   .productThumb-title {
     padding-top: rem-calc($level1);
-    padding-bottom: rem-calc($level1); 
     margin-bottom: 0; 
     text-align: left; 
     font-weight: bold; 
     text-align: center; 
     width: 100%;
+    color: #fff;
     @include text-micro(); 
     
     @include media-query($medium-up) {

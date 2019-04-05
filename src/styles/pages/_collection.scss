@@ -85,6 +85,14 @@
 
   a {
     color: #fff;
+    &:hover, 
+    &:focus {
+      font-weight: bold; 
+    }
+
+    &.is-active {
+      font-weight: bold; 
+    }
   }
 
   @include media-query($large-up) {
@@ -95,7 +103,10 @@
     margin-bottom: rem-calc(3px); 
 
     .dropDown {
+      margin-top: rem-calc(3px);
+      margin-bottom: rem-calc($level1); 
       display: none; 
+      padding-left: rem-calc($level2); 
 
       &.is-showing {
         display: block;
