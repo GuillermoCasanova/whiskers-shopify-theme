@@ -31,13 +31,15 @@ theme.collectionFilter = (function() {
   function getFilterProducts(tags, collection){
       $.ajax({
           type: 'GET',
-          url: '/collections/'+ collection + '/products.json?limit=250?fields=url',
-          dataType: 'json',
+          url: '/collections/'+ collection + '?view=json',
           success: function(res){
-              filterProducts(res.products, tags)
+            console.log(res); 
+            var result = JSON.parse(res); 
+            console.log(result.products);
+            filterProducts(result.products, tags)
            },
           error: function(status){
-               alert(status);
+             alert(status);
           }
       })
   }
@@ -50,6 +52,7 @@ theme.collectionFilter = (function() {
     }
 
     var filteredProducts = products.filter(function(product){
+      console.log(product); 
       for(var i = 0; i < tags.length; i++) {
         if(product.tags.indexOf(tags[i]) > -1) {
           return true
@@ -76,13 +79,14 @@ theme.collectionFilter = (function() {
       source = $("#collection-template").html(),
       template = Handlebars.compile(source);
       products = filteredProds.map(function(productItem) {
-      
+        
        var product = {
           id: productItem.id, 
           description: productItem.body_html.replace(/<\/?[^>]+(>|$)/g, "").split(' ').join(' '), 
           title: productItem.title, 
-          price: slate.Currency.formatMoney(productItem.variants[0].price, '${{amount}}'),
-          featuredImg: productItem.images[0].src,
+          price: slate.Currency.formatMoney(productItem.price, '${{amount}}'),
+          featuredImg: productItem.images[0],
+          secondaryImg: productItem.secondaryImg,
           url: productItem.url,
           handle: productItem.handle,
           variant: productItem.variants[0].id

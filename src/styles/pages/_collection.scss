@@ -43,7 +43,7 @@
   width: 100%;
   position: relative;
   min-height: 100vh;
-  
+
 
   .collection-products {
     @include media-query($large-up) {
@@ -116,7 +116,8 @@
       padding-left: 0;
       padding-right: 0;
       min-width: auto;
-      @include h4(); 
+      margin-bottom: 0; 
+      @include h6(); 
     }
   
     &.is-active {
