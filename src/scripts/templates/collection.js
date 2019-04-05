@@ -18,7 +18,9 @@ theme.collection = (function() {
 
   var self = this; 
 
-  setTimeout(function(){
+  var setUpThumbAnimations = function() {
+
+    setTimeout(function(){
     
     //
     // Defining the animations with ScrollMagic
@@ -50,6 +52,16 @@ theme.collection = (function() {
 
       });
 
-  }, 200); 
+    },200); 
+  }
+
+
+  setUpThumbAnimations(); 
+
+
+  // $(document).on('reset-thumbnails', function() {
+  //   setUpThumbAnimations(); 
+  // })
+
 
 })();

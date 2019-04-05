@@ -34,7 +34,10 @@
           </div>
           {%endif%}
         </div>
-        <div class="productThumb-description text-center grid grid--center grid--justifySpaceBetween">
+
+      </div>
+
+            <div class="productThumb-description text-center grid grid--center grid--flexDirectionColumn">
           <h3 class="productThumb-title">
           {{ product.title }}
           </h3>
@@ -67,7 +70,6 @@
             
           </div>
         </div>
-      </div>
     </a>
   {% else %}
     {% if collection.handle == 'all' and collection.all_vendors.size == 0 and collection.all_types.size == 0 %}

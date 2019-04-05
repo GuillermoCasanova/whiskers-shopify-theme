@@ -1,10 +1,5 @@
 
 <div>
- 		
-	<span>
-		{{section.settings.title}}
-	</span>
-
 	<ul class="collection-menu-categories">
    {% for link in linklists[section.settings.menu].links %}
       {%- assign child_list_handle = link.title | handleize -%}

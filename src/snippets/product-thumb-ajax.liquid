@@ -1,0 +1,42 @@
+
+
+<a class="productThumb"  href="{{url}}" data-product>
+
+  <div class="productThumb-tags">
+    {%for tag in product.tags%}
+      {%if tag == 'best-seller'%}
+        <div class="productThumb-tag  productThumb-tag--bestSeller">
+          TOP SELLER  
+        </div>
+      {%endif%}
+      {%if tag == 'new-pair'%}
+        <div class="productThumb-tag  productThumb-tag--new">
+          New Pair
+        </div>
+      {%endif%}
+    {%endfor%}
+  </div>
+
+  <div class="productThumb-inner">
+    <div class="productThumb-addToCart">
+        <form action="/cart/add" method="post" id="AddToCartForm" data-thumb-add-to-cart-form enctype="multipart/form-data">   
+        <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+          <button type="submit" name="add" id="AddToCart" class="AddToCart"  data-thumb-add-to-cart-btn>
+          {% include 'icon-cart' %}</button>
+      </form>
+    </div>
+
+    <div class="productThumb-bg">
+      <img data-srcset="{{featuredImg}}" alt="{{product.featured_image.alt}}" class="lazyload" data-sizes="auto"  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="  data-product-img>
+    </div>
+    <div class="productThumb-description text-center grid grid--center grid--justifySpaceBetween">
+      <h3 class="productThumb-title">
+      {{title}}
+      </h3>
+      <div>
+        <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+        <s>price</s>
+      </div>
+    </div>
+  </div>
+</a>

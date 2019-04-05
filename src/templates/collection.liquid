@@ -1,19 +1,11 @@
 
+<div data-collection-id="{{collection.handle}}">
   <!--Page Header Begins--> 
   {% section 'page-header' %}
   <!--Page Header Ends--> 
-
-
-
-  <!--Collections Filter Begins--> 
-<!--   <div class="row">
-    <div class="small-12  medium-11  large-10  medium-centered  columns">
-       {% section 'collection-nav' %}
-    </div>
-  </div> -->
-  <!--Collection Filter Ends--> 
   
-
+  
+  <!--Collection Description--> 
   <div class="row  row--full">
     <div class="small-12  medium-11  columns">
       <div class="collectionDescription">
@@ -25,17 +17,21 @@
       </div>
     </div>
   </div>
-
+  <!--END Collection Description--> 
+  
+  
   <!--Collection Begins--> 
-  <div class="row  row--full">
+  <div class="row  ">
     <div class="small-12  medium-11  columns">
       <div class="collection  grid  grid--flexDirectionColumn  large-grid--flexDirectionRow">
-        <div class="collection-menu">
-        {% section 'collection-categories' %}
-
-        Filters
-        {% section 'collection-color-filter' %}
-        {% section 'collection-pattern-filter' %}
+        <div class="collection-menu" data-ui-component="collection-menu">
+          <div class="collection-menu-inner">
+            {% section 'collection-categories' %}
+              
+            Filters
+            {% section 'collection-color-filter' %}
+            {% section 'collection-pattern-filter' %}
+          </div>
         </div>
         <div class="collection-products">
         {% section 'collection' %}
@@ -43,6 +39,6 @@
       </div>
     </div>
   </div>
-  <!--Collection Ends--> 
+  <!--Collection Ends--> </div>
 
 

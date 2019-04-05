@@ -22,6 +22,7 @@ window.theme = window.theme || {};
 
 
 /*================ Templates ================*/
+// =require templates/collection-filter.js
 // =require templates/collection.js
 // =require templates/customers-addresses.js
 // =require templates/customers-login.js

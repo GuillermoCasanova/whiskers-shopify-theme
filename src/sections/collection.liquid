@@ -9,11 +9,9 @@
 
               <div class="grid  grid--justifyCenter">
                 <div class="collectionContainer">
-                  <div class="categoryHeader"> 
-                    
+                   <div class="categoryHeader"> 
                     <h2 class="categoryHeader-title">{{ collection.title }}</h2>
-                    
-                  </div>
+                  </div> 
                     
                   <div class="row">
                     <div class="small-12 columns">
@@ -44,6 +42,92 @@
     </div>
   </div>
 </section>
+
+
+
+
+{%raw%}
+<script id="collection-template" type="text/template">
+      <div class="section">
+        <div class="row row--full small-collapse">
+          <div class="small-12  medium-11  large-12  medium-centered  columns  ">
+
+              <div class="grid  grid--justifyCenter">
+                <div class="collectionContainer">
+                  <div class="categoryHeader"> 
+                    
+                    <h2 class="categoryHeader-title">
+{%endraw%}
+                    {{collection.title}}</h2>
+{%raw%}
+                  </div>
+                    
+                  <div class="row">
+                    <div class="small-12 columns">
+                      <ul class="grid  
+                                 grid--flexDirectionRow
+                                 grid--1of2
+                                 med-grid--1of3
+                                 grid--flexWrap
+                                 med-grid--flexDirectionRow
+                                 large-grid--1of4
+                                 productThumbs">
+                  
+                        {{#product}}
+                        <li class="grid-cell">
+                          <a class="productThumb"  href="{{url}}" data-product>
+
+                            <div class="productThumb-tags">
+                             
+                            </div>
+
+                            <div class="productThumb-inner">
+                              <div class="productThumb-addToCart">
+                                  <form action="/cart/add" method="post" id="AddToCartForm" data-thumb-add-to-cart-form enctype="multipart/form-data">   
+                                  <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+                                    <button type="submit" name="add" id="AddToCart" class="AddToCart"  data-thumb-add-to-cart-btn>
+{%endraw%}
+                                    {% include 'icon-cart' %}
+{%raw%}
+                                    </button>
+                                </form>
+                              </div>
+
+                              <div class="productThumb-bg">
+                                <img src="{{featuredImg}}" alt="{{product.featured_image.alt}}" data-sizes="auto" data-product-img>
+                              </div>
+  
+                            </div>
+
+                            <div class="productThumb-description text-center grid grid--center grid--justifySpaceBetween">
+                                <h3 class="productThumb-title">
+                                {{title}}
+                                </h3>
+                                <div>
+                                  <span class="visually-hidden">
+                                  {{price}}
+                                    </span>
+                                  }
+                                  <s>{{price}}</s>
+                                </div>
+                              </div>
+                          </a>
+
+
+                        </li>
+                        {{/product}}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+{%endraw%}
+
+</script>
+
 
 
 {% javascript %}

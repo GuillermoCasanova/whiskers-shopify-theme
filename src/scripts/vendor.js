@@ -58,3 +58,9 @@
  * panzoom-2.0.5.min.js
  */
 // =require vendor/panzoom-2.0.5.min.js
+
+
+/*!
+ * lodash.js
+ */
+// =require vendor/lodash.js
