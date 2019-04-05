@@ -84,7 +84,7 @@
                             <div class="productThumb-inner">
                               <div class="productThumb-addToCart">
                                   <form action="/cart/add" method="post" id="AddToCartForm" data-thumb-add-to-cart-form enctype="multipart/form-data">   
-                                  <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+                                  <input type="hidden" name="id" value="{{variant}}">
                                     <button type="submit" name="add" id="AddToCart" class="AddToCart"  data-thumb-add-to-cart-btn>
 {%endraw%}
                                     {% include 'icon-cart' %}
@@ -128,22 +128,6 @@
 
 </script>
 
-
-
-{% javascript %}
-    //
-    // Initializes the AJAX cart properties 
-    // <script>
-     ajaxCart.init({
-        formSelector: '[data-thumb-add-to-cart-form]',
-        cartContainer: '#CartContainer',
-        addToCartSelector: '[data-thumb-add-to-cart-btn]',
-        enableQtySelectors: true,
-        moneyFormat: theme.strings.moneyFormat
-    });
-
-  //</script>
-{% endjavascript %}
 
 
 {% schema %}

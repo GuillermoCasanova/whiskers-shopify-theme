@@ -59,9 +59,16 @@ theme.collection = (function() {
   setUpThumbAnimations(); 
 
 
-  // $(document).on('reset-thumbnails', function() {
-  //   setUpThumbAnimations(); 
-  // })
+  $(document).on('reset-thumbnails', function() {
+    setUpThumbAnimations(); 
+     ajaxCart.init({
+        formSelector: '[data-thumb-add-to-cart-form]',
+        cartContainer: '#CartContainer',
+        addToCartSelector: '[data-thumb-add-to-cart-btn]',
+        enableQtySelectors: true,
+        moneyFormat: theme.strings.moneyFormat
+    });
+  });
 
 
 })();

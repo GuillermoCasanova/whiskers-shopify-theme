@@ -74,6 +74,8 @@ theme.collectionFilter = (function() {
         template = Handlebars.compile(source);
         products = filteredProds.map(function(productItem) {
         
+        console.log(productItem); 
+
          var product = {
             id: productItem.id, 
             description: productItem.body_html.replace(/<\/?[^>]+(>|$)/g, "").split(' ').join(' '), 
@@ -81,7 +83,8 @@ theme.collectionFilter = (function() {
             price: slate.Currency.formatMoney(productItem.variants[0].price, '${{amount}}'),
             featuredImg: productItem.images[0].src,
             url: productItem.url,
-            handle: productItem.handle
+            handle: productItem.handle,
+            variant: productItem.variants[0].id
         }
 
         return product; 

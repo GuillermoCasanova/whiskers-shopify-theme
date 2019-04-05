@@ -107,6 +107,15 @@ $(document).ready(function() {
         moneyFormat: theme.strings.moneyFormat
     });
 
+     ajaxCart.init({
+        formSelector: '[data-thumb-add-to-cart-form]',
+        cartContainer: '#CartContainer',
+        addToCartSelector: '[data-thumb-add-to-cart-btn]',
+        enableQtySelectors: true,
+        moneyFormat: theme.strings.moneyFormat
+    });
+
+
   };
 
   theme.initPlugins = function() {

@@ -6,8 +6,9 @@
 
 .collectionContainer {
   max-width: rem-calc(1000px); 
-  min-height: rem-calc(380px);
+  min-height: 100vh;
   width: 100%; 
+  position: relative;
 }
 
 
