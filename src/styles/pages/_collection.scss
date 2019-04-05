@@ -85,8 +85,9 @@
   position: relative;
   padding: rem-calc(3px); 
   border-bottom: 1px solid #3c3737;
+  margin-bottom: rem-calc($level4); 
 
-  @include media-query($medium-up) {
+  @include media-query($large-up) {
     padding-bottom: rem-calc($level4); 
     border-bottom: 1px solid $quintenaryColor;
     margin-bottom: rem-calc($level4);  
@@ -99,8 +100,12 @@
     color: #fff;
   }
 
+
+  ul {
+    margin-bottom: 0; 
+  }
+
   .menu-item {
-    margin-bottom: rem-calc($level1); 
     background-color: transparent;
     border-right: 1px solid #3c3737;
     margin-right: rem-calc($level2); 
@@ -110,8 +115,9 @@
     min-width: rem-calc(140px); 
     @include text-micro();
 
-    @include media-query($medium-up) {
+    @include media-query($large-up) {
       text-align: left; 
+      margin-bottom: rem-calc($level1); 
       border-right: 0; 
       padding-left: 0;
       padding-right: 0;
@@ -162,7 +168,7 @@
         content: " ";
         left: 0; 
         right: 0;
-        bottom: -6px;
+        bottom: -3px;
         position: absolute;
         background-color: $accentColor;
         height: 2px;
@@ -393,65 +399,39 @@
 
 
 /*------------------------------------*\
-    #Collection Container
+    #Collection More Thumb 
 \*------------------------------------*/
 
-.collectionNav {
-  margin-bottom: rem-calc($level5); 
-  width: 100%; 
+.collectionMoreThumb {
+  display: block;
+  background-color: $senaryColor;
+  position: relative;
+  color: #fff;
+  overflow: hidden;
+  .collectionMoreThumb-inner {
+    padding-bottom: 137%; 
+    width: 100%;
+    text-align: center; 
+    background-color: $senaryColor;
 
- .collectionNav-title {
-    text-transform: uppercase; 
-    font-weight: bold; 
-    margin-right: rem-calc($level1); 
-    @include text-micro(); 
-  }
-
-  .collectionNav-menu:last-child {
-    margin-bottom: 0; 
-  }
-
-  .collectionNav-menu {
-    margin-bottom: rem-calc($level1);
-
-    .collectionNav-menu-item {
-      margin-right: rem-calc($level2); 
-      color: $quintenaryColor; 
+    p {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      top: 0;
+      margin: auto;
+      opacity: .7; 
+      height: 100%;
+      width: 100%;
+      font-weight: bold; 
     }
- 
-    .collectionNav-menu-link {
-      color: $secondaryColor; 
-      transition: all .3s cubic-bezier(0.23, 1, 0.32, 1); 
-      position: relative;
+  }
 
-      &:after {
-        content: " "; 
-        height: 2px;
-        background-color: transparent;
-        position: absolute;
-        width: 100%; 
-        bottom: 0; 
-        left: 0; 
-        right: 0; 
-        opacity: 0; 
-        transform: translateY(4px); 
-        transition: all .3s cubic-bezier(0.23, 1, 0.32, 1); 
-      }
-
-      &:hover, 
-      &:focus {
-        color: $quintenaryColor; 
-      }
-
-      &.is-active {
-        color: #fff; 
-
-        &:after {
-          opacity: 1; 
-          transform: translateY(0); 
-          background-color: $accentColor; 
-        }
-      }
+  &:hover, 
+  &:focus {
+    p {
+      opacity: 1; 
     }
   }
 }

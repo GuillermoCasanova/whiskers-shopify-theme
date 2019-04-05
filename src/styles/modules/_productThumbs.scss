@@ -41,9 +41,6 @@
   position: relative;
   display: block; 
 
-  @include media-query($large-up) {
-
-  }
 
   &:hover, 
   &:focus {

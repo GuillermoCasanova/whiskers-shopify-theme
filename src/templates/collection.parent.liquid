@@ -46,7 +46,7 @@
                         <div class="row row--full small-collapse">
                           <div class="small-12  medium-11  large-12  medium-centered  columns  ">
 
-                              <div class="grid  grid--justifyCenter">
+                              <div class="grid  grid--justifyCenter  grid--stretch">
                                 <div class="collectionContainer">
                                    <div class="categoryHeader"> 
                                     <h2 class="categoryHeader-title">{{ collection.title }}</h2>
@@ -69,12 +69,8 @@
                                           {%include 'product-thumb'%}
                                         </li>
                                         {% endfor %}
-                                        <li>
-                                         <a href="{{collection.url}}" rel="internal" title="View All {{collection.title}}">
-                                          <div>
-                                             <p> View All {{collection.title}}</p>
-                                           </div>
-                                          </a>
+                                        <li class="grid-cell">
+                                          {%include 'collection-more-thumb'%}
                                         </li>
                                       </ul>
                                     </div>

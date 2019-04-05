@@ -1,21 +1,20 @@
 
 <div>
 
-  <ul class="collectionCategories  grid  grid--center  flex--noWrap  large-grid--flexDirectionColumn  grid--1of3  large-grid--top">
-   {% for link in linklists[section.settings.high-level-menu].links %}
-      <li class="menu-item  grid-cell  {% if link.active %}is-active{% endif %} ">
-        <a href="{{ link.url }}" class="menu-link">{{ link.title }}</a>
-      </li>
-    {% endfor %}
-  </ul>
+<div class="collectionCategories">
+  <ul class="grid  grid--center  flex--noWrap  large-grid--flexDirectionColumn  grid--1of3  large-grid--top">
+    {% for link in linklists[section.settings.high-level-menu].links %}
+     <li class="menu-item  grid-cell  {% if link.active %}is-active{% endif %} ">
+       <a href="{{ link.url }}" class="menu-link">{{ link.title }}</a>
+     </li>
+   {% endfor %}
 
-	<ul class="collectionCategories  grid  grid--center  flex--noWrap  large-grid--flexDirectionColumn  grid--1of3  large-grid--top">
    {% for link in linklists[section.settings.menu].links %}
       {%- assign child_list_handle = link.title | handleize -%}
       {% if menus[child_list_handle].links != blank %}
         <li class="menu-item grid-cell {% if link.active %}is-active{%endif%}" >
           <a href="{{ link.url }}" class="menu-link ">{{ link.title }}</a>
-          <ul class="dropDown is-showing">
+          <ul class="dropDown is-showing show-for-large-up">
             {% for childlink in menus[child_list_handle].links %}
               <li class="dropDown-item animElem {% if childlink.active %}is-active{% endif %}" >
                 <a href="{{ childlink.url }}" class="dropDown-link">{{ childlink.title | escape }}</a>
@@ -29,7 +28,8 @@
         </li>
       {% endif %}
     {% endfor %}
-	</ul>
+    </ul>
+</div>
 
 </div>
 
