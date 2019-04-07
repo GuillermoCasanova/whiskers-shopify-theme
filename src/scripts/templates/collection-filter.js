@@ -36,7 +36,7 @@ theme.collectionFilter = (function() {
           success: function(res){
             console.log(res); 
             var result = JSON.parse(res); 
-            console.log(result.products);
+            console.log(res);
             filterProducts(result.products, tags)
            },
           error: function(status){
@@ -46,7 +46,6 @@ theme.collectionFilter = (function() {
   }
 
   function filterProducts(products, tags) {
-    console.log(tags); 
     if(tags.length === 0 ) {
       buildFilteredProducts(products); 
       $('[data-results-total]').text(products.length); 
@@ -94,6 +93,7 @@ theme.collectionFilter = (function() {
           variant: productItem.variants[0].id
       }
 
+      console.log(product); 
         return product; 
     });
         

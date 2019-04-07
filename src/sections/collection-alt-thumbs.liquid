@@ -18,15 +18,14 @@
                       <ul class="grid  
                                  grid--flexDirectionRow
                                  grid--1of2
-                                 med-grid--1of3
                                  grid--flexWrap
                                  med-grid--flexDirectionRow
-                                 large-grid--1of4
+                                 large-grid--1of2
                                  productThumbs">
                   
                         {% for product in collection.products %}
                         <li class="grid-cell">
-                          {%include 'product-thumb'%}
+                          {%include 'product-thumb-alt'%}
                         </li>
                         {% endfor %}
                   
@@ -67,14 +66,13 @@
                       <ul class="grid  
                                  grid--flexDirectionRow
                                  grid--1of2
-                                 med-grid--1of3
                                  grid--flexWrap
                                  med-grid--flexDirectionRow
-                                 large-grid--1of4
+                                 large-grid--1of2
                                  productThumbs">
                         {{#product}}
                         <li class="grid-cell">
-                          <a class="productThumb"  href="{{url}}" data-product>
+                          <a class="productThumb  productThumb--alt"  href="{{url}}" data-product>
 
                             <div class="productThumb-tags">
                              
@@ -94,9 +92,12 @@
 
                               <div class="productThumb-bg">
                                 <img src="{{featuredImg}}" alt="{{title}}" data-sizes="auto" data-product-img>
+
+                                {{#if secondaryImg}}
                                <div class="productThumb-bg-secondaryImg">
                                   <img src="{{ secondaryImg}}" alt="{{title}}" class="lazyload" data-sizes="auto"  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="  data-product-img>
                                 </div>
+                                {{/if}}
                               </div>
   
                             </div>
@@ -132,10 +133,9 @@
 {%include 'collection-no-results' %}
 
 
-
 {% schema %}
   {
-    "name": "Default Collection Page",
+    "name": "Alt Collection Page",
     "settings": [
       {
         "type": "text",

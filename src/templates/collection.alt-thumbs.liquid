@@ -1,0 +1,36 @@
+
+<div data-collection-id="{{collection.handle}}">
+  <!--Page Header Begins--> 
+  {% section 'page-header' %}
+  <!--Page Header Ends--> 
+  
+  
+  <!--Collection Description--> 
+  <div class="row  row--full  show-for-medium-up">
+    <div class="small-12  large-11  columns">
+      <div class="collectionDescription">
+        <div class="collectionDescription-inner">
+          <p>
+            {{collection.description}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--END Collection Description--> 
+  
+  
+  <!--Collection Begins--> 
+  <div class="row small-collapse ">
+    <div class="small-12  large-11  columns">
+      <div class="collection  grid  grid--flexDirectionColumn  large-grid--flexDirectionRow">
+        {%include 'collection-menu'%}
+        <div class="collection-products">
+        {% section 'collection-alt-thumbs' %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--Collection Ends--> </div>
+
+
