@@ -7,7 +7,6 @@
 
 
 .collectionMenu {
-
   @include media-query($large-up) {
     z-index: 2; 
     max-width: rem-calc(180px); 
@@ -23,11 +22,16 @@
 .collectionCategories {
   overflow-x: scroll; 
   max-width: 100%;
+  width: 100%;
   min-width: 100vw;
   position: relative;
   padding: rem-calc(3px); 
   border-bottom: 1px solid #3c3737;
   margin-bottom: rem-calc($level4); 
+
+  .swiper-container {
+    width: 100%;
+  }
 
   @include media-query($large-up) {
     padding-bottom: rem-calc($level4); 

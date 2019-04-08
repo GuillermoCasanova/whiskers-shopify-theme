@@ -1,20 +1,20 @@
 
-<div>
-
-<div class="collectionCategories">
-  <ul class="grid  grid--center  flex--noWrap  large-grid--flexDirectionColumn  grid--1of3  large-grid--top">
+<div class="collectionCategories" data-categories-slideshow>
+    <!-- Additional required wrapper -->
+  <ul class="grid  grid--center  flex--noWrap  large-grid--flexDirectionColumn  grid--1of3  large-grid--top" >
     {% for link in linklists[section.settings.high-level-menu].links %}
-     <li class="menu-item  grid-cell  {% if link.active %}is-active{% endif %} ">
+     <li class="menu-item  grid-cell  {% if link.active %}is-active{% endif %}" data-category-slide data-category-handle="{{ link.object.handle }}">
        <a href="{{ link.url }}" class="menu-link">{{ link.title }}</a>
+
      </li>
    {% endfor %}
 
    {% for link in linklists[section.settings.menu].links %}
       {%- assign child_list_handle = link.title | handleize -%}
       {% if menus[child_list_handle].links != blank %}
-        <li class="menu-item grid-cell {% if link.active %}is-active{%endif%}" >
+        <li class="menu-item grid-cell {% if link.active %}is-active{%endif%}"data-category-slide data-category-handle="{{ link.object.handle }}">
           <a href="{{ link.url }}" class="menu-link ">{{ link.title }}</a>
-          <ul class="dropDown is-showing show-for-large-up">
+          <ul class="dropDown is-showing">
             {% for childlink in menus[child_list_handle].links %}
               <li class="dropDown-item animElem {% if childlink.active %}is-active{% endif %}" >
                 <a href="{{ childlink.url }}" class="dropDown-link">{{ childlink.title | escape }}</a>
@@ -23,7 +23,7 @@
           </ul>
         </li>
       {% else %}  
-        <li class="menu-item  grid-cell  {% if link.active %}is-active{% endif %} ">
+        <li class="menu-item  grid-cell  {% if link.active %}is-active{% endif %} " data-category-slide data-category-handle="{{ link.object.handle }}">
           <a href="{{ link.url }}" class="menu-link">{{ link.title }}</a>
         </li>
       {% endif %}
@@ -31,7 +31,41 @@
     </ul>
 </div>
 
-</div>
+
+
+{% javascript %}
+//<script>
+  $(document).on('ready', function() {
+
+    var collectionCategories = {
+      selectors: {
+          categoriesSlideshow: "[data-categories-slideshow]",
+          categorySlide: "[data-category-slide]"
+      }, 
+      goToActiveCategory:  function(pCategory) {
+        var $activeSlide = $(this.getActiveSlide());
+        var $categoriesSlideshow = $(this.selectors.categoriesSlideshow); 
+        var position = $activeSlide.offset().left - ($categoriesSlideshow.width() / 3);
+        $categoriesSlideshow.scrollLeft(position); 
+      },
+      getActiveSlide: function() {
+        var $categories = $(this.selectors.categorySlide); 
+        for(var i = 0; i < $categories.length; i++) {
+          if($($categories[i]).hasClass('is-active')) {
+            return $categories[i]; 
+          }
+        }
+      },
+      init: function() {
+        this.goToActiveCategory();
+      }
+    }; 
+
+    collectionCategories.init(); 
+
+  });
+//</script>
+{%endjavascript%}
 
 
 

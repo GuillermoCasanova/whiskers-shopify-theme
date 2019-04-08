@@ -39,12 +39,17 @@
       {%endif%}
     {%endfor%}
     {%if primaryFound == false %}
+      {%- assign colorFound = false -%}
       {%for tag in product.tags%}
-        {%if tag contains 'color'%}
+        {%if tag contains 'color-'%}
           "{{tag}}"
+          {%- assign colorFound = true -%}
           {%break%}
         {%endif%}
       {%endfor%}
+      {%if colorFound == false %}
+        "color-none"
+      {%endif%}
     {%endif%}
 	}{% unless forloop.last %},{% endunless %}{% endfor %}
   ]
