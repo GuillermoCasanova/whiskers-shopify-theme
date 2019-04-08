@@ -16,7 +16,36 @@
   	"title": "{{ product.title | escape}}",
   	"vendor": "{{ product.vendor }}",
   	"collections": "{{product.collections.first.handle}}",
-  	"tags": [{%for tag in product.tags %} "{{tag | replace: '"', ''}}" {% unless forloop.last %},{% endunless %}{%endfor%}]
+  	"tags": [{%for tag in product.tags %} "{{tag | replace: '"', ''}}" {% unless forloop.last %},{% endunless %}{%endfor%}],
+    "date":
+    {%- assign found = false -%}
+      {%for tag in product.tags%}
+        {%if tag contains 'added-'%}
+          "{{tag | replace: 'added-', ''}}"
+          {%- assign found = true -%}
+          {%break%}
+        {%endif%}
+      {%endfor%}
+      {%if found == false%}
+      "today"
+      {%endif%}, 
+    "color": 
+    {%- assign primaryFound = false -%}
+    {%for tag in product.tags%}
+      {%if tag contains 'primary-color'%}
+        "{{tag}}"
+        {%- assign primaryFound = true -%}
+        {%break%}
+      {%endif%}
+    {%endfor%}
+    {%if primaryFound == false %}
+      {%for tag in product.tags%}
+        {%if tag contains 'color'%}
+          "{{tag}}"
+          {%break%}
+        {%endif%}
+      {%endfor%}
+    {%endif%}
 	}{% unless forloop.last %},{% endunless %}{% endfor %}
   ]
 }

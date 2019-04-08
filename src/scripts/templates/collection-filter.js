@@ -12,7 +12,9 @@ theme.collectionFilter = (function() {
 
   var selectors = {
     collectionMenu: '[data-ui-component="collection-menu"]',
-    collectionFiltersToggle: '[data-filter-toggle]'
+    collectionFiltersToggle: '[data-filter-toggle]',
+    collectionFilterOption: '[data-filter-option]',
+    collectionSortOption: '[data-sort-option]'
   };
 
 
@@ -24,19 +26,18 @@ theme.collectionFilter = (function() {
   }
 
   /**
-  //This will hold our tags 
+  //This will hold our tags and other info
   */
-  var tags = []; 
-  var collectionId = $('[data-collection-id]').data('collection-id'); 
+  var tags = [],
+      collectionId = $('[data-collection-id]').data('collection-id'),
+      productsShowing = null;  
 
   function getFilterProducts(tags, collection){
       $.ajax({
           type: 'GET',
           url: '/collections/'+ collection + '?view=json',
           success: function(res){
-            console.log(res); 
             var result = JSON.parse(res); 
-            console.log(res);
             filterProducts(result.products, tags)
            },
           error: function(status){
@@ -44,6 +45,22 @@ theme.collectionFilter = (function() {
           }
       })
   }
+
+  function getCollectionProducts(collection) {
+    $.ajax({
+        type: 'GET',
+        url: '/collections/'+ collection + '?view=json',
+        success: function(res){
+          var result = JSON.parse(res); 
+          productsShowing = result.products;
+          console.log(productsShowing); 
+         },
+        error: function(status){
+          console.log(status);
+        }
+    });
+  }
+
 
   function filterProducts(products, tags) {
     if(tags.length === 0 ) {
@@ -92,8 +109,6 @@ theme.collectionFilter = (function() {
           handle: productItem.handle,
           variant: productItem.variants[0].id
       }
-
-      console.log(product); 
         return product; 
     });
         
@@ -114,11 +129,35 @@ theme.collectionFilter = (function() {
 
   function clearAllFilters() {
     tags = []; 
-    $('[data-ui-component="filter-option"]').removeAttr('checked');
+    $(selectors.collectionFilterOption).removeAttr('checked');
     getFilterProducts(tags, collectionId);
   }
 
-  $('[data-ui-component="filter-option"]').on('change', function(){
+  function sortProducts(products, sortOption) {
+    var sortedProducts = null; 
+
+    function dynamicSort(property) {
+      var sortOrder = 1;
+      if(property[0] === "-") {
+          sortOrder = -1;
+          property = property.substr(1);
+      }
+      return function (a,b) {
+          var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+          return result * sortOrder;
+      }
+    }
+
+    var sortedProducts = products.sort(dynamicSort(sortOption));
+    console.log(sortedProducts);
+    buildFilteredProducts(sortedProducts);  
+  }
+
+
+  getCollectionProducts(collectionId); 
+
+
+  $(selectors.collectionFilterOption).on('change', function(){
       var tag = $(this).val()
       if(tags.indexOf(tag) != -1) {
         _.pull(tags, tag); 
@@ -133,6 +172,11 @@ theme.collectionFilter = (function() {
       clearAllFilters(); 
    });
 
+   $(selectors.collectionSortOption).on('click', function() {
+    var sortOption = $(this).data('value');
+    sortProducts(productsShowing, sortOption); 
+   }); 
+
   if($(selectors.collectionFiltersToggle).length > 0 ) {
 
   var $filterToggle = $(selectors.collectionFiltersToggle); 
@@ -142,8 +186,7 @@ theme.collectionFilter = (function() {
   }
 
   $filterToggle.on('click', toggleFiltersMenu); 
+  
   }
-
-
 })();
 
