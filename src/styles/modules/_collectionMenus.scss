@@ -15,7 +15,6 @@
     top: 0; 
     left: 0; 
     width: 100%;
-    margin-top: rem-calc(-42px); 
     margin-left: 7%;
   }
 }
@@ -327,6 +326,15 @@
     top: rem-calc(72px);
     position: absolute;
     padding-bottom: 180px;
+
+    @include media-query($large-up) {
+      position: relative;
+      top: 0; 
+      padding-bottom: rem-calc($level7); 
+      height: auto;
+      overflow: visible;
+      overflow-y: visible; 
+    }
   }
 
   .collectionFilters-header {
@@ -357,6 +365,10 @@
 
     @include media-query($large-up) {
       padding: 0;
+      overflow: visible;
+      padding-top: 0; 
+      width: auto;
+      height: auto;
     }
   }
 
@@ -437,7 +449,7 @@
 
   }
     
-  .collectionFilterSortingToggle {
+  .collectionSortingToggle {
     margin-right: rem-calc($level3); 
     
     div {
@@ -447,8 +459,11 @@
       min-width: rem-calc(120px); 
       margin-bottom: 0; 
     }
-  }
 
+    @include media-query($large-up) {
+      max-width: rem-calc(200px); 
+    }
+  }
 }
 
 
@@ -458,3 +473,65 @@
 
 
 
+.collectionActiveTags {
+
+}
+
+.activeTags {
+  margin-bottom: 0; 
+
+  @include media-query($medium-up) {
+    padding: rem-calc($level2); 
+    padding-top: 0; 
+    padding-bottom: rem-calc($level5); 
+  }
+
+  .activeTags-tag {
+    color: #fff;
+    margin-right: rem-calc($level1); 
+    background-color: $secondaryColor;
+    margin-bottom: rem-calc($level1); 
+    padding: rem-calc($level1); 
+    padding-top: rem-calc(3px);
+    padding-bottom: rem-calc(3px);
+    width: auto; 
+    position: relative;
+    @include text-micro(); 
+
+    a {
+      color: #fff;
+      margin-right: rem-calc($level1); 
+      height: rem-calc(10px);
+      width: rem-calc(10px);
+      position: relative;
+
+      &:after,
+      &:before {
+        content: ""; 
+        height: 2px;
+        background-color: #fff; 
+        width: 100%;  
+        left: 0; 
+        right: 0; 
+        position: absolute;
+        transition: all .2s cubic-bezier(0.23, 1, 0.32, 1); 
+      }
+
+      &:before {
+        top: 50%; 
+        transform: translateY(0) rotate(-45deg); 
+      }
+
+      &:after {
+        top: 50%; 
+        transform: translateY(0) rotate(45deg); 
+      }
+    }
+
+    h2 {
+      margin-bottom: 0; 
+      text-transform: capitalize;
+      @include text-micro(); 
+    }
+  }
+}

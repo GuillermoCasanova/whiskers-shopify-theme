@@ -101,7 +101,7 @@
 .pageHeader--collection {
   margin-bottom: 0; 
   @include media-query($large-up) {
-    margin-bottom: rem-calc($level4); 
+    margin-bottom: rem-calc($level5); 
   }
 } 
 
