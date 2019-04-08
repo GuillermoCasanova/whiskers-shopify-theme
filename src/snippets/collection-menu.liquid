@@ -2,36 +2,51 @@
   <div class="collectionMenu-inner">
       {% section 'collection-categories' %}
       <div class="collectionFilters is-hidden" data-filters-off-canvas>
-        <div class="collectionFilters-header  hide-for-large-up  ">
-         <div class="grid  grid--center  grid--justifySpaceBetween">
-          <div class="collectionFilters-close">
-            <button data-filter-toggle></button>
-          </div>
-          <div class="collectionFilters-clear">
-            <button data-clear-filters>
-             Clear 
-           </button>
-         </div>
-         </div>
-        </div>
         <div class="collectionFilters-inner">
-          <span class="collectionFilters-title show-for-large-up">Filters</span>
-          <div class="collectionFilters-filter">{% section 'collection-color-filter' %}</div>
-          <div class="collectionFilters-filter">{% section 'collection-length-filter' %}</div>
-        </div>
-        <div class="collectionFilters-footer  hide-for-large-up">
-          <button class="button  button--medium  button--expanded   button--primary collectionFilters-viewResults"  data-filter-toggle data-text="View Results">
-            View Results <span class="collectionFilters-viewResults-results ">(<span data-results-total>0</span>)</span>
-          </button>
+          <div class="collectionFilters-header  hide-for-large-up  ">
+           <div class="grid  grid--center  grid--justifySpaceBetween">
+            <div class="collectionFilters-close">
+              <button data-filter-toggle></button>
+            </div>
+            <div class="collectionFilters-clear">
+              <button data-clear-filters>
+               Clear 
+             </button>
+           </div>
+           </div>
+          </div>
+
+          <div class="collectionFilters-filters">
+            <span class="collectionFilters-title show-for-large-up">Filters</span>
+            <div class="collectionFilters-filter">{% section 'collection-color-filter' %}</div>
+            <div class="collectionFilters-filter">{% section 'collection-length-filter' %}</div>
+          </div>
+
+          <div class="collectionFilters-footer  hide-for-large-up">
+            <button class="button  button--medium  button--expanded   button--primary collectionFilters-viewResults"  data-filter-toggle data-text="View Results">
+              View Results <span class="collectionFilters-viewResults-results ">(<span data-results-total>0</span>)</span>
+            </button>
+          </div>
         </div>
       </div>
-      <button  class="collectionFilterToggle  hide-for-large-up" data-filter-toggle>
-        Filter
-      </button>
-      <button  class="collectionFilterToggle  hide-for-large-up" data-sort-toggle>
-        Sort
-      </button>
-      <button data-sort-option data-value="color">Color</button>
-      <button data-sort-option data-value="-date">Newest</button>
-    </div>
+      <div class="collectionFilterToggles  grid grid--center grid--justifySpaceBetween">
+        <div>
+          <button  class="collectionFilterToggle  hide-for-large-up  button--secondary  button--medium" data-filter-toggle>
+            <span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26"><path d="M9.7 3.4V1.5H3.3v1.9H.4v2.5h2.9v2h6.4v-2h16V3.4zM22.8 10h-6.4v1.9H.4v2.6h16v1.9h6.4v-1.9h2.9v-2.6h-2.9zM13.6 18.9H7.2v1.9H.4v2.5h6.8v2h6.4v-2h12.1v-2.5H13.6z"/></svg>
+            </span>  
+            Filter
+          </button>
+        </div>
+        <div class="collectionFilterSortingToggle">
+          <div class="select--secondary select--medium select--expanded">
+            <select name="collectionSorting" id="collectionSorting" data-sort-option>
+              <option value="" default>Sort by</option>
+              <option value="color">Color</option>
+              <option value="-date">Newest</option>
+            </select>
+          </div>
+        </div>
+      </div>
+  </div>
 </div>

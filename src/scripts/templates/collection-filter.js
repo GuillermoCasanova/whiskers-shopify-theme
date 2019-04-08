@@ -30,6 +30,10 @@ theme.collectionFilter = (function() {
   */
   var tags = [],
       collectionId = $('[data-collection-id]').data('collection-id'),
+      sortingState = {
+        "filter": null, 
+        "active": false
+      },
       productsShowing = null;  
 
   function getFilterProducts(tags, collection){
@@ -41,7 +45,7 @@ theme.collectionFilter = (function() {
             filterProducts(result.products, tags)
            },
           error: function(status){
-             alert(status);
+             console.log(status);
           }
       })
   }
@@ -65,6 +69,7 @@ theme.collectionFilter = (function() {
   function filterProducts(products, tags) {
     if(tags.length === 0 ) {
       buildFilteredProducts(products); 
+      console.log(products); 
       $('[data-results-total]').text(products.length); 
       return products
     }
@@ -78,7 +83,12 @@ theme.collectionFilter = (function() {
       return false 
     });
 
-    buildFilteredProducts(filteredProducts); 
+    if(sortingState.active) {
+      sortProducts(filteredProducts, sortingState.option);
+      $('[data-results-total]').text(filteredProducts.length); 
+    } else {
+      buildFilteredProducts(filteredProducts); 
+    }
     $('[data-results-total]').text(filteredProducts.length); 
     return filteredProducts;
   }
@@ -151,6 +161,8 @@ theme.collectionFilter = (function() {
     var sortedProducts = products.sort(dynamicSort(sortOption));
     console.log(sortedProducts);
     buildFilteredProducts(sortedProducts);  
+    sortingState.active = true;
+    sortingState.option = sortOption;
   }
 
 
@@ -158,6 +170,7 @@ theme.collectionFilter = (function() {
 
 
   $(selectors.collectionFilterOption).on('change', function(){
+    console.log('change'); 
       var tag = $(this).val()
       if(tags.indexOf(tag) != -1) {
         _.pull(tags, tag); 
@@ -172,8 +185,9 @@ theme.collectionFilter = (function() {
       clearAllFilters(); 
    });
 
-   $(selectors.collectionSortOption).on('click', function() {
-    var sortOption = $(this).data('value');
+   $(selectors.collectionSortOption).on('change', function() {
+    var sortOption = this.value; 
+    console.log(sortOption); 
     sortProducts(productsShowing, sortOption); 
    }); 
 
@@ -183,6 +197,7 @@ theme.collectionFilter = (function() {
 
   function toggleFiltersMenu() {
     $('[data-filters-off-canvas]').toggleClass('is-hidden'); 
+    $('body').toggleClass('filter-off-canvas-open');
   }
 
   $filterToggle.on('click', toggleFiltersMenu); 
