@@ -1,5 +1,5 @@
   {% if product.featured_image != blank %}
-    <a class="productThumb  {% unless product.available %}productThumb--soldOut{% endunless %}" href="{{ product.url | within: collection }}" data-product>
+    <a class="productThumb  {% unless product.available %}productThumb--soldOut{% endunless %}" href="{{ product.url | within: collection }}" data-product  data-title="{{product.title}}">
 
 
       <div class="productThumb-tags">
