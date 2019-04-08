@@ -12,18 +12,21 @@
    {% for link in linklists[section.settings.menu].links %}
       {%- assign child_list_handle = link.title | handleize -%}
       {% if menus[child_list_handle].links != blank %}
-        <li class="menu-item grid-cell {% if link.active %}is-active{%endif%}"data-category-slide data-category-handle="{{ link.object.handle }}">
+        <li class="menu-item grid-cell" data-category-url="{{link.object.url}}" data-category-slide data-category-handle="{{ link.object.handle }}" data-child-categories="{% for childlink in menus[child_list_handle].links %}{{childlink.object.url}}{% unless forloop.last %},{% endunless %}{% endfor %}">
           <a href="{{ link.url }}" class="menu-link ">{{ link.title }}</a>
-          <ul class="dropDown is-showing">
+          <ul class="dropDown is-showing show-for-large-up">
             {% for childlink in menus[child_list_handle].links %}
-              <li class="dropDown-item animElem {% if childlink.active %}is-active{% endif %}" >
+              <li class="dropDown-item animElem {% if childlink.active %}is-active{% endif %}" data-child-category >
                 <a href="{{ childlink.url }}" class="dropDown-link">{{ childlink.title | escape }}</a>
               </li>
             {% endfor %}
           </ul>
+          {%if link.active %}
+            {%- assign activeLink = link.title -%}
+          {%endif%}
         </li>
       {% else %}  
-        <li class="menu-item  grid-cell  {% if link.active %}is-active{% endif %} " data-category-slide data-category-handle="{{ link.object.handle }}">
+        <li class="menu-item  grid-cell"  data-category-url="{{link.object.url}}" data-category-slide data-category-handle="{{ link.object.handle }}">
           <a href="{{ link.url }}" class="menu-link">{{ link.title }}</a>
         </li>
       {% endif %}
@@ -32,6 +35,20 @@
 </div>
 
 
+<div class="collectionChildCategories" data-child-categories-slideshow>
+  {% for link in linklists[section.settings.menu].links %}
+    {%-assign child_list_handle = link.title | handleize -%}
+    {% if menus[child_list_handle].links != blank %}
+    <ul class="collectionChildCategories-list  grid  grid--center  grid--justifyCenter  grid--flexDirectionRow" data-parent-category-handle="{{link.object.handle}}" data-child-categories-container>
+      {% for childlink in menus[child_list_handle].links %}
+        <li class="subCategory  grid-cell" >
+          <a href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+    {%endif%}
+  {% endfor %}
+</div>
 
 {% javascript %}
 //<script>
@@ -39,22 +56,64 @@
 
     var collectionCategories = {
       selectors: {
-          categoriesSlideshow: "[data-categories-slideshow]",
-          categorySlide: "[data-category-slide]"
+        categoriesSlideshow: "[data-categories-slideshow]",
+        categorySlide: "[data-category-slide]",
+        childCategoriesContainer: "[data-child-categories-container]",
+        childCategoriesSlideshow: "[data-child-categories-slideshow]"
       }, 
       goToActiveCategory:  function(pCategory) {
-        var $activeSlide = $(this.getActiveSlide());
+
+        var activeCategory = this.getSetActiveCategory()
+
+        if(activeCategory) {
+          var $activeSlide = $(activeCategory);
+        } else {
+          return false; 
+        }
         var $categoriesSlideshow = $(this.selectors.categoriesSlideshow); 
         var position = $activeSlide.offset().left - ($categoriesSlideshow.width() / 3);
         $categoriesSlideshow.scrollLeft(position); 
+
+        //
+        // Checks if the currently active category has children or an active child category
+        //
+        if($activeSlide.data('child-link-active') || $activeSlide.data('child-categories')) {
+          this.setActiveChildCategory($activeSlide.data('category-handle')); 
+          $(this.selectors.childCategoriesSlideshow).toggleClass('is-active'); 
+        }
       },
-      getActiveSlide: function() {
+      setActiveChildCategory: function(pParentHandle) {
+
+        var $childCategoriesContainers = $(this.selectors.childCategoriesContainer);
+        var $categories = $(this.selectors.categorySlide);
+
+        for(var i = 0; i < $childCategoriesContainers.length; i++) {
+          if($($childCategoriesContainers[i]).data('parent-category-handle') == pParentHandle) {
+            $($childCategoriesContainers[i]).toggleClass('is-active');
+          } 
+        }
+      },
+      getSetActiveCategory: function() {
         var $categories = $(this.selectors.categorySlide); 
+
         for(var i = 0; i < $categories.length; i++) {
-          if($($categories[i]).hasClass('is-active')) {
+          var $categorySlide = $($categories[i]); 
+          if($categorySlide.data('child-categories')) {
+            var childCategories = $($categories[i]).data('child-categories').split(",");
+            if(childCategories.indexOf(window.location.pathname) > -1) {
+              $categorySlide.addClass('is-active');
+              $categorySlide.data('child-link-active', true); 
+              return $categories[i]; 
+            }
+          }
+
+          if($categorySlide.data('category-url') === window.location.pathname) {
+            $categorySlide.addClass('is-active');
             return $categories[i]; 
           }
         }
+
+        return false;
       },
       init: function() {
         this.goToActiveCategory();

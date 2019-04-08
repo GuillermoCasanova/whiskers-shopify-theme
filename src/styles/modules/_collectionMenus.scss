@@ -142,6 +142,102 @@
 }
 
 
+.collectionChildCategories {
+  width: 100%;
+  overflow-x: scroll; 
+  overflow-y: hidden; 
+  min-width: 100vw; 
+  top: -24px;
+  background-color: $senaryColor;
+  position: relative;
+  border-bottom: 1px solid #3c3737;
+  display: none;
+
+  &.is-active {
+    display: grid;
+  }
+
+  .collectionChildCategories-list {
+    text-align: center; 
+    padding-left: rem-calc($level1);
+    padding-right: rem-calc($level1);
+    display: none;
+    margin-bottom: 0; 
+    height: rem-calc(42px); 
+    @include text-micro();
+
+    .subCategory {
+      min-width: rem-calc(80px); 
+    }
+
+    &.is-active {
+      display: flex; 
+
+      a {
+        font-weight: bold; 
+        width: 100%;
+        
+        &:after {
+          opacity: 1;
+
+          @include media-query($medium-up) {
+            opacity: 0; 
+          }
+        }
+      }
+    }
+    
+    a {
+      padding: rem-calc($level3); 
+      color: #fff;
+      display: block; 
+      position: relative;
+      width: 100%;
+
+      @include media-query($medium-up) {
+        padding: 0;
+        text-align: left; 
+      }
+
+      &:hover, 
+      &:focus {
+        font-weight: bold; 
+        @include media-query($large-up) {
+          border-bottom: 2px solid $accentColor;
+        }
+      }
+
+      &:after {
+        content: " ";
+        left: 0; 
+        right: 0;
+        bottom: -3px;
+        position: absolute;
+        background-color: $accentColor;
+        height: 2px;
+        width: 100%;
+        opacity: 0;
+      }
+    }
+
+    .dropDown {
+      margin-top: rem-calc(3px);
+      margin-bottom: rem-calc($level1); 
+      display: none; 
+      padding-left: rem-calc($level2); 
+
+      &.is-showing {
+        display: block;
+      }
+    }
+
+    .menu-link {
+      color: #fff;
+    }
+  }
+
+}
+
 .collection-color-filter {
   max-width: rem-calc(290px); 
 
