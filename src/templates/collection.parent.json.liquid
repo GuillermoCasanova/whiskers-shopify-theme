@@ -1,0 +1,72 @@
+{% layout none %}
+  {%- assign linkHandle = collection.handle | handleize -%}
+  {% for link in linklists %}
+    {%- assign linkTitle = link.title | handleize -%}
+    {% if linkTitle == linkHandle %} 
+	    {%- assign child_list_handle = link.title | handleize -%}
+	    	[
+	      {% for childlink in link.links %} 
+	      {
+	        {% assign collection = childlink.object %}
+	        "collection": {
+						"id": "{{collection.id}}",
+						"url": "{{collection.url}}",
+						"title": "{{collection.title}}",
+						"handle": "{{collection.handle}}"
+	      	},
+	        "products": [
+					  {% for product in collection.products %}
+						{
+					    "id": "{{product.id}}", 
+					    "body_html": "{{product.body_html}}",
+					    "price": "{{product.variants[0].price}}",
+					    "images": [{%for image in product.images %} "{{image | img_url: '400x400'}}" {% unless forloop.last %},{% endunless %}{%endfor%}],	
+					    "secondaryImg": "{{product.images[2] | img_url:'1000x1000'}}",
+					    "url": "{{product.url}}",
+					    "handle": "{{product.handle}}",
+					    "variants": {{product.variants | json }},
+					  	"available": "{{ product.available }}",
+					  	"title": "{{ product.title | escape}}",
+					  	"vendor": "{{ product.vendor }}",
+					  	"collections": "{{product.collections.first.handle}}",
+					  	"tags": [{%for tag in product.tags %} "{{tag | replace: '"', ''}}" {% unless forloop.last %},{% endunless %}{%endfor%}],
+					    "date":
+					    {%- assign found = false -%}
+					      {%for tag in product.tags%}
+					        {%if tag contains 'added-'%}
+					          "{{tag | replace: 'added-', ''}}"
+					          {%- assign found = true -%}
+					          {%break%}
+					        {%endif%}
+					      {%endfor%}
+					      {%if found == false%}
+					      "today"
+					      {%endif%}, 
+					    "color": 
+					    {%- assign primaryFound = false -%}
+					    {%for tag in product.tags%}
+					      {%if tag contains 'primary-color'%}
+					        "{{tag}}"
+					        {%- assign primaryFound = true -%}
+					        {%break%}
+					      {%endif%}
+					    {%endfor%}
+					    {%if primaryFound == false %}
+					      {%- assign colorFound = false -%}
+					      {%for tag in product.tags%}
+					        {%if tag contains 'color-'%}
+					          "{{tag}}"
+					          {%- assign colorFound = true -%}
+					          {%break%}
+					        {%endif%}
+					      {%endfor%}
+					      {%if colorFound == false %}
+					        "color-none"
+					      {%endif%}
+					    {%endif%}
+						}{% unless forloop.last %},{% endunless %}{% endfor %}
+					 ]
+	      }{% unless forloop.last %},{% endunless %}
+	     {%endfor%} ]
+    {%endif%}
+  {%endfor%}

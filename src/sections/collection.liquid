@@ -25,7 +25,7 @@
                                  productThumbs">
                   
                         {% for product in collection.products %}
-                        <li class="grid-cell">
+                        <li class="grid-cell {%if product.tags contains 'alt-thumb' %} alt-thumbnail {%endif%}">
                           {%include 'product-thumb'%}
                         </li>
                         {% endfor %}

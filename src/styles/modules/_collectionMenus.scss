@@ -58,7 +58,7 @@
     text-align: center; 
     padding-left: rem-calc($level1);
     padding-right: rem-calc($level1);
-    min-width: rem-calc(140px); 
+    min-width: 9.75rem; 
     @include text-micro();
 
     @include media-query($large-up) {
@@ -123,6 +123,13 @@
       }
     }
 
+    .collection-total {
+      @include media-query($large-up) {
+        color: $quintenaryColor;
+        @include text-micro(); 
+      }
+    }
+
     .dropDown {
       margin-top: rem-calc(3px);
       margin-bottom: rem-calc($level1); 
@@ -147,7 +154,7 @@
   overflow-x: scroll; 
   overflow-y: hidden; 
   min-width: 100vw; 
-  top: -24px;
+  top: -25px;
   background-color: $senaryColor;
   position: relative;
   border-bottom: 1px solid #3c3737;
@@ -155,6 +162,9 @@
 
   &.is-active {
     display: grid;
+    @include media-query($large-up) {
+        display: none; 
+    }
   }
 
   .collectionChildCategories-list {
@@ -633,5 +643,15 @@
       text-transform: capitalize;
       @include text-micro(); 
     }
+  }
+}
+
+.collectionFilters-noResults {
+  height: 100%;
+  min-height: 60vh; 
+  text-align: center; 
+  
+  h1 {
+    margin-bottom: rem-calc($level2); 
   }
 }

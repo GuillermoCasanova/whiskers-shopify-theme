@@ -1,25 +1,11 @@
 
-<div data-collection-id="{{collection.handle}}">
+<div data-collection-id="{{collection.handle}}" data-collection-type="{{collection.template_suffix}}">
   <!--Page Header Begins--> 
   {% section 'page-header' %}
   <!--Page Header Ends--> 
   
 <main>  
 
-  <!--Collection Description--> 
-  <div class="row  row--full  show-for-medium-up">
-    <div class="small-12  large-11  columns">
-      <section class="collectionDescription">
-        <div class="collectionDescription-inner">
-          <p>
-            {{collection.description}}
-          </p>
-        </div>
-      </section>
-    </div>
-  </div>
-  <!--END Collection Description--> 
-  
     
     <!--Collection Begins--> 
     <div class="row small-collapse ">
@@ -27,66 +13,77 @@
         <div class="collection  grid  grid--flexDirectionColumn  large-grid--flexDirectionRow">
           {%include 'collection-menu'%}
           <div class="collection-products">
-            {%- assign linkHandle = collection.handle | handleize -%}
-            {% for link in linklists %}
-              {%- assign linkTitle = link.title | handleize -%}
-              {% if linkTitle == linkHandle %} 
-                 {%- assign child_list_handle = link.title | handleize -%}
-                 {% for childlink in link.links %}
 
-                  {% comment %}
-                  If we have a collection link.
-                  {% endcomment %}   
-                  {% assign collection = childlink.object %}
-                  {% assign number_of_links = number_of_links | plus: 1 %}
+            <div class="show-for-medium-up">
+              <div class="collectionDescription" data-collection-description>
+                <div class="collectionDescription-inner">
+                  <p>
+                    {{collection.description}}
+                  </p>
+                </div>
+              </div>
+            </div>
 
-                  <div class="row small-collapse">
-                    <div class="small-12  medium-11  large-12  medium-centered  columns  ">
-                      <!--Collection Begins--> 
-                      <section class="section">
-                        <div class="row row--full small-collapse">
-                          <div class="small-12  medium-11  large-12  medium-centered  columns  ">
+            <div class="collectionActiveTags  show-for-medium-up" data-active-tags-container>
 
-                              <div class="grid  grid--justifyCenter  grid--stretch">
-                                <div class="collectionContainer">
-                                   <div class="categoryHeader"> 
-                                    <h2 class="categoryHeader-title">{{ collection.title }}</h2>
-                                  
-                                  </div> 
+            </div>
+            <div data-collections-container>
+              {%- assign linkHandle = collection.handle | handleize -%}
+              {% for link in linklists %}
+                {%- assign linkTitle = link.title | handleize -%}
+                {% if linkTitle == linkHandle %} 
+                   {%- assign child_list_handle = link.title | handleize -%}
+                   {% for childlink in link.links %} 
+                    {% assign collection = childlink.object %}
+              
+                    <div class="row small-collapse">
+                      <div class="small-12  medium-11  large-12  medium-centered  columns  ">
+                        <!--Collection Begins--> 
+                        <section class="section">
+                          <div class="row row--full small-collapse">
+                            <div class="small-12  medium-11  large-12  medium-centered  columns  ">
+              
+                                <div class="grid  grid--justifyCenter  grid--stretch">
+                                  <div class="collectionContainer">
+                                     <div class="categoryHeader"> 
+                                      <h2 class="categoryHeader-title">{{ collection.title }}</h2>
                                     
-                                  <div class="row">
-                                    <div class="small-12 columns">
-                                      <ul class="grid  
-                                                 grid--flexDirectionRow
-                                                 grid--1of2
-                                                 med-grid--1of3
-                                                 grid--flexWrap
-                                                 med-grid--flexDirectionRow
-                                                 large-grid--1of4
-                                                 productThumbs">
-                                  
-                                        {% for product in collection.products | limit:7 %}
-                                        <li class="grid-cell">
-                                          {%include 'product-thumb'%}
-                                        </li>
-                                        {% endfor %}
-                                        <li class="grid-cell">
-                                          {%include 'collection-more-thumb'%}
-                                        </li>
-                                      </ul>
+                                    </div> 
+                                      
+                                    <div class="row">
+                                      <div class="small-12 columns">
+                                        <ul class="grid  
+                                                   grid--flexDirectionRow
+                                                   grid--1of2
+                                                   med-grid--1of3
+                                                   grid--flexWrap
+                                                   med-grid--flexDirectionRow
+                                                   large-grid--1of4
+                                                   productThumbs">
+                                    
+                                          {% for product in collection.products | limit:7 %}
+                                          <li class="grid-cell  {%if product.tags contains 'alt-thumb' %} alt-thumbnail {%endif%}">
+                                            {%include 'product-thumb'%}
+                                          </li>
+                                          {% endfor %}
+                                          <li class="grid-cell">
+                                            {%include 'collection-more-thumb'%}
+                                          </li>
+                                        </ul>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
+                            </div>
                           </div>
-                        </div>
-                      </section>
-                      <!--Collection Ends--> 
+                        </section>
+                        <!--Collection Ends--> 
+                      </div>
                     </div>
-                  </div>
-                {%endfor%}
-              {%endif%}
-            {%endfor%}
+                  {%endfor%}
+                {%endif%}
+              {%endfor%}
+            </div>
           </div>
         </div>
       </div>
@@ -99,51 +96,97 @@
 
 
 {%raw%}
-<script id="collection-template" type="text/template">
-  <div class="row small-collapse">
-    <div class="small-12  medium-11  large-12  medium-centered  columns  ">
-      <!--Collection Begins--> 
-      <section class="section">
-        <div class="row row--full small-collapse">
-          <div class="small-12  medium-11  large-12  medium-centered  columns  ">
+<script id="collection-parent-template" type="text/template">
+  {{#collections}}
+    <div class="row small-collapse">
+        <div class="small-12  medium-11  large-12  medium-centered  columns  ">
+          <!--Collection Begins--> 
+          <section class="section">
+            <div class="row row--full small-collapse">
+              <div class="small-12  medium-11  large-12  medium-centered  columns  ">
 
-              <div class="grid  grid--justifyCenter  grid--stretch">
-                <div class="collectionContainer">
-                   <div class="categoryHeader"> 
-                    <h2 class="categoryHeader-title">{{ collection.title }}</h2>
-                  
-                  </div> 
-                    
-                  <div class="row">
-                    <div class="small-12 columns">
-                      <ul class="grid  
-                                 grid--flexDirectionRow
-                                 grid--1of2
-                                 med-grid--1of3
-                                 grid--flexWrap
-                                 med-grid--flexDirectionRow
-                                 large-grid--1of4
-                                 productThumbs">
-                  
-                        {% for product in collection.products | limit:7 %}
-                        <li class="grid-cell">
-                          {%include 'product-thumb'%}
-                        </li>
-                        {% endfor %}
-                        <li class="grid-cell">
-                          {%include 'collection-more-thumb'%}
-                        </li>
-                      </ul>
+                  <div class="grid  grid--justifyCenter  grid--stretch">
+                    <div class="collectionContainer">
+                       <div class="categoryHeader"> 
+                        <h2 class="categoryHeader-title">{{ collection.title }}</h2>
+                      
+                      </div> 
+                        
+                      <div class="row">
+                        <div class="small-12 columns">
+                          <ul class="grid  
+                                     grid--flexDirectionRow
+                                     grid--1of2
+                                     med-grid--1of3
+                                     grid--flexWrap
+                                     med-grid--flexDirectionRow
+                                     large-grid--1of4
+                                     productThumbs">
+                                {{#products }}
+                                <li class="grid-cell  {{#ifIn 'alt-thumb' tags}} alt-thumbnail{{/ifIn}}">
+                                  <a class="productThumb"  href="{{url}}" data-product data-title="{{title}}">
+
+                                    <div class="productThumb-tags">
+                                     
+                                    </div>
+
+                                    <div class="productThumb-inner">
+                                      <div class="productThumb-addToCart">
+                                          <form action="/cart/add" method="post" id="AddToCartForm" data-thumb-add-to-cart-form enctype="multipart/form-data">   
+                                          <input type="hidden" name="id" value="{{variant}}">
+                                            <button type="submit" name="add" id="AddToCart" class="AddToCart"  data-thumb-add-to-cart-btn>
+        {%endraw%}
+                                            {% include 'icon-cart' %}
+        {%raw%}
+                                            </button>
+                                        </form>
+                                      </div>
+
+                                      <div class="productThumb-bg">
+                                        <img src="{{featuredImg}}" alt="{{title}}" data-sizes="auto" data-product-img>
+                                       <div class="productThumb-bg-secondaryImg">
+                                          <img src="{{ secondaryImg}}" alt="{{title}}" class="lazyload" data-sizes="auto"  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="  data-product-img>
+                                        </div>
+                                      </div>
+          
+                                    </div>
+
+                                    <div class="productThumb-description text-center grid grid--justifyCenter  grid--flexDirectionColumn">
+                                        <h3 class="productThumb-title">
+                                        {{title}}
+                                        </h3>
+                                        <div>
+                                          <span>
+                                          {{price}}
+                                          </span>
+                                        </div>
+                                      </div>
+                                  </a>
+
+
+                                </li>
+                                {{/products}}
+                                <li class="grid-cell">
+                                  <a href="{{collection.url}}" rel="internal" title="View All {{collection.title}}" class="productThumb">
+                                    <div class="collectionMoreThumb">
+                                       <div class="collectionMoreThumb-inner   grid--center  grid">
+                                       <p class="grid  grid--center  grid--justifyCenter"> View All <br>   {{collection.title}}</p>
+                                     </div>
+                                    </div>
+                                  </a>
+                                </li>                                  
+                            </ul>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
               </div>
-          </div>
+            </div>
+          </section>
+          <!--Collection Ends--> 
         </div>
-      </section>
-      <!--Collection Ends--> 
-    </div>
-  </div>
-
+      </div>
+  {{/collections}}
 </script>
 {%endraw%}
+

@@ -5,20 +5,6 @@
   <!--Page Header Ends--> 
   
   
-  <!--Collection Description--> 
-  <div class="row  row--full  show-for-medium-up">
-    <div class="small-12  large-11  columns">
-      <div class="collectionDescription">
-        <div class="collectionDescription-inner">
-          <p>
-            {{collection.description}}
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--END Collection Description--> 
-  
   
   <!--Collection Begins--> 
   <div class="row small-collapse ">
@@ -26,6 +12,19 @@
       <div class="collection  grid  grid--flexDirectionColumn  large-grid--flexDirectionRow">
         {%include 'collection-menu'%}
         <div class="collection-products">
+          <div class="show-for-medium-up">
+            <div class="collectionDescription" data-collection-description>
+              <div class="collectionDescription-inner">
+                <p>
+                  {{collection.description}}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="collectionActiveTags  show-for-medium-up" data-active-tags-container>
+
+          </div>
         {% section 'collection-alt-thumbs' %}
         </div>
       </div>

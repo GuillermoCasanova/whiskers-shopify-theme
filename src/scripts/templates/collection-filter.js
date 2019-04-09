@@ -1,10 +1,19 @@
 
 
-  Array.prototype.extend = function (other_array) {
-      /* You should include a test to check whether other_array really is an array */
-      other_array.forEach(function(v) {this.push(v)}, this);
+  /**
+  ** Helper for checking if propert is inside of array 
+  */
+Handlebars.registerHelper('ifIn', function(elem, list, options) {
+  if(list && elem) {
+    if(list.indexOf(elem) > -1) {
+      return options.fn(this);
+    }
+    return options.inverse(this);
+  } else {
+    return 
   }
-  
+});
+
 
 /**
  * Password Template Script
@@ -26,7 +35,6 @@ theme.collectionFilter = (function() {
   };
 
 
-
   /**
   ** If there is no filtering system on this page, we do nothing  beyond this point 
   */
@@ -35,12 +43,14 @@ theme.collectionFilter = (function() {
   }
 
   /**
-  //This will hold our tags and other info
+  **This will hold our tags and other info
   */
   var tags = [],
       collection = {
         "products": null,
-        "id": $('[data-collection-id]').data('collection-id')
+        "id": $('[data-collection-id]').data('collection-id'),
+        "parent": false,
+        "childCollections": []
       },
       sortingState = {
         "filter": null, 
@@ -48,26 +58,191 @@ theme.collectionFilter = (function() {
       },
       filterState = {
         "active": false,
-        "filteredProducts": null
+        "filteredProducts": null,
+        "filteredChildCollections": null 
       };
 
-  function getFilterProducts(collection){
-    filterProducts(collection.products, tags); 
+
+  /**
+  **This checks if this a parent collection 
+  */
+  if($('[data-collection-type]').data('collection-type') == 'parent') {
+    collection.parent = true; 
   }
 
-  function getCollectionProducts(collection) {
-    $.ajax({
-        type: 'GET',
-        url: '/collections/'+ collection.id + '?view=json',
-        success: function(res){
-          var result = JSON.parse(res); 
-          filterState.productsShowing = result.products;
-          collection.products = result.products; 
-         },
-        error: function(status){
-          console.log(status);
+
+  function filterChildCollections(pCollections, pTags) {
+
+    if(pTags.length === 0 ) {
+      buildChildCollections(pCollections.childCollections); 
+      buildActiveTags(tags);
+      filterState.childCollectionsShowing = pCollections; 
+      filterState.active = false; 
+      //$('[data-results-total]').text(products.length); 
+      return pCollections
+    }
+
+    var collections = pCollections.childCollections; 
+    var filteredCollections = []; 
+    var existingCollectionsFiltered = [],
+        existingCollectionsShowing = filterState.collectionsShowing;
+
+    collections.forEach(function(pCollection) {
+      
+      var handle = pCollection.handle; 
+      var filteredCollection = {},
+          products = pCollection.products; 
+
+          filteredCollection.products = [];
+          filteredCollection.collection = pCollection.collection;
+
+      if(!filterState.active) {
+        filteredCollection.products = products.filter(function(product){
+          for(var i = 0; i < pTags.length; i++) {
+            if(product.tags.indexOf(pTags[i]) > -1) {
+              return true
+            }
+          }
+          return false 
+        });
+      } else { 
+
+       var existingCollectionsShowing = filterState.childCollectionsShowing,
+           existingCollectionFiltered = {}; 
+           console.log(filterState.childCollectionsShowing); 
+
+       filteredCollection.products = products.filter(function(product){
+          for(var i = 0; i < pTags.length; i++) {
+            if(product.tags.indexOf(pTags[i]) > -1) {
+              return true
+            }
+          }
+          return false 
+        });
+
+
+        for(var i = 0; i < existingCollectionsShowing.length; i++) {
+          if(existingCollectionsShowing[i].handle == handle) {
+            var filteredProducts = existingCollectionsShowing[i].products.filter(function(product){
+              for(var i = 0; i < tags.length; i++) {
+                if(product.tags.indexOf(tags[i]) > -1) {
+                  return true
+                }
+              }
+              return false 
+            });
+            existingCollectionFiltered.products = filteredProducts; 
+            console.log("A FILTERED EXISTING COLLECTION"); 
+            console.log(existingCollectionFiltered); 
+          } 
         }
-    });
+
+        existingCollectionFiltered.products.reverse(); 
+
+        filteredCollection.products = existingCollectionFiltered.products.concat(filteredCollection.products.filter(function(product) {
+          var found = JSON.stringify(existingCollectionFiltered.products).indexOf(JSON.stringify(product)) == - 1;
+          return found; 
+        })).reverse(); 
+
+      }
+
+      filteredCollections.push(filteredCollection); 
+
+     }); 
+
+    console.log(filteredCollections); 
+    filterState.childCollectionsShowing = filteredCollections; 
+    filterState.active = true; 
+    buildChildCollections(filteredCollections); 
+  }   
+
+
+  function buildChildCollections(pFilteredCollections) {
+       
+    var $collectionsContainer = $('[data-collections-container]');
+    var filteredCollections  = pFilteredCollections; 
+
+    if(filteredCollections.length > 0) {
+
+      $collectionsContainer.empty();
+
+      var  data = {
+        "collections": []
+      }, 
+      source = $("#collection-parent-template").html(),
+      template = Handlebars.compile(source);
+
+      filteredCollections.forEach(function(pCollections) {
+        var dataCollection = {}; 
+            dataCollection.products = pCollections.products;
+            dataCollection.collection = pCollections.collection; 
+
+        var products = [],
+        product = {}, 
+        products = dataCollection.products.map(function(productItem) {
+           var product = {
+            id: productItem.id, 
+            description: productItem.body_html.replace(/<\/?[^>]+(>|$)/g, "").split(' ').join(' '), 
+            title: productItem.title, 
+            price: slate.Currency.formatMoney(productItem.price, '${{amount}}'),
+            featuredImg: productItem.images[0],
+            secondaryImg: productItem.secondaryImg,
+            url: productItem.url,
+            handle: productItem.handle,
+            variant: productItem.variants[0].id,
+            tags: productItem.tags
+          }
+          return product; 
+        });
+
+        dataCollection.products = products;
+        dataCollection.products = dataCollection.products.splice(0, 7);
+        data.collections.push(dataCollection);  
+      });   
+
+
+      $collectionsContainer.append(template(data)); 
+      $(document).trigger('reset-thumbnails'); 
+    } else {
+      $collectionsContainer.empty();
+      var source = $("#collection-template-empty").html(),
+      template = Handlebars.compile(source);
+      $collectionsContainer.append(template()); 
+    } 
+  }
+
+
+  function getCollectionProducts(pCollection) {
+
+    if(collection.parent) {
+      $.ajax({
+          type: 'GET',
+          url: '/collections/' + pCollection.id + '?view=parent.json',
+          success: function(res){
+            console.log(res); 
+            var result = JSON.parse(res); 
+            console.log(result); 
+            collection.childCollections = result;
+            console.log(collection); 
+           },
+          error: function(status){
+            console.log(status);
+          }
+      }); 
+    } else {
+        $.ajax({
+          type: 'GET',
+          url: '/collections/'+ pCollection.id + '?view=json',
+          success: function(res){
+            var result = JSON.parse(res); 
+            filterState.productsShowing = result.products;
+            collection.products = result.products; 
+           },
+          error: function(status){
+            console.log(status);
+          }
+      });
+    }
   }
 
 
@@ -120,11 +295,9 @@ theme.collectionFilter = (function() {
       })).reverse(); 
     }
 
-    if(sortingState.active) {
-      sortProducts(filteredProducts, sortingState.option);
-    } else {
-      buildFilteredProducts(filteredProducts); 
-    }
+
+    buildFilteredProducts(filteredProducts); 
+    
 
     $('[data-results-total]').text(filteredProducts.length); 
     filterState.active = true; 
@@ -185,28 +358,6 @@ theme.collectionFilter = (function() {
   }
 
 
-  function sortProducts(pProducts, pSortOption) {
-    var sortedProducts = null; 
-
-    function dynamicSort(property) {
-      var sortOrder = 1;
-      if(property[0] === "-") {
-          sortOrder = -1;
-          property = property.substr(1);
-      }
-      return function (a,b) {
-          var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
-          return result * sortOrder;
-      }
-    }
-
-    var sortedProducts = pProduts.sort(dynamicSort(pSortOption));
-    buildFilteredProducts(sortedProducts);  
-    sortingState.active = true;
-    sortingState.option = pSortOption;
-  }
-
-
   function buildActiveTags(pTags) {
     var $tagsContainer = $(selectors.activeTags); 
     var $collectionDescription = $(selectors.collectionDescription); 
@@ -249,9 +400,19 @@ theme.collectionFilter = (function() {
   }
 
   function removeActiveTag(pTag) {
+    var filterOptions = $(selectors.collectionFilterOption); 
+
+
     for(var i = 0; i < tags.length; i++) {
       if(pTag === tags[i]) {
         tags.splice(i, 1); 
+      }
+    }
+
+    for(var b = 0; b < filterOptions.length; b++) {
+      var $optionInput = $(filterOptions[b]); 
+      if($optionInput.val() === pTag) {
+        $optionInput.removeAttr('checked'); 
       }
     }
     filterProducts(collection.products, tags); 
@@ -285,9 +446,13 @@ theme.collectionFilter = (function() {
       } else {
         tags.push(tag); 
       }
-      getFilterProducts(collection);
+      if(collection.parent) {
+        console.log(collection);
+        filterChildCollections(collection, tags)
+      } else {
+        filterProducts(collection.products, tags); 
+      }
    });
-
 
   //
   // Gets the collection's products and stores it so we dont need to make more calls to get all products for it
@@ -302,6 +467,30 @@ theme.collectionFilter = (function() {
  //  var sortOption = this.value; 
  //  sortProducts(filterState.productsShowing, sortOption); 
  // }); 
+
+
+
+  // function sortProducts(pProducts, pSortOption) {
+  //   var sortedProducts = null; 
+
+  //   function dynamicSort(property) {
+  //     var sortOrder = 1;
+  //     if(property[0] === "-") {
+  //         sortOrder = -1;
+  //         property = property.substr(1);
+  //     }
+  //     return function (a,b) {
+  //         var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+  //         return result * sortOrder;
+  //     }
+  //   }
+
+  //   var sortedProducts = pProduts.sort(dynamicSort(pSortOption));
+  //   buildFilteredProducts(sortedProducts);  
+  //   sortingState.active = true;
+  //   sortingState.option = pSortOption;
+  // }
+
 
 
 
