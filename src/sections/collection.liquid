@@ -1,11 +1,11 @@
 
 <section class="section" data-section-id="{{ section.id }}" data-section-type="collection">
   <div class="row small-collapse">
-    <div class="small-12   large-12  medium-centered  columns  ">
+    <div class="small-12   medium-11  large-12 columns  ">
       <!--Collection Begins--> 
       <div class="section">
         <div class="row row--full small-collapse">
-          <div class="small-12   large-12  medium-centered  columns  ">
+          <div class="small-12  columns">
 
               <div class="grid  grid--justifyCenter">
                 <div class="collectionContainer">
@@ -18,7 +18,7 @@
                       <ul class="grid  
                                  grid--flexDirectionRow
                                  grid--1of2
-                                 med-grid--1of4
+                                 med-grid--1of3
                                  grid--flexWrap
                                  med-grid--flexDirectionRow
                                  large-grid--1of4
@@ -48,82 +48,97 @@
 
 {%raw%}
 <script id="collection-template" type="text/template">
-      <div class="section">
-        <div class="row row--full small-collapse">
-          <div class="small-12  medium-11  large-12  medium-centered  columns  ">
-
-              <div class="grid  grid--justifyCenter">
-                <div class="collectionContainer">
-                  <div class="categoryHeader"> 
-                    
-                    <h2 class="categoryHeader-title">
-{%endraw%}
-                    {{collection.title}}</h2>
-{%raw%}
-                  </div>
-                    
-                  <div class="row">
-                    <div class="small-12 columns">
-                      <ul class="grid  
-                                 grid--flexDirectionRow
-                                 grid--1of2
-                                 med-grid--1of4
-                                 grid--flexWrap
-                                 med-grid--flexDirectionRow
-                                 large-grid--1of4
-                                 productThumbs">
-                        {{#product}}
-                        <li class="grid-cell">
-                          <a class="productThumb"  href="{{url}}" data-product data-title="{{title}}">
-
-                            <div class="productThumb-tags">
-                             
+<div class="row small-collapse">
+  <div class="small-12 columns medium-11 large-12 columns">
+    <div class="section">
+      <div class="row row--full  small-collapse">
+        <div class="small-12  columns">
+      
+            <div class="grid  grid--justifyCenter">
+              <div class="collectionContainer">
+                <div class="categoryHeader"> 
+                  
+                  <h2 class="categoryHeader-title">
+      {%endraw%}
+                  {{collection.title}}</h2>
+      {%raw%}
+                </div>
+                  
+                <div class="row">
+                  <div class="small-12 columns">
+                    <ul class="grid  
+                               grid--flexDirectionRow
+                               grid--1of2
+                               med-grid--1of3
+                               grid--flexWrap
+                               med-grid--flexDirectionRow
+                               large-grid--1of4
+                               productThumbs">
+                      {{#product}}
+                      <li class="grid-cell {{#ifIn 'alt-thumb' tags}} alt-thumbnail{{/ifIn}}">
+                        <a class="productThumb"  href="{{url}}" data-product data-title="{{title}}">
+      
+                          <div class="productThumb-tags">
+                           
+                          </div>
+      
+                          <div class="productThumb-inner">
+                            <div class="productThumb-addToCart">
+                                <form action="/cart/add" method="post" id="AddToCartForm" data-thumb-add-to-cart-form enctype="multipart/form-data">   
+                                <input type="hidden" name="id" value="{{variant}}">
+                                  <button type="submit" name="add" id="AddToCart" class="AddToCart"  data-thumb-add-to-cart-btn>
+      {%endraw%}
+                                  {% include 'icon-cart' %}
+      {%raw%}
+                                  </button>
+                              </form>
                             </div>
-
-                            <div class="productThumb-inner">
-                              <div class="productThumb-addToCart">
-                                  <form action="/cart/add" method="post" id="AddToCartForm" data-thumb-add-to-cart-form enctype="multipart/form-data">   
-                                  <input type="hidden" name="id" value="{{variant}}">
-                                    <button type="submit" name="add" id="AddToCart" class="AddToCart"  data-thumb-add-to-cart-btn>
-{%endraw%}
-                                    {% include 'icon-cart' %}
-{%raw%}
-                                    </button>
-                                </form>
-                              </div>
-
-                              <div class="productThumb-bg">
-                                <img src="{{featuredImg}}" alt="{{title}}" data-sizes="auto" data-product-img>
+      
+                            <div class="productThumb-bg">
+                              <picture>
+                                <source data-srcset="{{images.0.large}}"  media="(min-width: 900x)">
+                                <source data-srcset="{{images.0.medium}}"  media="(min-width: 640px)">
+                                <source data-srcset="{{images.0.small}}">
+                                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="{{title}}" data-sizes="auto" data-product-img class="lazyload" data-sizes="auto">
+                              </picture>
+                              {{#if images.2.xlarge}}
                                <div class="productThumb-bg-secondaryImg">
-                                  <img src="{{ secondaryImg}}" alt="{{title}}" class="lazyload" data-sizes="auto"  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="  data-product-img>
+                                  <picture>
+                                    <source data-srcset="{{images.2.xlarge}}"  media="(min-width: 900x)">
+                                    <source data-srcset="{{images.2.xlarge}}"  media="(min-width: 640px)">
+                                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="{{title}}" data-sizes="auto" data-product-img class="lazyload" data-sizes="auto">
+                                  </picture>
                                 </div>
-                              </div>
-  
+                              {{/if}}
                             </div>
-
-                            <div class="productThumb-description text-center grid grid--justifyCenter  grid--flexDirectionColumn">
-                                <h3 class="productThumb-title">
-                                {{title}}
-                                </h3>
-                                <div>
-                                  <span>
-                                  {{price}}
-                                  </span>
-                                </div>
+      
+                          </div>
+      
+                          <div class="productThumb-description text-center grid grid--justifyCenter  grid--flexDirectionColumn">
+                              <h3 class="productThumb-title">
+                              {{title}}
+                              </h3>
+                              <div>
+                                <span>
+                                {{price}}
+                                </span>
                               </div>
-                          </a>
-
-
-                        </li>
-                        {{/product}}
-                      </ul>
-                    </div>
+                            </div>
+                        </a>
+      
+      
+                      </li>
+                      {{/product}}
+                    </ul>
                   </div>
                 </div>
               </div>
-          </div>
+            </div>
         </div>
       </div>
+    </div>
+  </div>
+</div>
 {%endraw%}
 
 </script>

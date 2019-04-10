@@ -6,7 +6,6 @@
 
 .collectionContainer {
   max-width: rem-calc(1000px); 
-  min-height: 105vh;
   width: 100%; 
   position: relative;
 }
@@ -35,13 +34,15 @@
 .collection {
   width: 100%;
   position: relative;
-  min-height: 100vh;
-
+  min-height: 150vh;
 
   .collection-products {
-    @include media-query($large-up) {
+    @include media-query($medium-up) {
       padding-left: 28%; 
       width: 100%;
+    }
+    @include media-query($large-up) {
+      padding-left: 28%; 
     }
   }
 }
@@ -104,36 +105,131 @@
     #Collection More Thumb 
 \*------------------------------------*/
 
+
+@keyframes product-thumb-border-anim {
+  
+  0%{
+    transform: translateX(-120%);
+  }
+
+  50% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+
 .collectionMoreThumb {
   display: block;
   background-color: $senaryColor;
   position: relative;
   color: #fff;
   overflow: hidden;
+
+  &:hover, 
+  &:focus {
+    .collectionMoreThumb-inner {
+
+      &:after {
+        animation: product-thumb-border-anim .6s forwards;
+      }
+
+      .collectionMoreThumb-content {
+        p {
+          opacity: 1; 
+          transform: translateY(0);
+        }
+      
+        .collectionMoreThumb-icon {
+          transform: translateY(0);
+          opacity: 1; 
+
+          svg {
+            .ring {
+              fill: $accentColor;
+            }
+          }
+        }
+      }
+    }
+  }
+
   .collectionMoreThumb-inner {
     padding-bottom: 137%; 
     width: 100%;
+    position: relative;
     text-align: center; 
     background-color: $senaryColor;
+    overflow: hidden;
 
-    p {
+    &:after {
+      content: " "; 
+      height: rem-calc(2px);
+      width: 100%;
+      background-color: $accentColor;
+      position: absolute;
+      bottom: 0; 
+      left: 0;
+      transform: translateX(-120%);
+      transition: all .3s cubic-bezier(0.23, 1, 0.32, 1); 
+      z-index: 1; 
+    }
+    
+    .collectionMoreThumb-content {
+      height: 100%;
+      width: 100%;
       position: absolute;
       left: 0;
       bottom: 0;
       right: 0;
       top: 0;
-      margin: auto;
-      opacity: .7; 
-      height: 100%;
-      width: 100%;
-      font-weight: bold; 
-    }
-  }
 
-  &:hover, 
-  &:focus {
-    p {
-      opacity: 1; 
+      p {
+        color: #fff;
+        font-weight: bold; 
+        margin-bottom: rem-clac($level2);
+        @include h4(); 
+
+        @include media-query($medium-up) {
+          @include h6(); 
+        }
+      }
+
+      .collectionMoreThumb-icon {
+        width: 100%;
+        transition: all .3s cubic-bezier(0.23, 1, 0.32, 1);
+
+        svg {
+          height: rem-calc(36px);
+          width: rem-calc(36px);
+          margin: auto;
+          left: 0; 
+          right: 0; 
+          position: relative;
+
+          .ring {
+            fill: #fff;
+            transition: all .4s cubic-bezier(0.23, 1, 0.32, 1);
+          }
+
+          .arrow {
+            fill: #fff;
+          }
+        }
+      }
     }
   }
 }
+
+.alt-thumbnail {
+  .collectionMoreThumb {
+    .collectionMoreThumb-inner{
+      padding-bottom: 66%; 
+    }
+  }
+}
+
+

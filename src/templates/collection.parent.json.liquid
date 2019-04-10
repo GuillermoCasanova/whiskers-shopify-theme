@@ -20,8 +20,15 @@
 					    "id": "{{product.id}}", 
 					    "body_html": "{{product.body_html}}",
 					    "price": "{{product.variants[0].price}}",
-					    "images": [{%for image in product.images %} "{{image | img_url: '400x400'}}" {% unless forloop.last %},{% endunless %}{%endfor%}],	
-					    "secondaryImg": "{{product.images[2] | img_url:'1000x1000'}}",
+					    "images": [{%for image in product.images %} 
+						      { 
+						        "title": "{{image.id}}",
+						        "small": "{{image | img_url: '380x', format: 'pjpg'}}",
+						        "medium": "{{image | img_url: '420x',  format: 'pjpg'}}",
+						        "large": "{{image | img_url: '550x',  format: 'pjpg'}}",
+						        "xlarge": "{{image | img_url: '1000x',  format: 'pjpg'}}"
+						      }
+						      {% unless forloop.last %},{% endunless %}{%endfor%}],	
 					    "url": "{{product.url}}",
 					    "handle": "{{product.handle}}",
 					    "variants": {{product.variants | json }},

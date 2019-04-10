@@ -1,7 +1,5 @@
   {% if product.featured_image != blank %}
     <a class="productThumb  {% unless product.available %}productThumb--soldOut{% endunless %}" href="{{ product.url | within: collection }}" data-product  data-title="{{product.title}}">
-
-
       <div class="productThumb-tags">
         {%for tag in product.tags%}
           {%if tag == 'best-seller'%}
@@ -27,12 +25,31 @@
         </div>
 
         <div class="productThumb-bg">
-          <img data-srcset="{{ product.featured_image.src | img_url: '600x600'}}" alt="{{product.featured_image.alt}}" class="lazyload" data-sizes="auto"  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="  data-product-img>
-          {%if product.images[2]  %}
-          <div class="productThumb-bg-secondaryImg">
-            <img data-srcset="{{ product.images[2] | img_url: '900x900'}}" alt="{{product.featured_image.alt}}" class="lazyload" data-sizes="auto"  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="  data-product-img>
-          </div>
+           {%if product.tags contains 'alt-thumb'  %}
+           <picture>
+              <source data-srcset="{{ product.featured_image.src | img_url: '880x', format:'pjpg'}}"  media="(min-width: 900x)">
+              <source data-srcset="{{ product.featured_image.src | img_url: '660x', format:'pjpg'}}"  media="(min-width: 640px)">
+              <source data-srcset="{{ product.featured_image.src | img_url: '700x', format:'pjpg'}}">
+              <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="{{product.featured_image.alt}}" data-sizes="auto" data-product-img class="lazyload" data-sizes="auto">
+            </picture>
+          {%else%}
+           <picture>
+              <source data-srcset="{{ product.featured_image.src | img_url: '550x', format:'pjpg'}}"  media="(min-width: 900x)">
+              <source data-srcset="{{ product.featured_image.src | img_url: '420x', format:'pjpg'}}"  media="(min-width: 640px)">
+              <source data-srcset="{{ product.featured_image.src | img_url: '380x', format:'pjpg'}}">
+              <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="{{product.featured_image.alt}}" data-sizes="auto" data-product-img class="lazyload" data-sizes="auto">
+
+            {%if product.images[2]  %}
+               <div class="productThumb-bg-secondaryImg">
+                  <picture>
+                    <source data-srcset="{{ product.images[2].src | img_url: '1000x', format:'pjpg'}}"  media="(min-width: 900x)">
+                    <source data-srcset="{{ product.images[2].src | img_url: '1000x', format:'pjpg'}}"  media="(min-width: 640px)">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="{{product.images[2].alt}}" data-sizes="auto" data-product-img class="lazyload" data-sizes="auto" alt="">
+                  </picture>
+                </div>
+            {%endif%}
           {%endif%}
+
         </div>
 
       </div>

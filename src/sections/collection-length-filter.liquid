@@ -1,15 +1,17 @@
 
-<div>
+<div class="collection-length-filter">
 	<span class="collectionFilters-filter-title">
 		{{section.settings.title}}
 	</span>
-	<ul class="grid  grid--flexWrap">
+	<ul class="grid  grid--flexWrap grid--1of2  med-grid--full  large-grid--1of2  ">
 		{%for block in section.blocks%}
-			<li>
-				<div>
-					<label for="{{block.settings.tag}}">{{block.settings.title}} ({{block.settings.length}})</label>
-
-					<input type="checkbox" value="{{block.settings.tag}}" name="{{block.settings.tag}}" data-filter-option>
+			<li class="grid-cell">
+				<div class="lengthOption">
+          <input type="checkbox" value="{{block.settings.tag}}" name="{{block.settings.tag}}" data-filter-option>
+					<label for="{{block.settings.tag}}"> 
+              <span class="lengthOption-length">{{block.settings.length}}</span>
+              <span class="lengthOption-detail">{{block.settings.title}}</span>
+          </label>
 				</div>
 			</li>
 		{%endfor%}

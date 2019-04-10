@@ -73,7 +73,9 @@ theme.collectionFilter = (function() {
 
   function filterChildCollections(pCollections, pTags) {
 
-    if(pTags.length === 0 ) {
+    var tags = pTags; 
+
+    if(tags.length === 0 ) {
       buildChildCollections(pCollections.childCollections); 
       buildActiveTags(tags);
       filterState.childCollectionsShowing = pCollections; 
@@ -98,8 +100,8 @@ theme.collectionFilter = (function() {
 
       if(!filterState.active) {
         filteredCollection.products = products.filter(function(product){
-          for(var i = 0; i < pTags.length; i++) {
-            if(product.tags.indexOf(pTags[i]) > -1) {
+          for(var i = 0; i < tags.length; i++) {
+            if(product.tags.indexOf(tags[i]) > -1) {
               return true
             }
           }
@@ -109,11 +111,10 @@ theme.collectionFilter = (function() {
 
        var existingCollectionsShowing = filterState.childCollectionsShowing,
            existingCollectionFiltered = {}; 
-           console.log(filterState.childCollectionsShowing); 
 
        filteredCollection.products = products.filter(function(product){
-          for(var i = 0; i < pTags.length; i++) {
-            if(product.tags.indexOf(pTags[i]) > -1) {
+          for(var i = 0; i < tags.length; i++) {
+            if(product.tags.indexOf(tags[i]) > -1) {
               return true
             }
           }
@@ -132,8 +133,6 @@ theme.collectionFilter = (function() {
               return false 
             });
             existingCollectionFiltered.products = filteredProducts; 
-            console.log("A FILTERED EXISTING COLLECTION"); 
-            console.log(existingCollectionFiltered); 
           } 
         }
 
@@ -150,11 +149,21 @@ theme.collectionFilter = (function() {
 
      }); 
 
-    console.log(filteredCollections); 
     filterState.childCollectionsShowing = filteredCollections; 
     filterState.active = true; 
+    buildActiveTags(tags);
     buildChildCollections(filteredCollections); 
   }   
+
+
+  function shortenChildCollectionProds(pProducts) {
+    var products = pProducts;
+    if(products.length > 4) {
+      return products.splice(0, 7)
+    } else {
+      return products.splice(0, 3)
+    }
+  }
 
 
   function buildChildCollections(pFilteredCollections) {
@@ -180,13 +189,12 @@ theme.collectionFilter = (function() {
         var products = [],
         product = {}, 
         products = dataCollection.products.map(function(productItem) {
-           var product = {
+          var product = {
             id: productItem.id, 
             description: productItem.body_html.replace(/<\/?[^>]+(>|$)/g, "").split(' ').join(' '), 
             title: productItem.title, 
             price: slate.Currency.formatMoney(productItem.price, '${{amount}}'),
-            featuredImg: productItem.images[0],
-            secondaryImg: productItem.secondaryImg,
+            images: productItem.images,
             url: productItem.url,
             handle: productItem.handle,
             variant: productItem.variants[0].id,
@@ -196,7 +204,7 @@ theme.collectionFilter = (function() {
         });
 
         dataCollection.products = products;
-        dataCollection.products = dataCollection.products.splice(0, 7);
+        dataCollection.products = shortenChildCollectionProds(dataCollection.products);
         data.collections.push(dataCollection);  
       });   
 
@@ -219,11 +227,8 @@ theme.collectionFilter = (function() {
           type: 'GET',
           url: '/collections/' + pCollection.id + '?view=parent.json',
           success: function(res){
-            console.log(res); 
             var result = JSON.parse(res); 
-            console.log(result); 
             collection.childCollections = result;
-            console.log(collection); 
            },
           error: function(status){
             console.log(status);
@@ -246,7 +251,9 @@ theme.collectionFilter = (function() {
   }
 
 
-  function filterProducts(products, tags) {
+  function filterProducts(products, pTags) {
+
+    var tags = pTags; 
 
     if(tags.length === 0 ) {
       buildFilteredProducts(products); 
@@ -326,11 +333,11 @@ theme.collectionFilter = (function() {
           description: productItem.body_html.replace(/<\/?[^>]+(>|$)/g, "").split(' ').join(' '), 
           title: productItem.title, 
           price: slate.Currency.formatMoney(productItem.price, '${{amount}}'),
-          featuredImg: productItem.images[0],
-          secondaryImg: productItem.secondaryImg,
+          images: productItem.images,
           url: productItem.url,
           handle: productItem.handle,
-          variant: productItem.variants[0].id
+          variant: productItem.variants[0].id,
+          tags: productItem.tags
       }
         return product; 
     });
@@ -359,6 +366,8 @@ theme.collectionFilter = (function() {
 
 
   function buildActiveTags(pTags) {
+    console.log(pTags); 
+
     var $tagsContainer = $(selectors.activeTags); 
     var $collectionDescription = $(selectors.collectionDescription); 
 
@@ -415,8 +424,22 @@ theme.collectionFilter = (function() {
         $optionInput.removeAttr('checked'); 
       }
     }
-    filterProducts(collection.products, tags); 
+
+    if(collection.parent) {
+      filterChildCollections(collection, tags); 
+    } else {
+      filterProducts(collection.products, tags); 
+    }
   }
+
+
+
+  //
+  // Gets the collection's products and stores it so we dont need to make more calls to get all products for it
+  //
+  getCollectionProducts(collection); 
+
+
 
   //
   // Sets up the filtering elements 
@@ -424,13 +447,21 @@ theme.collectionFilter = (function() {
   if($(selectors.collectionFiltersToggle).length > 0 ) {
 
     var $filterToggle = $(selectors.collectionFiltersToggle); 
+    var $filterClose = $('[data-filter-close]'); 
 
     function toggleFiltersMenu() {
       $('[data-filters-off-canvas]').toggleClass('is-hidden'); 
       $('body').toggleClass('filter-off-canvas-open');
     }
 
+    function closeFilterMenu() {
+      $('[data-filters-off-canvas]').addClass('is-hidden'); 
+      $('body').removeClass('filter-off-canvas-open');
+    }
+
     $filterToggle.on('click', toggleFiltersMenu); 
+    $filterClose.on('click', closeFilterMenu); 
+
   
     $('[data-clear-filters]').on('click', function() {
       clearAllFilters(); 
@@ -447,17 +478,11 @@ theme.collectionFilter = (function() {
         tags.push(tag); 
       }
       if(collection.parent) {
-        console.log(collection);
         filterChildCollections(collection, tags)
       } else {
         filterProducts(collection.products, tags); 
       }
    });
-
-  //
-  // Gets the collection's products and stores it so we dont need to make more calls to get all products for it
-  //
-  getCollectionProducts(collection); 
 
 
   //

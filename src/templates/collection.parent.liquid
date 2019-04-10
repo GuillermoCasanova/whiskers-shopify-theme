@@ -15,11 +15,15 @@
           <div class="collection-products">
 
             <div class="show-for-medium-up">
-              <div class="collectionDescription" data-collection-description>
-                <div class="collectionDescription-inner">
-                  <p>
-                    {{collection.description}}
-                  </p>
+              <div class="row  row--full">
+                <div class="class small-12 medium-11 large-12 columns">
+                  <div class="collectionDescription" data-collection-description>
+                    <div class="collectionDescription-inner">
+                      <p>
+                        {{collection.description}}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -37,11 +41,11 @@
                     {% assign collection = childlink.object %}
               
                     <div class="row small-collapse">
-                      <div class="small-12  medium-11  large-12  medium-centered  columns  ">
+                      <div class="small-12  large-12  columns  ">
                         <!--Collection Begins--> 
                         <section class="section">
                           <div class="row row--full small-collapse">
-                            <div class="small-12  medium-11  large-12  medium-centered  columns  ">
+                            <div class="small-12  medium-11  large-12  columns  ">
               
                                 <div class="grid  grid--justifyCenter  grid--stretch">
                                   <div class="collectionContainer">
@@ -61,12 +65,12 @@
                                                    large-grid--1of4
                                                    productThumbs">
                                     
-                                          {% for product in collection.products | limit:7 %}
+                                          {% for product in collection.products | limit: 7 %}
                                           <li class="grid-cell  {%if product.tags contains 'alt-thumb' %} alt-thumbnail {%endif%}">
                                             {%include 'product-thumb'%}
                                           </li>
                                           {% endfor %}
-                                          <li class="grid-cell">
+                                          <li class="grid-cell  {%if collection.products[0].tags contains 'alt-thumb' %} alt-thumbnail {%endif%}">
                                             {%include 'collection-more-thumb'%}
                                           </li>
                                         </ul>
@@ -143,10 +147,21 @@
                                       </div>
 
                                       <div class="productThumb-bg">
-                                        <img src="{{featuredImg}}" alt="{{title}}" data-sizes="auto" data-product-img>
-                                       <div class="productThumb-bg-secondaryImg">
-                                          <img src="{{ secondaryImg}}" alt="{{title}}" class="lazyload" data-sizes="auto"  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="  data-product-img>
-                                        </div>
+                                       <picture>
+                                          <source data-srcset="{{images.0.large}}"  media="(min-width: 900x)">
+                                          <source data-srcset="{{images.0.medium}}"  media="(min-width: 640px)">
+                                          <source data-srcset="{{images.0.small}}">
+                                          <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="{{title}}" data-sizes="auto" data-product-img class="lazyload" data-sizes="auto">
+                                        </picture>
+                                        {{#if images.2.xlarge}}
+                                         <div class="productThumb-bg-secondaryImg">
+                                            <picture>
+                                              <source data-srcset="{{images.2.xlarge}}"  media="(min-width: 900x)">
+                                              <source data-srcset="{{images.2.xlarge}}"  media="(min-width: 640px)">
+                                              <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="{{title}}" data-sizes="auto" data-product-img class="lazyload" data-sizes="auto">
+                                            </picture>
+                                          </div>
+                                        {{/if}}
                                       </div>
           
                                     </div>
@@ -162,16 +177,19 @@
                                         </div>
                                       </div>
                                   </a>
-
-
                                 </li>
                                 {{/products}}
-                                <li class="grid-cell">
+                                <li class="grid-cell {{#ifIn 'alt-thumb' products.0.tags}} alt-thumbnail {{/ifIn}}">
                                   <a href="{{collection.url}}" rel="internal" title="View All {{collection.title}}" class="productThumb">
                                     <div class="collectionMoreThumb">
                                        <div class="collectionMoreThumb-inner   grid--center  grid">
-                                       <p class="grid  grid--center  grid--justifyCenter"> View All <br>   {{collection.title}}</p>
-                                     </div>
+                                          <div class="collectionMoreThumb-content  grid  grid--center  grid--flexDirectionColumn  grid--justifyCenter">
+                                            <p class="grid  grid--center  grid--justifyCenter"> Shop All <br> {{collection.title}}</p>
+                                            <div class="collectionMoreThumb-icon">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><path class="ring" d="M22.118 44.236C9.922 44.236 0 34.314 0 22.118S9.922 0 22.118 0s22.118 9.922 22.118 22.118-9.922 22.118-22.118 22.118zm0-42.736C10.75 1.5 1.5 10.749 1.5 22.118c0 11.368 9.25 20.618 20.618 20.618 11.37 0 20.618-9.25 20.618-20.618 0-11.369-9.248-20.618-20.618-20.618z"/><path  class="arrow" d="M19.341 29.884a.75.75 0 0 1-.53-1.281l6.796-6.804-6.796-6.803a.75.75 0 1 1 1.061-1.061l7.325 7.333a.75.75 0 0 1 0 1.061l-7.325 7.333a.742.742 0 0 1-.531.222z"/></svg>
+                                            </div>
+                                          </div>
+                                      </div>
                                     </div>
                                   </a>
                                 </li>                                  
@@ -189,4 +207,20 @@
   {{/collections}}
 </script>
 {%endraw%}
+
+
+
+{%raw%}
+<script id="tags-template" type="text/template">
+  <ul class="activeTags  grid  grid--center  grid--flexDirectionRow">
+    {{#tag}}
+    <li class="activeTags-tag  grid  grid--center  grid--justifyLeft  grid--flexDirectionRow  grid--middle">
+      <a data-active-tag title="Remove {{this.name}}"  data-label="{{this.label}}" role="button">
+      </a> <h2>{{this.name}}</h2>
+    </li>
+    {{/tag}}
+  </ul>
+</script>
+{%endraw%}
+
 

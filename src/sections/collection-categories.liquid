@@ -1,22 +1,22 @@
 
 <div class="collectionCategories" data-categories-slideshow>
     <!-- Additional required wrapper -->
-  <ul class="grid  grid--center  flex--noWrap  large-grid--flexDirectionColumn  grid--1of3  large-grid--top" >
+  <ul class="grid  grid--center  flex--noWrap  med-grid--flexDirectionColumn  grid--1of3  med-grid--top" >
     {% for link in linklists[section.settings.high-level-menu].links %}
-     <li class="menu-item  grid-cell  {% if link.active %}is-active{% endif %}" data-category-slide data-category-handle="{{ link.object.handle }}">
-       <a href="{{ link.url }}" class="menu-link">{{ link.title }} <span class="collection-total">({{link.object.all_products_count}})</span></a>
+     <li class="collectionCategories-category   grid-cell" data-category-slide data-category-handle="{{ link.object.handle }}">
+       <a href="{{ link.url }}" class="collectionCategories-category-link  {% if link.active %}is-active{% endif %}">{{ link.title }} <span class="collection-total">({{link.object.all_products_count}})</span></a>
      </li>
    {% endfor %}
 
    {% for link in linklists[section.settings.menu].links %}
       {%- assign child_list_handle = link.title | handleize -%}
       {% if menus[child_list_handle].links != blank %}
-        <li class="menu-item grid-cell" data-category-url="{{link.object.url}}" data-category-slide data-category-handle="{{ link.object.handle }}" data-child-categories="{% for childlink in menus[child_list_handle].links %}{{childlink.object.url}}{% unless forloop.last %},{% endunless %}{% endfor %}">
-          <a href="{{ link.url }}" class="menu-link ">{{ link.title }} <span class="collection-total">({{link.object.all_products_count}})</span></a>
-          <ul class="dropDown is-showing show-for-large-up">
+        <li class="collectionCategories-category  grid-cell" data-category-url="{{link.object.url}}" data-category-slide data-category-handle="{{ link.object.handle }}" data-child-categories="{% for childlink in menus[child_list_handle].links %}{{childlink.object.url}}{% unless forloop.last %},{% endunless %}{% endfor %}">
+          <a href="{{ link.url }}" class="collectionCategories-category-link {% if link.active %}is-active{% endif %}">{{ link.title }} <span class="collection-total">({{link.object.all_products_count}})</span></a>
+          <ul class="dropDown is-showing show-for-medium-up">
             {% for childlink in menus[child_list_handle].links %}
-              <li class="dropDown-item animElem {% if childlink.active %}is-active{% endif %}" data-child-category >
-                <a href="{{ childlink.url }}" class="dropDown-link">{{ childlink.title | escape }}</a>
+              <li class="dropDown-item animElem" data-child-category >
+                <a href="{{ childlink.url }}" class="collectionCategories-category-link  {% if childlink.active %}is-active{% endif %}" >{{ childlink.title | escape }} <span class="collection-total">({{childlink.object.all_products_count}})</span></a>
               </li>
             {% endfor %}
           </ul>
@@ -25,8 +25,8 @@
           {%endif%}
         </li>
       {% else %}  
-        <li class="menu-item  grid-cell"  data-category-url="{{link.object.url}}" data-category-slide data-category-handle="{{ link.object.handle }}">
-          <a href="{{ link.url }}" class="menu-link">{{ link.title }} <span class="collection-total">({{link.object.all_products_count}})</span></a>
+        <li class="collectionCategories-category   grid-cell"  data-category-url="{{link.object.url}}" data-category-slide data-category-handle="{{ link.object.handle }}">
+          <a href="{{ link.url }}" class="collectionCategories-category-link  {% if link.active %}is-active{% endif %}">{{ link.title }} <span class="collection-total">({{link.object.all_products_count}})</span></a>
         </li>
       {% endif %}
     {% endfor %}
