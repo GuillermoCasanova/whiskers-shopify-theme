@@ -30,6 +30,23 @@
       </div>
     </div>
   </div>
-  <!--Collection Ends--> </div>
+  <!--Collection Ends--> 
+</div>
 
+
+
+
+
+{%raw%}
+<script id="tags-template" type="text/template">
+  <ul class="activeTags  grid  grid--center  grid--flexDirectionRow">
+    {{#tag}}
+    <li class="activeTags-tag  grid  grid--center  grid--justifyLeft  grid--flexDirectionRow  grid--middle">
+      <a data-active-tag title="Remove {{this.name}}"  data-label="{{this.label}}" role="button">
+      </a> <h2>{{this.name}}</h2>
+    </li>
+    {{/tag}}
+  </ul>
+</script>
+{%endraw%}
 

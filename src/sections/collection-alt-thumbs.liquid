@@ -65,10 +65,10 @@
                     <div class="small-12 columns">
                       <ul class="grid  
                                  grid--flexDirectionRow
-                                 grid--1of2
+                                 grid--full
                                  grid--flexWrap
                                  med-grid--flexDirectionRow
-                                 large-grid--1of2
+                                 med-grid--1of2
                                  productThumbs">
                         {{#product}}
                         <li class="grid-cell">
@@ -91,13 +91,20 @@
                               </div>
 
                               <div class="productThumb-bg">
-                                <img src="{{featuredImg}}" alt="{{title}}" data-sizes="auto" data-product-img>
-
-                                {{#if secondaryImg}}
-                                <div class="productThumb-bg-secondaryImg">
-                                  <img src="{{ secondaryImg}}" alt="{{title}}" class="lazyload" data-sizes="auto"  src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="  data-product-img>
-                                </div>
-                                {{/if}}
+                                <picture>
+                                  <source data-srcset="{{images.0.xlarge}}"  media="(min-width: 900x)">
+                                  <source data-srcset="{{images.0.large}}"  media="(min-width: 640px)">
+                                  <source data-srcset="{{images.0.medium}}">
+                                  <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="{{title}}" data-sizes="auto" data-product-img class="lazyload" data-sizes="auto">
+                                  {{#if images.2.xlarge}}
+                                   <div class="productThumb-bg-secondaryImg">
+                                      <picture>
+                                        <source data-srcset="{{images.2.xlarge}}"  media="(min-width: 900x)">
+                                        <source data-srcset="{{images.2.xlarge}}"  media="(min-width: 640px)">
+                                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="{{title}}" data-sizes="auto" data-product-img class="lazyload" data-sizes="auto">
+                                      </picture>
+                                    </div>
+                                  {{/if}}
                               </div>
   
                             </div>
