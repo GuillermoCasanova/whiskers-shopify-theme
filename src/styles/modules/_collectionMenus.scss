@@ -162,7 +162,7 @@
       }
 
       .collectionCategories-childCategories-childCategory.is-active {
-        
+
         & > a {
           font-weight: bold; 
 
@@ -416,6 +416,8 @@
     height: 100vh;
     position: relative;
     padding-bottom: 180px;
+    padding-top: rem-calc($level7 + $level7); 
+    z-index: 0; 
 
     @include media-query($medium-up) {
       top: 0; 
@@ -423,6 +425,7 @@
       height: auto;
       overflow: visible;
       overflow-y: visible; 
+      padding-top: 0; 
     }
   }
 
@@ -442,7 +445,6 @@
 
   .collectionFilters-inner {
     padding: rem-calc($level2);
-    padding-top: rem-calc($level7 + $level7); 
     position: relative;
     top: 0; 
     bottom: 0; 
@@ -585,8 +587,10 @@
 
 
 .filter-off-canvas-open {
+  overflow: hidden !important; 
+
   @include media-query($medium-up) {
-    overflow: hidden; 
+    overflow: visible !important; 
   }
 }
 
