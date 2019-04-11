@@ -73,9 +73,41 @@
       white-space: nowrap;
       @include h6(); 
     }
-    
 
-    .collectionCategories-category-link {
+      &:not(.is-active):hover, 
+      &:not(.is-active):focus {
+        a {
+          @include media-query($medium-up) {
+            color: $quintenaryColor;
+          }
+        }
+      }
+
+      &.is-active {
+        a {
+          font-weight: bold; 
+
+          &:after {
+           opacity: 1;
+
+           @include media-query($medium-up) {
+            opacity: 0; 
+           }
+          }
+
+          @include media-query($medium-up) {
+            background-color: #4D4C57;
+          }
+
+          .collection-total {
+            color: #fff; 
+            font-weight: bold; 
+          }
+        }
+      }
+
+
+    a {
       padding: rem-calc($level3); 
       color: #fff;
       position: relative;
@@ -111,50 +143,9 @@
         width: 100%;
         opacity: 0;
       }
-
-      &:not(.is-active):hover, 
-      &:not(.is-active):focus {
-        @include media-query($medium-up) {
-          color: $quintenaryColor;
-        }
-      }
-
-      &.is-active {
-        font-weight: bold; 
-
-        &:after {
-         opacity: 1;
-
-         @include media-query($medium-up) {
-          opacity: 0; 
-         }
-        }
-
-        @include media-query($medium-up) {
-          background-color: #4D4C57;
-        }
-
-        .collection-total {
-          color: #fff; 
-          font-weight: bold; 
-        }
-      }
     }
 
-    // a {
-    //   color: #fff;
-    //   display: block; 
-    //   position: relative;
-    //   width: 100%;
-
-    //   @include media-query($medium-up) {
-    //     padding: 0;
-    //     text-align: left; 
-    //     display: inline-block; 
-    //   }
-    // }
-      
-    .dropDown {
+    .collectionCategories-childCategories {
       margin-top: rem-calc(3px);
       margin-bottom: rem-calc($level1); 
       display: none; 
@@ -178,6 +169,7 @@
   position: relative;
   border-bottom: 1px solid #3c3737;
   display: none;
+  padding: rem-calc(3px);
 
   &.is-active {
     display: grid;
@@ -188,15 +180,33 @@
 
   .collectionChildCategories-list {
     text-align: center; 
-    padding-left: rem-calc($level1);
-    padding-right: rem-calc($level1);
     display: none;
     margin-bottom: 0; 
     height: rem-calc(42px); 
     @include text-micro();
 
-    .subCategory {
-      min-width: rem-calc(80px); 
+    .collectionChildCategories-childCategory {
+      min-width: 6.3rem; 
+      position: relative;
+
+      a {
+        color: $quintenaryColor;
+
+        &:active,
+        &:focus {
+          color: #fff;
+        }
+      }
+
+      &.is-active {
+        a {
+          font-weight: bold;
+          color: #fff;  
+          &:after {
+            opacity: 1; 
+          }
+        }
+      }
     }
 
     &.is-active {
@@ -221,6 +231,8 @@
       color: #fff;
       display: block; 
       position: relative;
+      padding-right: 0; 
+      padding-left: 0; 
       width: 100%;
 
       @include media-query($medium-up) {

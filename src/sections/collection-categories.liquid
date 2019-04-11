@@ -11,11 +11,11 @@
    {% for link in linklists[section.settings.menu].links %}
       {%- assign child_list_handle = link.title | handleize -%}
       {% if menus[child_list_handle].links != blank %}
-        <li class="collectionCategories-category  grid-cell" data-category-url="{{link.object.url}}" data-category-slide data-category-handle="{{ link.object.handle }}" data-child-categories="{% for childlink in menus[child_list_handle].links %}{{childlink.object.url}}{% unless forloop.last %},{% endunless %}{% endfor %}">
-          <a href="{{ link.url }}" class="collectionCategories-category-link {% if link.active %}is-active{% endif %}">{{ link.title }} <span class="collection-total">({{link.object.all_products_count}})</span></a>
-          <ul class="dropDown is-showing show-for-medium-up">
+        <li class="collectionCategories-category  grid-cell  {% if link.active %}is-active{% endif %}" data-category-url="{{link.object.url}}" data-category-slide data-category-handle="{{ link.object.handle }}" data-child-categories="{% for childlink in menus[child_list_handle].links %}{{childlink.object.url}}{% unless forloop.last %},{% endunless %}{% endfor %}">
+          <a href="{{ link.url }}">{{ link.title }} <span class="collection-total">({{link.object.all_products_count}})</span></a>
+          <ul class="collectionCategories-childCategories is-showing show-for-medium-up">
             {% for childlink in menus[child_list_handle].links %}
-              <li class="dropDown-item animElem" data-child-category >
+              <li class="dropDown-item">
                 <a href="{{ childlink.url }}" class="collectionCategories-category-link  {% if childlink.active %}is-active{% endif %}" >{{ childlink.title | escape }} <span class="collection-total">({{childlink.object.all_products_count}})</span></a>
               </li>
             {% endfor %}
@@ -38,9 +38,9 @@
   {% for link in linklists[section.settings.menu].links %}
     {%-assign child_list_handle = link.title | handleize -%}
     {% if menus[child_list_handle].links != blank %}
-    <ul class="collectionChildCategories-list  grid  grid--center  grid--justifyCenter  grid--flexDirectionRow" data-parent-category-handle="{{link.object.handle}}" data-child-categories-container>
+    <ul class="collectionChildCategories-list  grid  grid--center  flex--noWrap  med-grid--flexDirectionColumn" data-parent-category-handle="{{link.object.handle}}" data-child-categories-container>
       {% for childlink in menus[child_list_handle].links %}
-        <li class="subCategory  grid-cell  grid-cell--autoSize" >
+        <li class="collectionChildCategories-childCategory  grid-cell  grid-cell--autoSize   {% if childlink.active %}is-active{% endif %}"  data-child-category>
           <a href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
         </li>
       {% endfor %}
@@ -58,6 +58,7 @@
         categoriesSlideshow: "[data-categories-slideshow]",
         categorySlide: "[data-category-slide]",
         childCategoriesContainer: "[data-child-categories-container]",
+        childCategory: "[data-child-category]",
         childCategoriesSlideshow: "[data-child-categories-slideshow]"
       }, 
       goToActiveCategory:  function(pCategory) {
@@ -101,6 +102,7 @@
             var childCategories = $($categories[i]).data('child-categories').split(",");
             if(childCategories.indexOf(window.location.pathname) > -1) {
               $categorySlide.addClass('is-active');
+              console.log('this parent is active'); 
               $categorySlide.data('child-link-active', true); 
               return $categories[i]; 
             }
@@ -157,3 +159,4 @@
 
 {% endschema %}
 
+  
