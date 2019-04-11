@@ -15,8 +15,8 @@
           <a href="{{ link.url }}">{{ link.title }} <span class="collection-total">({{link.object.all_products_count}})</span></a>
           <ul class="collectionCategories-childCategories is-showing show-for-medium-up">
             {% for childlink in menus[child_list_handle].links %}
-              <li class="dropDown-item">
-                <a href="{{ childlink.url }}" class="collectionCategories-category-link  {% if childlink.active %}is-active{% endif %}" >{{ childlink.title | escape }} <span class="collection-total">({{childlink.object.all_products_count}})</span></a>
+              <li class="dropDown-item  collectionCategories-childCategories-childCategory {% if childlink.active %}is-active{% endif %}">
+                <a href="{{ childlink.url }}">{{ childlink.title | escape }} <span class="collection-total">({{childlink.object.all_products_count}})</span></a>
               </li>
             {% endfor %}
           </ul>

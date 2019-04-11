@@ -366,7 +366,6 @@ theme.collectionFilter = (function() {
 
 
   function buildActiveTags(pTags) {
-    console.log(pTags); 
 
     var $tagsContainer = $(selectors.activeTags); 
     var $collectionDescription = $(selectors.collectionDescription); 
