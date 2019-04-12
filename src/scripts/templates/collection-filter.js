@@ -70,6 +70,35 @@ theme.collectionFilter = (function() {
     collection.parent = true; 
   }
 
+  function getCollectionProducts(pCollection) {
+
+    if(collection.parent) {
+      $.ajax({
+          type: 'GET',
+          url: '/collections/' + pCollection.id + '?view=parent.json',
+          success: function(res){
+            var result = JSON.parse(res); 
+            collection.childCollections = result;
+           },
+          error: function(status){
+            console.log(status);
+          }
+      }); 
+    } else {
+        $.ajax({
+          type: 'GET',
+          url: '/collections/'+ pCollection.id + '?view=json',
+          success: function(res){
+            var result = JSON.parse(res); 
+            filterState.productsShowing = result.products;
+            collection.products = result.products; 
+           },
+          error: function(status){
+            console.log(status);
+          }
+      });
+    }
+  }
 
   function filterChildCollections(pCollections, pTags) {
 
@@ -217,37 +246,6 @@ theme.collectionFilter = (function() {
       template = Handlebars.compile(source);
       $collectionsContainer.append(template()); 
     } 
-  }
-
-
-  function getCollectionProducts(pCollection) {
-
-    if(collection.parent) {
-      $.ajax({
-          type: 'GET',
-          url: '/collections/' + pCollection.id + '?view=parent.json',
-          success: function(res){
-            var result = JSON.parse(res); 
-            collection.childCollections = result;
-           },
-          error: function(status){
-            console.log(status);
-          }
-      }); 
-    } else {
-        $.ajax({
-          type: 'GET',
-          url: '/collections/'+ pCollection.id + '?view=json',
-          success: function(res){
-            var result = JSON.parse(res); 
-            filterState.productsShowing = result.products;
-            collection.products = result.products; 
-           },
-          error: function(status){
-            console.log(status);
-          }
-      });
-    }
   }
 
 
@@ -432,6 +430,18 @@ theme.collectionFilter = (function() {
   }
 
 
+  function disableDisabledInputs(pInputs) {
+
+    var $inputs = $(pInputs);
+
+    $inputs.each(function(index, element) {
+      var $element = $(element); 
+      if($element.parent().hasClass('is-disabled')) {
+        $element.prop("disabled", true);
+      } 
+    })
+  }
+
 
   //
   // Gets the collection's products and stores it so we dont need to make more calls to get all products for it
@@ -469,6 +479,9 @@ theme.collectionFilter = (function() {
   }
 
 
+  //
+  // Listens for any collection filters to change in order to filter products 
+  //
    $(selectors.collectionFilterOption).on('change', function(){
       var tag = $(this).val()
       if(tags.indexOf(tag) != -1) {
@@ -483,6 +496,7 @@ theme.collectionFilter = (function() {
       }
    });
 
+   disableDisabledInputs(selectors.collectionFilterOption); 
 
   //
   // Sets up the sorting drop down 

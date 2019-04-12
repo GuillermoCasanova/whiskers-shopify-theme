@@ -777,9 +777,16 @@
         opacity: .5; 
       }
 
+      input {
+        pointer-events: none; 
+        cursor: default;
+      }
+
       .lengthOption-checkbox {
         border: 1px solid $quintenaryColor;
         opacity: .5; 
+        pointer-events: none; 
+        cursor: default;
 
         &:before {
           content: "N/A";
