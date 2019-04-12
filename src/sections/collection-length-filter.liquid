@@ -5,20 +5,21 @@
 	</span>
 	<ul class="grid  grid--flexWrap grid--flexDirectionColumn">
 		{%for block in section.blocks%}
-			<li class="grid-cell">
-				<div class="lengthOption  grid  grid--center">
-          <input type="checkbox" value="{{block.settings.tag}}" name="{{block.settings.tag}}" data-filter-option>
-          <span class="lengthOption-checkbox">
-            <div class="lengthOption-checkbox-check">
-              
-            </div>
-          </span>
-					<label for="{{block.settings.tag}}"> 
-              <span class="lengthOption-length">{{block.settings.length}}</span>
-              <span class="lengthOption-detail">{{block.settings.title}}</span>
-          </label>
-				</div>
-			</li>
+  			<li class="grid-cell">
+  				<div class="lengthOption  grid  grid--center  {%unless collection.all_tags contains block.settings.tag%} 
+          is-disabled{%endunless%}">
+            <input type="checkbox" value="{{block.settings.tag}}" name="{{block.settings.tag}}" data-filter-option>
+            <span class="lengthOption-checkbox">
+              <div class="lengthOption-checkbox-check">
+                
+              </div>
+            </span>
+  					<label for="{{block.settings.tag}}"> 
+                <span class="lengthOption-length">{{block.settings.length}}</span>
+                <span class="lengthOption-detail">{{block.settings.title}}</span>
+            </label>
+  				</div>
+  			</li>
 		{%endfor%}
 	</ul>
 </div>

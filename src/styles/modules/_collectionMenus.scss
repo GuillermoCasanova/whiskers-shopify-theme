@@ -771,6 +771,32 @@
     margin-right: rem-calc($level2); 
     transition: all .2s cubic-bezier(0.23, 1, 0.32, 1);
 
+    &.is-disabled {
+      label {
+        color: $quintenaryColor;
+        opacity: .5; 
+      }
+
+      .lengthOption-checkbox {
+        border: 1px solid $quintenaryColor;
+        opacity: .5; 
+
+        &:before {
+          content: "N/A";
+          color: $quintenaryColor;
+          opacity: 1;
+          top: 2px; 
+          right: 0; 
+          bottom: 0;
+          left: 0;
+          position: absolute;
+          text-align: center; 
+          margin: auto; 
+          @include text-mini(); 
+        }
+      }
+    }
+
     .lengthOption-checkbox {
       border: 1px solid #fff;
       height: 26px;
