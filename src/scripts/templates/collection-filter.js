@@ -28,7 +28,8 @@ theme.collectionFilter = (function() {
   var selectors = {
     collectionMenu: '[data-ui-component="collection-menu"]',
     collectionFiltersToggle: '[data-filter-toggle]',
-    collectionFilterOption: '[data-filter-option]',
+    collectionFilterOptions: '[data-filter-option]',
+    collectionEnforcedOptions: '[data-enforced-option]',
     collectionSortOption: '[data-sort-option]',
     collectionDescription: '[data-collection-description]',
     activeTags: '[data-active-tags-container]'
@@ -59,7 +60,8 @@ theme.collectionFilter = (function() {
       filterState = {
         "active": false,
         "filteredProducts": null,
-        "filteredChildCollections": null 
+        "filteredChildCollections": [],
+        "childCollectionsShowing": []
       };
 
 
@@ -115,35 +117,45 @@ theme.collectionFilter = (function() {
 
     var collections = pCollections.childCollections; 
     var filteredCollections = []; 
-    var existingCollectionsFiltered = [],
-        existingCollectionsShowing = filterState.collectionsShowing;
 
-    collections.forEach(function(pCollection) {
-      
-      var handle = pCollection.handle; 
+    var existingCollectionsFiltered = [],
+        existingCollectionsShowing = filterState.childCollectionsShowing;
+
+
+    for(var c = 0; c < collections.length; c++) {
+      var handle = collections[c].collection.handle; 
       var filteredCollection = {},
-          products = pCollection.products; 
+          products = collections[c].products; 
 
           filteredCollection.products = [];
-          filteredCollection.collection = pCollection.collection;
+          filteredCollection.collection = collections[c].collection;
 
       if(!filterState.active) {
         filteredCollection.products = products.filter(function(product){
           for(var i = 0; i < tags.length; i++) {
-            if(product.tags.indexOf(tags[i]) > -1) {
+            if(product.tags.indexOf(tags[i]) > -1 && checkForEnforcedOptions(selectors.collectionEnforcedOptions, product.tags)) {
               return true
             }
           }
           return false 
         });
-      } else { 
+      } else {
 
        var existingCollectionsShowing = filterState.childCollectionsShowing,
-           existingCollectionFiltered = {}; 
+           existingCollectionFiltered = {
+            products: []
+           }; 
 
        filteredCollection.products = products.filter(function(product){
           for(var i = 0; i < tags.length; i++) {
-            if(product.tags.indexOf(tags[i]) > -1) {
+            if(product.tags.indexOf(tags[i]) > -1 && checkForEnforcedOptions(selectors.collectionEnforcedOptions, product.tags)) {
+              console.log("FOUND VIA CRITERIA")
+              console.log(product.tags); 
+              console.log(tags[i]);
+              console.log((product.tags.indexOf(tags[i])));
+              console.log(checkForEnforcedOptions(selectors.collectionEnforcedOptions, product.tags)); 
+              console.log(product.tags); 
+              console.log(tags); 
               return true
             }
           }
@@ -152,20 +164,21 @@ theme.collectionFilter = (function() {
 
 
         for(var i = 0; i < existingCollectionsShowing.length; i++) {
-          if(existingCollectionsShowing[i].handle == handle) {
+          if(existingCollectionsShowing[i].handle == handle && existingCollectionsShowing[i].products.length > 0) {
             var filteredProducts = existingCollectionsShowing[i].products.filter(function(product){
-              for(var i = 0; i < tags.length; i++) {
-                if(product.tags.indexOf(tags[i]) > -1) {
+              for(var b = 0; b < tags.length; b++) {
+                if(product.tags.indexOf(tags[b]) > -1 && checkForEnforcedOptions(selectors.collectionEnforcedOptions, product.tags)) {
                   return true
                 }
               }
               return false 
             });
             existingCollectionFiltered.products = filteredProducts; 
-          } 
+            existingCollectionFiltered.products.reverse(); 
+          } else if(existingCollectionsShowing[i].handle == handle && existingCollectionsShowing[i].products.length == 0) {
+            existingCollectionFiltered.products = []; 
+          }
         }
-
-        existingCollectionFiltered.products.reverse(); 
 
         filteredCollection.products = existingCollectionFiltered.products.concat(filteredCollection.products.filter(function(product) {
           var found = JSON.stringify(existingCollectionFiltered.products).indexOf(JSON.stringify(product)) == - 1;
@@ -175,8 +188,7 @@ theme.collectionFilter = (function() {
       }
 
       filteredCollections.push(filteredCollection); 
-
-     }); 
+    }
 
     filterState.childCollectionsShowing = filteredCollections; 
     filterState.active = true; 
@@ -196,7 +208,7 @@ theme.collectionFilter = (function() {
 
 
   function buildChildCollections(pFilteredCollections) {
-       
+    
     var $collectionsContainer = $('[data-collections-container]');
     var filteredCollections  = pFilteredCollections; 
 
@@ -249,6 +261,36 @@ theme.collectionFilter = (function() {
   }
 
 
+  function checkForEnforcedOptions(pEnforcedOptions, pProductTags) {
+
+    var $optionInputs = $(pEnforcedOptions + ":checked"); 
+    var productTags = pProductTags;
+    var enforcedTags = []; 
+    var passes = true; 
+
+    $optionInputs.each(function(index, element){
+      enforcedTags.push($(element).val());
+    }); 
+
+    if(enforcedTags.length > 0 ) {
+      for(var i = 0; i < enforcedTags.length; i++) {
+        if(productTags.indexOf(enforcedTags[i]) == -1) {
+          passes = false 
+          console.log('enforced tag not found'); 
+        } else {
+          passes = true
+          console.log('enforced tag found'); 
+          break
+        }
+      }
+    } else {
+      passes = true 
+    }
+
+
+    return passes 
+  }
+
   function filterProducts(products, pTags) {
 
     var tags = pTags; 
@@ -266,7 +308,7 @@ theme.collectionFilter = (function() {
     if(!filterState.active) {
       var filteredProducts = products.filter(function(product){
         for(var i = 0; i < tags.length; i++) {
-          if(product.tags.indexOf(tags[i]) > -1) {
+          if(product.tags.indexOf(tags[i]) > -1 && checkForEnforcedOptions(selectors.collectionEnforcedOptions, product.tags)) {
             return true
           }
         }
@@ -276,7 +318,7 @@ theme.collectionFilter = (function() {
 
       var filteredProducts = products.filter(function(product){
         for(var i = 0; i < tags.length; i++) {
-          if(product.tags.indexOf(tags[i]) > -1) {
+          if(product.tags.indexOf(tags[i]) > -1 && checkForEnforcedOptions(selectors.collectionEnforcedOptions, product.tags)) {
             return true
           }
         }
@@ -285,7 +327,7 @@ theme.collectionFilter = (function() {
 
       var existingFiltered = filterState.productsShowing.filter(function(product){
         for(var i = 0; i < tags.length; i++) {
-          if(product.tags.indexOf(tags[i]) > -1) {
+          if(product.tags.indexOf(tags[i]) > -1 && checkForEnforcedOptions(selectors.collectionEnforcedOptions, product.tags)) {
             return true
           }
         }
@@ -357,7 +399,7 @@ theme.collectionFilter = (function() {
 
   function clearAllFilters() {
     tags = []; 
-    $(selectors.collectionFilterOption).removeAttr('checked');
+    $(selectors.collectionFilterOptions).removeAttr('checked');
     buildActiveTags(tags);
     getFilterProducts(collection);
   }
@@ -406,7 +448,7 @@ theme.collectionFilter = (function() {
   }
 
   function removeActiveTag(pTag) {
-    var filterOptions = $(selectors.collectionFilterOption); 
+    var filterOptions = $(selectors.collectionFilterOptions); 
 
 
     for(var i = 0; i < tags.length; i++) {
@@ -482,21 +524,34 @@ theme.collectionFilter = (function() {
   //
   // Listens for any collection filters to change in order to filter products 
   //
-   $(selectors.collectionFilterOption).on('change', function(){
-      var tag = $(this).val()
-      if(tags.indexOf(tag) != -1) {
-        _.pull(tags, tag); 
-      } else {
-        tags.push(tag); 
-      }
-      if(collection.parent) {
-        filterChildCollections(collection, tags)
-      } else {
-        filterProducts(collection.products, tags); 
-      }
+   $(selectors.collectionFilterOptions).on('change', function(){
+    var tag = $(this).val()
+    if(tags.indexOf(tag) != -1) {
+      _.pull(tags, tag); 
+    } else {
+      tags.push(tag); 
+    }
+    if(collection.parent) {
+      filterChildCollections(collection, tags)
+    } else {
+      filterProducts(collection.products, tags); 
+    }
    });
 
-   disableDisabledInputs(selectors.collectionFilterOption); 
+
+  //
+  // Listens for any enforced collection filters to change in order to filter products 
+  //
+   $(selectors.collectionEnforcedOptions).on('change', function(){
+    if(collection.parent) {
+      filterChildCollections(collection, tags)
+    } else {
+      filterProducts(collection.products, tags); 
+    }
+   });
+
+
+   disableDisabledInputs(selectors.collectionFilterOptions); 
 
   //
   // Sets up the sorting drop down 
