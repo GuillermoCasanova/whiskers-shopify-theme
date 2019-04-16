@@ -15,13 +15,6 @@
 // =require vendor/slick.min.js
 
 
-
-/*!
- * swiper-4.5.0
- */
-// =require vendor/swiper-4.5.0.min.js
-
-
 /*!
  * lazysizes.js
  */

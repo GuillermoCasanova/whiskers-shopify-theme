@@ -13,11 +13,11 @@
 				<div class="emailPopUp-image">
           <picture>
               
-            <source media="(min-width: 640px)"
-                    srcset="{{'pop-up-email-image-medium2.png' | asset_url}}">
+            <source media="(min-width: 680px)"
+                    srcset="{{settings.image_large | img_url: format: 'pjpg'}}">
           
-            <source media="(min-width: 0)"
-                    srcset="{{'pop-up-email-image-small.png' | asset_url}}">
+            <source media="(max-width: 679px)"
+                    srcset="{{settings.image_small | img_url: format: 'pjpg' }}">
           
             <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
                  data-sizes="auto" 

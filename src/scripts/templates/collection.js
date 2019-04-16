@@ -56,8 +56,6 @@ theme.collection = (function() {
   }
 
 
-
-
   setUpThumbAnimations(); 
 
 

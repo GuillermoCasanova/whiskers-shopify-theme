@@ -25,10 +25,10 @@
             {% if collection.image != undefined %}
              <picture>
                  <source media="(min-width: 1024px)"
-                         srcset="{{collection.image | img_url: '1600x'}}">
+                         srcset="{{collection.image | img_url: '1600x', format: 'pjpg' }}">
                  <source media="(min-width: 640px)"
-                         srcset="{{collection.image | img_url: '1200x',  crop: 'left'}}">
-                <img src="{{collection.image | img_url: '800x', crop: 'left'}}"
+                         srcset="{{collection.image | img_url: '1200x',  crop: 'left', format: 'pjpg' }}">
+                <img src="{{collection.image | img_url: '800x', crop: 'left', format: 'pjpg' }}"
                        data-sizes="auto" 
                        data-header-bg
                        alt="collection.image.alt" 

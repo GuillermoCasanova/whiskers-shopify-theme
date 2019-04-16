@@ -24,6 +24,64 @@
     ]
   },
   {
+    "name": "Email Pop-up",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "email_pop_up_active",
+        "label": "Email Pop-up Activation",
+        "info": "This turns on\/off the email pop-up on the site"
+      },
+      {
+        "type": "text",
+        "id": "email_popup_headline",
+        "label": "The headline for the pop-up"
+      },
+      {
+        "type": "text",
+        "id": "email_popup_body",
+        "label": "The body copy for the pop-up"
+      },
+      {
+        "type": "text",
+        "id": "email_popup_button_cta",
+        "label": "The text inside the button to sign up"
+      },
+      {
+        "type": "text",
+        "id": "email_popup_secondary_body",
+        "label": "Any secondary text below the button cta"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_small",
+        "label": "The image that will appear on small devices"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_large",
+        "label": "The image that will appear on larger devices"
+      },
+      {
+        "type": "select",
+        "id": "pop_up_frequency",
+        "label": "How often do you wan to show the pop-up?",
+        "options": [
+          {
+            "group": "frequency",
+            "value": "first-timers-only",
+            "label": "First Time Visitors Only"
+          },
+          {
+            "group": "frequency",
+            "value": "everytime-site-loads",
+            "label": "Everytime site loads"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "name": "Typography",
     "settings": [
       {

@@ -764,12 +764,25 @@
 }
 
 .collection-length-filter {
+  
+  ul {
+    li:last-child {
+      .lengthOption {
+        margin-bottom: rem-calc($level3); 
+      }
+    }
+  }
+
 
   .lengthOption {
     position: relative;
     margin-bottom: rem-calc($level3); 
     margin-right: rem-calc($level2); 
     transition: all .2s cubic-bezier(0.23, 1, 0.32, 1);
+
+    @include media-query($large-up) {
+      margin-bottom: rem-calc($level2); 
+    }
 
     &.is-disabled {
       label {
@@ -811,6 +824,11 @@
       display: inline-block;
       margin-right: rem-calc($level1);
       position: relative;
+
+      @include media-query($large-up) {
+        height: 24px;
+        width: 24px;
+      }
       
       .lengthOption-checkbox-check {
         position: absolute;
