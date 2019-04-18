@@ -15,10 +15,24 @@
     left: 0; 
     width: 100%;
     margin-left: 4%;
+    
+    .collectionFilters {
+      opacity: 0; 
+      transform: translateX(-20px) !important;
+      transition: all .3s cubic-bezier(0.23, 1, 0.32, 1); 
+    }
   }
+
   @include media-query($large-up) {
     max-width: rem-calc(200px); 
     margin-left: 7%;
+  }
+
+  &.is-showing {
+    .collectionFilters {
+      transform: translateX(0) !important;
+      opacity: 1; 
+    }
   }
 }
 

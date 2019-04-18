@@ -72,6 +72,10 @@ theme.collectionFilter = (function() {
     collection.parent = true; 
   }
 
+  function showCollectionMenu() {
+    $(selectors.collectionMenu).addClass('is-showing'); 
+  }
+
   function getCollectionProducts(pCollection) {
 
     if(collection.parent) {
@@ -81,6 +85,7 @@ theme.collectionFilter = (function() {
           success: function(res){
             var result = JSON.parse(res); 
             collection.childCollections = result;
+            showCollectionMenu(); 
            },
           error: function(status){
             console.log(status);
@@ -94,6 +99,7 @@ theme.collectionFilter = (function() {
             var result = JSON.parse(res); 
             filterState.productsShowing = result.products;
             collection.products = result.products; 
+            showCollectionMenu(); 
            },
           error: function(status){
             console.log(status);
