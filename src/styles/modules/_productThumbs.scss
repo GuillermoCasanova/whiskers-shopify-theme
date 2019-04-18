@@ -56,7 +56,6 @@
   position: relative;
   display: block; 
 
-
   &:hover, 
   &:focus {
 
@@ -71,6 +70,14 @@
     .productThumb-bg {
       .productThumb-bg-secondaryImg {
         opacity: 1;
+      }
+    }
+  }
+  
+  &[data-already-showing] {
+    .productThumb-bg {
+      img {
+        visibility: visible !important; 
       }
     }
   }

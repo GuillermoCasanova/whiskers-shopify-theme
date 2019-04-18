@@ -76,7 +76,7 @@
                                productThumbs">
                       {{#product}}
                       <li class="grid-cell {{#ifIn 'alt-thumb' tags}} alt-thumbnail{{/ifIn}}">
-                        <a class="productThumb"  href="{{url}}" data-product data-title="{{title}}">
+                        <a class="productThumb"  href="{{url}}" data-product data-title="{{title}}"  {{#if alreadyShowing}}data-already-showing="true"{{/if}}>
       
                           <div class="productThumb-tags">
                            

@@ -33,22 +33,28 @@ theme.collection = (function() {
       //
       $(selectors.products).each(function(index, element) {
         
-        var product = element;
+        var $product = $(element); 
+        
+        TweenMax.set($product.find('[data-product-img]'), {autoAlpha: 1});
 
-        TweenMax.set($(product).find('[data-product-img]'), {autoAlpha: 1});
+        if($product.data('already-showing')) {
+          console.log('already showing'); 
+          return 
+        } else {
 
-        var delay = ((index + 1) === 4) ?  1 : (index + 1);
+          var delay = ((index + 1) === 4) ?  1 : (index + 1);
 
-        var productEntry = new TimelineLite()
-                .from($(product).find('[data-product-img]'), .3, {opacity: 0}, .02 * delay);
+          var productEntry = new TimelineLite()
+                  .from($product.find('[data-product-img]'), .2, {opacity: 0}, .03 * delay);
 
-        var productScene = new ScrollMagic.Scene({
-            triggerElement: product,
-            triggerHook: 'onEnter',
-            reverse: false
-          })
-          .setTween(productEntry)
-          .addTo(self.animCtrl); 
+          var productScene = new ScrollMagic.Scene({
+              triggerElement: element,
+              triggerHook: 'onEnter',
+              reverse: false
+            })
+            .setTween(productEntry)
+            .addTo(self.animCtrl); 
+        }
 
       });
 

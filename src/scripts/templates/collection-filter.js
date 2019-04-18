@@ -297,10 +297,8 @@ theme.collectionFilter = (function() {
       for(var i = 0; i < enforcedTags.length; i++) {
         if(productTags.indexOf(enforcedTags[i]) == -1) {
           passes = false 
-          console.log('enforced tag not found'); 
         } else {
           passes = true
-          console.log('enforced tag found'); 
           break
         }
       }
@@ -318,9 +316,13 @@ theme.collectionFilter = (function() {
 
 
     if(tags.length === 0 ) {
-      buildFilteredProducts(products); 
+
+      if(!_.isEqual(_.sortBy(products), _.sortBy(filterState.productsShowing))) {
+        buildFilteredProducts(products); 
+      }
+
       buildActiveTags(tags);
-      filterState.productsShowing = []; 
+      filterState.productsShowing = products; 
       filterState.active = false; 
       $('[data-results-total]').text(products.length); 
       return products
@@ -374,6 +376,11 @@ theme.collectionFilter = (function() {
 
       existingFiltered.reverse(); 
 
+      existingFiltered.map(function(productItem) {
+        productItem.alreadyShowing = true;
+        return productItem; 
+      });
+
       filteredProducts = existingFiltered.concat(filteredProducts.filter(function(product) {
         var found = JSON.stringify(existingFiltered).indexOf(JSON.stringify(product)) == - 1;
         return found; 
@@ -381,7 +388,12 @@ theme.collectionFilter = (function() {
     }
 
 
-    buildFilteredProducts(filteredProducts); 
+    console.log(filteredProducts);
+    console.log(filterState.productsShowing);
+
+    if(!_.isEqual(_.sortBy(filteredProducts), _.sortBy(filterState.productsShowing))) {
+      buildFilteredProducts(filteredProducts); 
+    }
     
 
     $('[data-results-total]').text(filteredProducts.length); 
@@ -393,7 +405,9 @@ theme.collectionFilter = (function() {
 
 
   function buildFilteredProducts(filteredProds) {
-          
+    
+    console.log(filteredProds); 
+
     var $productContainer = $('[data-section-type="collection"]');
       
     if(filteredProds.length > 0) {
@@ -417,7 +431,12 @@ theme.collectionFilter = (function() {
           variant: productItem.variants[0].id,
           tags: productItem.tags
       }
-        return product; 
+
+      if(productItem.alreadyShowing) {
+        product.alreadyShowing = true;         
+      } 
+
+     return product; 
     });
         
     data = {
@@ -439,7 +458,7 @@ theme.collectionFilter = (function() {
     tags = []; 
     $(selectors.collectionFilterOptions).removeAttr('checked');
     buildActiveTags(tags);
-    getFilterProducts(collection);
+    getCollectionProducts(collection);
   }
 
 
