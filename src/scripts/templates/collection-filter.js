@@ -1,8 +1,8 @@
 
 
-  /**
-  ** Helper for checking if propert is inside of array 
-  */
+/**
+** Helper for checking if propert is inside of array 
+*/
 Handlebars.registerHelper('ifIn', function(elem, list, options) {
   if(list && elem) {
     if(list.indexOf(elem) > -1) {
@@ -13,6 +13,17 @@ Handlebars.registerHelper('ifIn', function(elem, list, options) {
     return 
   }
 });
+
+
+/**
+** Helper for checking if array is longer than a specified value 
+*/
+Handlebars.registerHelper('checkLength', function(array, val2, options) {
+  if (array.length > val2) {
+    return options.fn(this);
+  }
+  return options.inverse(this); 
+})
 
 
 /**

@@ -118,6 +118,8 @@
                         
                       <div class="row">
                         <div class="small-12 columns">
+
+                          {{#checkLength products 0}}
                           <ul class="grid  
                                      grid--flexDirectionRow
                                      grid--1of2
@@ -194,6 +196,20 @@
                                   </a>
                                 </li>                                  
                             </ul>
+                            {{else}}
+                            <div class="childCollectionEmptyState">
+                              <div class="childCollectionEmptyState-inner  grid  grid--center  grid--justifyCenter  grid--flexDirectionColumn">
+                                <h1 class="headline">Currently... nothing to see here.</h1>
+                                <p>At this time we don't offer {{collection.title}} that match your query. <br> <br>
+                                  <a href="{{collection.url}}" title="Shop {{collection.title}}" rel="internal" class="" data-text=" {{collection.title}}">
+                                  Shop All {{collection.title}}
+                                  </a>
+                                </p>
+                              </div>
+                            </div>
+                            <div>
+                            </div>
+                            {{/checkLength}}
                         </div>
                       </div>
                     </div>
@@ -210,6 +226,8 @@
 
 
 
+
+
 {%raw%}
 <script id="tags-template" type="text/template">
   <ul class="activeTags  grid  grid--center  grid--flexDirectionRow">
@@ -222,5 +240,6 @@
   </ul>
 </script>
 {%endraw%}
+
 
 
