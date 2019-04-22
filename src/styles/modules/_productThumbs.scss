@@ -74,10 +74,12 @@
     }
   }
   
-  &[data-already-showing] {
+  &[data-already-showing="true"] {
     .productThumb-bg {
       img {
         visibility: visible !important; 
+        opacity: 1 !important; 
+        transform: scale(2);
       }
     }
   }

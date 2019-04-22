@@ -37,8 +37,9 @@ theme.collection = (function() {
         
         TweenMax.set($product.find('[data-product-img]'), {autoAlpha: 1});
 
-        if($product.data('already-showing')) {
-          console.log('already showing'); 
+        console.log($product.data('already-showing'));
+        if($product.data('already-showing') === true) {
+          console.log('dont reset please');
           return 
         } else {
 

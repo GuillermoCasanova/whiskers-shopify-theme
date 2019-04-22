@@ -345,7 +345,6 @@ theme.collectionFilter = (function() {
       return products
     }
 
-
     if(enforcedOptions) {
       tags = tags.filter(function(tag) {
         for(var i = 0; i < enforcedOptions.length; i++) {
@@ -361,57 +360,18 @@ theme.collectionFilter = (function() {
       }
     }
 
-
-    if(!filterState.active) {
-      var filteredProducts = products.filter(function(product){
-        for(var i = 0; i < tags.length; i++) {
-          if(product.tags.indexOf(tags[i]) > -1 && checkForEnforcedOptions(enforcedOptions, product.tags)) {
-            return true
-          }
+    var filteredProducts = products.filter(function(product){
+      for(var i = 0; i < tags.length; i++) {
+        if(product.tags.indexOf(tags[i]) > -1 && checkForEnforcedOptions(enforcedOptions, product.tags)) {
+          return true
         }
-        return false 
-      });
-    } else {
-
-      var filteredProducts = products.filter(function(product){
-        for(var i = 0; i < tags.length; i++) {
-          if(product.tags.indexOf(tags[i]) > -1 && checkForEnforcedOptions(enforcedOptions, product.tags)) {
-            return true
-          }
-        }
-        return false 
-      });
-
-      var existingFiltered = filterState.productsShowing.filter(function(product){
-        for(var i = 0; i < tags.length; i++) {
-          if(product.tags.indexOf(tags[i]) > -1 && checkForEnforcedOptions(enforcedOptions, product.tags)) {
-            return true
-          }
-        }
-        return false 
-      });
-
-      existingFiltered.reverse(); 
-
-      existingFiltered.map(function(productItem) {
-        productItem.alreadyShowing = true;
-        return productItem; 
-      });
-
-      filteredProducts = existingFiltered.concat(filteredProducts.filter(function(product) {
-        var found = JSON.stringify(existingFiltered).indexOf(JSON.stringify(product)) == - 1;
-        return found; 
-      })).reverse(); 
-    }
-
-
-    console.log(filteredProducts);
-    console.log(filterState.productsShowing);
+      }
+      return false 
+    });
 
     if(!_.isEqual(_.sortBy(filteredProducts), _.sortBy(filterState.productsShowing))) {
-      buildFilteredProducts(filteredProducts); 
+      buildFilteredProducts(filteredProducts, filterState.active); 
     }
-    
 
     $('[data-results-total]').text(filteredProducts.length); 
     filterState.active = true; 
@@ -421,52 +381,89 @@ theme.collectionFilter = (function() {
   }
 
 
-  function buildFilteredProducts(filteredProds) {
-    
-    console.log(filteredProds); 
+  function buildFilteredProducts(pFilteredProducts, pFilteringActive) {
 
-    var $productContainer = $('[data-section-type="collection"]');
-      
-    if(filteredProds.length > 0) {
+    var $productsContainer = $('[data-products-container]');
+    var filteredProducts = pFilteredProducts; 
 
-     $productContainer.empty();
-      var products = [],
-      product = {}, 
-      data = {}, 
-      source = $("#collection-template").html(),
-      template = Handlebars.compile(source);
-      products = filteredProds.map(function(productItem) {
+    function filterDisplayingProducts(pProdThumbnails, pFilteredProducts) {
+
+        var products = pFilteredProducts;
+        var $productThumbnails = $(pProdThumbnails); 
+
+        $productThumbnails.filter(function(product) {
+          for(var i = 0; i < products.length; i++) {
+            if($(this).data('id').toString() === products[i].id) {
+              $(this).find('[data-product]').data('already-showing', true); 
+              return true 
+            }
+          }
+          $(this).remove();
+          return false  
+        })
         
-       var product = {
-          id: productItem.id, 
-          description: productItem.body_html.replace(/<\/?[^>]+(>|$)/g, "").split(' ').join(' '), 
-          title: productItem.title, 
-          price: slate.Currency.formatMoney(productItem.price, '${{amount}}'),
-          images: productItem.images,
-          url: productItem.url,
-          handle: productItem.handle,
-          variant: productItem.variants[0].id,
-          tags: productItem.tags
+    }
+
+    function filterDuplicates(pProdThumbnails, pFilteredProducts) {
+
+      var products = pFilteredProducts; 
+      var $productThumbnails = $(pProdThumbnails).toArray(); 
+
+      products = products.filter(function(product){
+        for(var i = 0; i < $productThumbnails.length; i++) {
+          if($($productThumbnails[i]).data('id').toString() === product.id) {
+            return false 
+          }
+        }
+        return true 
+      });
+
+      return products; 
+    }
+
+    if(filteredProducts.length > 0) {
+
+      if(!pFilteringActive) {
+        $productsContainer.empty(); 
       }
 
-      if(productItem.alreadyShowing) {
-        product.alreadyShowing = true;         
-      } 
+      var products = [],    
+      product = {}, 
+      data = {}, 
+      source = $("#product-thumb-template").html(),
+      template = Handlebars.compile(source);
+      products = filteredProducts.map(function(productItem) {
+        
+      var product = {
+        id: productItem.id, 
+        description: productItem.body_html.replace(/<\/?[^>]+(>|$)/g, "").split(' ').join(' '), 
+        title: productItem.title, 
+        price: slate.Currency.formatMoney(productItem.price, '${{amount}}'),
+        images: productItem.images,
+        url: productItem.url,
+        handle: productItem.handle,
+        variant: productItem.variants[0].id,
+        tags: productItem.tags
+      }
 
      return product; 
     });
         
     data = {
-        product: products
+      product: products
     } 
 
-    $productContainer.append(template(data)); 
+    filterDisplayingProducts('[data-product-thumb]', data.product); 
+    data.product = filterDuplicates('[data-product-thumb]', data.product);
+
+    $productsContainer.prepend(template(data)); 
+
     $(document).trigger('reset-thumbnails'); 
     } else {
-      $productContainer.empty();
+      $productsContainer.empty();
       var source = $("#collection-template-empty").html(),
       template = Handlebars.compile(source);
-      $productContainer.append(template()); 
+      $productsContainer.append(template()); 
     } 
   }
 
