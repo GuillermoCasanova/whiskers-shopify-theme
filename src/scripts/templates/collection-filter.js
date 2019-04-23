@@ -83,9 +83,37 @@ theme.collectionFilter = (function() {
     collection.parent = true; 
   }
 
-  function showCollectionMenu() {
-    $(selectors.collectionMenu).addClass('is-showing'); 
+  function showCollectionMenu(pCollection) {
+    $(selectors.collectionMenu).addClass('is-showing');
+    
+    var $resultsTotal = $('[data-results-total]'), 
+        $resultsContainer = $('[data-results-container]'),
+        totalProducts = 0; 
+        
+        $resultsTotal.text("(0)");
+        $resultsContainer.data('text', $resultsContainer.data('text') + " " + "(0)");
+
+    if(pCollection.childCollections) {
+      var childCollections = pCollection.childCollections;
+      childCollections.forEach(function(collection){
+        totalProducts = totalProducts + collection.products.length;
+      })
+    }
+
+    if(pCollection.products) {
+      totalProducts = pCollection.products.length; 
+    }
+
+    $resultsTotal.text("(" + totalProducts + ")");
+    $resultsContainer.attr('data-text', $resultsContainer.text()); 
+  } 
+
+
+  function reloadYotpo() {
+    var api = new Yotpo.API(yotpo);
+    api.refreshWidgets();
   }
+
 
   function getCollectionProducts(pCollection) {
 
@@ -96,8 +124,8 @@ theme.collectionFilter = (function() {
           success: function(res){
             var result = JSON.parse(res); 
             collection.childCollections = result;
-            filterState.childCollectionsShowing = result;
-            showCollectionMenu(); 
+            filterState.childCollectionsShowing = result;            
+            showCollectionMenu(collection); 
            },
           error: function(status){
             console.log(status);
@@ -111,14 +139,14 @@ theme.collectionFilter = (function() {
             var result = JSON.parse(res); 
             filterState.productsShowing = result.products;
             collection.products = result.products; 
-            showCollectionMenu(); 
+            showCollectionMenu(collection); 
            },
           error: function(status){
             console.log(status);
           }
       });
     }
-  }
+  } 
 
   function filterChildCollections(pCollections, pTags) {
 
@@ -130,7 +158,6 @@ theme.collectionFilter = (function() {
       buildActiveTags(tags);
       filterState.childCollectionsShowing = pCollections; 
       filterState.active = false; 
-      //$('[data-results-total]').text(products.length); 
       return pCollections
     }
 
@@ -194,17 +221,10 @@ theme.collectionFilter = (function() {
 
       var  data = {}, 
       source = $("#collection-products-template").html(),
-      template = Handlebars.compile(source);
-
-
-      if(!pFilteringActive) {
-        filteredCollections.forEach(function(collection) {
-          var collectionInfo = collection.collection,
-              $collectionContainer = $("[data-collection-container-id=" + collectionInfo.id + "]");
-              $collectionContainer.empty();
-        }); 
-      }
-
+      template = Handlebars.compile(source),
+      $resultsTotal = $('[data-results-total]'),
+      $resultsContainer = $('[data-results-container]'),
+      totalProducts = 0; 
 
       filteredCollections.forEach(function(collection) {
 
@@ -231,14 +251,14 @@ theme.collectionFilter = (function() {
             });
 
             data = {
-              product: products
+              product: products,
+              collection: collectionInfo
             } 
 
             var newProds = [],
                 oldProds = [];
 
             if(pFilteringActive) {
-
               data.product.forEach(function(product){
 
                 var isOld = false,
@@ -262,10 +282,16 @@ theme.collectionFilter = (function() {
               })
               data.product = newProds.concat(oldProds); 
             }
-
-            data.product = data.product.splice(0, 6); 
+    
+            
+            totalProducts = totalProducts + data.product.length; 
+            data.product = data.product.splice(0, 7); 
             $collectionContainer.empty(); 
-            $collectionContainer.append(template(data)); 
+            $collectionContainer.prepend(template(data)); 
+
+            var moreProductsThumb = $("#view-more-prods-thumb-template").html(),
+            moreProdsThumbTemplate = Handlebars.compile(moreProductsThumb);
+            $collectionContainer.append(moreProdsThumbTemplate(data)); 
 
         } else {
           $collectionContainer.empty();
@@ -276,7 +302,10 @@ theme.collectionFilter = (function() {
 
       });
 
+      $resultsTotal.text("(" + totalProducts + ")");
+      $resultsContainer.attr('data-text', $resultsContainer.text()); 
       $(document).trigger('reset-thumbnails'); 
+      reloadYotpo()
 
     } 
   }
@@ -334,7 +363,6 @@ theme.collectionFilter = (function() {
       buildActiveTags(tags);
       filterState.productsShowing = products; 
       filterState.active = false; 
-      $('[data-results-total]').text(products.length); 
       return products
     }
 
@@ -366,7 +394,6 @@ theme.collectionFilter = (function() {
       buildFilteredProducts(filteredProducts, filterState.active); 
     }
 
-    $('[data-results-total]').text(filteredProducts.length); 
     filterState.active = true; 
     filterState.productsShowing = filteredProducts; 
     buildActiveTags(tags); 
@@ -377,8 +404,6 @@ theme.collectionFilter = (function() {
 
       var products = pFilteredProducts;
       var $productThumbnails = $(pProdThumbnails); 
-
-      console.log($productThumbnails); 
 
       $productThumbnails.filter(function(product) {
         for(var i = 0; i < products.length; i++) {
@@ -413,7 +438,10 @@ theme.collectionFilter = (function() {
   function buildFilteredProducts(pFilteredProducts, pFilteringActive) {
 
     var $productsContainer = $('[data-products-container]');
-    var filteredProducts = pFilteredProducts; 
+    var filteredProducts = pFilteredProducts,
+        $resultsTotal = $('[data-results-total]'),
+        $resultsContainer = $('[data-results-container]'),
+        totalProducts = 0; 
 
 
     if(filteredProducts.length > 0) {
@@ -429,34 +457,36 @@ theme.collectionFilter = (function() {
       template = Handlebars.compile(source);
       products = filteredProducts.map(function(productItem) {
         
-      var product = {
-        id: productItem.id, 
-        description: productItem.body_html.replace(/<\/?[^>]+(>|$)/g, "").split(' ').join(' '), 
-        title: productItem.title, 
-        price: slate.Currency.formatMoney(productItem.price, '${{amount}}'),
-        images: productItem.images,
-        url: productItem.url,
-        handle: productItem.handle,
-        variant: productItem.variants[0].id,
-        tags: productItem.tags
+        var product = {
+          id: productItem.id, 
+          description: productItem.body_html.replace(/<\/?[^>]+(>|$)/g, "").split(' ').join(' '), 
+          title: productItem.title, 
+          price: slate.Currency.formatMoney(productItem.price, '${{amount}}'),
+          images: productItem.images,
+          url: productItem.url,
+          handle: productItem.handle,
+          variant: productItem.variants[0].id,
+          tags: productItem.tags, 
+          available: productItem.available
+        }
+
+        return product; 
+      });
+          
+      data = {
+        product: products
+      } 
+      
+      console.log(data); 
+      
+      totalProducts = data.product.length; 
+
+      if(pFilteringActive) {
+        removeProductsInView('[data-product-thumb]', data.product); 
+        data.product = filterDuplicatesAlreadyDisplaying('[data-product-thumb]', data.product);
       }
 
-     return product; 
-    });
-        
-    data = {
-      product: products
-    } 
-    
-    if(pFilteringActive) {
-      removeProductsInView('[data-product-thumb]', data.product); 
-      data.product = filterDuplicatesAlreadyDisplaying('[data-product-thumb]', data.product);
-    }
-
-
-    $productsContainer.prepend(template(data)); 
-
-    $(document).trigger('reset-thumbnails'); 
+      $productsContainer.prepend(template(data)); 
 
     } else {
       $productsContainer.empty();
@@ -464,6 +494,12 @@ theme.collectionFilter = (function() {
       template = Handlebars.compile(source);
       $productsContainer.append(template()); 
     } 
+
+    $resultsTotal.text("(" + totalProducts + ")");
+    $resultsContainer.attr('data-text', $resultsContainer.text());     
+    $(document).trigger('reset-thumbnails'); 
+    reloadYotpo()
+
   }
 
 

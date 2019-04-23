@@ -48,14 +48,24 @@
 {%raw%}
 <script type="text/template" id="product-thumb-template">
 {{#product}}
-  <li  data-product-thumb  data-id="{{id}}" class="grid-cell {{#ifIn 'alt-thumb' tags}} alt-thumbnail{{/ifIn}}">
+  <li  data-product-thumb  data-id="{{id}}" class="grid-cell {{#unless available}}productThumb--soldOut{{/unless}} {{#ifIn 'alt-thumb' tags}} alt-thumbnail{{/ifIn}}">
     <a class="productThumb"  href="{{url}}" data-product data-title="{{title}}" data-already-showing="false">
 
       <div class="productThumb-tags">
-       
+        {{#ifIn 'best-seller' tags}}
+          <div class="productThumb-tag  productThumb-tag--bestSeller">
+            TOP SELLER  
+          </div>
+        {{/ifIn}}
+        {{#ifIn 'new-pair' tags}}
+          <div class="productThumb-tag  productThumb-tag--new">
+            New Pair
+          </div>
+        {{/ifIn}}
       </div>
 
       <div class="productThumb-inner">
+
         <div class="productThumb-addToCart">
             <form action="/cart/add" method="post" id="AddToCartForm" data-thumb-add-to-cart-form enctype="multipart/form-data">   
             <input type="hidden" name="id" value="{{variant}}">
@@ -67,21 +77,50 @@
           </form>
         </div>
 
+
+        <div class="productThumb-rating">
+          <div class="yotpo bottomLine"  data-product-id="{{id}}">
+          </div>
+        </div>
+
         <div class="productThumb-bg">
-          <picture>
-            <source data-srcset="{{images.0.large}}"  media="(min-width: 900x)">
-            <source data-srcset="{{images.0.medium}}"  media="(min-width: 640px)">
-            <source data-srcset="{{images.0.small}}">
-            <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="{{title}}" data-sizes="auto" data-product-img class="lazyload" data-sizes="auto">
+          {{#ifIn 'alt-thumb' tags}}
+            <picture>
+              <source data-srcset="{{images.0.wide-large}}"  media="(min-width: 900x)">
+              <source data-srcset="{{images.0.large}}"  media="(min-width: 640px)">
+              <source data-srcset="{{images.0.medium}}">
+              <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="{{title}}" data-sizes="auto" data-product-img class="lazyload" data-sizes="auto">
+            </picture>
+
             {{#if images.2.xlarge}}
              <div class="productThumb-bg-secondaryImg">
                 <picture>
                   <source data-srcset="{{images.2.xlarge}}"  media="(min-width: 900x)">
                   <source data-srcset="{{images.2.xlarge}}"  media="(min-width: 640px)">
-                  <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="{{title}}" data-sizes="auto" data-product-img  data-sizes="auto">
+                  <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="{{title}}" data-sizes="auto" data-product-img  class="lazyload" data-sizes="auto">
+                </picture>
+              </div>
+            {{/if}}      
+
+          {{else}}
+            <picture>
+              <source data-srcset="{{images.0.large}}"  media="(min-width: 900x)">
+              <source data-srcset="{{images.0.medium}}"  media="(min-width: 640px)">
+              <source data-srcset="{{images.0.small}}">
+              <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="{{title}}" data-sizes="auto" data-product-img class="lazyload" data-sizes="auto">
+            </picture>
+
+            {{#if images.2.xlarge}}
+             <div class="productThumb-bg-secondaryImg">
+                <picture>
+                  <source data-srcset="{{images.2.xlarge}}"  media="(min-width: 900x)">
+                  <source data-srcset="{{images.2.xlarge}}"  media="(min-width: 640px)">
+                  <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="{{title}}" data-sizes="auto" data-product-img  class="lazyload" data-sizes="auto">
                 </picture>
               </div>
             {{/if}}
+
+          {{/ifIn}}
         </div>
 
       </div>
