@@ -39,7 +39,6 @@ theme.collection = (function() {
 
         console.log($product.data('already-showing'));
         if($product.data('already-showing') === true) {
-          console.log('dont reset please');
           return 
         } else {
 

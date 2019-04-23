@@ -96,6 +96,7 @@ theme.collectionFilter = (function() {
           success: function(res){
             var result = JSON.parse(res); 
             collection.childCollections = result;
+            filterState.childCollectionsShowing = result;
             showCollectionMenu(); 
            },
           error: function(status){
@@ -165,126 +166,118 @@ theme.collectionFilter = (function() {
           filteredCollection.products = [];
           filteredCollection.collection = collections[c].collection;
 
-      if(!filterState.active) {
-        filteredCollection.products = products.filter(function(product){
-          for(var i = 0; i < tags.length; i++) {
-            if(product.tags.indexOf(tags[i]) > -1 && checkForEnforcedOptions(enforcedOptions, product.tags)) {
-              return true
-            }
-          }
-          return false 
-        });
-      } else {
-
-       var existingCollectionsShowing = filterState.childCollectionsShowing,
-           existingCollectionFiltered = {
-            products: []
-           }; 
-
-       filteredCollection.products = products.filter(function(product){
-          for(var i = 0; i < tags.length; i++) {
-            if(product.tags.indexOf(tags[i]) > -1 && checkForEnforcedOptions(enforcedOptions, product.tags)) {
-              return true
-            }
-          }
-          return false 
-        });
-
-
-        for(var i = 0; i < existingCollectionsShowing.length; i++) {
-          if(existingCollectionsShowing[i].handle == handle && existingCollectionsShowing[i].products.length > 0) {
-            var filteredProducts = existingCollectionsShowing[i].products.filter(function(product){
-              for(var b = 0; b < tags.length; b++) {
-                if(product.tags.indexOf(tags[b]) > -1 && checkForEnforcedOptions(enforcedOptions, product.tags)) {
-                  return true
-                }
-              }
-              return false 
-            });
-            existingCollectionFiltered.products = filteredProducts; 
-            existingCollectionFiltered.products.reverse(); 
-          } else if(existingCollectionsShowing[i].handle == handle && existingCollectionsShowing[i].products.length == 0) {
-            existingCollectionFiltered.products = []; 
+      filteredCollection.products = products.filter(function(product){
+        for(var i = 0; i < tags.length; i++) {
+          if(product.tags.indexOf(tags[i]) > -1 && checkForEnforcedOptions(enforcedOptions, product.tags)) {
+            return true
           }
         }
-
-        filteredCollection.products = existingCollectionFiltered.products.concat(filteredCollection.products.filter(function(product) {
-          var found = JSON.stringify(existingCollectionFiltered.products).indexOf(JSON.stringify(product)) == - 1;
-          return found; 
-        })).reverse(); 
-
-      }
+        return false 
+      });
 
       filteredCollections.push(filteredCollection); 
     }
 
+    buildActiveTags(tags);
+    buildChildCollections(filteredCollections, filterState.active); 
     filterState.childCollectionsShowing = filteredCollections; 
     filterState.active = true; 
-    buildActiveTags(tags);
-    buildChildCollections(filteredCollections); 
   }   
 
 
-  function shortenChildCollectionProds(pProducts) {
-    var products = pProducts;
-    if(products.length > 4) {
-      return products.splice(0, 7)
-    } else {
-      return products.splice(0, 3)
-    }
-  }
 
-
-  function buildChildCollections(pFilteredCollections) {
+  function buildChildCollections(pFilteredCollections, pFilteringActive) {
     
-    var $collectionsContainer = $('[data-collections-container]');
     var filteredCollections  = pFilteredCollections; 
 
     if(filteredCollections.length > 0) {
 
-      $collectionsContainer.empty();
-
-      var  data = {
-        "collections": []
-      }, 
-      source = $("#collection-parent-template").html(),
+      var  data = {}, 
+      source = $("#collection-products-template").html(),
       template = Handlebars.compile(source);
 
-      filteredCollections.forEach(function(pCollections) {
-        var dataCollection = {}; 
-            dataCollection.products = pCollections.products;
-            dataCollection.collection = pCollections.collection; 
 
-        var products = [],
-        product = {}, 
-        products = dataCollection.products.map(function(productItem) {
-          var product = {
-            id: productItem.id, 
-            description: productItem.body_html.replace(/<\/?[^>]+(>|$)/g, "").split(' ').join(' '), 
-            title: productItem.title, 
-            price: slate.Currency.formatMoney(productItem.price, '${{amount}}'),
-            images: productItem.images,
-            url: productItem.url,
-            handle: productItem.handle,
-            variant: productItem.variants[0].id,
-            tags: productItem.tags
-          }
-          return product; 
-        });
-
-        dataCollection.products = products;
-        dataCollection.products = shortenChildCollectionProds(dataCollection.products);
-        data.collections.push(dataCollection);  
-      });   
+      if(!pFilteringActive) {
+        filteredCollections.forEach(function(collection) {
+          var collectionInfo = collection.collection,
+              $collectionContainer = $("[data-collection-container-id=" + collectionInfo.id + "]");
+              $collectionContainer.empty();
+        }); 
+      }
 
 
-      $collectionsContainer.append(template(data)); 
+      filteredCollections.forEach(function(collection) {
+
+        var collectionInfo = collection.collection,
+            $collectionContainer = $("[data-collection-container-id=" + collectionInfo.id + "]");
+
+        if(collection.products.length > 0) {
+
+            var products = [],
+            product = {}, 
+            products = collection.products.map(function(productItem) {
+              var product = {
+                id: productItem.id, 
+                description: productItem.body_html.replace(/<\/?[^>]+(>|$)/g, "").split(' ').join(' '), 
+                title: productItem.title, 
+                price: slate.Currency.formatMoney(productItem.price, '${{amount}}'),
+                images: productItem.images,
+                url: productItem.url,
+                handle: productItem.handle,
+                variant: productItem.variants[0].id,
+                tags: productItem.tags
+              }
+              return product; 
+            });
+
+            data = {
+              product: products
+            } 
+
+            var newProds = [],
+                oldProds = [];
+
+            if(pFilteringActive) {
+
+              data.product.forEach(function(product){
+
+                var isOld = false,
+                    lastProductsShown =  filterState.childCollectionsShowing;
+
+                for(var i = 0; i < lastProductsShown.length; i++) {
+                  if(lastProductsShown[i].collection.id == collectionInfo.id) {
+                    for(var b = 0; b < lastProductsShown[i].products.length; b++) {
+                      if(product.id == lastProductsShown[i].products[b].id) {
+                        $("[data-id=" + product.id + "]").data('already-showing', true); 
+                        isOld = true
+                      } 
+                    }
+                    if(isOld) {
+                      oldProds.push(product)
+                    } else {
+                      newProds.push(product)
+                    }                
+                  }
+                } 
+              })
+              data.product = newProds.concat(oldProds); 
+            }
+
+            data.product = data.product.splice(0, 6); 
+            $collectionContainer.empty(); 
+            $collectionContainer.append(template(data)); 
+
+        } else {
+          $collectionContainer.empty();
+          var emptyTemplateSource = $("#collection-empty-template").html(),
+          emptyTemplate = Handlebars.compile(emptyTemplateSource);
+          $collectionContainer.append(emptyTemplate()); 
+        }   
+
+      });
+
       $(document).trigger('reset-thumbnails'); 
-    } else {
-      $collectionsContainer.empty();
-      var source = $("#collection-template-empty").html(),
-      template = Handlebars.compile(source);
-      $collectionsContainer.append(template()); 
+
     } 
   }
 
@@ -380,46 +373,48 @@ theme.collectionFilter = (function() {
     return filteredProducts;
   }
 
+  function removeProductsInView(pProdThumbnails, pFilteredProducts) {
+
+      var products = pFilteredProducts;
+      var $productThumbnails = $(pProdThumbnails); 
+
+      console.log($productThumbnails); 
+
+      $productThumbnails.filter(function(product) {
+        for(var i = 0; i < products.length; i++) {
+          if($(this).data('id').toString() === products[i].id) {
+            $(this).find('[data-product]').data('already-showing', true); 
+            return true 
+          }
+        }
+        $(this).remove();
+        return false  
+      })
+      
+  }
+
+  function filterDuplicatesAlreadyDisplaying(pProdThumbnails, pFilteredProducts) {
+
+    var products = pFilteredProducts; 
+    var $productThumbnails = $(pProdThumbnails).toArray(); 
+
+    products = products.filter(function(product){
+      for(var i = 0; i < $productThumbnails.length; i++) {
+        if($($productThumbnails[i]).data('id').toString() === product.id) {
+          return false 
+        }
+      }
+      return true 
+    });
+
+    return products; 
+  }
 
   function buildFilteredProducts(pFilteredProducts, pFilteringActive) {
 
     var $productsContainer = $('[data-products-container]');
     var filteredProducts = pFilteredProducts; 
 
-    function filterDisplayingProducts(pProdThumbnails, pFilteredProducts) {
-
-        var products = pFilteredProducts;
-        var $productThumbnails = $(pProdThumbnails); 
-
-        $productThumbnails.filter(function(product) {
-          for(var i = 0; i < products.length; i++) {
-            if($(this).data('id').toString() === products[i].id) {
-              $(this).find('[data-product]').data('already-showing', true); 
-              return true 
-            }
-          }
-          $(this).remove();
-          return false  
-        })
-        
-    }
-
-    function filterDuplicates(pProdThumbnails, pFilteredProducts) {
-
-      var products = pFilteredProducts; 
-      var $productThumbnails = $(pProdThumbnails).toArray(); 
-
-      products = products.filter(function(product){
-        for(var i = 0; i < $productThumbnails.length; i++) {
-          if($($productThumbnails[i]).data('id').toString() === product.id) {
-            return false 
-          }
-        }
-        return true 
-      });
-
-      return products; 
-    }
 
     if(filteredProducts.length > 0) {
 
@@ -452,13 +447,17 @@ theme.collectionFilter = (function() {
     data = {
       product: products
     } 
+    
+    if(pFilteringActive) {
+      removeProductsInView('[data-product-thumb]', data.product); 
+      data.product = filterDuplicatesAlreadyDisplaying('[data-product-thumb]', data.product);
+    }
 
-    filterDisplayingProducts('[data-product-thumb]', data.product); 
-    data.product = filterDuplicates('[data-product-thumb]', data.product);
 
     $productsContainer.prepend(template(data)); 
 
     $(document).trigger('reset-thumbnails'); 
+
     } else {
       $productsContainer.empty();
       var source = $("#collection-template-empty").html(),
