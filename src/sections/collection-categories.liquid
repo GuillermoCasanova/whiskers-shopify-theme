@@ -3,8 +3,8 @@
     <!-- Additional required wrapper -->
   <ul class="grid  grid--center  flex--noWrap  med-grid--flexDirectionColumn  grid--1of3  med-grid--top" >
     {% for link in linklists[section.settings.high-level-menu].links %}
-     <li class="collectionCategories-category   grid-cell" data-category-slide data-category-handle="{{ link.object.handle }}">
-       <a href="{{ link.url }}" class="collectionCategories-category-link  {% if link.active %}is-active{% endif %}">{{ link.title }} <span class="collection-total">({{link.object.all_products_count}})</span></a>
+     <li class="collectionCategories-category   grid-cell   {% if link.active %}is-active{% endif %}"   data-category-slide data-category-handle="{{ link.object.handle }}">
+       <a href="{{ link.url }}" class="collectionCategories-category-link">{{ link.title }} <span class="collection-total">({{link.object.all_products_count}})</span></a>
      </li>
    {% endfor %}
 
@@ -15,7 +15,7 @@
           <a href="{{ link.url }}">{{ link.title }} <span class="collection-total">({{link.object.all_products_count}})</span></a>
           <ul class="collectionCategories-childCategories is-showing show-for-medium-up">
             {% for childlink in menus[child_list_handle].links %}
-              <li class="dropDown-item  collectionCategories-childCategories-childCategory {% if childlink.active %}is-active{% endif %}">
+              <li class="dropDown-item  collectionCategories-childCategories-childCategory {% if childlink.active %}is-active{% endif %}" data-child-category>
                 <a href="{{ childlink.url }}">{{ childlink.title | escape }} <span class="collection-total">({{childlink.object.all_products_count}})</span></a>
               </li>
             {% endfor %}
@@ -25,8 +25,8 @@
           {%endif%}
         </li>
       {% else %}  
-        <li class="collectionCategories-category   grid-cell"  data-category-url="{{link.object.url}}" data-category-slide data-category-handle="{{ link.object.handle }}">
-          <a href="{{ link.url }}" class="collectionCategories-category-link  {% if link.active %}is-active{% endif %}">{{ link.title }} <span class="collection-total">({{link.object.all_products_count}})</span></a>
+        <li class="collectionCategories-category   grid-cell  {% if link.active %}is-active{% endif %}"  data-category-url="{{link.object.url}}" data-category-slide data-category-handle="{{ link.object.handle }}">
+          <a href="{{ link.url }}" class="collectionCategories-category-link">{{ link.title }} <span class="collection-total">({{link.object.all_products_count}})</span></a>
         </li>
       {% endif %}
     {% endfor %}
@@ -70,8 +70,12 @@
         } else {
           return false; 
         }
+
+        console.log($activeSlide); 
+
         var $categoriesSlideshow = $(this.selectors.categoriesSlideshow); 
         var position = $activeSlide.offset().left - ($categoriesSlideshow.width() / 3);
+        console.log($activeSlide.offset().left); 
         $categoriesSlideshow.scrollLeft(position); 
 
         //
@@ -89,7 +93,17 @@
 
         for(var i = 0; i < $childCategoriesContainers.length; i++) {
           if($($childCategoriesContainers[i]).data('parent-category-handle') == pParentHandle) {
-            $($childCategoriesContainers[i]).toggleClass('is-active');
+            var $childCategorySlideshow =  $($childCategoriesContainers[i]);
+            $childCategorySlideshow.toggleClass('is-active');
+
+            if($childCategorySlideshow.find('.is-active').length > 0 ){
+              console.log('SCROLL NOW'); 
+              var activeSlide = $childCategorySlideshow.find('.is-active'); 
+              console.log($(activeSlide[0])); 
+              var position = $(activeSlide).offset().left - ($(this.selectors.childCategoriesSlideshow).width() / 3);
+              console.log($(activeSlide).offset().left); 
+              $childCategorySlideshow.scrollLeft(position); 
+            }
           } 
         }
       },
@@ -102,7 +116,6 @@
             var childCategories = $($categories[i]).data('child-categories').split(",");
             if(childCategories.indexOf(window.location.pathname) > -1) {
               $categorySlide.addClass('is-active');
-              console.log('this parent is active'); 
               $categorySlide.data('child-link-active', true); 
               return $categories[i]; 
             }

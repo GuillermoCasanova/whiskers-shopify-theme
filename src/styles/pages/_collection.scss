@@ -50,20 +50,16 @@
 
 
 
-
-/*------------------------------------*\
-    #Child Collections
-\*------------------------------------*/
-
-.childCollectionEmptyState {
+.collectionEmptyState {
   height: rem-calc(220px); 
   background-color: $senaryColor;
+  width: 100% !important;
 
   @include media-query($large-up) {
    height: rem-calc(260px); 
   }
 
-  .childCollectionEmptyState-inner {
+  .collectionEmptyState-inner {
     text-align: center; 
     width: 100%;
     height: 100%;
@@ -82,6 +78,11 @@
     @include media-query($medium-up) {
       max-width: 320px;
     }
+
+    @include media-query($medium-up) {
+      max-width: rem-calc(340px);
+    }
+
   }
   
   .button {

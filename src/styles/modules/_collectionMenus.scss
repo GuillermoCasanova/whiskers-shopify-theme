@@ -92,9 +92,9 @@
       @include h6(); 
     }
 
-    &:not(.is-active):hover, 
-    &:not(.is-active):focus {
-      & > a {
+    &:not(.is-active) {
+      & > a:hover,
+      & > a:focus {
         @include media-query($medium-up) {
           color: $quintenaryColor;
         }
@@ -134,7 +134,8 @@
 
       @include media-query($medium-up) {
         text-align: left; 
-        padding: rem-calc(3px);
+        padding-left: rem-calc(6px);
+        padding-right: rem-calc(6px);
         padding-top: 0; 
         padding-bottom: rem-calc(1.5px); 
         display: inline;

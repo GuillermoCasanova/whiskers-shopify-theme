@@ -245,7 +245,8 @@ theme.collectionFilter = (function() {
                 url: productItem.url,
                 handle: productItem.handle,
                 variant: productItem.variants[0].id,
-                tags: productItem.tags
+                tags: productItem.tags,
+                available: productItem.available
               }
               return product; 
             });
@@ -297,7 +298,7 @@ theme.collectionFilter = (function() {
           $collectionContainer.empty();
           var emptyTemplateSource = $("#collection-empty-template").html(),
           emptyTemplate = Handlebars.compile(emptyTemplateSource);
-          $collectionContainer.append(emptyTemplate()); 
+          $collectionContainer.append(emptyTemplate(collection)); 
         }   
 
       });
@@ -476,8 +477,6 @@ theme.collectionFilter = (function() {
       data = {
         product: products
       } 
-      
-      console.log(data); 
       
       totalProducts = data.product.length; 
 
