@@ -11,6 +11,59 @@
 }
 
 
+.rewardsAlert {
+  background-color: $secondaryColor;
+  top: rem-calc(72px); 
+  right: 0; 
+  z-index: 120; 
+  position: fixed;
+  @include text-micro(); 
+
+  @include media-query($medium-up) {
+    right: 16rem;
+    bottom: auto;
+    top: 0; 
+    position: fixed;
+  }
+
+  a {
+    color: #fff;
+    position: relative;
+    padding: rem-calc($level1); 
+    display: inline-block;
+    top: -2px;
+
+    &:active,
+    &:hover, 
+    &:focus {
+      .icon svg {
+        fill: #fff;
+      }
+    }
+
+    @include media-query($medium-up) {
+      padding-right: rem-calc($level2);
+      padding-left: rem-calc($level2);
+    }
+  }
+
+  .icon {
+    width: .8rem;
+    height: .8rem;
+    margin-right: 3px;
+    top: -1px;
+    position: relative;
+
+    @include media-query($medium-up) {
+      top: -2px;
+    }
+
+    svg {
+      fill: $accentColor;
+    }
+  }
+}
+
 /*------------------------------------*\
     #Main Nav Basic Styles
 \*------------------------------------*/
@@ -25,6 +78,56 @@
   .mainNav-title {
     z-index: 190; 
     transition: all .8s cubic-bezier(0.23, 1, 0.32, 1); 
+  }
+
+  .mainNav-rewardsAlert {
+    left: 0; 
+    text-align: center; 
+    width: 100%;
+    position: absolute;
+  }
+
+  .mainNav-accountLink {
+    color: #fff;
+    margin-bottom: rem-calc($level4);
+
+    @include media-query($large-up) {
+      @include text-micro(); 
+    }
+    
+    span  {
+      height: rem-calc(16px);
+      width: rem-calc(16px);
+      display: inline-block;
+      margin-right: rem-calc(2px);
+
+      @include media-query($large-up) {
+        height: rem-calc(12px);
+        width: rem-calc(12px);
+      }
+
+      svg {
+        width: 100%;
+        height: 100%;
+        fill: #fff;
+        position: relative;
+        top: 2px; 
+      }
+    }
+
+    a { 
+      color: #fff;
+      border-bottom: 2px solid transparent;
+
+      &:hover, 
+      &:focus {
+        border-bottom: 2px solid $accentColor; 
+      }
+
+      &:active {
+        border-bottom: 2px solid $accentColor; 
+      }
+    }
   }
 }
 
@@ -310,11 +413,16 @@
 
 
       @include media-query($medium-up) {
-        margin-left: rem-calc($level5); 
+        margin-left: rem-calc($level5);
+        padding-top: rem-calc($level4); 
       } 
 
       .mainNav-menu-item {
         margin-bottom: rem-calc($level4); 
+
+        @include media-query($large-up) {
+          margin-bottom: rem-calc($level3); 
+        }
       }
       
       .mainNav-menu-link {
@@ -326,8 +434,8 @@
         @include h1(); 
 
         @include media-query($medium-up) {
-          margin-bottom: rem-calc($level1); 
-          @include h2(); 
+          margin-bottom: 0;  
+          @include h3(); 
         }
 
         @include media-query($large-up) {
@@ -408,9 +516,7 @@
           margin-bottom: rem-calc($level2); 
 
           @include media-query($medium-up) {
-
             margin-bottom: rem-calc($level1); 
-
           }
         }
       }
@@ -433,6 +539,11 @@
 
         @include media-query($medium-up) {
           @include h6(); 
+        }
+
+        @include media-query($large-up) {
+          margin-bottom: 0; 
+          @include text-micro();
         }
 
         &:hover, 

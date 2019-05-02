@@ -1,0 +1,32 @@
+
+
+<section class="section--main  customerAccountHeader">
+
+  <div class="customerAccountHeader-bg">
+    <picture>
+      <source srcset="{{'icon-pattern-account-header--large.svg' | asset_url}}"
+          media="(min-width: 641px)">
+       <img src="{{'icon-pattern-account-header.svg' | asset_url}}" alt="">
+    </picture>
+  </div>
+
+  <div class="customerAccountHeader-inner">
+     <div  class="customerAccountHeader-back">
+      <a href="/account">Back To Account</a>
+    </div>
+    <div class="row  medium--smallGutter ">
+      <div class="small-12 columns">
+        <h1 class="headline">
+          Your Rewards
+        </h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="rewards">
+	<div class="rte">
+	  {{ page.content }}
+	</div>
+</div>
