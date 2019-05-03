@@ -17,6 +17,12 @@ theme.lacingGuide = (function() {
   };
 
   var lacingGuide = function() { 
+    
+
+    if($(selectors.stepsSlideshow).length < 0) {
+      console.log('not lacing guide page');
+      return 
+    }
 
     // ======================= imagesLoaded Plugin ===============================
     // https://github.com/desandro/imagesloaded
@@ -298,6 +304,8 @@ theme.lacingGuide = (function() {
       // Inits animations with Scroll Magic
       // 
       function initAnimations() {
+          
+        console.log('defining anim ctrl'); 
         
         var animCtrl = new ScrollMagic.Controller(); 
         

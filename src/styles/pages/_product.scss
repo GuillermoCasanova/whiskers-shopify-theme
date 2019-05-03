@@ -205,6 +205,12 @@
           }
         }
       }
+
+      .selector-wrapper {
+        @include media-query($medium-up) {
+          margin-right: rem-calc($level2); 
+        }
+      }
     }
 
     .product-secondaryDetails {
@@ -982,7 +988,7 @@ $closeWidth: 2.1rem;
       bottom: 0; 
       right: 0; 
       left: 0; 
-      //visibility: hidden; 
+      visibility: hidden; 
       will-change: transform; 
     }
 
@@ -1028,6 +1034,7 @@ $closeWidth: 2.1rem;
       font-family: $tertiary-font-family; 
       margin-bottom: rem-calc($level2);
       will-change: transform; 
+      visibility: hidden; 
 
       @include media-query($medium-up) {
         @include h2(); 
@@ -1039,6 +1046,7 @@ $closeWidth: 2.1rem;
     }
 
     p {
+      visibility: hidden; 
       margin-bottom: 0; 
       will-change: transform; 
       @include h4(); 
@@ -1082,6 +1090,7 @@ $closeWidth: 2.1rem;
       left: 0; 
       right: 0; 
       width: 100%; 
+      transform: translateY(100%);
     }
 
     @include media-query($medium-up) {

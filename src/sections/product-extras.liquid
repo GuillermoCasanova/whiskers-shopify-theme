@@ -17,10 +17,11 @@
                 <source media="(min-width: 0) and (max-width: 639px)"
                         data-srcset="{{'aglets-small.png' | asset_url}}">
                               
-                <img src=" "
+                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
                      class="lazyload"
                      alt="Lion biting the aglets on a Whiskers lace." 
                      data-lion
+                     data-sizes="auto"
                      data-image
                      >
               </picture>  
@@ -37,7 +38,7 @@
                   Whiskers aglets (the ends of a shoelace that keep it together) are made of metal. Because metal is metal  \m/
                   </p>
 
-                  <svg class="productExplanation-accent  whiskerIcon"  style="fill: #f1D601;">
+                  <svg class="productExplanation-accent  whiskerIcon"   data-icon style="fill: #f1D601;">
                     <use xlink:href="#icon--rock"/>
 
                   </svg>
@@ -67,7 +68,7 @@
                 <source media="(min-width: 0) and (max-width: 639px)"
                         data-srcset="{{'weave-small.png' | asset_url}}">
                      
-                  <img src=""
+                  <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
                      alt="Chatter teeth pulling weave." 
                      class="lazyload"
                      data-chatter-teeth
@@ -90,7 +91,7 @@
                   <p data-paragraph>
                    Durable woven laces that won’t break when you need them to, you know… be functional laces and keep your shoes on your feet.
                   </p>
-                  <svg class="productExplanation-accent  whiskerIcon"  style="fill: #ce1427;"  data-accent  data-index="0">
+                  <svg class="productExplanation-accent  whiskerIcon" data-icon  style="fill: #ce1427;"    data-index="0">
                     <use xlink:href="#icon--pineapple"/>
 
                   </svg>
@@ -146,7 +147,7 @@
                   <p data-paragraph>
                     We know you’ll be getting more than one pair, and keeping them tidy can get pretty intense. So our pairs of laces come wrapped around their own spool for maximum storage power. 
                   </p>
-                  <svg class="productExplanation-accent  whiskerIcon"  style="fill: #a067e0;"  data-accent  data-index="0">
+                  <svg class="productExplanation-accent  whiskerIcon"  data-icon  style="fill: #a067e0;"    data-index="0">
                     <use xlink:href="#icon--dolphin"/>
                   </svg>
                 </div>
@@ -169,7 +170,7 @@
           <div class="row  [  grid grid--flexDirectionColumn  med-grid--flexDirectionRow  grid--center ]">
             <div class="small-12 columns medium-7  medium-push-5"  >
               <div class="shippingAnnouncement-image">
-                <img data-src="{{ 'shipping_image.jpg' |  asset_url}}" alt="" class="lazyload" data-image>
+                <img data-src="{{ 'shipping_image.jpg' |  asset_url}}" alt="Overhead shot of shoes with Whiskers Laces" class="lazyload" data-image>
               </div>
             </div>
             <div class="small-12  columns  medium-5  medium-pull-7">
@@ -208,9 +209,10 @@
             <source media="(min-width: 0) and (max-width: 639px)"
                     data-srcset="{{'productArt-boot-small.png' | asset_url}}">
 
-            <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+            <img src="{{'productArt-boot-small.png' | asset_url}}"
                  alt="Whiskers Laces Artshot of boot with blue laces" 
                  class="lazyload"
+                 data-sizes="auto"
                  data-image
                  >
           </picture>      
@@ -227,9 +229,10 @@
             <source media="(min-width: 0) and (max-width: 639px)"
                     data-srcset="{{'productArt-shoe-small.png' | asset_url}}">
 
-            <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+            <img src="{{'productArt-shoe-small.png' | asset_url}}"
                  alt="Whiskers Laces Artshot of shoe with red laces" 
                  class="lazyload"
+                 data-sizes="auto"
                  data-image
                  >
           </picture>     
@@ -271,21 +274,19 @@ $(window).on('load', function() {
 
   function lionAnim(container) {
 
-    var self = this; 
-
     var selectors = {
       lion: '[data-lion]',
       headline: '[data-headline]',
-      paragraph: '[data-paragraph]'
+      paragraph: '[data-paragraph]',
+      icon: '[data-icon]'
     };
 
     var $container = $(container); 
     var $lion = $(selectors.lion); 
-    var animCtrl = new ScrollMagic.Controller(); 
-    var copyAnimCtrl = new ScrollMagic.Controller(); 
+    this.animCtrl = new ScrollMagic.Controller(); 
 
-    $container.find('.lazyload').on('lazyloaded', function() {
 
+    $container.find('img').on('lazyloaded', function() {
 
       function activateAgletAnim(animCtrl) {
 
@@ -304,22 +305,28 @@ $(window).on('load', function() {
               duration: '90%'
             })
             .setTween(lionEntryAnim)
-            .addTo(animCtrl); 
+            .addTo(this.animCtrl); 
       }
 
-      if(window.innerWidth > 640) {
-        activateAgletAnim(animCtrl);
-      }
 
-     $(window).on('resize', function() {
-        animCtrl.destroy(true); 
-        animCtrl = new ScrollMagic.Controller(); 
+      setTimeout(function(){
+  
+          if(window.innerWidth > 640) {
+            console.log('activate lion animation');
+            activateAgletAnim(this.animCtrl);
+          }
 
-        if(window.innerWidth >= 640) {
-          activateAgletAnim(animCtrl);
-        }
+         $(window).on('resize', function() {
+            this.animCtrl.destroy(true); 
+            this.animCtrl = new ScrollMagic.Controller(); 
 
-      }); 
+            if(window.innerWidth >= 640) {
+              activateAgletAnim(this.animCtrl);
+            }
+
+          }); 
+
+      }, 100);
 
     }); 
 
@@ -328,15 +335,15 @@ $(window).on('load', function() {
     //
     var sectionAnim  = new TimelineMax()
           .from($container.find(selectors.headline), .2, {y: '18px', opacity: 0}, .1)
-          .from($container.find(selectors.paragraph), .2, {y: '18px', opacity: 0}, '-=.1');
+          .from($container.find(selectors.paragraph), .2, {y: '18px', opacity: 0}, '-=.1')
+          .from($container.find(selectors.icon), .1, {opacity: 0});
 
     var sectionScene = new ScrollMagic.Scene({
         triggerElement: container, 
         triggerHook: 'onCenter'
     })
     .setTween(sectionAnim)
-    .addTo(copyAnimCtrl); 
-
+    .addTo(this.animCtrl); 
 
   }
 
@@ -346,20 +353,19 @@ $(window).on('load', function() {
     var selectors = {
       chatterTeeth: '[data-chatter-teeth]',
       headline: '[data-headline]',
-      paragraph: '[data-paragraph]'
+      paragraph: '[data-paragraph]',
+      icon: '[data-icon]'
     };
 
     var $container = $(container); 
     var $chatterTeethSequence = $(selectors.chatterTeeth);
-    var animCtrl = new ScrollMagic.Controller(); 
-    var copyAnimCtrl = new ScrollMagic.Controller(); 
+    this.animCtrl = new ScrollMagic.Controller(); 
 
     //
     // Code to animate the chatter teeth
     //
-    $container.find('.lazyload').on('lazyloaded', function() {
+    $container.find('img').on('lazyloaded', function() {
       function activateWeaveAnim(animCtrl) {
-        console.log('animate!!!!'); 
 
         $container.find('picture source').remove();
 
@@ -400,19 +406,19 @@ $(window).on('load', function() {
           triggerHook: "onEnter"
         })
         .setTween(tween)
-        .addTo(animCtrl); 
+        .addTo(this.animCtrl); 
       }
 
       if(window.innerWidth > 640) {
-        activateWeaveAnim(animCtrl);
+        activateWeaveAnim(this.animCtrl);
       }
 
       $(window).on('resize', function() {
-        animCtrl.destroy(true); 
-        animCtrl = new ScrollMagic.Controller(); 
+        this.animCtrl.destroy(true); 
+        this.animCtrl = new ScrollMagic.Controller(); 
 
         if(window.innerWidth >= 640) {
-          activateWeaveAnim(animCtrl);
+          activateWeaveAnim(this.animCtrl);
         }
 
       }); 
@@ -423,16 +429,16 @@ $(window).on('load', function() {
     //
     var sectionAnim  = new TimelineMax()
           .from($container.find(selectors.headline), .2, {y: '18px', opacity: 0}, .1)
-          .from($container.find(selectors.paragraph), .2, {y: '18px', opacity: 0}, '-=.1');
+          .from($container.find(selectors.paragraph), .2, {y: '18px', opacity: 0}, '-=.1')
+          .from($container.find(selectors.icon), .1, {opacity: 0});
 
     var sectionScene = new ScrollMagic.Scene({
         triggerElement: container, 
-        triggerHook: 'onCenter'
+        triggerHook: 'onCenter',
+        offset: 200
     })
     .setTween(sectionAnim)
-    .addTo(copyAnimCtrl); 
-
-
+    .addTo(this.animCtrl); 
 
   }
 
@@ -455,60 +461,67 @@ $(window).on('load', function() {
     var selectors = {
       spool: '[data-spool]',
       headline: '[data-headline]',
-      paragraph: '[data-paragraph]'
+      paragraph: '[data-paragraph]',
+      icon: '[data-icon]'
     };
 
     var $container = $(container); 
     var $spoolSequence = $(selectors.spool);
-    var animCtrl = new ScrollMagic.Controller(); 
-    var copyAnimCtrl = new ScrollMagic.Controller(); 
+    this.animCtrl = new ScrollMagic.Controller(); 
 
-    $container.find('.lazyload').on('lazyloaded', function() {
-      //
-      // Code to animate the spool spinning
-      //
-      function activateSpoolAnim(animCtrl) {
 
-        $container.find('picture source').remove();
+    $container.find('img').on('lazyloaded', function() {
 
-        var frames = generateFrames($spoolSequence.attr('data-image-steps')); 
+      setTimeout(function() { 
 
-        var frameTracker = {curImg: 0};
+        //
+        // Code to animate the spool spinning
+        //
+        function activateSpoolAnim(animCtrl) {
 
-        var tween = TweenMax.to(frameTracker, .8,
-          {
-            curImg: frames.length - 1, 
-            roundProps: "curImg", 
-            immediateRender: true, 
-            ease: Linear.easeNone, 
-            onUpdate: function(event) {
-              $spoolSequence.attr('src', frames[frameTracker.curImg]);
-            }
+          $container.find('picture source').remove();
 
-          });
+          var frames = generateFrames($spoolSequence.attr('data-image-steps')); 
 
-        var scene = new ScrollMagic.Scene({
-          triggerElement: "[data-spool-explanation]", 
-          duration: "50%",
-          triggerHook: "onCenter"
-        })
-        .setTween(tween)
-        .addTo(animCtrl); 
-      }
+          var frameTracker = {curImg: 0};
 
-      if(window.innerWidth > 640) {
-        activateSpoolAnim(animCtrl);
-      }
+          var tween = TweenMax.to(frameTracker, .8,
+            {
+              curImg: frames.length - 1, 
+              roundProps: "curImg", 
+              immediateRender: true, 
+              ease: Linear.easeNone, 
+              onUpdate: function(event) {
+                $spoolSequence.attr('src', frames[frameTracker.curImg]);
+              }
 
-      $(window).on('resize', function() {
-        animCtrl.destroy(true); 
-        animCtrl = new ScrollMagic.Controller(); 
+            });
 
-        if(window.innerWidth >= 640) {
-          activateSpoolAnim(animCtrl);
+          var scene = new ScrollMagic.Scene({
+            triggerElement: "[data-spool-explanation]", 
+            duration: "50%",
+            triggerHook: "onCenter"
+          })
+          .setTween(tween)
+          .addTo(this.animCtrl); 
         }
 
-      });   
+        if(window.innerWidth > 640) {
+          activateSpoolAnim(this.animCtrl);
+        }
+
+        $(window).on('resize', function() {
+          this.animCtrl.destroy(true); 
+          this.animCtrl = new ScrollMagic.Controller(); 
+
+          if(window.innerWidth >= 640) {
+            activateSpoolAnim(this.animCtrl);
+          }
+
+        });   
+
+      }, 200); 
+
     }); 
 
 
@@ -517,14 +530,15 @@ $(window).on('load', function() {
     //
     var sectionAnim  = new TimelineMax()
           .from($container.find(selectors.headline), .2, {y: '18px', opacity: 0}, .1)
-          .from($container.find(selectors.paragraph), .2, {y: '18px', opacity: 0}, '-=.1');
+          .from($container.find(selectors.paragraph), .2, {y: '18px', opacity: 0}, '-=.1')
+          .from($container.find(selectors.icon), .1, {opacity: 0});
 
     var sectionScene = new ScrollMagic.Scene({
         triggerElement: container, 
         triggerHook: 'onCenter'
     })
     .setTween(sectionAnim)
-    .addTo(copyAnimCtrl); 
+    .addTo(this.animCtrl); 
     
   }
 
@@ -539,38 +553,41 @@ $(window).on('load', function() {
     };
     
     var $container = $(container); 
-    var animCtrl = new ScrollMagic.Controller(); 
+    this.animCtrl = new ScrollMagic.Controller(); 
 
 
-    $container.find('.lazyload').on('lazyloaded', function() {
-
-      TweenMax.set(selectors.headline, {autoAlpha: 1});
-      TweenMax.set(selectors.image, {autoAlpha: 1});
-      TweenMax.set(selectors.icon, {autoAlpha: 1});
+    $container.find('img').on('lazyloaded', function() {
 
       setTimeout(function() {
+
+        //
+        // Make selectors inside container visibility normal to prepare for animation
+        //
+        for(var selector in selectors) {
+          TweenMax.set($container.find(selectors[selector]), {autoAlpha: 1});
+        }
+
 
         //
         // Code to animate the lookbook art shot when it enters the page
         //
         var sectionAnim  = new TimelineMax()
-              .from($container.find(selectors.image), animSpeed, {y: '100%'})
+              .to($container.find(selectors.image), animSpeed, {y: '0'})
               .fromTo($container.find(selectors.headline), animSpeed, {y: '20px', opacity: 0}, {y: '0', opacity: 1}, '-=0.2')
               .from($container.find(selectors.icon), .1, {opacity: 0});
-
 
         //
         // Defining section scenes that will trigger animations
         //
         var sectionScene = new ScrollMagic.Scene({
             triggerElement: container, 
-            triggerHook: 'onCenter',
-            offset: 100
+            triggerHook: 'onCenter'
         })
         .setTween(sectionAnim)
-        .addTo(animCtrl); 
+        .addTo(this.animCtrl); 
 
       }, 200); 
+
     }); 
   }
     
@@ -585,42 +602,47 @@ $(window).on('load', function() {
     };
 
     var $container = $(container); 
-    var animCtrl = new ScrollMagic.Controller(); 
+    this.animCtrl = new ScrollMagic.Controller(); 
 
-    //
-    // Make selectors inside container visibility normal to prepare for animation
-    //
-    for(var selector in selectors) {
-      TweenMax.set($container.find(selectors[selector]), {autoAlpha: 1});
-    }
 
-    $container.find('.lazyload').on('lazyloaded', function() {
+    $container.find('img').on('lazyloaded', function() {
 
-      //
-      // Code to animate the lookbook intro when it enters the page
-      //
-      var sectionAnim  = new TimelineMax()
-            .from($container.find(selectors.image), animSpeed, {y: '100%'}, '-=.4')
-            .from($container.find(selectors.headline), .2, {y: '18px', opacity: 0}, .1)
-            .from($container.find(selectors.paragraph), .2, {y: '18px', opacity: 0}, '-=.1');
+      setTimeout(function() {
 
-      var sectionScene = new ScrollMagic.Scene({
-          triggerElement: container, 
-          triggerHook: 'onCenter'
-      })
-      .setTween(sectionAnim)
-      .addTo(animCtrl); 
+        //
+        // Make selectors inside container visibility normal to prepare for animation
+        //
+        for(var selector in selectors) {
+          TweenMax.set($container.find(selectors[selector]), {autoAlpha: 1});
+        }
+
+        //
+        // Code to animate the lookbook intro when it enters the page
+        //
+        var sectionAnim  = new TimelineMax()
+              .from($container.find(selectors.image), animSpeed, {y: '100%'}, '-=.4')
+              .from($container.find(selectors.headline), .2, {y: '18px', opacity: 0}, .1)
+              .from($container.find(selectors.paragraph), .2, {y: '18px', opacity: 0}, '-=.1');
+        
+        var sectionScene = new ScrollMagic.Scene({
+            triggerElement: container, 
+            triggerHook: 'onCenter'
+        })
+        .setTween(sectionAnim)
+        .addTo(this.animCtrl); 
+      }, 400); 
 
     }); 
   }
 
 
-    spoolStorageAnim('[data-spool-explanation]'); 
-    chatterTeethAnim('[data-weave-explanation]'); 
-    lionAnim('[data-aglet-explanation]')
-    productArtShot("[data-product-art-shot]");
-    shippingAnnouncement('[data-shipping-announcement]');
+  spoolStorageAnim('[data-spool-explanation]'); 
+  chatterTeethAnim('[data-weave-explanation]'); 
+  lionAnim('[data-aglet-explanation]')
+  shippingAnnouncement('[data-shipping-announcement]');
+  productArtShot("[data-product-art-shot]");
 
-}); 
+});
+
 //</script> 
 {%endjavascript%}
