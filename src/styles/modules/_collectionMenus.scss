@@ -75,10 +75,9 @@
   .collectionCategories-category {
     background-color: transparent;
     border-right: 1px solid #3c3737;
-    margin-right: rem-calc($level2); 
     text-align: center; 
-    padding-left: rem-calc($level1);
-    padding-right: rem-calc($level1);
+    padding-left: .8rem;
+    padding-right: .8rem;
     @include text-micro();
 
     @include media-query($medium-up) {
@@ -131,6 +130,7 @@
       padding-left: 0;
       padding-right: 0;
       display: block; 
+      min-width: 100px;
 
       @include media-query($medium-up) {
         text-align: left; 
@@ -208,11 +208,14 @@
   top: -25px;
   background-color: $senaryColor;
   position: relative;
-  display: none;
+  display: flex;
   padding: rem-calc(3px);
+  margin-bottom: rem-calc(-18px);
+  opacity: 0; 
 
   &.is-active {
-    display: grid;
+    opacity: 1; 
+    margin-bottom: 0; 
     @include media-query($medium-up) {
         display: none; 
     }
@@ -220,18 +223,23 @@
 
   .collectionChildCategories-list {
     text-align: center; 
-    display: none;
+    display: flex;
+    opacity: 0; 
+    width: 100%;
     margin-bottom: 0; 
     height: rem-calc(42px); 
     @include text-micro();
 
     .collectionChildCategories-childCategory {
-      min-width: 6.3rem; 
       position: relative;
 
       a {
         color: $quintenaryColor;
-
+        padding-right: rem-calc($level2);
+        padding-left: rem-calc($level2); 
+        margin-right: rem-calc($level1);
+        margin-left: rem-calc($level1); 
+        
         &:active,
         &:focus {
           color: #fff;
@@ -251,6 +259,8 @@
 
     &.is-active {
       display: flex; 
+      z-index: 5; 
+      opacity: 1; 
 
       a {
         font-weight: bold; 

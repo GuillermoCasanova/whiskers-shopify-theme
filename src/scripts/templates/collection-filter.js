@@ -505,8 +505,12 @@ theme.collectionFilter = (function() {
   function clearAllFilters() {
     tags = []; 
     $(selectors.collectionFilterOptions).removeAttr('checked');
-    buildActiveTags(tags);
-    getCollectionProducts(collection);
+    
+    if(collection.parent) {
+      filterChildCollections(collection, tags); 
+    } else {
+      filterProducts(collection.products, tags); 
+    }
   }
 
 
