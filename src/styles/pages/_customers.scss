@@ -140,6 +140,38 @@
 
 
 /*------------------------------------*\
+    #Customer Account Actions
+\*------------------------------------*/
+
+
+.customerActions {
+	.button {
+		background-color: $secondaryColor; 
+		max-width: rem-calc(180px); 
+
+   .icon {
+    width: .9rem;
+    height: .9rem;
+    margin-right: 3px;
+    top: -1px;
+    position: relative;
+
+    @include media-query($medium-up) {
+      top: -2px;
+    }
+
+    svg {
+      fill: $accentColor;
+    }
+  }
+	}
+}
+
+
+
+
+
+/*------------------------------------*\
     #Customer Information Panels
 \*------------------------------------*/
 
@@ -432,5 +464,3 @@
 .fulfilled {
 	color: #9bd84f;
 }
-
-

@@ -21,6 +21,7 @@
 
   @include media-query($large-up) {
     height: 40rem; 
+    margin-bottom: rem-calc($level4); 
   }
 
   .rewardsProgramPromoHeader-bg {
@@ -87,7 +88,8 @@
       background-size: contain; 
       font-size: 4rem; 
       padding-top: 0; 
-      @include text-mega(); 
+      bottom: -2vh; 
+      @include text-giga(); 
     }
   }
 
@@ -110,8 +112,8 @@
     }
 
     @include media-query($large-up) {
-      max-width: 50%; 
-      bottom: -8.5rem;
+      bottom: -27vh;
+      max-width: 33rem;
       @include h4(); 
     }
   }
@@ -125,9 +127,14 @@
     margin-right: auto;
     margin-left: auto;
     bottom: rem-calc(-110px); 
+    visibility: hidden; 
 
     @include media-query($medium-up) {
-      bottom: -160px; 
+      bottom: -20vh; 
+    }
+
+    @include media-query($large-up) {
+      bottom: -30vh;
     }
   }
 }
@@ -142,6 +149,10 @@
 
 .rewardsHow {
   position: relative;
+
+  @include media-query($large-up) {
+    margin-bottom: rem-calc($level4); 
+  }
 
   .rewardsHow-inner {
     z-index: 1; 
@@ -160,7 +171,12 @@
       height: 80%;
       top: 0;
       z-index: 0;
-      bottom: -15px;
+      bottom: rem-calc(-16px);
+    }
+
+    @include media-query($large-up) {
+      height: 84%;
+      bottom: rem-calc(-36px);
     }
   }
 
@@ -173,6 +189,11 @@
       margin-bottom: rem-calc($level7);
       @include text-kilo(); 
     }
+    
+    @include media-query($large-up) {
+      margin-bottom: rem-calc($level7 + $level3)
+    }
+
   }
 
   .rewardsHow-instructions {
@@ -261,21 +282,60 @@
 \*------------------------------------*/
 
 .rewardsPromoCta {
+  width: 100%;
+
+  @include media-query($large-up) {
+    margin-bottom: rem-calc($level7 + $level7); 
+  }
 
   .rewardsPromoCta-inner {
 
   }
+  
+  .rewardsPromoCta-lion {
+    max-width: rem-calc(500px); 
+    margin-right: auto; 
+    margin-left: auto; 
+    margin-bottom: rem-calc($level4); 
+
+    @include media-query($large-up) {
+      position: absolute;
+      left: -10vw; 
+      bottom: -10vh; 
+      max-width: rem-calc(570px); 
+      margin-bottom: 0; 
+    }
+  }
+
+
+  .rewardsPromoCta-chatterTeeth {
+
+    @include media-query($large-up) {
+      max-width: rem-calc(500px); 
+      margin-right: auto; 
+      margin-left: auto; 
+      position: absolute;
+      right: -12vw; 
+      bottom: -14vh; 
+      max-width: rem-calc(570px); 
+    }
+  }
+
 
   .rewardsPromoCta-signUp {
     background-color: $secondaryColor;
     padding: rem-calc($level4);
     padding-bottom: rem-calc($level6); 
     padding-top: rem-calc($level6); 
-    max-width: 520px; 
+    max-width: rem-calc(420px); 
     margin-right: auto; 
     margin-left: auto; 
     width: 100%; 
     margin-bottom: rem-calc($level4); 
+
+    @include media-query($large-up) {
+      max-width: rem-calc(460px); 
+    }
 
     .rewardsPromoCta-signUp-headline {
       text-align: center; 

@@ -3,7 +3,11 @@
     #Sections (Extends from _generics.scss, _colors.scss)
 \*------------------------------------*/
 
-
+body {
+  overflow-x: hidden !important; 
+  position: relative;
+  width: 100%;
+}
 
 /*------------------------------------*\
     #Normal Section

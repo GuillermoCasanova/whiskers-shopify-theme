@@ -166,8 +166,8 @@ button,
 
 .button--medium {
   padding: rem-calc($level2);
-  padding-right: rem-calc($level4);
-  padding-left: rem-calc($level4);
+  padding-right: rem-calc($level3);
+  padding-left: rem-calc($level3);
   &:after {
     padding: rem-calc(11px); 
   }
@@ -175,8 +175,8 @@ button,
 
 .button--large {
   padding: rem-calc(15px);
-  padding-right: rem-calc($level3);
-  padding-left: rem-calc($level3);
+  padding-right: rem-calc($level4);
+  padding-left: rem-calc($level4);
   &:after {
   padding: rem-calc(18px); 
   }

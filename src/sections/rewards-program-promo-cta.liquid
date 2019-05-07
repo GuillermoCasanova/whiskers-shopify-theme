@@ -1,6 +1,28 @@
 
 
 <section class="rewardsPromoCta">
+
+  <div class="rewardsPromoCta-lion">
+    <picture>
+        <source media="(min-width: 1024px)"
+                data-srcset="{{'aglets-large.png' | asset_url}}">
+      
+        <source media="(min-width: 640px)  and (max-width: 1023px)"
+                data-srcset="{{'aglets-medium.png' | asset_url}}">
+
+        <source media="(min-width: 0) and (max-width: 639px)"
+                data-srcset="{{'aglets-small.png' | asset_url}}">
+                      
+        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+             class="lazyload"
+             alt="Lion biting the aglets on a Whiskers lace." 
+             data-lion
+             data-sizes="auto"
+             data-image
+             >
+    </picture>    
+  </div>
+
   <div class="row">
       <div class="small-12 columns medium-10 medium-centered">
         <div class="rewardsPromoCta-inner">
@@ -9,7 +31,7 @@
             <p>
               Earn 50 points just by joining! 
             </p>
-            <a href="/account/register" rel="internal"  title="Log In" class="button  button--primary  button--medium" data-text="Sign Up">
+            <a href="/account/register" rel="internal"  title="Sign up for a Whiskers Laces account" class="button  button--primary  button--medium" data-text="Sign Up">
               Sign Up
             </a>
           </div>
@@ -17,12 +39,35 @@
           <div class="rewardsPromoCta-logIn">
             <h2 class="rewardsPromoCta-logIn-headline"> Already have an account?</h2>
             <p>
-              <a href="/account/login" rel="internal" >
-                Launch loyalty program 
+              <a href="/account/login" rel="internal" title="Log in to view rewards">
+              Log In to Account
               </a>
             </p>
           </div>
         </div>
       </div>
+  </div>
+
+
+  <div class="rewardsPromoCta-chatterTeeth  show-for-large-up">
+    <picture>
+
+      <source media="(min-width: 0) and (min-width: 640px)"
+              data-srcset="{{'chatter-teeth-animation-1.png' | asset_url}}">
+
+      <source media="(min-width: 0) and (max-width: 639px)"
+              data-srcset="{{'weave-small.png' | asset_url}}">
+           
+        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
+           alt="Chatter teeth pulling weave." 
+           class="lazyload"
+           data-chatter-teeth
+           data-image-steps = '[
+              "{{'chatter-teeth-animation-1.png' | asset_url}}",
+              "{{'chatter-teeth-animation-2.png' | asset_url}}",
+              "{{'chatter-teeth-animation-3.png' | asset_url}}"
+           ]'
+           >
+    </picture> 
   </div>
 </section>
