@@ -1,0 +1,312 @@
+
+
+/*------------------------------------*\
+    #Rewards Program Promo Page
+\*------------------------------------*/
+
+
+/*------------------------------------*\
+    #Rewards Program Promo Header
+\*------------------------------------*/
+
+
+.rewardsProgramPromoHeader {
+  height: 30rem; 
+  position: relative;
+  margin-bottom: rem-calc($level7 + $level7); 
+
+  @include media-query($medium-up) {
+    margin-bottom: rem-calc($level7 + $level3); 
+  }
+
+  @include media-query($large-up) {
+    height: 40rem; 
+  }
+
+  .rewardsProgramPromoHeader-bg {
+    background-image: url('lookbook-bg_small10.svg');
+    background-size: cover; 
+    background-position: center; 
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0;
+    visibility: hidden; 
+
+    @include media-query($medium-up) {
+      background-image: url('lookbook-bg_medium3.svg');
+      background-position: top;
+    } 
+
+    @include media-query($large-up) {
+      background-image: url('lookbook-bg_large8.svg');
+      background-position: center;
+      background-size: cover; 
+    }
+  }
+  
+  .rewardsProgramPromoheader-copy {
+    max-width: rem-calc(370px);
+  }
+
+  .rewardsProgramPromoHeader-headline {
+    font-family: $tertiary-font-family; 
+    padding-top: 9.5rem;
+    width: 100%; 
+    max-width: rem-calc(340px); 
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+    will-change: transform; 
+    z-index: 1; 
+    visibility: hidden; 
+    @include text-kilo(); 
+
+    &:after {
+      content: " "; 
+      bottom: rem-calc(-24px); 
+      width: rem-calc(48px); 
+      height: rem-calc(4px); 
+      right: 0; 
+      left: 0; 
+      margin-right: auto;
+      margin-left: auto; 
+      position: absolute;
+      background-color: $accentColor;
+    }
+
+    @include media-query($medium-up) {
+      padding-top: 4rem;
+      max-width: 27.25rem; 
+      @include text-mega(); 
+    }
+
+    @include media-query($large-up) {
+      max-width: 28.75rem; 
+      background-size: contain; 
+      font-size: 4rem; 
+      padding-top: 0; 
+      @include text-mega(); 
+    }
+  }
+
+  .rewardsProgramPromoHeader-descriptor {
+    position: relative;
+    bottom: -5.25rem;
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 21.125rem;
+    margin-bottom: 0; 
+    visibility: hidden; 
+    will-change: transform; 
+    z-index: 1; 
+
+    @include media-query($medium-up) {
+      width: 100%;
+      max-width: 28rem; 
+      bottom: -6.5rem;
+    }
+
+    @include media-query($large-up) {
+      max-width: 50%; 
+      bottom: -8.5rem;
+      @include h4(); 
+    }
+  }
+
+  .rewardsProgramPromoHeader-accent  {
+    fill: $accentColor;
+    display: block;
+    position: relative;
+    width: rem-calc(48px);
+    height: rem-calc(48px);
+    margin-right: auto;
+    margin-left: auto;
+    bottom: rem-calc(-110px); 
+
+    @include media-query($medium-up) {
+      bottom: -160px; 
+    }
+  }
+}
+
+
+
+
+/*------------------------------------*\
+    #Rewards Program Promo How
+\*------------------------------------*/
+
+
+.rewardsHow {
+  position: relative;
+
+  .rewardsHow-inner {
+    z-index: 1; 
+    position: relative;
+  }
+
+  &:after {
+    @include media-query($medium-up) {
+      content: " ";
+      position: absolute; 
+      left: 0; 
+      right: 0; 
+      margin: auto; 
+      width: 2px;
+      background-color: $senaryColor;
+      height: 80%;
+      top: 0;
+      z-index: 0;
+      bottom: -15px;
+    }
+  }
+
+
+  .rewardsHow-headline {
+    text-align: center; 
+    @include h1(); 
+
+    @include media-query($medium-up) {
+      margin-bottom: rem-calc($level7);
+      @include text-kilo(); 
+    }
+  }
+
+  .rewardsHow-instructions {
+    @include media-query($medium-up) {
+    }
+  }
+
+  .rewardsHow-instructions-headline {
+    text-transform: uppercase; 
+    font-weight: bold;
+    text-align: center; 
+    margin-bottom: rem-calc($level2); 
+    font-family: $secondary-font-family; 
+    @include h3(); 
+  }
+
+  .rewardsHow-instructions-steps {
+    margin-bottom: rem-calc($level7); 
+    max-width: rem-calc(360px);
+    margin-right: auto;
+    margin-left: auto;
+
+    @include media-query($medium-up) {
+      max-width: rem-calc(320px);
+      
+      ul {
+        margin-left: rem-calc($level2);
+        margin-right: rem-calc($level2);  
+      }
+    } 
+
+    @include media-query($large-up) {
+      max-width: rem-calc(380px); 
+    }
+
+    .rewardsHow-instructions-descriptor {
+      text-align: center;
+
+      @include media-query($large-up) {
+        max-width: rem-calc(320px);
+        margin-right: auto; 
+        margin-left: auto; 
+        @include h4();
+      } 
+    }
+
+    .rewardsHow-instructions-step {
+      margin-bottom: rem-calc($level3); 
+      background: $secondaryColor;
+      padding: rem-calc($level3);
+      border-left: 4px solid $accentColor;
+
+      .icon {
+        width: rem-calc(48px);
+        height: rem-calc(48px);
+        margin-right: rem-calc($level2); 
+        margin-left: rem-calc($level2 );
+      }
+
+      p {
+        text-align: left; 
+        margin-bottom: 0; 
+
+        .action,
+        .points {
+          text-align: left; 
+          display: block; 
+          @include h4(); 
+        }
+
+        .action {
+          margin-bottom: rem-calc($level1); 
+          font-weight: bold;
+        }
+      }
+    }
+
+  } 
+}
+
+
+
+
+/*------------------------------------*\
+    #Rewards Program Promo CTA
+\*------------------------------------*/
+
+.rewardsPromoCta {
+
+  .rewardsPromoCta-inner {
+
+  }
+
+  .rewardsPromoCta-signUp {
+    background-color: $secondaryColor;
+    padding: rem-calc($level4);
+    padding-bottom: rem-calc($level6); 
+    padding-top: rem-calc($level6); 
+    max-width: 520px; 
+    margin-right: auto; 
+    margin-left: auto; 
+    width: 100%; 
+    margin-bottom: rem-calc($level4); 
+
+    .rewardsPromoCta-signUp-headline {
+      text-align: center; 
+      margin-bottom: rem-calc($level2); 
+      @include h1(); 
+    }
+
+    p {
+      text-align: center; 
+      @include h4();
+    }
+
+    .button {
+      max-width: rem-calc(260px); 
+      margin-bottom: 0; 
+      margin-right: auto; 
+      margin-left: auto; 
+    }
+  }
+
+  .rewardsPromoCta-logIn {
+    text-align: center; 
+  
+    .rewardsPromoCta-logIn-headline {
+      margin-bottom: rem-calc($level1);
+      @include h4(); 
+    }
+
+    a {
+    }
+  }
+}
+
+

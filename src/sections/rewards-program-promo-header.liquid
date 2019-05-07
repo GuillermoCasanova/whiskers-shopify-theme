@@ -1,0 +1,76 @@
+
+
+
+<section data-section-id="{{ section.id }}" data-section-type="rewards_program_promo_header"  data-lookbook-header-container>
+  <div class="rewardsProgramPromoHeader  [ grid  grid--center  grid--justifyCenter ]"  data-lookbook-header>
+    <div class="rewardsProgramPromoHeader-bg" data-bg>
+      
+    </div>
+    <div class="rewardsProgramPromoHeader-content">
+      <h1 class="rewardsProgramPromoHeader-headline  text-center" data-headline>
+        The Whiskers <br>Rewards Program 
+      </h1>
+      
+      <p class="rewardsProgramPromoHeader-descriptor  text-center"  data-body>
+        Our loyalty program is our way of showing appreciation. When you’re in the Loop, you get all the perks. This is your all-access pass to exclusive rewards.
+      </p>
+
+      <svg class="rewardsProgramPromoHeader-accent  whiskerIcon" data-accent  data-index="2">
+          <use xlink:href="#icon--rock"/>
+      
+      </svg>
+    </div>  
+  </div>
+</section>
+
+
+
+{%javascript %}
+//<script>
+  $(window).on('load', function() {
+
+    function rewardsProgramPromoHeader(container) {
+
+      var selectors = {
+        header: '[data-lookbook-header]', 
+        headline: '[data-headline]', 
+        body: '[data-body]',
+        background: '[data-bg]'
+      };
+
+      this.$container = $(container); 
+
+      this.animCtrl = new ScrollMagic.Controller(); 
+
+      var self = this; 
+
+      //
+      // Make selectors inside container visibility normal to prepare for animation
+      //
+      for(var selector in selectors) {
+        TweenMax.set(self.$container.find(selectors[selector]), {autoAlpha: 1});
+      }
+    
+      //
+      // Code to animate the header when it enters the page
+      //
+      this.headerAnim  = new TimelineMax()
+            .from(self.$container.find(selectors.background), .4, {opacity: 0}, .1)
+            .from(self.$container.find(selectors.headline), .4, {opacity: 0, y: '20px'})
+            .from(self.$container.find(selectors.body), .4, {opacity: 0, y: '20px'});
+
+      this.headerScene = new ScrollMagic.Scene({
+          triggerElement: container, 
+          triggerHook: 'onEnter'
+      })
+      .setTween(this.headerAnim)
+      .addTo(this.animCtrl); 
+    }
+    
+    setTimeout(function() {
+      rewardsProgramPromoHeader('[data-lookbook-header]');
+    }, 200);
+
+  });
+//</script> 
+{% endjavascript %}
