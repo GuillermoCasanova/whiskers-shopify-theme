@@ -6,14 +6,25 @@
 
 .customerAccountHeader {
 	padding-bottom: rem-calc($level2);
+	margin-bottom: rem-calc($level2); 
 	position: relative;
-	
+
 	@include media-query($medium-up) {
 		padding-top: rem-calc($level7  + $level5); 
 	}
 
 	@include media-query($large-up) {
 		padding-top: 0;
+	}
+
+
+	h1 {
+		margin-bottom: rem-calc($level2);
+		@include text-kilo(); 
+
+		@include media-query($medium-up) {
+			margin-bottom: 0; 
+		}
 	}
 
 
@@ -91,20 +102,17 @@
 
 		@include media-query($medium-up) {
 			max-width: rem-calc(720px); 
-			padding-top: rem-calc($level7 + $level7); 
+			padding-top: 5rem; 
 		}
 
 
 		@include media-query($large-up) {
 			max-width: rem-calc(820px); 
+			padding-top: 7rem; 
 		}
 
 	}
 
-	h1 {
-		margin-bottom: rem-calc($level2); 
-		@include text-kilo(); 
-	}
 }
 
 
@@ -147,23 +155,40 @@
 .customerActions {
 	.button {
 		background-color: $secondaryColor; 
-		max-width: rem-calc(180px); 
+		max-width: rem-calc(200px);
+		padding-left: rem-calc($level2); 
+		padding-right: rem-calc($level2); 
+		border: 2px solid $accentColor; 
+		margin-bottom: 0; 
 
    .icon {
-    width: .9rem;
-    height: .9rem;
-    margin-right: 3px;
-    top: -1px;
-    position: relative;
+	    width: .9rem;
+	    height: .9rem;
+	    margin-right: 3px;
+	    top: -1px;
+	    position: relative;
 
-    @include media-query($medium-up) {
-      top: -2px;
-    }
+	    @include media-query($medium-up) {
+	      top: -2px;
+	    }
 
-    svg {
-      fill: $accentColor;
-    }
-  }
+	    svg {
+	      fill: $accentColor;
+	    }
+  	}
+
+  	&:hover, 
+  	&:focus {
+  		background-color: $accentColor;
+  		color: $secondaryColor; 
+
+  		.icon {
+  			svg {
+  				fill: $secondaryColor; 
+  			}
+  		} 
+
+  	}
 	}
 }
 

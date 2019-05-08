@@ -82,6 +82,22 @@
     ]
   },
   {
+    "name": "Rewards Program",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "rewards_program_active",
+        "label": "Activate Rewards Program ",
+        "info": "This turns on/off the rewards program across the site"
+      },
+      {
+        "type": "text",
+        "id": "rewards_program_tab_text",
+        "label": "Text that will go in the rewards program tab"
+      }
+    ]
+  },
+  {
     "name": "Typography",
     "settings": [
       {

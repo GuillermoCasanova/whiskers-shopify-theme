@@ -247,10 +247,13 @@
       border-left: 4px solid $accentColor;
 
       .icon {
-        width: rem-calc(48px);
-        height: rem-calc(48px);
+        width: rem-calc(56px);
+        height: rem-calc(56px);
         margin-right: rem-calc($level2); 
-        margin-left: rem-calc($level2 );
+
+        @include media-query($large-up) {
+          margin-right: rem-calc($level3); 
+        }
       }
 
       p {
@@ -265,7 +268,7 @@
         }
 
         .action {
-          margin-bottom: rem-calc($level1); 
+          margin-bottom: 0;
           font-weight: bold;
         }
       }
