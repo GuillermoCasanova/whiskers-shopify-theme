@@ -21,24 +21,23 @@ theme.customerLogin = (function() {
 
 
   var config = {
-    recoverPasswordForm: '#RecoverPassword',
+    recoverPasswordForm: '#RecoverPasswordForm',
+    recoverPasswordLink: '#RecoverPasswordLink',
     hideRecoverPasswordLink: '#HideRecoverPasswordLink'
   };
-
 
 
 
   /**
   ** If the page has a recover password form, we activate the recover password code
   */
-  if ($(config.recoverPasswordForm).length) {
+  if ($(config.recoverPasswordForm).length > 0) {
 
     checkUrlHash();
     resetPasswordSuccess();
 
-    $(config.recoverPasswordForm).on('click', onShowHidePasswordForm);
+    $(config.recoverPasswordLink).on('click', onShowHidePasswordForm);
     $(config.hideRecoverPasswordLink).on('click', onShowHidePasswordForm);
-
 
     function onShowHidePasswordForm(evt) {
       evt.preventDefault();
@@ -52,10 +51,6 @@ theme.customerLogin = (function() {
       if (hash === '#recover') {
         toggleRecoverPasswordForm();
       }
-
-      // if(hash ==='#register') {
-      //   toggleRegisterView(); 
-      // }
     }
 
     /**
@@ -94,6 +89,7 @@ theme.customerLogin = (function() {
   }
 
 
+
   /**
    * Buttons to show/hide register and log in forms
    */
@@ -122,5 +118,13 @@ theme.customerLogin = (function() {
     
     $(selectors.panels).toggleClass('is-showing-register'); 
    }
+
+
+    /**
+    ** If this is the register page show the register page UI
+    */
+    if(window.location.pathname == '/account/register') {
+      toggleRegisterView(); 
+    }
 
 })();

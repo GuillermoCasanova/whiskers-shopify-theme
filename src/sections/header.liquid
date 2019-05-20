@@ -1,10 +1,10 @@
 
 
 <div data-section-id="{{ section.id }}" data-section-type="header"  data-template="{{ template.name }}">
-  
 
-  {%if template.name != 'account' and page.title != 'Orders' and template.name != 'addresses' and page.title != 'Whiskers Rewards'  %}
-    {%if settings.rewards_program_active %}
+
+  {%if settings.rewards_program_active %}
+   {%if template.name != 'account' and page.title != 'Orders' and template.name != 'addresses' and page.title != 'Whiskers Rewards'  %}
     <div class="rewardsAlert [ grid  grid--center grid--justifyCenter ]">
       {%if customer%}
      <a href="/pages/rewards" rel="interal" title="Whiskers Rewards Program">

@@ -38,7 +38,7 @@
                             </div>
                              <div class="customerLoginForm-errors-description">
                                {{ form.errors | default_errors }}
-                               <a href="#recover" id="RecoverPassword">
+                               <a href="#recover" id="RecoverPasswordLink">
                                {{ 'customer.login.forgot_password' | t }}
                                </a>
                              </div>
@@ -179,12 +179,21 @@
                 <p>By having a Whiskers account you’ll be able to check on orders, manage account info, and earn points for our loyalty program.</p>
               </div>
               <div class="customerLoginForm  customerLoginForm--register">
-                <h2 class="customerLoginForm-headline">Create Account</h2>
+                    {% form 'create_customer' %}
+                <div class="row large--smallGutter">
+                  <div class="small-12 columns">
+                    <h2 class="customerLoginForm-headline">Create Account</h2>
+                    
+                      {%if form.errors %}
+                        <div class="customerLoginForm-errors  grid  grid--top  grid--flexDirectionRow">
+                          <div class="customerLoginForm-errors-icon">
+                          {{ form.errors | default_errors }}
+                          </div>
+                      </div>
+                      {%endif%}
+                  </div>
+                </div>
 
-                {% form 'create_customer' %}
-                
-                <!-- {{ form.errors | default_errors }} -->
-                              
                 <div class="row large--smallGutter">
                    <div class="small-12 large-6 columns">
                      <div class="input--secondary  input--medium" data-input-wrapper>
@@ -194,6 +203,7 @@
                        <input type="text"
                           name="customer[first_name]"
                           id="FirstName"
+                          class="{% if form.errors contains 'first_name' %}input-error{% endif %}"
                           autofocus
                           {% if form.first_name %}value="{{ form.first_name }}"{% endif %}>
                      </div>
@@ -205,6 +215,7 @@
                         </label>
                         <input type="text"
                           name="customer[last_name]"
+                          class="{% if form.errors contains 'last_name' %}input-error{% endif %}"
                           id="LastName"
                           {% if form.last_name %}value="{{ form.last_name }}"{% endif %}>
                      </div>
