@@ -1,28 +1,19 @@
 
-<section  data-section-type="hero_header">
+<section  data-section-type="hero_header"  data-section-id="{{ section.id }}">
   <div class="heroHeader grid grid--flexDirectionColumn med-grid--flexDirectionRow med-grid--flexDirectionRowReverse  ">
     <div class="heroHeader-bg">
        <div class="heroHeader-bg-inner">
 
-          <img src="{{'home_header_small2.png' | asset_url}}" alt="Whiskers Shoelaces" class="hide-for-medium-up  heroHeader-bg-img" role="presentation">
+          <img src="{{'home_header_small3.jpg' | asset_url}}" alt="Whiskers Shoelaces" class="hide-for-medium-up  heroHeader-bg-img" role="presentation">
     
           <div class="heroHeader-bg-slideshow  heroSlideshow show-for-medium-up"  role="presentation"  data-slideshow>
-            <div class="heroSlideshow-slide" data-slide  data-index="0">
+            {% for block in section.blocks %}
+            <div class="heroSlideshow-slide" data-slide  data-index="{{forloop.index0}}" data-block-id="{{block.id}}">
               <div class="heroSlideshow-slide-img"  
-                   style="background-image: url({{'home_header_large5.png' | asset_url}});">
+                   style="background-image: url({{block.settings.hero_image.src | img_url: '1400x1400'}});">
               </div>
             </div>
-            <div class="heroSlideshow-slide" data-slide  data-index="1">
-              <div class="heroSlideshow-slide-img"  
-                   style="background-image: url({{'home_header_large7.png' | asset_url}});">
-              </div>
-            </div>
-
-            <div class="heroSlideshow-slide" data-slide  data-index="2">
-              <div class="heroSlideshow-slide-img"  
-                   style="background-image: url({{'home_header_large6.png' | asset_url}});">
-              </div>
-            </div>
+            {%endfor%}
         </div>
       </div>
   
@@ -36,35 +27,34 @@
         
           <div class="small-12  large-11 large-centered  columns">
         
-            <h1 class="heroHeader-headline  text-center" data-headline>
-               {{section.settings.headline}}
-            </h1>
-        
-            <div class="row">
-              <div class="small-8 columns small-centered">
-                <div class="grid grid--justifyCenter grid--flexDirectionColumn  grid--center">
-                  <a href="{{section.settings.cta}}" rel="internal" class="button  button--small  button--expanded  button--primary  heroHeader-cta" data-text="{{section.settings.cta_label}}" data-cta>
-                    <span>{{section.settings.cta_label}}</span>
-                  </a>
-                    
-                  <div class="heroHeader-accentContainer">
-                     <svg class="heroHeader-accent  whiskerIcon"  style="fill: #e4283d;" data-accent  data-index="0">
-                        <use xlink:href="#icon--bolt"/>
-                  
-                      </svg>
-                      
-                     <svg class="heroHeader-accent  whiskerIcon"  style="fill: #e4283d;"  data-accent  data-index="1">
-                        <use xlink:href="#icon--pepper"/>
-                  
-                      </svg>
-                  
-                     <svg class="heroHeader-accent  whiskerIcon"  style="fill: #e4283d;" data-accent  data-index="2">
-                        <use xlink:href="#icon--sunglasses"/>
-                  
-                      </svg>
+            <div class="heroHeader-content-slides">
+              {% for block in section.blocks %}
+                <div class="heroHeader-content-slide" {{ block.shopify_attributes }} data-block-id="{{block.id}}" data-index="{{forloop.index0}}" data-content-slide>
+                  <div  class="row  heroHeader-headlines  small-collapse  grid  grid--center  grid--justifyCenter" data-headlines>
+                   <div class="small-12 columns">
+                      <h1 class="heroHeader-headline  text-center" data-headline data-index="{{forloop.index0}}">
+                        {{block.settings.headline}}
+                     </h1>
+                   </div>
+                  </div>
+                          
+                  <div class="row"  data-ctas>
+                    <div class="small-8 columns small-centered">
+                      <div class="grid grid--center grid--flexDirectionColumn  grid--justifyCenter">
+                        <a href="{{block.settings.url}}" rel="internal" class="button  button--small  button--expanded  button--primary  heroHeader-cta" data-text="{{block.settings.cta}}" data-cta data-index="{{forloop.index0}}">
+                          <span>{{block.settings.cta}}</span>
+                        </a>
+                        <div class="heroHeader-accentContainer">
+                           <svg class="heroHeader-accent  whiskerIcon"  style="fill: {{block.settings.icon_color}};"  data-accent  data-index="{{forloop.index0}}">
+                              <use xlink:href="#icon--{{block.settings.icon_name}}"/>
+                        
+                            </svg>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+                {%endfor%}
             </div>
           </div>
         </div>
@@ -76,22 +66,45 @@
 {% schema %}
   {
     "name": "Hero Header",
+    "max_blocks": 3,
     "settings": [
+    ],
+    "blocks": [
       {
-        "type": "text",
-        "id": "headline",
-        "label": "Headline",
-        "default": "Headline for hero header"
-      },
-      {
-        "type": "text",
-        "id": "cta_label",
-        "label": "CTA Label"
-      },
-      {
-        "type": "url",
-        "id": "cta",
-        "label": "Call to Action"
+        "type": "announcement",
+        "name": "Announcment", 
+        "settings": [
+          {
+          "label": "Headline",
+          "id": "headline", 
+          "type": "text"
+          },
+          {
+          "label": "cta",
+          "id": "cta", 
+          "type": "text"
+          },
+          {
+          "label": "Page",
+          "id": "url", 
+          "type": "url"
+          },
+          {
+          "label": "Hero Image",
+          "id": "hero_image", 
+          "type": "image_picker"
+          },
+         {
+          "label": "Icon Name",
+          "id": "icon_name", 
+          "type": "text"
+          },
+         {
+          "label": "Icon Color",
+          "id": "icon_color", 
+          "type": "color"
+          }
+        ]
       }
     ],
     "presets": [
