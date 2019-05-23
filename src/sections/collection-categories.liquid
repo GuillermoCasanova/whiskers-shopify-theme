@@ -38,7 +38,7 @@
   {% for link in linklists[section.settings.menu].links %}
     {%-assign child_list_handle = link.title | handleize -%}
     {% if menus[child_list_handle].links != blank %}
-    <ul class="collectionChildCategories-list  grid  grid--center  flex--noWrap  med-grid--flexDirectionColumn" data-parent-category-handle="{{link.object.handle}}" data-child-categories-container>
+    <ul class="collectionChildCategories-list  grid  grid--center  flex--noWrap" data-parent-category-handle="{{link.object.handle}}" data-child-categories-container>
       {% for childlink in menus[child_list_handle].links %}
         <li class="collectionChildCategories-childCategory  grid-cell  grid-cell--autoSize   {% if childlink.active %}is-active{% endif %}"  data-child-category>
           <a href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
@@ -51,7 +51,7 @@
 
 {% javascript %}
 //<script>
-  $(document).on('ready', function() {
+  $(window).on('load', function() {
 
     var collectionCategories = {
       selectors: {
@@ -71,11 +71,8 @@
           return false; 
         }
 
-        console.log($activeSlide); 
-
         var $categoriesSlideshow = $(this.selectors.categoriesSlideshow); 
         var position = $activeSlide.offset().left - ($categoriesSlideshow.width() / 3);
-        console.log($activeSlide.offset().left); 
         $categoriesSlideshow.scrollLeft(position); 
 
         //
@@ -93,17 +90,15 @@
 
         for(var i = 0; i < $childCategoriesContainers.length; i++) {
           if($($childCategoriesContainers[i]).data('parent-category-handle') == pParentHandle) {
-            var $childCategorySlideshow =  $($childCategoriesContainers[i]);
-            $childCategorySlideshow.toggleClass('is-active');
+            var $childCategoryList =  $($childCategoriesContainers[i]);
+            $childCategoryList.addClass('is-active');
 
-            if($childCategorySlideshow.find('.is-active').length > 0 ){
-              console.log('SCROLL NOW'); 
-              var activeSlide = $childCategorySlideshow.find('.is-active'); 
-              console.log($(activeSlide[0])); 
-              var position = $(activeSlide).offset().left - ($(this.selectors.childCategoriesSlideshow).width() / 3);
-              console.log($(activeSlide).offset().left); 
-              $childCategorySlideshow.scrollLeft(position); 
-            }
+            var activeSlide = $childCategoryList.find('.is-active'),
+                position = $(activeSlide).offset().left - 50 - ($(this.selectors.childCategoriesSlideshow).width() / 3),
+                childCategoriesSlideshow =  $(this.selectors.childCategoriesSlideshow);
+
+            childCategoriesSlideshow.scrollLeft(position); 
+            break
           } 
         }
       },
